@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <NI_HumanSuccubus.label>NI_HumanSuccubus</NI_HumanSuccubus.label>
+  <NI_HumanSuccubus.corePart.parts.8.customLabel>left lung</NI_HumanSuccubus.corePart.parts.8.customLabel>
+  <NI_HumanSuccubus.corePart.parts.9.customLabel>right lung</NI_HumanSuccubus.corePart.parts.9.customLabel>
+  <NI_HumanSuccubus.corePart.parts.10.customLabel>left kidney</NI_HumanSuccubus.corePart.parts.10.customLabel>
+  <NI_HumanSuccubus.corePart.parts.11.customLabel>right kidney</NI_HumanSuccubus.corePart.parts.11.customLabel>
+  <NI_HumanSuccubus.corePart.parts.14.parts.0.parts.1.customLabel>left eye</NI_HumanSuccubus.corePart.parts.14.parts.0.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.14.parts.0.parts.2.customLabel>right eye</NI_HumanSuccubus.corePart.parts.14.parts.0.parts.2.customLabel>
+  <NI_HumanSuccubus.corePart.parts.14.parts.0.parts.3.customLabel>left ear</NI_HumanSuccubus.corePart.parts.14.parts.0.parts.3.customLabel>
+  <NI_HumanSuccubus.corePart.parts.14.parts.0.parts.4.customLabel>right ear</NI_HumanSuccubus.corePart.parts.14.parts.0.parts.4.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.customLabel>left shoulder</NI_HumanSuccubus.corePart.parts.15.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.parts.0.customLabel>left clavicle</NI_HumanSuccubus.corePart.parts.15.parts.0.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.parts.1.customLabel>left arm</NI_HumanSuccubus.corePart.parts.15.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.parts.1.parts.0.customLabel>left humerus</NI_HumanSuccubus.corePart.parts.15.parts.1.parts.0.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.parts.1.parts.1.customLabel>left radius</NI_HumanSuccubus.corePart.parts.15.parts.1.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.customLabel>left hand</NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.parts.0.customLabel>left pinky</NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.parts.0.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.parts.1.customLabel>left ring finger</NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.parts.2.customLabel>left middle finger</NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.parts.2.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.parts.3.customLabel>left index finger</NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.parts.3.customLabel>
+  <NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.parts.4.customLabel>left thumb</NI_HumanSuccubus.corePart.parts.15.parts.1.parts.2.parts.4.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.customLabel>right shoulder</NI_HumanSuccubus.corePart.parts.16.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.parts.0.customLabel>right clavicle</NI_HumanSuccubus.corePart.parts.16.parts.0.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.parts.1.customLabel>right arm</NI_HumanSuccubus.corePart.parts.16.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.parts.1.parts.0.customLabel>right humerus</NI_HumanSuccubus.corePart.parts.16.parts.1.parts.0.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.parts.1.parts.1.customLabel>right radius</NI_HumanSuccubus.corePart.parts.16.parts.1.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.customLabel>right hand</NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.parts.0.customLabel>right pinky</NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.parts.0.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.parts.1.customLabel>right ring finger</NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.parts.2.customLabel>right middle finger</NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.parts.2.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.parts.3.customLabel>right index finger</NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.parts.3.customLabel>
+  <NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.parts.4.customLabel>right thumb</NI_HumanSuccubus.corePart.parts.16.parts.1.parts.2.parts.4.customLabel>
+  <NI_HumanSuccubus.corePart.parts.18.customLabel>left leg</NI_HumanSuccubus.corePart.parts.18.customLabel>
+  <NI_HumanSuccubus.corePart.parts.18.parts.0.customLabel>left femur</NI_HumanSuccubus.corePart.parts.18.parts.0.customLabel>
+  <NI_HumanSuccubus.corePart.parts.18.parts.1.customLabel>left tibia</NI_HumanSuccubus.corePart.parts.18.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.18.parts.2.customLabel>left foot</NI_HumanSuccubus.corePart.parts.18.parts.2.customLabel>
+  <NI_HumanSuccubus.corePart.parts.18.parts.2.parts.0.customLabel>left little toe</NI_HumanSuccubus.corePart.parts.18.parts.2.parts.0.customLabel>
+  <NI_HumanSuccubus.corePart.parts.18.parts.2.parts.1.customLabel>left fourth toe</NI_HumanSuccubus.corePart.parts.18.parts.2.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.18.parts.2.parts.2.customLabel>left middle toe</NI_HumanSuccubus.corePart.parts.18.parts.2.parts.2.customLabel>
+  <NI_HumanSuccubus.corePart.parts.18.parts.2.parts.3.customLabel>left second toe</NI_HumanSuccubus.corePart.parts.18.parts.2.parts.3.customLabel>
+  <NI_HumanSuccubus.corePart.parts.18.parts.2.parts.4.customLabel>left big toe</NI_HumanSuccubus.corePart.parts.18.parts.2.parts.4.customLabel>
+  <NI_HumanSuccubus.corePart.parts.19.customLabel>right leg</NI_HumanSuccubus.corePart.parts.19.customLabel>
+  <NI_HumanSuccubus.corePart.parts.19.parts.0.customLabel>right femur</NI_HumanSuccubus.corePart.parts.19.parts.0.customLabel>
+  <NI_HumanSuccubus.corePart.parts.19.parts.1.customLabel>right tibia</NI_HumanSuccubus.corePart.parts.19.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.19.parts.2.customLabel>right foot</NI_HumanSuccubus.corePart.parts.19.parts.2.customLabel>
+  <NI_HumanSuccubus.corePart.parts.19.parts.2.parts.0.customLabel>right little toe</NI_HumanSuccubus.corePart.parts.19.parts.2.parts.0.customLabel>
+  <NI_HumanSuccubus.corePart.parts.19.parts.2.parts.1.customLabel>right fourth toe</NI_HumanSuccubus.corePart.parts.19.parts.2.parts.1.customLabel>
+  <NI_HumanSuccubus.corePart.parts.19.parts.2.parts.2.customLabel>right middle toe</NI_HumanSuccubus.corePart.parts.19.parts.2.parts.2.customLabel>
+  <NI_HumanSuccubus.corePart.parts.19.parts.2.parts.3.customLabel>right second toe</NI_HumanSuccubus.corePart.parts.19.parts.2.parts.3.customLabel>
+  <NI_HumanSuccubus.corePart.parts.19.parts.2.parts.4.customLabel>right big toe</NI_HumanSuccubus.corePart.parts.19.parts.2.parts.4.customLabel>
+
+
+</LanguageData>

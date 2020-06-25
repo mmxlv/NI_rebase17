@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <NI_ManaAttribute.degreeDatas.0.label>梦魇的魔纹</NI_ManaAttribute.degreeDatas.0.label>
+  <NI_ManaAttribute.degreeDatas.0.description>【噩梦的化身】：凶暴型魔力特性\n[PAWN_nameDef]作为梦魔有着非比寻常的强大魔力。[PAWN_possessive]能与上级魔族匹敌的凶恶的力量是很难控制的，光是维持肉体就需要非常多的魔力代价吧。对一起行动的伙伴来说也是非常危险且麻烦的素质。</NI_ManaAttribute.degreeDatas.0.description>
+  <NI_ManaAttribute.degreeDatas.1.label>腐化的魔纹</NI_ManaAttribute.degreeDatas.1.label>
+  <NI_ManaAttribute.degreeDatas.1.description>【堕落的梦魔】：嗜虐型魔力特性\n[PAWN_nameDef]作为梦魔拥有很强的力量，并且能熟练使用强力的咒术和一些幻术。[PAWN_pronoun]看到他人困惑、痛苦、表情扭曲的表情时，会产生强烈的快感。另外在魔力收集方面，也有执着地反复对相同的人进行吸精行动，享受对方衰弱的样子等，兴趣相当可怕。</NI_ManaAttribute.degreeDatas.1.description>
+  <NI_ManaAttribute.degreeDatas.2.label>终末的魔纹</NI_ManaAttribute.degreeDatas.2.label>
+  <NI_ManaAttribute.degreeDatas.2.description>【情欲的梦魔】：高耗型魔力特性\n[PAWN_nameDef]作为梦魔拥有强大的力量，[PAWN_pronoun]在开口之前就能自然地吸引面前的所有人，将其成为俘虏。[PAWN_pronoun]能使用更强的幻术和一些咒术，不过，力量强大的魔力也代表着更激烈的消耗，在其身边的人能体会到[PAWN_possessive]无尽的贪婪。从某种意义上说，这可能是最热情的魅魔类型。</NI_ManaAttribute.degreeDatas.2.description>
+  <NI_ManaAttribute.degreeDatas.3.label>恶戏的魔纹</NI_ManaAttribute.degreeDatas.3.label>
+  <NI_ManaAttribute.degreeDatas.3.description>【不逞的梦魔】：不定型魔力特性\n[PAWN_nameDef]比起幻术，更擅长直接给对方带来坏影响的咒术。[PAWN_pronoun]不喜欢被人指导或认真对待魔力，总是期望混乱的结果，随心所欲地行动。因此在[PAWN_possessive]身边不知道会发生什么。</NI_ManaAttribute.degreeDatas.3.description>
+  <NI_ManaAttribute.degreeDatas.4.label>魅惑的魔纹</NI_ManaAttribute.degreeDatas.4.label>
+  <NI_ManaAttribute.degreeDatas.4.description>【吸引的梦魔】：幻惑型魔力特性\n[PAWN_nameDef]最喜欢让人着迷和迷惑的事物，而且擅长处理与那个领域相吻合的幻术。拥有一种独特的魔力。可以说是对魔力收集有很大帮助的资质吧。</NI_ManaAttribute.degreeDatas.4.description>
+  <NI_ManaAttribute.degreeDatas.5.label>静谧的魔纹</NI_ManaAttribute.degreeDatas.5.label>
+  <NI_ManaAttribute.degreeDatas.5.description>【静寂的夢魔】：低耗型魔力特性\n[PAWN_nameDef]具有梦魔的潜质，但其的力量永远不会强大。与其他魅魔相比，可以处理的魔法能力比较差。取而代之的是，[PAWN_pronoun]具有抑制魔力消耗的特性，从而不会尽可能地远离他人。</NI_ManaAttribute.degreeDatas.5.description>
+
+
+</LanguageData>

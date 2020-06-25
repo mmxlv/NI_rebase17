@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <NI_ManaherbTea.label>マナハーブティー</NI_ManaherbTea.label>
+  <NI_ManaherbTea.description>魔晶鉱石の粉末を薬草で煮出して魔力を抽出したもの。服用することで魔力をわずかに回復する。</NI_ManaherbTea.description>
+  <NI_ManaherbTea.ingestible.ingestCommandString>{0}を使う</NI_ManaherbTea.ingestible.ingestCommandString>
+  <NI_ManaherbTea.ingestible.ingestReportString>{0}を服用している</NI_ManaherbTea.ingestible.ingestReportString>
+  <NI_ManaherbTea.stuffProps.stuffAdjective>マナハーブティー</NI_ManaherbTea.stuffProps.stuffAdjective>
+
+  <NI_ManaPotion.label>マナポーション</NI_ManaPotion.label>
+  <NI_ManaPotion.description>服用する事で魔力を大幅に回復することが出来る。原料が希少なため市場に出回ることはまずない貴重品だ。</NI_ManaPotion.description>
+  <NI_ManaPotion.ingestible.ingestCommandString>{0}を使う</NI_ManaPotion.ingestible.ingestCommandString>
+  <NI_ManaPotion.ingestible.ingestReportString>{0}を服用している</NI_ManaPotion.ingestible.ingestReportString>
+  <NI_ManaPotion.stuffProps.stuffAdjective>マナポーション</NI_ManaPotion.stuffProps.stuffAdjective>
+
+
+</LanguageData>

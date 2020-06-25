@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A2A7FE11-A410-4679-A901-43D6C6ADFBAA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NightmareIncarnation</RootNamespace>
+    <AssemblyName>Nightmare Incarnation</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\1.0Nightmare_Incarnation_-_\[1.0]Nightmare Incarnation - 魅魔\Assemblies\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="UnityEngine" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonData.cs" />
+    <Compile Include="commonUtl.cs" />
+    <Compile Include="CompProperties_SuccubusRace.cs" />
+    <Compile Include="CompSuccubusRace.cs" />
+    <Compile Include="HarmonyPatches.cs" />
+    <Compile Include="IconTex.cs" />
+    <Compile Include="ITab_ManaPolicy.cs" />
+    <Compile Include="JobDriver_ManaFeedPatient.cs" />
+    <Compile Include="JobDriver_NIFeedManaItem.cs" />
+    <Compile Include="JobDriver_NIIngestManaItem.cs" />
+    <Compile Include="JobDriver_NIManaSqueeze.cs" />
+    <Compile Include="JobGiver_GetMana.cs" />
+    <Compile Include="ManaAmountCategory.cs" />
+    <Compile Include="Need_Mana.cs" />
+    <Compile Include="NIHediffDefOf.cs" />
+    <Compile Include="NIJobDefOf.cs" />
+    <Compile Include="NIJoyKindDefOf.cs" />
+    <Compile Include="NINeedDefOf.cs" />
+    <Compile Include="NISoundDefOf.cs" />
+    <Compile Include="NIThingDefOf.cs" />
+    <Compile Include="NIThoughtDefOf.cs" />
+    <Compile Include="NITraitDefOf.cs" />
+    <Compile Include="NI_WorldManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelationType.cs" />
+    <Compile Include="TexButton.cs" />
+    <Compile Include="ThoughtWorker_NIManaTrait.cs" />
+    <Compile Include="ThoughtWorker_NINeedMana.cs" />
+    <Compile Include="ThoughtWorker_NIPolicyUnacceptable.cs" />
+    <Compile Include="WorkGiver_ManaFeedPatient.cs" />
+    <Compile Include="WorkGiver_NIFeedManaItem.cs" />
+    <Compile Include="WorkPlan.cs" />
+    <Compile Include="WorkPlanStack.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

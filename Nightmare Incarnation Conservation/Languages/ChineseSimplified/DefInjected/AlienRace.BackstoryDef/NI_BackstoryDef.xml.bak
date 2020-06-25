@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 幼年期 -->
+
+  <NI_BS1c.title>心優しい幼魔</NI_BS1c.title>
+  <NI_BS1c.titleShort>優しい幼魔</NI_BS1c.titleShort>
+  <NI_BS1c.baseDescription>[PAWN_nameDef]は悪魔に似つかわしくないほど心優しい夢魔の子供でした。それゆえ[PAWN_pronoun]はいつも他の悪魔たちにからかわれ、いじめられていました。
+</NI_BS1c.baseDescription>
+
+  <NI_BS2c.title>幼い夢魔見習い</NI_BS2c.title>
+  <NI_BS2c.titleShort>夢魔見習い</NI_BS2c.titleShort>
+  <NI_BS2c.baseDescription>[PAWN_nameDef]は一人前のサキュバスを目指して魔界で修行中の身でした。[PAWN_pronoun]は魔力の扱い方を覚え、それなりに仕事をこなすことが出来るようになりました。いつしか人間界を訪れる夢をみながら、[PAWN_possessive]修行の日々はまだまだ続きます。
+</NI_BS2c.baseDescription>
+
+  <NI_BS3c.title>放浪の幼魔</NI_BS3c.title>
+  <NI_BS3c.titleShort>放浪の幼魔</NI_BS3c.titleShort>
+  <NI_BS3c.baseDescription>[PAWN_nameDef]は物心が付いたころには魔界の各地を、たった一人で渡り歩いていました。しかし[PAWN_pronoun]は、決して寂しさを感じませんでした。お腹が空けば他の魔族から食べ物を盗んで追いかけられるスリルを味わい、広大な大地を歩むのに飽きたら空を仰いで魔晶山脈にたなびく雲を眺め、体に流れ込む魔力のせせらぎを堪能する。自分がなぜサキュバスなのか？[PAWN_pronoun]にとって、そんな些細な事を考える暇なんてありません。毎日のいいこと、嫌なこと、それらすべての先が読めない体験が、新鮮で楽しくて仕方ないのです。
+</NI_BS3c.baseDescription>
+
+  <NI_BS4c.title>高貴な生まれの幼魔</NI_BS4c.title>
+  <NI_BS4c.titleShort>高貴な幼魔</NI_BS4c.titleShort>
+  <NI_BS4c.baseDescription>[PAWN_nameDef]は魔界の名家の下に生を受けた、上流魔族の子供です。[PAWN_pronoun]は幼い頃から様々な高等教育を受け、高度な魔術の扱い方を習得し、夢魔としての活躍をみんなから期待されて育ってきました。ただの箱入り娘だと言われたりもしたけれど、[PAWN_possessive]実力はすでに並の夢魔たちを凌駕しています。
+</NI_BS4c.baseDescription>
+
+  <NI_BS5c.title>意地悪な幼魔</NI_BS5c.title>
+  <NI_BS5c.titleShort>小悪魔</NI_BS5c.titleShort>
+  <NI_BS5c.baseDescription>[PAWN_nameDef]は幼い頃から才色兼備で人（魔族）の扱いも上手く、他の悪魔たちを言葉巧みに言いくるめては服従させていたことから影の支配者として恐れられていました。[PAWN_possessive]下僕達に対する扱いは決して優しいものではありませんでしたが、心なしか誰ひとりとして嫌がる者はおらず、むしろ悪魔の手本として尊敬するものすらいました。悪魔（ひと）は[PAWN_pronoun]のような者を悪童（しんどう）と呼ぶようです。
+</NI_BS5c.baseDescription>
+
+  <NI_BS6c.title>謎深き孤高の幼魔</NI_BS6c.title>
+  <NI_BS6c.titleShort>謎の幼魔</NI_BS6c.titleShort>
+  <NI_BS6c.baseDescription>[PAWN_nameDef]は気が付いた時には一人で魔界の荒野を彷徨っていました。[PAWN_pronoun]がいつ生を受けたのか、また自分が何者であるのかも知りません。[PAWN_possessive]夢魔には相応しくない得体の知れない魔力は一体何なのか？[PAWN_possessive]正体を暴こうとする者は、[PAWN_possessive]意思がどうであれみんな消えていきました。[PAWN_pronoun]は今日も独りです。
+</NI_BS6c.baseDescription>
+
+
+  <!-- 青年期 -->
+
+  <NI_BS1a.title>心優しい夢魔</NI_BS1a.title>
+  <NI_BS1a.titleShort>心優しい夢魔</NI_BS1a.titleShort>
+  <NI_BS1a.baseDescription>[PAWN_nameDef]は誰にでも分け隔てなく優しく接する夢魔です。その悪魔らしからぬ振る舞いゆえ、他の人々は[PAWN_pronoun]自身がサキュバスであると公言しない限り、その事実に誰一人気づかないでしょう。</NI_BS1a.baseDescription>
+
+  <NI_BS2a.title>見習い夢魔</NI_BS2a.title>
+  <NI_BS2a.titleShort>見習い夢魔</NI_BS2a.titleShort>
+  <NI_BS2a.baseDescription>[PAWN_nameDef]は現世に来てからまだ間もないサキュバスです。魔界で懸命に修行に励んだ[PAWN_pronoun]は、きっとこの世界でもうまくやれる、と自信に満ち溢れています。さあ、まずは手近な人間から始めよう！</NI_BS2a.baseDescription>
+
+  <NI_BS3a.title>放蕩癖の直らない夢魔</NI_BS3a.title>
+  <NI_BS3a.titleShort>根無し草夢魔</NI_BS3a.titleShort>
+  <NI_BS3a.baseDescription>人間界に来た[PAWN_nameDef]の目は、確かに明星の如く輝いていました。「この世界が全部自分のものになるなんて！」成人になりながらもあらぬ妄想をしつつ、新天地にワクワクが止まらない[PAWN_pronoun]は自身がサキュバスであることすら忘れ、自由気ままにやりたい放題です。</NI_BS3a.baseDescription>
+
+  <NI_BS4a.title>高貴な夢魔</NI_BS4a.title>
+  <NI_BS4a.titleShort>高貴な夢魔</NI_BS4a.titleShort>
+  <NI_BS4a.baseDescription>[PAWN_nameDef]は現世に来てからまだ間もないサキュバスですが、溢れる気品や貫禄のオーラは既に一人前の夢魔そのものです。家門の誉れと、ひいては危機に瀕した魔界のため、より多くの魔力を集めようと行動してきた[PAWN_possessive]意思に共感した魔族も多く、[PAWN_possessive]は魔界でも非常に広い人脈を持ちます。</NI_BS4a.baseDescription>
+
+  <NI_BS5a.title>嗜虐の夢魔</NI_BS5a.title>
+  <NI_BS5a.titleShort>嗜虐の夢魔</NI_BS5a.titleShort>
+  <NI_BS5a.baseDescription>[PAWN_nameDef]は邪悪で強力なサキュバスです。辺境に[PAWN_possessive]館を建て、夜な夜な下僕達を虐げていました。苦しめては回復させ、苦しめては回復させを繰り返す残虐な行為から、魔界の悪魔からは畏怖されていたそうです。現世の人間がひとたび[PAWN_objective]に獲物として認められれば、力尽きるまで逃れることは出来ないでしょう。</NI_BS5a.baseDescription>
+
+  <NI_BS6a.title>彷徨う悪夢</NI_BS6a.title>
+  <NI_BS6a.titleShort>彷徨う悪夢</NI_BS6a.titleShort>
+  <NI_BS6a.baseDescription>[PAWN_nameDef]は現世に破滅をもたらします。[PAWN_pronoun]の強大な魔力は現在も増大し続けており、[PAWN_pronoun]の意思がどうであろうとそれらを御する事は困難です。どれほど酷いことが起こるのか？それを見たものは誰一人生き残っていないため、誰にもわかりません。</NI_BS6a.baseDescription>
+
+
+</LanguageData>
