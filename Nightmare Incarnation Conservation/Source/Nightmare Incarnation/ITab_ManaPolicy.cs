@@ -30,8 +30,8 @@ namespace NightmareIncarnation
 		// Token: 0x06000010 RID: 16 RVA: 0x00002544 File Offset: 0x00000744
 		protected override void FillTab()
 		{
-			Rect rect;
-			rect..ctor(ITab_ManaPolicy.WinSize.x - ITab_ManaPolicy.PasteX, ITab_ManaPolicy.PasteY, ITab_ManaPolicy.PasteSize, ITab_ManaPolicy.PasteSize);
+			Rect rect = new Rect();
+			rect.Set(ITab_ManaPolicy.WinSize.x - ITab_ManaPolicy.PasteX, ITab_ManaPolicy.PasteY, ITab_ManaPolicy.PasteSize, ITab_ManaPolicy.PasteSize);
 			Rect rect2 = GenUI.ContractedBy(new Rect(0f, 0f, ITab_ManaPolicy.WinSize.x, ITab_ManaPolicy.WinSize.y), 10f);
 			Func<List<FloatMenuOption>> recipeOptionsMaker = delegate()
 			{
@@ -39,7 +39,7 @@ namespace NightmareIncarnation
 				bool flag = !GenCollection.Any<FloatMenuOption>(list);
 				if (flag)
 				{
-					list.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), null, 4, null, null, 0f, null, null));
+					list.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), null, MenuOptionPriority.Default, null, null, 0f, null, null));
 				}
 				return list;
 			};

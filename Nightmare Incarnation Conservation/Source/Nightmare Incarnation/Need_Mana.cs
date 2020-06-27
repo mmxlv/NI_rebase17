@@ -224,16 +224,15 @@ namespace NightmareIncarnation
 			{
 				num2 *= Mathf.InverseLerp(0f, 50f, rect.height);
 			}
-			Text.Font = ((rect.height <= 55f) ? 0 : 1);
-			Text.Anchor = 6;
+			Text.Font = ((rect.height <= 55f) ?GameFont.Tiny : GameFont.Small);
+			Text.Anchor = TextAnchor.LowerLeft;
+
 			Rect rect2;
-			rect2..ctor(rect.x + num3 + rect.width * 0.1f, rect.y, rect.width - num3 - rect.width * 0.1f, rect.height / 2f);
+			rect2 = new Rect(rect.x + num3 + rect.width * 0.1f, rect.y, rect.width - num3 - rect.width * 0.1f, rect.height / 2f);
 			Widgets.Label(rect2, base.LabelCap);
 			Text.Anchor = 0;
-			Rect rect3;
-			rect3..ctor(rect.x, rect.y + rect.height / 2f, rect.width, rect.height / 2f);
-			rect3..ctor(rect3.x + num3, rect3.y, rect3.width - num3 * 2f, rect3.height - num2);
-			Rect rect4 = rect3;
+			Rect rect3 = new Rect(rect.x, rect.y + rect.height / 2f, rect.width, rect.height / 2f);
+			Rect rect4 = new Rect(rect3.x + num3, rect3.y, rect3.width - num3 * 2f, rect3.height - num2);
 			float num4 = 1f;
 			bool flag4 = this.def.scaleBar && this.MaxLevel < 1f;
 			if (flag4)
@@ -275,15 +274,14 @@ namespace NightmareIncarnation
 			{
 				UIHighlighter.HighlightOpportunity(rect, this.def.tutorHighlightTag);
 			}
-			Text.Font = 1;
+			Text.Font = GameFont.Small;
 		}
 
 		// Token: 0x06000036 RID: 54 RVA: 0x000041E0 File Offset: 0x000023E0
 		private void DrawBarThreshold(Rect barRect, float threshPct)
 		{
 			float num = (float)((barRect.width <= 60f) ? 1 : 2);
-			Rect rect;
-			rect..ctor(barRect.x + barRect.width * threshPct - (num - 1f), barRect.y + barRect.height / 2f, num, barRect.height / 2f);
+			Rect rect = new Rect(barRect.x + barRect.width * threshPct - (num - 1f), barRect.y + barRect.height / 2f, num, barRect.height / 2f);
 			bool flag = threshPct < base.CurLevelPercentage;
 			Texture2D texture2D;
 			if (flag)
@@ -304,8 +302,7 @@ namespace NightmareIncarnation
 		private void DrawBarDivision(Rect barRect, float threshPct)
 		{
 			float num = 5f;
-			Rect rect;
-			rect..ctor(barRect.x + barRect.width * threshPct - (num - 1f), barRect.y, num, barRect.height);
+			Rect rect = new Rect(barRect.x + barRect.width * threshPct - (num - 1f), barRect.y, num, barRect.height);
 			bool flag = threshPct < base.CurLevelPercentage;
 			if (flag)
 			{

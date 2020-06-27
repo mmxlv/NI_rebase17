@@ -85,15 +85,15 @@ namespace NightmareIncarnation
 		{
 			Need_Mana pNeed = this.pawn.needs.AllNeeds.Find((Need x) => x.def == NINeedDefOf.NI_Need_Mana) as Need_Mana;
 			Need_Mana tNeed = this.Victim.needs.AllNeeds.Find((Need x) => x.def == NINeedDefOf.NI_Need_Mana) as Need_Mana;
-			ToilFailConditions.FailOnDespawnedNullOrForbidden<JobDriver_NIManaSqueeze>(this, 1);
+			ToilFailConditions.FailOnDespawnedNullOrForbidden<JobDriver_NIManaSqueeze>(this,TargetIndex.A);
 			ToilFailConditions.FailOn<JobDriver_NIManaSqueeze>(this, () => !commonUtl.IsPassive(this.Victim) || this.workPlan.Suspended || (this.JoyMode && !this.workPlan.AllowJoy) || (!this.workPlan.AllowOverSqueeze && commonUtl.GetMana(this.Victim) <= 0f) || (!this.workPlan.AllowDown && (this.Victim.Downed || this.Victim.health.HasHediffsNeedingTendByPlayer(false) || commonUtl.GetNetMana(this.Victim) < -0.79f)) || (!this.workPlan.AllowKill && commonUtl.GetNetMana(this.Victim) < -0.95f));
-			ToilFailConditions.FailOnAggroMentalState<JobDriver_NIManaSqueeze>(this, 1);
+			ToilFailConditions.FailOnAggroMentalState<JobDriver_NIManaSqueeze>(this, TargetIndex.A);
 			base.AddFinishAction(delegate()
 			{
 				bool flag = this.Victim != this.pawn && this.Victim.CurJobDef == JobDefOf.Wait_MaintainPosture;
 				if (flag)
 				{
-					this.Victim.jobs.EndCurrentJob(5, true);
+					this.Victim.jobs.EndCurrentJob(JobCondition.InterruptForced, true);
 				}
 				bool flag2 = this.totalGainMana > 0f;
 				if (flag2)
@@ -102,8 +102,8 @@ namespace NightmareIncarnation
 					this.CompRace.TotalManaGained = Mathf.Min(this.CompRace.TotalManaGained + (float)Mathf.RoundToInt(this.totalGainMana / 0.01f) * 0.01f, 9999f);
 				}
 			});
-			PathEndMode interactionCell = 1;
-			Toil gotoToil = Toils_Goto.GotoThing(1, interactionCell);
+			PathEndMode interactionCell =PathEndMode.OnCell;
+			Toil gotoToil = Toils_Goto.GotoThing(TargetIndex.A, interactionCell);
 			yield return gotoToil;
 			yield return Toils_General.Do(delegate()
 			{
@@ -112,7 +112,7 @@ namespace NightmareIncarnation
 			work.initAction = delegate()
 			{
 				Pawn actor = work.actor;
-				Pawn pawn = (Pawn)this.job.GetTarget(1).Thing;
+				Pawn pawn = (Pawn)this.job.GetTarget(TargetIndex.A).Thing;
 				actor.pather.StopDead();
 				PawnUtility.ForceWait(pawn, this.job.def.joyDuration, null, true);
 			};
@@ -143,7 +143,7 @@ namespace NightmareIncarnation
 					bool flag3 = this.pawn.needs.joy.CurLevelPercentage >= 1f;
 					if (flag3)
 					{
-						this.pawn.jobs.EndCurrentJob(2, true);
+						this.pawn.jobs.EndCurrentJob(JobCondition.Succeeded, true);
 					}
 				}
 				else
@@ -159,11 +159,11 @@ namespace NightmareIncarnation
 						this.pawn.needs.joy.CurLevel += 0.1f;
 					}
 					this.pawn.needs.food.CurLevel += 0.05f;
-					this.pawn.jobs.EndCurrentJob(2, true);
+					this.pawn.jobs.EndCurrentJob(JobCondition.Succeeded, true);
 				}
 			};
-			work.defaultCompleteMode = 5;
-			ToilEffects.PlaySustainerOrSound(ToilEffects.WithProgressBar(ToilFailConditions.FailOnCannotTouch<Toil>(work, 1, interactionCell), 1, new Func<float>(this.GetProgress), false, -0.5f), NISoundDefOf.Recipe_Surgery);
+			work.defaultCompleteMode =ToilCompleteMode.Never;
+			ToilEffects.PlaySustainerOrSound(ToilEffects.WithProgressBar(ToilFailConditions.FailOnCannotTouch<Toil>(work, TargetIndex.A, interactionCell), TargetIndex.A, new Func<float>(this.GetProgress), false, -0.5f), NISoundDefOf.Recipe_Surgery);
 			work.activeSkill = (() => SkillDefOf.Social);
 			yield return work;
 			yield break;
@@ -213,14 +213,14 @@ namespace NightmareIncarnation
 						}
 						else
 						{
-							bool flag5 = pawn.story != null && pawn.story.traits.HasTrait(TraitDefOf.DislikesMen) && target.gender == 1;
+							bool flag5 = pawn.story != null && pawn.story.traits.HasTrait(TraitDefOf.DislikesMen) && target.gender == Gender.Male;
 							if (flag5)
 							{
 								JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 2);
 							}
 							else
 							{
-								bool flag6 = pawn.story != null && pawn.story.traits.HasTrait(TraitDefOf.DislikesWomen) && target.gender == 2;
+								bool flag6 = pawn.story != null && pawn.story.traits.HasTrait(TraitDefOf.DislikesWomen) && target.gender == Gender.Female;
 								if (flag6)
 								{
 									JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 1);
@@ -283,16 +283,16 @@ namespace NightmareIncarnation
 					List<Pawn> list = (from x in Find.WorldPawns.AllPawnsAlive
 					where x.IsColonist && x != pawn
 					select x).ToList<Pawn>();
-					Func<Pawn, bool> <>9__1;
+					//Func<Pawn, bool> <>9__1;
+						Func<Pawn, bool> predicate = (Pawn x) => !x.Dead && x.IsColonist && x != pawn;
 					foreach (Map map in Find.Maps)
 					{
 						List<Pawn> list2 = list;
 						IEnumerable<Pawn> allPawns = map.mapPawns.AllPawns;
-						Func<Pawn, bool> predicate;
-						if ((predicate = <>9__1) == null)
-						{
-							predicate = (<>9__1 = ((Pawn x) => !x.Dead && x.IsColonist && x != pawn));
-						}
+						//Func<Pawn, bool> predicate;
+						//if ((predicate = <>9__1) == null)
+						//{
+						//}
 						list2.AddRange(allPawns.Where(predicate));
 					}
 					foreach (Pawn pawn2 in list)
@@ -308,16 +308,17 @@ namespace NightmareIncarnation
 						List<Pawn> list3 = (from x in Find.WorldPawns.AllPawnsAlive
 						where (x.IsColonist || x.IsPrisoner) && x != pawn
 						select x).ToList<Pawn>();
-						Func<Pawn, bool> <>9__3;
+						//Func<Pawn, bool> <>9__3;
+						Func<Pawn, bool> predicate2 = (Pawn x) => !x.Dead && (x.IsColonist || x.IsPrisoner) && x != pawn;
 						foreach (Map map2 in Find.Maps)
 						{
 							List<Pawn> list4 = list3;
 							IEnumerable<Pawn> allPawns2 = map2.mapPawns.AllPawns;
-							Func<Pawn, bool> predicate2;
-							if ((predicate2 = <>9__3) == null)
-							{
-								predicate2 = (<>9__3 = ((Pawn x) => !x.Dead && (x.IsColonist || x.IsPrisoner) && x != pawn));
-							}
+							//Func<Pawn, bool> predicate2;
+							//if ((predicate2 = <>9__3) == null)
+							//{
+							//	predicate2 = (<>9__3 = ((Pawn x) => !x.Dead && (x.IsColonist || x.IsPrisoner) && x != pawn));
+							//}
 							list4.AddRange(allPawns2.Where(predicate2));
 						}
 						foreach (Pawn pawn3 in list3)
@@ -367,7 +368,7 @@ namespace NightmareIncarnation
 							}
 							else
 							{
-								bool flag17 = target.story != null && target.story.traits.HasTrait(TraitDefOf.DislikesMen) && pawn.gender == 1;
+								bool flag17 = target.story != null && target.story.traits.HasTrait(TraitDefOf.DislikesMen) && pawn.gender == Gender.Male;
 								if (flag17)
 								{
 									JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodDislikeMen, target, pawn, 0);
@@ -375,7 +376,7 @@ namespace NightmareIncarnation
 								}
 								else
 								{
-									bool flag18 = target.story != null && target.story.traits.HasTrait(TraitDefOf.DislikesWomen) && pawn.gender == 2;
+									bool flag18 = target.story != null && target.story.traits.HasTrait(TraitDefOf.DislikesWomen) && pawn.gender == Gender.Female;
 									if (flag18)
 									{
 										JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodDislikeFem, target, pawn, 0);

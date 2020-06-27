@@ -4,6 +4,7 @@
   <HediffDef>
     <defName>ManaDeficiency</defName>
     <label>魔力欠乏症</label>
+	<description>Need Mana</description>
     <lethalSeverity>1</lethalSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
     <stages>
@@ -67,6 +68,7 @@
     <defName>VigorRavage</defName>
     <label>精力崩壊</label>
     <lethalSeverity>1</lethalSeverity>
+	<description>Rapedy Rape Rape</description>
     <scenarioCanAdd>false</scenarioCanAdd>
     <stages>
       <li>

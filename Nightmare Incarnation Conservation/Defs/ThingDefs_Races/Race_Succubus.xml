@@ -112,7 +112,7 @@
 			<maleGenderProbability>0.001</maleGenderProbability>
 			<!--男性と女性の比率を弄る記述です。0にしても動作しますがEdbでセーブの際に保存した名前が上手く適用されなくなります。-->
 			<!--0.01以下に設定するとEdBに不具合が出てしまう可能性があります。-->
-			<useOnlyPawnkindBackstories>true</useOnlyPawnkindBackstories>
+			<!-- <useOnlyPawnkindBackstories>true</useOnlyPawnkindBackstories> -->
 			<!--独自のバックストーリーを使用しない際はfalseに変更するか記述ごと削除します。-->
 			
 			<allowHumanBios>true</allowHumanBios>

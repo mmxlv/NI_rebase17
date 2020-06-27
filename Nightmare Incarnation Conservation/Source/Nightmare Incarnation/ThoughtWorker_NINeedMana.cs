@@ -22,8 +22,8 @@ namespace NightmareIncarnation
 			{
 				List<Need> allNeeds = p.needs.AllNeeds;
 				Need need = allNeeds.Find((Need x) => x.def == NINeedDefOf.NI_Need_Mana);
-				Need_Mana need_Mana;
-				bool flag2 = need != null && (need_Mana = (need as Need_Mana)) != null;
+				Need_Mana need_Mana = (need as Need_Mana);
+				bool flag2 = need != null && (need_Mana != null);
 				if (flag2)
 				{
 					switch (need_Mana.CurCategory)

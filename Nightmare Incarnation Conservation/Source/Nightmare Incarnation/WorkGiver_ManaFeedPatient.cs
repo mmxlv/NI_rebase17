@@ -14,7 +14,7 @@ namespace NightmareIncarnation
 		{
 			get
 			{
-				return ThingRequest.ForGroup(11);
+				return ThingRequest.ForGroup(ThingRequestGroup.Pawn);
 			}
 		}
 
@@ -24,14 +24,14 @@ namespace NightmareIncarnation
 		{
 			get
 			{
-				return 3;
+				return PathEndMode.ClosestTouch;
 			}
 		}
 
 		// Token: 0x06000003 RID: 3 RVA: 0x00002080 File Offset: 0x00000280
 		public override Danger MaxPathDanger(Pawn pawn)
 		{
-			return 3;
+			return Danger.Deadly;
 		}
 
 		// Token: 0x06000004 RID: 4 RVA: 0x00002094 File Offset: 0x00000294
@@ -92,7 +92,7 @@ namespace NightmareIncarnation
 									{
 										Thing thing;
 										ThingDef thingDef;
-										bool flag8 = !FoodUtility.TryFindBestFoodSourceFor(pawn, pawn2, pawn2.needs.food.CurCategory == 3, ref thing, ref thingDef, false, true, false, true, false, false, false);
+										bool flag8 = !FoodUtility.TryFindBestFoodSourceFor(pawn, pawn2, pawn2.needs.food.CurCategory ==HungerCategory.Starving, out thing, out thingDef, false, true, false, true, false, false, false);
 										if (flag8)
 										{
 											JobFailReason.Is(Translator.Translate("NoFood"), null);
@@ -118,7 +118,7 @@ namespace NightmareIncarnation
 			Pawn pawn2 = (Pawn)t;
 			Thing thing;
 			ThingDef thingDef;
-			bool flag = FoodUtility.TryFindBestFoodSourceFor(pawn, pawn2, pawn2.needs.food.CurCategory == 3, ref thing, ref thingDef, false, true, false, true, false, false, false);
+			bool flag = FoodUtility.TryFindBestFoodSourceFor(pawn, pawn2, pawn2.needs.food.CurCategory == HungerCategory.Starving, out thing, out thingDef, false, true, false, true, false, false, false);
 			Job result;
 			if (flag)
 			{

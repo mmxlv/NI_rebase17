@@ -14,7 +14,7 @@ namespace NightmareIncarnation
 		{
 			get
 			{
-				return ThingRequest.ForGroup(11);
+				return ThingRequest.ForGroup(ThingRequestGroup.Pawn);
 			}
 		}
 
@@ -24,14 +24,14 @@ namespace NightmareIncarnation
 		{
 			get
 			{
-				return 3;
+				return PathEndMode.ClosestTouch;
 			}
 		}
 
 		// Token: 0x06000063 RID: 99 RVA: 0x00006090 File Offset: 0x00004290
 		public override Danger MaxPathDanger(Pawn pawn)
 		{
-			return 3;
+			return Danger.Deadly;
 		}
 
 		// Token: 0x06000064 RID: 100 RVA: 0x000060A4 File Offset: 0x000042A4
