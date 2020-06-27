@@ -3,10 +3,10 @@
 
   <!--======================= Requiring nothing =======================-->
 
-  <!-- 娯楽吸魔 -->
+  <!-- 娯楽吸魔 Amusement -->
   <JoyKindDef>
     <defName>JoyKind_NISuccubusWork</defName>
-    <label>イイコト</label>
+    <label>good idea</label>
   </JoyKindDef>
 
   <!--======================= Item consumption =======================-->

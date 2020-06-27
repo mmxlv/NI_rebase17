@@ -17,7 +17,7 @@
 
 <PawnKindDef ParentName="NI_KindBase">
     <defName>NI_ScColonist</defName>
-    <label>サキュバス</label>
+    <label>Succubus</label>
     <combatPower>50</combatPower>
     <isFighter>false</isFighter>
     <backstoryCategories>

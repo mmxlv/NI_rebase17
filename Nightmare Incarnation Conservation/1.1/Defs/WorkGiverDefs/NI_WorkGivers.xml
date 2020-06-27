@@ -5,12 +5,12 @@
   
   <WorkGiverDef>
     <defName>NIWG_FeedManaItem</defName>
-    <label>魔力回復アイテムを給仕中</label>
+    <label>Serving magic recovery items</label>
     <giverClass>NightmareIncarnation.WorkGiver_NIFeedManaItem</giverClass>
     <workType>Doctor</workType>
     <priorityInType>80</priorityInType>
-    <verb>給仕</verb>
-    <gerund>給仕する</gerund>
+    <verb>Waitperson</verb>
+    <gerund>Serve</gerund>
     <requiredCapacities>
       <li>Manipulation</li>
     </requiredCapacities>

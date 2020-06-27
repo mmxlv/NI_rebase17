@@ -3,13 +3,13 @@
 
   <HediffDef>
     <defName>ManaDeficiency</defName>
-    <label>魔力欠乏症</label>
-	<description>Need Mana</description>
+    <label>mana deficiency</label>
     <lethalSeverity>1</lethalSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
-    <stages>
+  	<description>2</description>
+	<stages>
       <li>
-        <label>魔力循環不調</label>
+        <label>magical circulation disorder</label>
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
@@ -19,7 +19,7 @@
       </li>
       <li>
         <minSeverity>0.2</minSeverity>
-        <label>魔力枯渇</label>
+        <label>magic exhaustion</label>
         <socialFightChanceFactor>0.75</socialFightChanceFactor>
         <capMods>
           <li>
@@ -30,7 +30,7 @@
       </li>
       <li>
         <minSeverity>0.4</minSeverity>
-        <label>魔力飢餓</label>
+        <label>magic hunger</label>
         <socialFightChanceFactor>0.5</socialFightChanceFactor>
         <capMods>
           <li>
@@ -41,7 +41,7 @@
       </li>
       <li>
         <minSeverity>0.6</minSeverity>
-        <label>朦朧</label>
+        <label>hazy</label>
         <socialFightChanceFactor>0.25</socialFightChanceFactor>
         <capMods>
           <li>
@@ -52,7 +52,7 @@
       </li>
       <li>
         <minSeverity>0.8</minSeverity>
-        <label>衰弱</label>
+        <label>weak</label>
         <lifeThreatening>true</lifeThreatening>
         <capMods>
           <li>
@@ -66,13 +66,13 @@
 
   <HediffDef>
     <defName>VigorRavage</defName>
-    <label>精力崩壊</label>
+    <label>energy breakdown</label>
     <lethalSeverity>1</lethalSeverity>
-	<description>Rapedy Rape Rape</description>
     <scenarioCanAdd>false</scenarioCanAdd>
+  	<description>1</description>
     <stages>
       <li>
-        <label>わずかな疲れ</label>
+        <label>tired</label>
         <socialFightChanceFactor>1.5</socialFightChanceFactor>
         <restFallFactorOffset>0.1</restFallFactorOffset>
         <capMods>
@@ -84,7 +84,7 @@
       </li>
       <li>
         <minSeverity>0.2</minSeverity>
-        <label>疲労</label>
+        <label>fatigue</label>
         <socialFightChanceFactor>2</socialFightChanceFactor>
         <restFallFactorOffset>0.25</restFallFactorOffset>
         <capMods>
@@ -96,7 +96,7 @@
       </li>
       <li>
         <minSeverity>0.4</minSeverity>
-        <label>過労</label>
+        <label>overworked</label>
         <socialFightChanceFactor>2.5</socialFightChanceFactor>
         <restFallFactorOffset>0.5</restFallFactorOffset>
         <capMods>
@@ -108,7 +108,7 @@
       </li>
       <li>
         <minSeverity>0.6</minSeverity>
-        <label>極度の過労</label>
+        <label>extremly overworked</label>
         <socialFightChanceFactor>3</socialFightChanceFactor>
         <restFallFactorOffset>1.0</restFallFactorOffset>
         <capMods>
@@ -120,7 +120,7 @@
       </li>
       <li>
         <minSeverity>0.8</minSeverity>
-        <label>衰弱</label>
+        <label>weak</label>
         <lifeThreatening>true</lifeThreatening>
         <restFallFactorOffset>2.0</restFallFactorOffset>
         <capMods>

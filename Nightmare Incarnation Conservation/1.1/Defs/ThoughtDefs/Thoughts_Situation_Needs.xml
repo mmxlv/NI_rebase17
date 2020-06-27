@@ -7,38 +7,38 @@
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
       <li>
-        <label>魔力が少ない</label>
-        <description>魔力がちょっと足りない。</description>
+        <label>Little magic</label>
+        <description>A little lack of magical power.</description>
         <baseMoodEffect>-6</baseMoodEffect>
       </li>
       <li>
-        <label>魔力不足</label>
-        <description>魔力が足りない。</description>
+        <label>Lack of magic</label>
+        <description>Not enough magic.</description>
         <baseMoodEffect>-12</baseMoodEffect>
       </li>
       <li>
-        <label>魔力欠乏</label>
-        <description>魔力が足りなくて集中できない。</description>
+        <label>Lack of magic</label>
+        <description>I can't concentrate because I don't have enough magic.</description>
         <baseMoodEffect>-20</baseMoodEffect>
       </li>
       <li>
-        <label>魔力失調</label>
-        <description>自分の体が衰弱していく。早く魔力を補給しなければ。</description>
+        <label>Ataxia</label>
+        <description>My body is weakening. I have to replenish my magic power soon.</description>
         <baseMoodEffect>-26</baseMoodEffect>
       </li>
       <li>
-        <label>魔力喪失</label>
-        <description>もう力が出ない。何でもいいから魔力を摂りたい。</description>
+        <label>Lost magic</label>
+        <description>I can't help anymore. I want to get magical power, whatever it is.</description>
         <baseMoodEffect>-32</baseMoodEffect>
       </li>
       <li>
-        <label>魔力飢餓</label>
-        <description>何もしなくても顔が青ざめ、脂汗が出てくる。魔力を、早く・・・</description>
+        <label>Magical starvation</label>
+        <description>The face turns pale and greasy sweat comes out without doing anything. Need Magic power quickly...</description>
         <baseMoodEffect>-38</baseMoodEffect>
       </li>
       <li>
-        <label>極度の魔力飢餓</label>
-        <description>魔力...魔力を...誰か...</description>
+        <label>Extreme magic starvation</label>
+        <description>Magic power... Magic power... Someone...</description>
         <baseMoodEffect>-44</baseMoodEffect>
       </li>
     </stages>
@@ -50,32 +50,31 @@
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
       <li>
-        <label>自分に合わない魔力方針</label>
-        <description>自分に合わない魔力収集方針を強要されている。必要も無いのに娯楽で人を弄ぶなんて...。</description>
+        <label>Magical policy that does not suit me</label>
+        <description>You have been forced to collect a magic power that does not suit you. It's not necessary to play with people for entertainment...</description>
         <baseMoodEffect>-5</baseMoodEffect>
       </li>
       <li>
-        <label>自分に合わない魔力方針</label>
-        <description>自分に合わない魔力収集方針を強要されている。つまみ食いも自由に出来ないなんて！</description>
+        <label>Magical policy that does not suit me</label>
+        <description>You have been forced to collect a magic power that does not suit you. You can't eat any snacks!</description>
         <baseMoodEffect>-5</baseMoodEffect>
       </li>
       <li>
-        <label>自分に合わない魔力方針</label>
-        <description>自分に合わない魔力収集方針を強要されている。自分が食べる相手くらい自分で選ぶ。私に指図しないで！</description>
+        <label>Magical policy that does not suit me</label>
+        <description>You have been forced to collect a magic power that does not suit you. Choose as much as you want to eat. Don't tell me!</description>
         <baseMoodEffect>-3</baseMoodEffect>
       </li>
       <li>
-        <label>自分に合わない魔力方針</label>
-        <description>自分に合わない魔力収集方針を強要されている。限界を超えて人間を弄べないのは何とも味気ない。</description>
+        <label>Magical policy that does not suit me</label>
+        <description>You have been forced to collect a magic power that does not suit you. It's bland to not be able to play with people beyond their limits.</description>
         <baseMoodEffect>-4</baseMoodEffect>
       </li>
       <li>
-        <label>自分に合わない魔力方針</label>
-        <description>自分に合わない魔力収集方針を強要されている。人は散る瞬間こそが最も美しいというのに、何故それを理解できないのか。</description>
+        <label>Magical policy that does not suit me</label>
+        <description>You have been forced to collect a magic power that does not suit you. Why can't people understand the most beautiful moment when they scatter?</description>
         <baseMoodEffect>-5</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
-
 
 </Defs>

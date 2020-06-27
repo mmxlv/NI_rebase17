@@ -29,10 +29,9 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS1c</defName>
-	<title>心優しい幼魔</title>
-	<titleShort>優しい幼魔</titleShort>
-	<baseDescription>[PAWN_nameDef]は悪魔に似つかわしくないほど心優しい夢魔の子供でした。それゆえ[PAWN_pronoun]はいつも他の悪魔たちにからかわれ、いじめられていました。
-</baseDescription>
+	<title>Gentle Devil</title>
+	<titleShort>Gentle Devil</titleShort>
+	<baseDescription>[PAWN_nameDef] Was a child of Yumema who was so kind that she couldn't look like a devil. Therefore [PAWN_pronoun] was always teased and bullied by other demons.</baseDescription>
 	<slot>Childhood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -63,10 +62,9 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS2c</defName>
-	<title>幼い夢魔見習い</title>
-	<titleShort>夢魔見習い</titleShort>
-	<baseDescription>[PAWN_nameDef]は一人前のサキュバスを目指して魔界で修行中の身でした。[PAWN_pronoun]は魔力の扱い方を覚え、それなりに仕事をこなすことが出来るようになりました。いつしか人間界を訪れる夢をみながら、[PAWN_possessive]修行の日々はまだまだ続きます。
-</baseDescription>
+	<title>young dream apprentice</title>
+	<titleShort>Dream Apprentice</titleShort>
+	<baseDescription>[PAWN_nameDef] was training in Makai aiming to be a full-fledged succubus. [PAWN_pronoun] has learned how to handle magical powers, and is able to do his or her job accordingly. The days of [PAWN_possessive] training will continue, with the dream of visiting the human world.</baseDescription>
 	<slot>Childhood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -93,10 +91,9 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS3c</defName>
-	<title>放浪の幼魔</title>
-	<titleShort>放浪の幼魔</titleShort>
-	<baseDescription>[PAWN_nameDef]は物心が付いたころには魔界の各地を、たった一人で渡り歩いていました。しかし[PAWN_pronoun]は、決して寂しさを感じませんでした。お腹が空けば他の魔族から食べ物を盗んで追いかけられるスリルを味わい、広大な大地を歩むのに飽きたら空を仰いで魔晶山脈にたなびく雲を眺め、体に流れ込む魔力のせせらぎを堪能する。自分がなぜサキュバスなのか？[PAWN_pronoun]にとって、そんな些細な事を考える暇なんてありません。毎日のいいこと、嫌なこと、それらすべての先が読めない体験が、新鮮で楽しくて仕方ないのです。
-</baseDescription>
+	<title>Wandering Demon</title>
+	<titleShort>Wandering Demon</titleShort>
+	<baseDescription>[PAWN_nameDef] was walking alone in various parts of the demon world But [PAWN_pronoun] never felt lonely. If you are hungry, you can enjoy the thrill of stealing food from other demons and chasing you, and when you get tired of walking on the vast land, look up at the sky and look at the clouds fluttering in the Sacred Mountains, and enjoy the serenity of magic flowing into your body. .. Why am I a succubus? [PAWN_pronoun] has no time to think about such trivial matters. Every day, all the good things, the bad things, and the unpredictable experiences are all fresh and enjoyable.</baseDescription>
 	<slot>Childhood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -137,8 +134,8 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS4c</defName>
-	<title>高貴な生まれの幼魔</title>
-	<titleShort>高貴な幼魔</titleShort>
+	<title>noble born devil</title>
+	<titleShort>Noble Devil</titleShort>
 	<baseDescription>[PAWN_nameDef]は魔界の名家の下に生を受けた、上流魔族の子供です。[PAWN_pronoun]は幼い頃から様々な高等教育を受け、高度な魔術の扱い方を習得し、夢魔としての活躍をみんなから期待されて育ってきました。ただの箱入り娘だと言われたりもしたけれど、[PAWN_possessive]実力はすでに並の夢魔たちを凌駕しています。
 </baseDescription>
 	<slot>Childhood</slot>
@@ -171,8 +168,8 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS5c</defName>
-	<title>意地悪な幼魔</title>
-	<titleShort>小悪魔</titleShort>
+	<title>Evil Devil</title>
+	<titleShort>Devil</titleShort>
 	<baseDescription>[PAWN_nameDef]は幼い頃から才色兼備で人（魔族）の扱いも上手く、他の悪魔たちを言葉巧みに言いくるめては服従させていたことから影の支配者として恐れられていました。[PAWN_possessive]下僕達に対する扱いは決して優しいものではありませんでしたが、心なしか誰ひとりとして嫌がる者はおらず、むしろ悪魔の手本として尊敬するものすらいました。悪魔（ひと）は[PAWN_pronoun]のような者を悪童（しんどう）と呼ぶようです。
 </baseDescription>
 	<slot>Childhood</slot>
@@ -209,8 +206,8 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS6c</defName>
-	<title>謎深き孤高の幼魔</title>
-	<titleShort>謎の幼魔</titleShort>
+	<title>mysterious lonely demon</title>
+	<titleShort>Mysterious Demon</titleShort>
 	<baseDescription>[PAWN_nameDef]は気が付いた時には一人で魔界の荒野を彷徨っていました。[PAWN_pronoun]がいつ生を受けたのか、また自分が何者であるのかも知りません。[PAWN_possessive]夢魔には相応しくない得体の知れない魔力は一体何なのか？[PAWN_possessive]正体を暴こうとする者は、[PAWN_possessive]意思がどうであれみんな消えていきました。[PAWN_pronoun]は今日も独りです。
 </baseDescription>
 	<slot>Childhood</slot>
@@ -241,9 +238,9 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS1a</defName>
-	<title>心優しい夢魔</title>
-	<titleShort>心優しい夢魔</titleShort>
-	<baseDescription>[PAWN_nameDef]は誰にでも分け隔てなく優しく接する夢魔です。その悪魔らしからぬ振る舞いゆえ、他の人々は[PAWN_pronoun]自身がサキュバスであると公言しない限り、その事実に誰一人気づかないでしょう。</baseDescription>
+	<title>Gentle Genma</title>
+	<titleShort>Gentle Genma</titleShort>
+	<baseDescription>[PAWN_nameDef] is Yumema who treats everyone gently and gently.\nBecause of their unsatanic behaviour, no one else will be popular with the fact unless they claim to be themselves a succubus [PAWN_pronoun].</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -281,9 +278,9 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS2a</defName>
-	<title>見習い夢魔</title>
-	<titleShort>見習い夢魔</titleShort>
-	<baseDescription>[PAWN_nameDef]は現世に来てからまだ間もないサキュバスです。魔界で懸命に修行に励んだ[PAWN_pronoun]は、きっとこの世界でもうまくやれる、と自信に満ち溢れています。さあ、まずは手近な人間から始めよう！</baseDescription>
+	<title>Apprentice Muma</title>
+	<titleShort>Apprentice Muma</titleShort>
+	<baseDescription>[PAWN_nameDef] is a succubus that has just arrived in this world. [PAWN_pronoun] who has worked hard in the demon world is confident that she can do well in this world. Let's start with the person at hand!</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -349,8 +346,8 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS4a</defName>
-	<title>高貴な夢魔</title>
-	<titleShort>高貴な夢魔</titleShort>
+	<title>noble dreamer</title>
+	<titleShort>noble dreamer</titleShort>
 	<baseDescription>[PAWN_nameDef]は現世に来てからまだ間もないサキュバスですが、溢れる気品や貫禄のオーラは既に一人前の夢魔そのものです。家門の誉れと、ひいては危機に瀕した魔界のため、より多くの魔力を集めようと行動してきた[PAWN_possessive]意思に共感した魔族も多く、[PAWN_possessive]は魔界でも非常に広い人脈を持ちます。</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
@@ -385,8 +382,8 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS5a</defName>
-	<title>嗜虐の夢魔</title>
-	<titleShort>嗜虐の夢魔</titleShort>
+	<title>devilish dreamer</title>
+	<titleShort>devilish dreamer</titleShort>
 	<baseDescription>[PAWN_nameDef]は邪悪で強力なサキュバスです。辺境に[PAWN_possessive]館を建て、夜な夜な下僕達を虐げていました。苦しめては回復させ、苦しめては回復させを繰り返す残虐な行為から、魔界の悪魔からは畏怖されていたそうです。現世の人間がひとたび[PAWN_objective]に獲物として認められれば、力尽きるまで逃れることは出来ないでしょう。</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
@@ -425,9 +422,9 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS6a</defName>
-	<title>彷徨う悪夢</title>
-	<titleShort>彷徨う悪夢</titleShort>
-	<baseDescription>[PAWN_nameDef]は現世に破滅をもたらします。[PAWN_pronoun]の強大な魔力は現在も増大し続けており、[PAWN_pronoun]の意思がどうであろうとそれらを御する事は困難です。どれほど酷いことが起こるのか？それを見たものは誰一人生き残っていないため、誰にもわかりません。</baseDescription>
+	<title>wandering nightmare</title>
+	<titleShort>wandering nightmare</titleShort>
+	<baseDescription>[PAWN_nameDef] brings ruin to this world. The enormous magical powers of [PAWN_pronoun] are still increasing, and it is difficult to control them no matter what the intention of [PAWN_pronoun] is.\nNo one can account for [PAWN_pronoun]'s atrocious as none have survived.</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>

@@ -131,8 +131,8 @@
 
   <ThingDef ParentName="NI_ApparelMakeableBase">
     <defName>Apparel_NIUnderwear</defName>
-    <description>サキュバス用下着</description>
-    <label>サキュバスアンダーウェア</label>
+    <description>underwear for succubus</description>
+    <label>succubus underwear</label>
     <recipeMaker>
       <researchPrerequisite>ComplexClothing</researchPrerequisite>
     </recipeMaker>
@@ -177,8 +177,8 @@
 
   <ThingDef ParentName="NI_ApparelMakeableBase">
     <defName>Apparel_NILongGloves</defName>
-    <description>サキュバス用ロンググローブ</description>
-    <label>サキュバスロンググローブ</label>
+    <description>long gloves for succubus</description>
+    <label>long succubus gloves</label>
     <recipeMaker>
       <researchPrerequisite>ComplexClothing</researchPrerequisite>
     </recipeMaker>
@@ -222,8 +222,8 @@
 
   <ThingDef ParentName="NI_ApparelMakeableBase">
     <defName>Apparel_NIThighHighSocks</defName>
-    <description>サキュバス用サイハイソックス</description>
-    <label>サキュバスサイハイ</label>
+    <description>thigh high socks for Succubus</description>
+    <label>Succubus thigh high socks</label>
     <recipeMaker>
       <researchPrerequisite>ComplexClothing</researchPrerequisite>
     </recipeMaker>
@@ -267,8 +267,8 @@
 
   <ThingDef ParentName="NI_ApparelMakeableBase">
     <defName>Apparel_NIBabydoll</defName>
-    <description>サキュバス用の外套。本来は部屋着として用いられる下着である。</description>
-    <label>サキュバスベビードール</label>
+    <description>Mantle for succubus. originally used as room wear.</description>
+    <label>succubus baby doll</label>
     <recipeMaker>
       <researchPrerequisite>ComplexClothing</researchPrerequisite>
     </recipeMaker>
@@ -340,8 +340,8 @@
 
 	<ThingDef ParentName="NI_ArmorMachineableBase">
     <defName>Apparel_NIBattleGarb</defName>
-    <label>ナイトメアバトルガーブ</label>
-    <description>サキュバスの戦闘用衣装。装者がサキュバス種族であった場合、あらゆる被ダメージを30%軽減し、さらにスキルの魔力消費量が軽減される。</description>
+    <label>Nightmare Battle Garb</label>
+    <description>Succubus battle costume. If the wearer is a Succubus, all damage taken is reduced by 30%, and the magic essence consumption of the skill is reduced.</description>
     <techLevel>Spacer</techLevel>
     <recipeMaker>
       <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
@@ -413,8 +413,8 @@
 
 	<ThingDef ParentName="NI_ArmorMachineableBase">
     <defName>Apparel_NIHalfPersona</defName>
-    <label>ナイトメアハーフペルソナ</label>
-    <description>サキュバスの戦闘用仮面。装者がサキュバス種族であった場合、あらゆる被ダメージを10%の確率で無効化し、さらにスキル威力が強化される。</description>
+    <label>Nightmare Half Persona</label>
+    <description>Succubus battle mask. If the wearer is a Succubus, there is a 10% chance to nullify any damage taken and the skill power is further enhanced.</description>
     <techLevel>Spacer</techLevel>
     <recipeMaker>
       <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>

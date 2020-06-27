@@ -17,7 +17,7 @@
 
       <li>
 
-        <label>かわいい（サキュバス特性）</label>
+        <label>Cute (succubus characteristic)</label>
 
         <baseOpinionOffset>20</baseOpinionOffset>
 
@@ -25,21 +25,21 @@
 
       <li>
 
-        <label>とても可愛い（サキュバス特性）</label>
+        <label>Very cute (succubus characteristic)</label>
 
         <baseOpinionOffset>30</baseOpinionOffset>
 
       </li>
       <li>
 
-        <label>魅惑的（サキュバス特性）</label>
+        <label>Enchanting (Succubus characteristic)</label>
 
         <baseOpinionOffset>40</baseOpinionOffset>
 
       </li>
       <li>
 
-        <label>この世のものとは思えないほど魅惑的（サキュバス特性）</label>
+        <label>otherworldly beauty （succubus characteristic）</label><!--この世のものとは思えないほど魅惑的（サキュバス特性） == Fascinating as if it were not in this world (succubus characteristic) == otherworldly beauty -->
 
         <baseOpinionOffset>50</baseOpinionOffset>
 
@@ -47,7 +47,7 @@
 
       <li>
 
-        <label>同胞（サキュバス特性）</label>
+        <label>Brotherhood (succubus characteristic)</label>
 
         <baseOpinionOffset>10</baseOpinionOffset>
 
@@ -57,7 +57,7 @@
   </ThoughtDef>
 
 
-	<!--受け手側心情-->
+	<!--受け手側心情  Recipient feelings-->
   <ThoughtDef>
 
     <defName>NI_SuccubusInteracteeMood</defName>
@@ -69,9 +69,9 @@
 
       <li>
 
-        <label>襲われた</label>
+        <label>Attacked</label>
 
-	<description>無理やり襲われた</description>
+	<description>Forcibly attacked</description>
         <baseMoodEffect>-5</baseMoodEffect>
 
       </li>
@@ -91,9 +91,9 @@
 
       <li>
 
-        <label>男に襲われた</label>
+        <label>Attacked by a man</label>
 
-	<description>大嫌いな男に無理やり襲われた。最悪だ！</description>
+	<description>I was attacked by a man I hate. it's awful!</description>
         <baseMoodEffect>-10</baseMoodEffect>
       </li>
     </stages>
@@ -111,9 +111,9 @@
 
       <li>
 
-        <label>女に襲われた</label>
+        <label>Attacked by a woman</label>
 
-	<description>大嫌いな女に無理やり襲われた。最悪だ！</description>
+	<description>I was forcibly attacked by a woman I hate. it's awful!</description>
         <baseMoodEffect>-10</baseMoodEffect>
       </li>
     </stages>
@@ -131,9 +131,9 @@
 
       <li>
 
-        <label>理性の敗北</label>
+        <label>Mental defeat</label><!-- Reason defeat -->
 
-	<description>煩悩に惑わされた。くやしい。</description>
+	<description>I was confused by my anxiety. I'm jealous.</description>
         <baseMoodEffect>-7</baseMoodEffect>
       </li>
     </stages>
@@ -151,9 +151,9 @@
 
       <li>
 
-        <label>マゾの喜び</label>
+        <label>Masochistic delight</label>
 
-	<description>無理やり襲われた。すごくよかった。</description>
+	<description>I was forcibly attacked. it was awesome.</description>
         <baseMoodEffect>6</baseMoodEffect>
       </li>
     </stages>
@@ -172,9 +172,9 @@
 
       <li>
 
-        <label>同性に襲われた</label>
+        <label>Attacked by same sex</label><!-- ??? was thinking about using gender but not sure how it exicutes in game or context -->
 
-	<description>好みの同性に襲われた。よかった。</description>
+	<description>I was attacked by my favorite sex. Was good.</description>
         <baseMoodEffect>6</baseMoodEffect>
       </li>
     </stages>
@@ -194,9 +194,9 @@
 
       <li>
 
-        <label>大切な人との逢瀬</label>
+        <label>Aize with an important person</label>
 
-	<description>大切な人に襲われた。情熱的だった。</description>
+	<description>I was attacked by an important person. I was passionate towards.</description>
         <baseMoodEffect>12</baseMoodEffect>
 
       </li>
@@ -204,7 +204,7 @@
 
   </ThoughtDef>
 
-	<!--受け手側印象度-->
+	<!--受け手側印象度  Impression degree on the receiver side-->
   <ThoughtDef>
 
     <defName>NI_SuccubusInteracteeOp</defName>
@@ -219,7 +219,7 @@
 
       <li>
 
-        <label>無理やり襲われた</label>
+        <label>Forcibly attacked</label>
         <baseOpinionOffset>-15</baseOpinionOffset>
       </li>
 
@@ -241,7 +241,7 @@
 
       <li>
 
-        <label>無理やり襲われた</label>
+        <label>Forcibly attacked</label>
         <baseOpinionOffset>15</baseOpinionOffset>
       </li>
 
@@ -263,7 +263,7 @@
 
       <li>
 
-        <label>情熱的な時を過ごした</label>
+        <label>Had a passionate time</label>
         <baseOpinionOffset>20</baseOpinionOffset>
       </li>
 
@@ -271,7 +271,7 @@
 
   </ThoughtDef>
 
-	<!--サキュバス側心情-->
+	<!--サキュバス側心情  Succubus-->
   <ThoughtDef>
 
     <defName>NI_SuccubusInteracterMood</defName>
@@ -282,48 +282,48 @@
 
       <li>
 
-        <label>魔力の食事を堪能した</label>
+        <label>Enjoyed the magical meal</label>
 
-	<description>無理やり魔力を搾り取った。おいしかった。</description>
+	<description>I squeezed out the magical force. it was delicious.</description>
         <baseMoodEffect>5</baseMoodEffect>
 
       </li>
 
       <li>
 
-        <label>女を襲った</label>
+        <label>Struck a woman</label>
 
-	<description>興味の無い女から魔力を奪うしかなかった。</description>
+	<description>I had no choice but to take away the magical power from a woman who was not interested.</description>
         <baseMoodEffect>-5</baseMoodEffect>
       </li>
       <li>
 
-        <label>男を襲った</label>
+        <label>Struck a man</label>
 
-	<description>興味の無い男から魔力を奪うしかなかった。</description>
+	<description>I had no choice but to take magic from an uninteresting man.</description>
         <baseMoodEffect>-5</baseMoodEffect>
       </li>
       <li>
 
-        <label>同性を襲った</label>
+        <label>Struck same sex</label>
 
-	<description>好みの同性の魔力を堪能した。とてもおいしかった！</description>
+	<description>I enjoyed the magical power of my favorite sex. was very delicious!</description>
         <baseMoodEffect>8</baseMoodEffect>
       </li>
       <li>
 
-        <label>大切な人の魔力を堪能した</label>
+        <label>Enjoyed the magic of an important person</label>
 
-	<description>大切な人の魔力を味わった。幸せ♪</description>
+	<description>I enjoyed the magic of an important person. Happy♪</description>
         <baseMoodEffect>12</baseMoodEffect>
 
       </li>
 
       <li>
 
-        <label>魔力の食事を堪能した</label>
+        <label>Enjoyed the magical meal</label>
 
-	<description>無理やり魔力を搾り取るのはあまりいい気がしないけれど、この世界で生きるには必要な事だ。</description>
+	<description>I don't feel like squeezing out my magic, but it is necessary to live in this world.</description>
         <baseMoodEffect>1</baseMoodEffect>
 
       </li>
@@ -346,9 +346,9 @@
 
       <li>
 
-        <label>魔力搾取で相手を死なせた</label>
+        <label>Killed the opponent with magical exploitation</label>
 
-	<description>いくら夢魔とはいえ、魔力の糧を一つ失ってしまった。少しやりすぎたかも...</description>
+	<description>No matter how much Yuma, I lost one source of magical power. I might have over-done it...</description>
         <baseMoodEffect>-6</baseMoodEffect>
 
       </li>
@@ -368,9 +368,9 @@
 
       <li>
 
-        <label>限界まで魔力を搾取した</label>
+        <label>Exploiting magic to the limit</label>
 
-	<description>相手が泣き叫ぶまで無理やり魔力を搾り取った。とても甘美な光景だった。フフフ...</description>
+	<description>Forcibly squeezed the magical power until the other party cried. It was a very sweet scene. Huhhuh...</description>
         <baseMoodEffect>15</baseMoodEffect>
 
       </li>
@@ -393,9 +393,9 @@
 
       <li>
 
-        <label>魔力搾取で相手を死なせた</label>
+        <label>Killed the opponent with magical exploitation</label>
 
-	<description>手加減したはずなのに...何てことをしてしまったんだろう...</description>
+	<description>I suppose it wasn't right...what the hell did I do...</description>
         <baseMoodEffect>-12</baseMoodEffect>
 
       </li>
@@ -417,9 +417,9 @@
 
       <li>
 
-        <label>魔力搾取で大切な人を死なせた</label>
+        <label>I killed an important person by magical exploitation</label>
 
-	<description>大切な人を自分の手で殺してしまった...何てことをしてしまったんだろう...</description>
+	<description>I killed an important person with my own hands...what a hell did I do...</description>
         <baseMoodEffect>-25</baseMoodEffect>
 
       </li>
@@ -427,7 +427,7 @@
 
   </ThoughtDef>
 
-	<!--サキュバス側印象度-->
+	<!--サキュバス側印象度  Succubus side impression-->
   <ThoughtDef>
 
     <defName>NI_SuccubusInteracterOpLover</defName>
@@ -442,7 +442,7 @@
 
       <li>
 
-        <label>情熱的な時を過ごした</label>
+        <label>Had a passionate time</label>
         <baseOpinionOffset>20</baseOpinionOffset>
       </li>
 
@@ -464,7 +464,7 @@
 
       <li>
 
-        <label>私に屈服したかわいい下僕</label>
+        <label>The cute servant who gave in to me</label>
         <baseOpinionOffset>15</baseOpinionOffset>
       </li>
 
@@ -486,7 +486,7 @@
 
       <li>
 
-        <label>助けられた</label>
+        <label>Helped</label>
         <baseOpinionOffset>15</baseOpinionOffset>
       </li>
 
@@ -494,7 +494,7 @@
 
   </ThoughtDef>
 
-	<!--その他-->
+	<!--その他  Other-->
 
   <ThoughtDef>
 
@@ -508,16 +508,16 @@
 
       <li>
 
-        <label>私の大切な人に手を出された</label>
+        <label>I was put up by my important person</label>
 
-	<description>私の大切な人が手を出された。</description>
+	<description>An important person of mine was put out.</description>
         <baseMoodEffect>-7</baseMoodEffect>
       </li>
       <li>
 
-        <label>私の大切な人に手を出された</label>
+        <label>I was put up by my important person</label>
 
-	<description>私の大切な人が手を出された。許せない！</description>
+	<description>An important person of mine was put out. can not forgive!</description>
         <baseMoodEffect>-12</baseMoodEffect>
       </li>
     </stages>
@@ -538,7 +538,7 @@
 
       <li>
 
-        <label>私の大切な人と関係を持った</label>
+        <label>Had a relationship with my loved one</label>
         <baseOpinionOffset>-20</baseOpinionOffset>
       </li>
 
@@ -558,7 +558,7 @@
 
       <li>
 
-        <label>私の大切な人を搾り殺した</label>
+        <label>Squeezed and killed my important person</label>
 
 	<baseOpinionOffset>-50</baseOpinionOffset>
       </li>
@@ -581,7 +581,7 @@
 
       <li>
 
-        <label>入植者を搾り殺した</label>
+        <label>Squeezed the settlers</label>
 
 	<baseOpinionOffset>-15</baseOpinionOffset>
       </li>
@@ -605,7 +605,7 @@
 
       <li>
 
-        <label>囚人を搾り殺した</label>
+        <label>Squeezed and killed a prisoner</label>
 
 	<baseOpinionOffset>-8</baseOpinionOffset>
       </li>

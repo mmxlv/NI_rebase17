@@ -10,9 +10,9 @@
 
     <needClass>NightmareIncarnation.Need_Mana</needClass>
 
-    <label>魔力</label>
+    <label>Mana</label>
 
-    <description>魔力は魔族がこの世で実体を維持したり、魔術を行使したりするのに必要です。</description>
+    <description>Mana is necessary for the demons to maintain form and exercise magic in this world.</description>
 
     <listPriority>19</listPriority>
 

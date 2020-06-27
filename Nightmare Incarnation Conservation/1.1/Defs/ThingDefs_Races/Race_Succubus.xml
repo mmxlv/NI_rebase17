@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
-<AlienRace.RaceSettings>
-	<defName>NI_Setting</defName>
-	<pawnKindSettings>
-	
-		<!--奴隷-->
+	<AlienRace.RaceSettings>
+		<defName>NI_Setting</defName>
+		<pawnKindSettings>
+		<!--slave-->
 		<!--<alienslavekinds>
 			<li>
 				<kindDefs>
@@ -20,9 +18,7 @@
 				<chance>5.0</chance>
 			</li>
 		</alienslavekinds>-->
-	
-	
-		<!--亡命-->
+		<!--exile-->
 		<!--<alienwandererkinds>
 			<li>
 				<pawnKindEntries>
@@ -38,66 +34,63 @@
 				</factionDefs>
 			</li>
 		</alienwandererkinds>-->
-		
-		<!--このStartingColonists項はゲーム開始時やEdBなどのランダム生成を叩いた時の当Raceの生成確立を制御します。-->
-		<!--上記のFactionDefsにはバニラの自コロニーが設定されています。ここにPlayerTribeを追記すると蛮族でも当Raceを使用できる事になります。-->
+		<!--This Starting Colonists term controls the establishment of this Race when the game starts or when you hit random generation such as EdB.-->
+		<!--The vanilla own colony is set in the above FactionDefs. If you add Player Tribe here, even the barbarians can use this Race.-->
 		<startingColonists>
-		<li>
-			<pawnKindEntries>
 			<li>
-				<kindDefs>
-				<li>NI_ScColonist</li>
-				</kindDefs>
-				<chance>10.0</chance>
-			</li>
-			</pawnKindEntries>
-			<factionDefs>
-				<li>PlayerColony</li>
-				<li>PlayerTribe</li>
-			</factionDefs>
-		</li>
-		</startingColonists>
-	</pawnKindSettings>
-</AlienRace.RaceSettings>
-
-
-
+				<pawnKindEntries>
+					<li>
+						<kindDefs>
+							<li>NI_ScColonist</li>
+						</kindDefs>
+						<chance>10.0</chance>
+					</li>
+				</pawnKindEntries>
+				<factionDefs>
+						<li>PlayerColony</li>
+						<li>PlayerTribe</li>
+					</factionDefs>
+				</li>
+			</startingColonists>
+		</pawnKindSettings>
+	</AlienRace.RaceSettings>
+	
 <!--バニラのBasePawnを流用する場合に限り場合ここの項目を削除します。-->
 <!--バニラのBasePawnに変更することで無改造で民火氏の作った見た目変更Modなどを使用できるかと思います。-->
 <!--特別にこの種族だけに変更を加えたい場合(例:この種族だけ乳搾り出来る)は以下の通り独自のDefNameをつけます。-->
 <!--”BaseNRPawn”は自分の作るRaceに合わせた略称などに変更すると良いでしょう。-->
-<ThingDef Name="BaseNIPawn" Abstract="True">
-    <thingClass>Pawn</thingClass>
-    <category>Pawn</category>
-    <selectable>true</selectable>
-    <tickerType>Normal</tickerType>
-    <altitudeLayer>Pawn</altitudeLayer>
-    <useHitPoints>false</useHitPoints>
-    <hasTooltip>true</hasTooltip>
-    <soundImpactDefault>BulletImpact_Flesh</soundImpactDefault>
-    <inspectorTabs>
-		<li>NightmareIncarnation.ITab_ManaPolicy</li>
-		<li>ITab_Pawn_Health</li>
-		<li>ITab_Pawn_Needs</li>
-		<li>ITab_Pawn_Character</li>
-		<li>ITab_Pawn_Training</li>
-		<li>ITab_Pawn_Gear</li>
-		<li>ITab_Pawn_Guest</li>
-		<li>ITab_Pawn_Prisoner</li>
-		<li>ITab_Pawn_Social</li>
-		<li>ITab_Pawn_Log</li>
-		<!--民火氏の作った見た目変更Modなどのタブを追加したい場合はこちらとすぐ下のCamps内に追記します。-->
-		<!--逆に戦闘ログなどを抜きたい場合は記述を削除すると良いかもしれません。(試したことは無い)-->
-    </inspectorTabs>
-    <comps>
-        <li>
-            <compClass>CompAttachBase</compClass>
-        </li>
-	<li Class="NightmareIncarnation.CompProperties_SuccubusRace" />
-    </comps>
-    <drawGUIOverlay>true</drawGUIOverlay>
-</ThingDef>
-
+	<ThingDef Name="BaseNIPawn" Abstract="True">
+		<thingClass>Pawn</thingClass>
+		<category>Pawn</category>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Pawn</altitudeLayer>
+		<useHitPoints>false</useHitPoints>
+		<hasTooltip>true</hasTooltip>
+		<soundImpactDefault>BulletImpact_Flesh</soundImpactDefault>
+		<inspectorTabs><!--can cause compatibility issues when done like this-->
+			<li>NightmareIncarnation.ITab_ManaPolicy</li>
+			<li>ITab_Pawn_Health</li>
+			<li>ITab_Pawn_Needs</li>
+			<li>ITab_Pawn_Character</li>
+			<li>ITab_Pawn_Training</li>
+			<li>ITab_Pawn_Gear</li>
+			<li>ITab_Pawn_Guest</li>
+			<li>ITab_Pawn_Prisoner</li>
+			<li>ITab_Pawn_Social</li>
+			<li>ITab_Pawn_Log</li>
+			<!--民火氏の作った見た目変更Modなどのタブを追加したい場合はこちらとすぐ下のCamps内に追記します。-->
+			<!--逆に戦闘ログなどを抜きたい場合は記述を削除すると良いかもしれません。(試したことは無い)-->
+		</inspectorTabs>
+		<comps>
+			<li>
+				<compClass>CompAttachBase</compClass>
+			</li>
+			<li Class="NightmareIncarnation.CompProperties_SuccubusRace" />
+		</comps>
+		<drawGUIOverlay>true</drawGUIOverlay>
+	</ThingDef>
+	
 <AlienRace.ThingDef_AlienRace ParentName="BaseNIPawn">
     <defName>NI_Race</defName>
 	<!--defName内のNewRaceはPawnKindDefs_Humanlikesフォルダ内の設定でも使用します。-->
@@ -112,9 +105,8 @@
 			<maleGenderProbability>0.001</maleGenderProbability>
 			<!--男性と女性の比率を弄る記述です。0にしても動作しますがEdbでセーブの際に保存した名前が上手く適用されなくなります。-->
 			<!--0.01以下に設定するとEdBに不具合が出てしまう可能性があります。-->
-			<!-- <useOnlyPawnkindBackstories>true</useOnlyPawnkindBackstories> -->
+			<!--<useOnlyPawnkindBackstories>true</useOnlyPawnkindBackstories>-->
 			<!--独自のバックストーリーを使用しない際はfalseに変更するか記述ごと削除します。-->
-			
 			<allowHumanBios>true</allowHumanBios>
 			<!--わからん-->
 			<humanRecipeImport>true</humanRecipeImport>
@@ -125,7 +117,6 @@
 				<li>Human</li>
 			</notXenophobistTowards>
 			<!--基本的に人間と同じ種族の場合はHumanに設定することで異種族をみなされなくなります。-->
-			
 			<!--<forcedRaceTraitEntries>
 				<li>
 					<defName>NI_ManaAttribute</defName>
@@ -136,7 +127,6 @@
 			<!--この項目で性格、特性周りの制御をします。例：種族全員可愛い持ち等。-->
 			<!--例ではawnが生成された時にかわいいを10％の確率で付与されるように設定してあります。-->
 			<!--聖典(AlienRaceWiki)や他のAlienRaceを参考にするとよいでしょう。-->	
-			
 			<disallowedTraits>
 				<li>Ugly</li>
 				<li>Staggeringly ugly</li>
@@ -148,10 +138,7 @@
 				<!--特性のDefNameではなくLabelの表示で制御できます。-->
 			</disallowedTraits>
 			<!--ここでPawnが生成されたときに付与されない特性をリストアップしています。-->
-			
 			<alienPartGenerator>
-			
-			
 				<headOffset>(0.00, 0.00)</headOffset>
 				<!--顔の位置を設定します。左側が左右、右側が上下に相当します。-->
 				<!--この項目は頭装備の表示に関わるModの影響を多大に受けます。例:髪の大きさだけが元に戻る、顔の位置が戻るなど-->
@@ -161,7 +148,6 @@
 				<customPortraitHeadDrawSize>(1.00, 1.00)</customPortraitHeadDrawSize>
 				<!--(横.縦)でグラフィックの比率を変えます。-->
 				<!--上手い事調整するとバニラに比べ高身長、頭身の高いキャラを実装できます。-->
-				
 				<aliencrowntypes>
 					<li>Female/Female_NI01face</li>
 					<li>Female/Female_NI02face</li>
@@ -188,7 +174,6 @@
 				<!--ゲーム内で生成されるPawnの体型を大まかに制御します。-->
 				<!--身体に独自テクスチャーを使用している場合Hulkなど対応するテクスチャーが無いとピンクテクスチャーのエラーが出ますので注意。-->
 				<!--身体は女性で性別上は男性と言った特殊なRaceを作る場合は別Def項のBackstory_defで制御します。-->
-				
 			<useGenderedHeads>false</useGenderedHeads>
 			<useGenderedBodies>false</useGenderedBodies>
 			<bodyAddons>
@@ -289,7 +274,6 @@
 						<!--特に抵抗がない、そもそも肌色でない場合、特に気にしなくて構いません。-->
                     </options>
                 </alienskincolorgen>
-				
 				<!--この項目ではテクスチャーの特定マスキング部のカラー変更で使用します。-->
 				<!--マスキングに使う色指定とどの様に設定するかはテクスチャフォルダを参照ください。-->
 				<!--上手く使用することで虹彩の色、上半身、下半身で別の色など再現する事ができます。-->
@@ -304,8 +288,6 @@
 						</li>
 					</options>
 				</alienskinsecondcolorgen>
-				
-				
 				<!--Pawnが生成されたときのヘアカラーなどを任意に制御できます。-->
 				<!--この様に記述を削除するなどして適用しない場合は、髪と肌の色などはバニラの人間Pawnと同じ処理になります。-->
 				<!--<alienhaircolorgen Class="ColorGenerator_Options">
@@ -318,11 +300,7 @@
 					</options>
 				</alienhaircolorgen>-->
             </alienPartGenerator>
-			
-
         </generalSettings>
-		
-		
 		<!--テクスチャーのフォルダを指定します。フォルダの階層などに注意してください。他のAlienRaceを参考にするとよいでしょう。-->
 		<!--主に独自のテクスチャーを使用する際は上記のように設定しますがバニラの人間Pawnと同じで良ければこの項目を削除します。-->
 		<!--その場合表示されるテクスチャーは血色の悪いものになってしまうので注意が必要です。-->
@@ -332,12 +310,10 @@
 				<body>Things/Pawn/NI_Succubus/Bodies/</body>
 			</li>
 		</graphicPaths>
-		
 		<hairSettings>
 		<hasHair>true</hasHair>
                 <getsGreyAt>1000</getsGreyAt>
 				<!--髪の色が白髪になる年齢ですが、老化の始まる年齢もここの数値の前後で決まります。-->
-				
 			<hairTags>
 				<li>NI_Succubus</li>
 				<!--<li>Urban</li>-->
@@ -346,8 +322,6 @@
 			<!--Race独自のヘアスタイルを設定したい場合はHairtagを使います。他のAlienRaceや髪型Modを参考にするとよいでしょう。-->
 			<!--この種族のみの髪型を使用したい場合は独自のタグを設定する必要があります。例：NR_hair-->
         </hairSettings>
-		
-		
 		<!--このthoughsettings項ではゲーム内の心情バフなどの効果を無効化したり名前などを種族の設定に合うフレーバーテキストに変更できます。-->
 		<!--対応するバニラの心情バフなどを参考に変更すると良いでしょう。-->
 		<thoughtSettings>
@@ -374,7 +348,6 @@
 				<li>EnvironmentDark</li>
 				<li>Naked</li>
 			</cannotReceiveThoughts>
-		
 		<!--これは心情バフなどのラベルや効果などを独自の定義に置き換えることができます。-->
 		<!--例ではパーティを置き換えています。その下はウフフ、アハハです。-->
 			<replacerList>
@@ -384,9 +357,7 @@
 				</li>-->
 			</replacerList>
         </thoughtSettings>
-		
     </alienRace>
-
 	<statBases>
 		<MarketValue>2200</MarketValue>
 		<MoveSpeed>4.61</MoveSpeed>
@@ -407,7 +378,6 @@
     </statBases>
 	<!--基本ステータスを設定できます。装備Mod等の追加効果の記述がそのまま流用出来る物もあります。-->
 	<!--当方の追加種族「強化人間」の記述をそのまま引っ張って来たので通常の人間に比べてOPな数値となっています。-->
-	
 	<tools>
 		<li>
 			<label>左手</label>
@@ -481,7 +451,6 @@
 		</li>
     </tools>
 	<!--徒手空拳の性能を設定します。手などが特殊形状で武器を持てない種族を設定する場合はこちらの設定を強化すると良いでしょう。-->
-
 	<race>
 		<thinkTreeMain>NI_Succubus</thinkTreeMain>
 		<thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
@@ -503,7 +472,6 @@
 		<baseHungerRate>0.5</baseHungerRate>
 		<foodType>OmnivoreHuman</foodType>
 		<!--Statbaseと同じくPawnの性能についての記述です。OP気味に設定していますが興ざめにならない程度に設定すると良いでしょう。-->
-		
 		<litterSizeCurve>
 			<points>
 				<li>(0.5, 0)</li>
@@ -513,7 +481,6 @@
 			</points>
 		</litterSizeCurve>
 		<!--わからん-->
-		
 		<lifeStageAges>
 			<li>
 				<def>HumanlikeBaby</def>
@@ -538,7 +505,6 @@
 		</lifeStageAges>
 		<!--成長過程の設定です。解説者は特に触っていません。-->
 		<!--子供の独自グラフィックなどを設定したい場合は猿の惑星Modを参考すると良いでしょう。-->
-		
 		<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
 		<soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding</soundMeleeHitBuilding>
 		<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
@@ -561,7 +527,6 @@
 			<li>OrganicStandard</li>
 		</hediffGiverSets>
 	</race>
-	
 	<!---->
 	<recipes>
 		<li>InstallArchotechEye</li>
@@ -595,5 +560,4 @@
 		<li>Anesthetize</li>
 	</recipes>
 </AlienRace.ThingDef_AlienRace>
-
 </Defs>

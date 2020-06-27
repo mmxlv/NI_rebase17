@@ -3,7 +3,7 @@
 
   <BodyPartDef>
     <defName>NI_LeftWing</defName>
-    <label>翼</label>
+    <label>Wing</label>
     <hitPoints>25</hitPoints>
     <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
     <skinCovered>false</skinCovered>
@@ -17,7 +17,7 @@
   </BodyPartDef>
   <BodyPartDef>
     <defName>NI_RightWing</defName>
-    <label>翼</label>
+    <label>Wing</label>
     <hitPoints>25</hitPoints>
     <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
     <skinCovered>false</skinCovered>
