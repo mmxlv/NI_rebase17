@@ -3,5 +3,4 @@
 Source/.vs
 Source/Nightmare Incarnation/bin
 Source/Nightmare Incarnation/obj
-1.*/Assemblies/*.xml
-1.*/Assemblies/*.pdb
+1.*/Assemblies/*.xml *.pdb
