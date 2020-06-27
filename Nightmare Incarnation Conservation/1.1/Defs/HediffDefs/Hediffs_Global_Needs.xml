@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef>
+    <defName>ManaDeficiency</defName>
+    <label>mana deficiency</label>
+    <lethalSeverity>1</lethalSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+  	<description>2</description>
+	<stages>
+      <li>
+        <label>magical circulation disorder</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.05</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.2</minSeverity>
+        <label>magic exhaustion</label>
+        <socialFightChanceFactor>0.75</socialFightChanceFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.10</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.4</minSeverity>
+        <label>magic hunger</label>
+        <socialFightChanceFactor>0.5</socialFightChanceFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.20</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.6</minSeverity>
+        <label>hazy</label>
+        <socialFightChanceFactor>0.25</socialFightChanceFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.30</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.8</minSeverity>
+        <label>weak</label>
+        <lifeThreatening>true</lifeThreatening>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.1</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VigorRavage</defName>
+    <label>energy breakdown</label>
+    <lethalSeverity>1</lethalSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+  	<description>1</description>
+    <stages>
+      <li>
+        <label>tired</label>
+        <socialFightChanceFactor>1.5</socialFightChanceFactor>
+        <restFallFactorOffset>0.1</restFallFactorOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.05</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.2</minSeverity>
+        <label>fatigue</label>
+        <socialFightChanceFactor>2</socialFightChanceFactor>
+        <restFallFactorOffset>0.25</restFallFactorOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.10</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.4</minSeverity>
+        <label>overworked</label>
+        <socialFightChanceFactor>2.5</socialFightChanceFactor>
+        <restFallFactorOffset>0.5</restFallFactorOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.20</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.6</minSeverity>
+        <label>extremly overworked</label>
+        <socialFightChanceFactor>3</socialFightChanceFactor>
+        <restFallFactorOffset>1.0</restFallFactorOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.30</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.8</minSeverity>
+        <label>weak</label>
+        <lifeThreatening>true</lifeThreatening>
+        <restFallFactorOffset>2.0</restFallFactorOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.1</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

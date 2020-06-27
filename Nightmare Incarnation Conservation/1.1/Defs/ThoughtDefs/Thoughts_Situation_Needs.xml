@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>NI_NeedMana</defName>
+    <workerClass>NightmareIncarnation.ThoughtWorker_NINeedMana</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>Little magic</label>
+        <description>A little lack of magical power.</description>
+        <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+      <li>
+        <label>Lack of magic</label>
+        <description>Not enough magic.</description>
+        <baseMoodEffect>-12</baseMoodEffect>
+      </li>
+      <li>
+        <label>Lack of magic</label>
+        <description>I can't concentrate because I don't have enough magic.</description>
+        <baseMoodEffect>-20</baseMoodEffect>
+      </li>
+      <li>
+        <label>Ataxia</label>
+        <description>My body is weakening. I have to replenish my magic power soon.</description>
+        <baseMoodEffect>-26</baseMoodEffect>
+      </li>
+      <li>
+        <label>Lost magic</label>
+        <description>I can't help anymore. I want to get magical power, whatever it is.</description>
+        <baseMoodEffect>-32</baseMoodEffect>
+      </li>
+      <li>
+        <label>Magical starvation</label>
+        <description>The face turns pale and greasy sweat comes out without doing anything. Need Magic power quickly...</description>
+        <baseMoodEffect>-38</baseMoodEffect>
+      </li>
+      <li>
+        <label>Extreme magic starvation</label>
+        <description>Magic power... Magic power... Someone...</description>
+        <baseMoodEffect>-44</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>NI_PolicyUnacceptable</defName>
+    <workerClass>NightmareIncarnation.ThoughtWorker_NIPolicyUnacceptable</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>Magical policy that does not suit me</label>
+        <description>You have been forced to collect a magic power that does not suit you. It's not necessary to play with people for entertainment...</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>Magical policy that does not suit me</label>
+        <description>You have been forced to collect a magic power that does not suit you. You can't eat any snacks!</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>Magical policy that does not suit me</label>
+        <description>You have been forced to collect a magic power that does not suit you. Choose as much as you want to eat. Don't tell me!</description>
+        <baseMoodEffect>-3</baseMoodEffect>
+      </li>
+      <li>
+        <label>Magical policy that does not suit me</label>
+        <description>You have been forced to collect a magic power that does not suit you. It's bland to not be able to play with people beyond their limits.</description>
+        <baseMoodEffect>-4</baseMoodEffect>
+      </li>
+      <li>
+        <label>Magical policy that does not suit me</label>
+        <description>You have been forced to collect a magic power that does not suit you. Why can't people understand the most beautiful moment when they scatter?</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

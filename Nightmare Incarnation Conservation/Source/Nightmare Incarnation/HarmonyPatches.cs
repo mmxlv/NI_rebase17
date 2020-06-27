@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Harmony;
+using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -15,17 +15,17 @@ namespace NightmareIncarnation
 		// Token: 0x06000025 RID: 37 RVA: 0x00003574 File Offset: 0x00001774
 		static HarmonyPatches()
 		{
-			HarmonyInstance harmonyInstance = HarmonyInstance.Create("NightmareIncarnation.HarmonyPatch");
-			harmonyInstance.Patch(AccessTools.Method(typeof(Pawn_HealthTracker), "AddHediff", new Type[]
+			Harmony harmony = new Harmony("NightmareIncarnation.HarmonyPatch");
+			harmony.Patch(AccessTools.Method(typeof(Pawn_HealthTracker), "AddHediff", new Type[]
 			{
 				typeof(Hediff),
 				typeof(BodyPartRecord),
 				typeof(DamageInfo),
 				typeof(DamageWorker.DamageResult)
 			}, null), new HarmonyMethod(typeof(HarmonyPatches), "Pawn_HealthTrackerAddHediffPrefix", null), null, null);
-			harmonyInstance.Patch(AccessTools.Method(typeof(Pawn), "GetGizmos", null, null), null, new HarmonyMethod(typeof(HarmonyPatches), "Pawn_GetGizmos_Postfix", null), null);
-			harmonyInstance.Patch(AccessTools.Method(typeof(Pawn), "PreApplyDamage", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Pawn_PreApplyDamage_Prefix", null), null, null);
-			harmonyInstance.Patch(AccessTools.Method(typeof(Thing), "Ingested", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Thing_Ingested_Prefix", null), null, null);
+			harmony.Patch(AccessTools.Method(typeof(Pawn), "GetGizmos", null, null), null, new HarmonyMethod(typeof(HarmonyPatches), "Pawn_GetGizmos_Postfix", null), null);
+			harmony.Patch(AccessTools.Method(typeof(Pawn), "PreApplyDamage", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Pawn_PreApplyDamage_Prefix", null), null, null);
+			harmony.Patch(AccessTools.Method(typeof(Thing), "Ingested", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Thing_Ingested_Prefix", null), null, null);
 		}
 
 		// Token: 0x06000026 RID: 38 RVA: 0x00003698 File Offset: 0x00001898
@@ -76,7 +76,7 @@ namespace NightmareIncarnation
 				bool flag3 = hediff.def == HediffDefOf.Anesthetic;
 				if (flag3)
 				{
-					flag2 = (pawn.Faction == null || !pawn.Faction.IsPlayer || pawn.CurJob == null || pawn.CurJobDef != JobDefOf.LayDown || (pawn.jobs.posture != 3 && pawn.jobs.posture != 2));
+					flag2 = (pawn.Faction == null || !pawn.Faction.IsPlayer || pawn.CurJob == null || pawn.CurJobDef != JobDefOf.LayDown || (pawn.jobs.posture != PawnPosture.LayingInBed && pawn.jobs.posture != PawnPosture.LayingOnGroundNormal));
 				}
 				bool flag4 = hediff.def == HediffDefOf.BloodLoss;
 				if (flag4)

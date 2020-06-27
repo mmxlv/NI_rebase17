@@ -16,7 +16,7 @@ namespace NightmareIncarnation
 		{
 			get
 			{
-				return this.job.GetTarget(1).Thing;
+				return this.job.GetTarget(TargetIndex.A).Thing;
 			}
 		}
 
@@ -64,7 +64,7 @@ namespace NightmareIncarnation
 				bool flag2 = thing != null && thing.def.ingestible != null;
 				if (flag2)
 				{
-					bool flag3 = !GenText.NullOrEmpty(thing.def.ingestible.ingestReportStringEat) && (GenText.NullOrEmpty(thing.def.ingestible.ingestReportString) || this.pawn.RaceProps.intelligence < 1);
+					bool flag3 = !GenText.NullOrEmpty(thing.def.ingestible.ingestReportStringEat) && (GenText.NullOrEmpty(thing.def.ingestible.ingestReportString) || this.pawn.RaceProps.intelligence < Intelligence.ToolUser);
 					if (flag3)
 					{
 						return string.Format(thing.def.ingestible.ingestReportStringEat, this.job.targetA.Thing.LabelShort);
@@ -120,17 +120,16 @@ namespace NightmareIncarnation
 			{
 				ToilFailConditions.FailOn<JobDriver_NIIngestManaItem>(this, () => !this.IngestibleSource.Destroyed && !this.IngestibleSource.IngestibleNow);
 			}
-			Toil chew = ToilFailConditions.FailOnCannotTouch<Toil>(ToilFailConditions.FailOn(Toils_Ingest.ChewIngestible(this.pawn, this.ChewDurationMultiplier, 1, 2), (Toil x) => !this.IngestibleSource.Spawned && (this.pawn.carryTracker == null || this.pawn.carryTracker.CarriedThing != this.IngestibleSource)), 1, 2);
+			Toil chew = ToilFailConditions.FailOnCannotTouch<Toil>(ToilFailConditions.FailOn(Toils_Ingest.ChewIngestible(this.pawn, this.ChewDurationMultiplier, TargetIndex.A, TargetIndex.B), (Toil x) => !this.IngestibleSource.Spawned && (this.pawn.carryTracker == null || this.pawn.carryTracker.CarriedThing != this.IngestibleSource)), TargetIndex.A,PathEndMode.Touch);
 			foreach (Toil toil in this.PrepareToIngestToils(chew))
 			{
 				yield return toil;
-				toil = null;
+				//toil = null;
 			}
 			IEnumerator<Toil> enumerator = null;
 			yield return chew;
-			yield return Toils_Ingest.FinalizeIngest(this.pawn, 1);
-			yield return Toils_Jump.JumpIf(chew, () => this.job.GetTarget(1).Thing is Corpse && this.pawn.needs.food.CurLevelPercentage < 0.9f);
-			yield break;
+			yield return Toils_Ingest.FinalizeIngest(this.pawn, TargetIndex.A);
+			yield return Toils_Jump.JumpIf(chew, () => this.job.GetTarget(TargetIndex.A).Thing is Corpse && this.pawn.needs.food.CurLevelPercentage < 0.9f);
 			yield break;
 		}
 
@@ -161,10 +160,10 @@ namespace NightmareIncarnation
 		// Token: 0x06000053 RID: 83 RVA: 0x00005C8F File Offset: 0x00003E8F
 		private IEnumerable<Toil> PrepareToIngestToils_Dispenser()
 		{
-			yield return ToilFailConditions.FailOnDespawnedNullOrForbidden<Toil>(Toils_Goto.GotoThing(1, 4), 1);
-			yield return Toils_Ingest.TakeMealFromDispenser(1, this.pawn);
-			yield return ToilFailConditions.FailOnDestroyedNullOrForbidden<Toil>(Toils_Ingest.CarryIngestibleToChewSpot(this.pawn, 1), 1);
-			yield return Toils_Ingest.FindAdjacentEatSurface(2, 1);
+			yield return ToilFailConditions.FailOnDespawnedNullOrForbidden<Toil>(Toils_Goto.GotoThing(TargetIndex.A ,PathEndMode.InteractionCell), TargetIndex.A);
+			yield return Toils_Ingest.TakeMealFromDispenser(TargetIndex.A, this.pawn);
+			yield return ToilFailConditions.FailOnDestroyedNullOrForbidden<Toil>(Toils_Ingest.CarryIngestibleToChewSpot(this.pawn, TargetIndex.A), TargetIndex.A);
+			yield return Toils_Ingest.FindAdjacentEatSurface(TargetIndex.B, TargetIndex.A);
 			yield break;
 		}
 
@@ -174,47 +173,50 @@ namespace NightmareIncarnation
 			bool flag = this.eatingFromInventory;
 			if (flag)
 			{
-				yield return Toils_Misc.TakeItemFromInventoryToCarrier(this.pawn, 1);
+				yield return Toils_Misc.TakeItemFromInventoryToCarrier(this.pawn, TargetIndex.A);
 			}
 			else
 			{
-				JobDriver_NIIngestManaItem.<>c__DisplayClass17_0 CS$<>8__locals1 = new JobDriver_NIIngestManaItem.<>c__DisplayClass17_0();
-				CS$<>8__locals1.<>4__this = this;
+				//JobDriver_NIIngestManaItem.<>c__DisplayClass17_0 CS$<>8__locals1 = new JobDriver_NIIngestManaItem.<>c__DisplayClass17_0();
+				//CS$<>8__locals1.<>4__this = this;
 				yield return this.ReserveFoodIfWillIngestWholeStack();
-				Toil gotoToPickup = ToilFailConditions.FailOnDespawnedNullOrForbidden<Toil>(Toils_Goto.GotoThing(1, 3), 1);
+				Toil gotoToPickup = ToilFailConditions.FailOnDespawnedNullOrForbidden<Toil>(Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.ClosestTouch), TargetIndex.A);
 				yield return Toils_Jump.JumpIf(gotoToPickup, () => this.pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation));
-				yield return ToilFailConditions.FailOnDespawnedNullOrForbidden<Toil>(Toils_Goto.GotoThing(1, 2), 1);
+				yield return ToilFailConditions.FailOnDespawnedNullOrForbidden<Toil>(Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch), TargetIndex.A);
 				yield return Toils_Jump.Jump(chewToil);
 				yield return gotoToPickup;
-				yield return Toils_Ingest.PickupIngestible(1, this.pawn);
-				CS$<>8__locals1.reserveExtraFoodToCollect = Toils_Reserve.Reserve(3, 1, -1, null);
+				yield return Toils_Ingest.PickupIngestible(TargetIndex.A, this.pawn);
+				//CS$<>8__locals1.reserveExtraFoodToCollect = Toils_Reserve.Reserve(3, 1, -1, null);
+				Toil reserveExtraFoodToCollect = Toils_Reserve.Reserve(TargetIndex.A, 1, -1, null);
 				Toil findExtraFoodToCollect = new Toil();
 				findExtraFoodToCollect.initAction = delegate()
 				{
-					bool flag2 = CS$<>8__locals1.<>4__this.pawn.inventory.innerContainer.TotalStackCountOfDef(CS$<>8__locals1.<>4__this.IngestibleSource.def) < CS$<>8__locals1.<>4__this.job.takeExtraIngestibles;
+					//bool flag2 = CS$<>8__locals1.<>4__this.pawn.inventory.innerContainer.TotalStackCountOfDef(CS$<>8__locals1.<>4__this.IngestibleSource.def) < CS$<>8__locals1.<>4__this.job.takeExtraIngestibles;
+					bool flag2 =this.pawn.inventory.innerContainer.TotalStackCountOfDef(this.IngestibleSource.def) > this.job.takeExtraIngestibles;
 					if (flag2)
 					{
-						Thing thing = GenClosest.ClosestThingReachable(CS$<>8__locals1.<>4__this.pawn.Position, CS$<>8__locals1.<>4__this.pawn.Map, ThingRequest.ForDef(CS$<>8__locals1.<>4__this.IngestibleSource.def), 2, TraverseParms.For(CS$<>8__locals1.<>4__this.pawn, 3, 0, false), 12f, (Thing x) => ReservationUtility.CanReserve(CS$<>8__locals1.<>4__this.pawn, x, 1, -1, null, false) && !ForbidUtility.IsForbidden(x, CS$<>8__locals1.<>4__this.pawn) && SocialProperness.IsSociallyProper(x, CS$<>8__locals1.<>4__this.pawn), null, 0, -1, false, 6, false);
+						//Thing thing = GenClosest.ClosestThingReachable(CS$<> 8__locals1.<> 4__this.pawn.Position, CS$<> 8__locals1.<> 4__this.pawn.Map, ThingRequest.ForDef(CS$<> 8__locals1.<> 4__this.IngestibleSource.def), 2, TraverseParms.For(CS$<> 8__locals1.<> 4__this.pawn, 3, 0, false), 12f, (Thing x) => ReservationUtility.CanReserve(CS$<> 8__locals1.<> 4__this.pawn, x, 1, -1, null, false) && !ForbidUtility.IsForbidden(x, CS$<> 8__locals1.<> 4__this.pawn) && SocialProperness.IsSociallyProper(x, CS$<> 8__locals1.<> 4__this.pawn), null, 0, -1, false, 6, false);
+						Thing thing = GenClosest.ClosestThingReachable(this.pawn.Position, this.pawn.Map, ThingRequest.ForDef(this.IngestibleSource.def),PathEndMode.Touch, TraverseParms.For(this.pawn,Danger.Deadly, 0, false), 12f, (Thing x) => ReservationUtility.CanReserve(this.pawn, x, 1, -1, null, false) && !ForbidUtility.IsForbidden(x, this.pawn) && SocialProperness.IsSociallyProper(x, this.pawn), null, 0, -1, false,RegionType.Set_Passable, false);
 						bool flag3 = thing != null;
 						if (flag3)
 						{
-							CS$<>8__locals1.<>4__this.job.SetTarget(3, thing);
-							CS$<>8__locals1.<>4__this.JumpToToil(CS$<>8__locals1.reserveExtraFoodToCollect);
+							this.job.SetTarget(TargetIndex.C, thing);
+							this.JumpToToil(reserveExtraFoodToCollect);
 						}
 					}
 				};
-				findExtraFoodToCollect.defaultCompleteMode = 1;
+				findExtraFoodToCollect.defaultCompleteMode = ToilCompleteMode.Instant;
 				yield return Toils_Jump.Jump(findExtraFoodToCollect);
-				yield return CS$<>8__locals1.reserveExtraFoodToCollect;
-				yield return Toils_Goto.GotoThing(3, 2);
-				yield return Toils_Haul.TakeToInventory(3, () => this.job.takeExtraIngestibles - this.pawn.inventory.innerContainer.TotalStackCountOfDef(this.IngestibleSource.def));
+				yield return reserveExtraFoodToCollect;
+				yield return Toils_Goto.GotoThing(TargetIndex.C, PathEndMode.Touch);
+				yield return Toils_Haul.TakeToInventory(TargetIndex.C, () => this.job.takeExtraIngestibles - this.pawn.inventory.innerContainer.TotalStackCountOfDef(this.IngestibleSource.def));
 				yield return findExtraFoodToCollect;
-				CS$<>8__locals1 = null;
+				reserveExtraFoodToCollect = null;
 				gotoToPickup = null;
 				findExtraFoodToCollect = null;
 			}
-			yield return ToilFailConditions.FailOnDestroyedOrNull<Toil>(Toils_Ingest.CarryIngestibleToChewSpot(this.pawn, 1), 1);
-			yield return Toils_Ingest.FindAdjacentEatSurface(2, 1);
+			yield return ToilFailConditions.FailOnDestroyedOrNull<Toil>(Toils_Ingest.CarryIngestibleToChewSpot(this.pawn, TargetIndex.A), TargetIndex.A);
+			yield return Toils_Ingest.FindAdjacentEatSurface(TargetIndex.B, TargetIndex.A);
 			yield break;
 		}
 
@@ -222,7 +224,7 @@ namespace NightmareIncarnation
 		private IEnumerable<Toil> PrepareToIngestToils_NonToolUser()
 		{
 			yield return this.ReserveFoodIfWillIngestWholeStack();
-			yield return Toils_Goto.GotoThing(1, 2);
+			yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
 			yield break;
 		}
 
@@ -236,7 +238,7 @@ namespace NightmareIncarnation
 					bool flag = this.pawn.Faction == null;
 					if (!flag)
 					{
-						Thing thing = this.job.GetTarget(1).Thing;
+						Thing thing = this.job.GetTarget(TargetIndex.A).Thing;
 						bool flag2 = this.pawn.carryTracker.CarriedThing == thing;
 						if (!flag2)
 						{
@@ -247,7 +249,7 @@ namespace NightmareIncarnation
 								bool flag4 = !thing.Spawned;
 								if (flag4)
 								{
-									this.pawn.jobs.EndCurrentJob(3, true);
+									this.pawn.jobs.EndCurrentJob(JobCondition.Incompletable, true);
 								}
 								else
 								{
@@ -257,7 +259,7 @@ namespace NightmareIncarnation
 						}
 					}
 				},
-				defaultCompleteMode = 1,
+				defaultCompleteMode =ToilCompleteMode.Instant,
 				atomicWithPrevious = true
 			};
 		}
@@ -265,7 +267,7 @@ namespace NightmareIncarnation
 		// Token: 0x06000057 RID: 87 RVA: 0x00005D00 File Offset: 0x00003F00
 		public override bool ModifyCarriedThingDrawPos(ref Vector3 drawPos, ref bool behind, ref bool flip)
 		{
-			IntVec3 cell = this.job.GetTarget(2).Cell;
+			IntVec3 cell = this.job.GetTarget(TargetIndex.B).Cell;
 			return JobDriver_Ingest.ModifyCarriedThingDrawPosWorker(ref drawPos, ref behind, ref flip, cell, this.pawn);
 		}
 
@@ -326,12 +328,13 @@ namespace NightmareIncarnation
 		public const float EatCorpseBodyPartsUntilFoodLevelPct = 0.9f;
 
 		// Token: 0x04000069 RID: 105
-		public const TargetIndex IngestibleSourceInd = 1;
+		public const TargetIndex IngestibleSourceInd =TargetIndex.A;
 
 		// Token: 0x0400006A RID: 106
-		private const TargetIndex TableCellInd = 2;
+		private const TargetIndex TableCellInd = TargetIndex.B;
 
 		// Token: 0x0400006B RID: 107
-		private const TargetIndex ExtraIngestiblesToCollectInd = 3;
+		private const TargetIndex ExtraIngestiblesToCollectInd = TargetIndex.C;
 	}
+
 }

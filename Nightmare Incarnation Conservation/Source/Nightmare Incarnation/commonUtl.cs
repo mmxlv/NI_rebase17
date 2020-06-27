@@ -21,21 +21,21 @@ namespace NightmareIncarnation
 				{
 					if (targetType != RelationType.Hostile)
 					{
-						result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn x) => x.Faction != Faction.OfPlayer && (x.Faction == null || (x.Faction != null && FactionUtility.HostileTo(x.Faction, Faction.OfPlayer))) && !x.IsPrisonerOfColony && x != pawn && x.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(x) && commonUtl.IsPassive(x) && commonUtl.HasEnoughtMana(pawn, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, x, 1, 3, 1, -1, null, false));
+						result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn x) => x.Faction != Faction.OfPlayer && (x.Faction == null || (x.Faction != null && FactionUtility.HostileTo(x.Faction, Faction.OfPlayer))) && !x.IsPrisonerOfColony && x != pawn && x.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(x) && commonUtl.IsPassive(x) && commonUtl.HasEnoughtMana(pawn, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, x, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false));
 					}
 					else
 					{
-						result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn x) => x.Faction != null && FactionUtility.HostileTo(x.Faction, Faction.OfPlayer) && !x.IsPrisonerOfColony && x != pawn && x.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(x) && commonUtl.IsPassive(x) && commonUtl.HasEnoughtMana(pawn, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, x, 1, 3, 1, -1, null, false));
+						result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn x) => x.Faction != null && FactionUtility.HostileTo(x.Faction, Faction.OfPlayer) && !x.IsPrisonerOfColony && x != pawn && x.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(x) && commonUtl.IsPassive(x) && commonUtl.HasEnoughtMana(pawn, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, x, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false));
 					}
 				}
 				else
 				{
-					result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn x) => x.IsPrisonerOfColony && x != pawn && x.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(x) && commonUtl.IsPassive(x) && commonUtl.HasEnoughtMana(x, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, x, 1, 3, 1, -1, null, false));
+					result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn x) => x.IsPrisonerOfColony && x != pawn && x.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(x) && commonUtl.IsPassive(x) && commonUtl.HasEnoughtMana(x, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, x, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false));
 				}
 			}
 			else
 			{
-				result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn x) => x.Faction != null && x.Faction == Faction.OfPlayer && x.IsColonist && x != pawn && !x.IsPrisonerOfColony && x.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(x) && commonUtl.IsPassive(x) && commonUtl.HasEnoughtMana(x, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, x, 1, 3, 1, -1, null, false));
+				result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn x) => x.Faction != null && x.Faction == Faction.OfPlayer && x.IsColonist && x != pawn && !x.IsPrisonerOfColony && x.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(x) && commonUtl.IsPassive(x) && commonUtl.HasEnoughtMana(x, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, x, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false));
 			}
 			return result;
 		}
@@ -159,14 +159,14 @@ namespace NightmareIncarnation
 				}
 				else
 				{
-					bool flag3 = pawn.story.traits.HasTrait(TraitDefOf.DislikesMen) && target.gender == 1;
+					bool flag3 = pawn.story.traits.HasTrait(TraitDefOf.DislikesMen) && target.gender == Gender.Male;
 					if (flag3)
 					{
 						result = 0.01f;
 					}
 					else
 					{
-						bool flag4 = pawn.story.traits.HasTrait(TraitDefOf.DislikesWomen) && target.gender == 2;
+						bool flag4 = pawn.story.traits.HasTrait(TraitDefOf.DislikesWomen) && target.gender == Gender.Female;
 						if (flag4)
 						{
 							result = 0.01f;
@@ -264,7 +264,7 @@ namespace NightmareIncarnation
 				IEnumerable<Thing> enumerable = from x in getter.Map.listerThings.AllThings
 				where CommonData.ManaSourceDefs.Any((ThingDef y) => x.def == y)
 				select x;
-				bool flag2 = !enumerable.Any<Thing>();
+				bool flag2 = !enumerable.EnumerableNullOrEmpty();
 				if (flag2)
 				{
 					result = null;
@@ -289,7 +289,7 @@ namespace NightmareIncarnation
 					}
 					ThingRequest thingRequest = ThingRequest.ForUndefined();
 					Predicate<Thing> predicate = (Thing t) => t.Spawned && CommonData.ManaSourceDefs.Any((ThingDef x) => t.def == x) && (allowForbidden || !ForbidUtility.IsForbidden(t, Faction.OfPlayer)) && (restrict == null || t.def == restrict) && ReservationUtility.CanReserve(getter, t, 1, -1, null, false);
-					Thing thing = GenClosest.ClosestThingReachable(getter.Position, getter.Map, thingRequest, 2, TraverseParms.For(getter, 3, 0, false), 9999f, predicate, enumerable, 0, -1, false, 6, false);
+					Thing thing = GenClosest.ClosestThingReachable(getter.Position, getter.Map, thingRequest, PathEndMode.Touch, TraverseParms.For(getter, Danger.Deadly, 0, false), 9999f, predicate, enumerable, 0, -1, false, RegionType.Set_Passable, false);
 					result = thing;
 				}
 			}

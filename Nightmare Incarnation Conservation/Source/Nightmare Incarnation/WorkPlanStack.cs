@@ -17,8 +17,8 @@ namespace NightmareIncarnation
 		// Token: 0x06000080 RID: 128 RVA: 0x00006E8C File Offset: 0x0000508C
 		public void ExposeData()
 		{
-			Scribe_Collections.Look<WorkPlan>(ref this.plans, "plans", 2, new object[0]);
-			bool flag = Scribe.mode == 3;
+			Scribe_Collections.Look<WorkPlan>(ref this.plans, "plans",LookMode.Deep, new object[0]);
+			bool flag = Scribe.mode == LoadSaveMode.ResolvingCrossRefs;
 			if (flag)
 			{
 				bool flag2 = this.plans.RemoveAll((WorkPlan x) => x == null) != 0;
@@ -57,20 +57,16 @@ namespace NightmareIncarnation
 		{
 			WorkPlan result = null;
 			GUI.BeginGroup(rect);
-			Rect rect2;
-			rect2..ctor(0f, 0f, 150f, 29f);
-			Rect rect3;
-			rect3..ctor(180f, 5f, 150f, 24f);
-			Text.Font = 2;
+			Rect rect2= new Rect(0f, 0f, 150f, 29f);
+			Rect rect3 = new Rect(180f, 5f, 150f, 24f);
+			Text.Font = GameFont.Medium;
 			Widgets.Label(rect2, "魔力収集方針");
-			Text.Font = 1;
+			Text.Font = GameFont.Small;
 			Widgets.Label(rect3, "獲得した魔力：" + this.compRace.TotalManaGained.ToString("F2"));
 			Text.Anchor = 0;
 			GUI.color = Color.white;
-			Rect rect4;
-			rect4..ctor(0f, 35f, rect.width, rect.height - 35f);
-			Rect rect5;
-			rect5..ctor(0f, 0f, rect4.width - 16f, viewHeight);
+			Rect rect4=new Rect(0f, 35f, rect.width, rect.height - 35f);
+			Rect rect5=new Rect(0f, 0f, rect4.width - 16f, viewHeight);
 			Widgets.BeginScrollView(rect4, ref scrollPosition, rect5, true);
 			float num = 0f;
 			for (int i = 0; i < this.plans.Count; i++)
@@ -84,7 +80,7 @@ namespace NightmareIncarnation
 				}
 				num += rect6.height + 6f;
 			}
-			bool flag2 = Event.current.type == 8;
+			bool flag2 = Event.current.type ==EventType.Layout;
 			if (flag2)
 			{
 				viewHeight = num + 60f;

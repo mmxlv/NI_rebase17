@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<!-- ============= Redo this section there should be some tags to allow it to display properly ============= -->
+  <!-- ============= Job - 精力吸収 ============= -->
+	<JobDef>
+		<defName>Job_NIManaSqueeze</defName>
+		<driverClass>NightmareIncarnation.JobDriver_NIManaSqueeze</driverClass>
+		<reportString>Squeezing magic from Target</reportString>
+		<joyDuration>800</joyDuration>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+  <!-- ============= Job - 魔力回復アイテムの使用 ============= -->
+	<JobDef>
+		<defName>Job_NIIngestManaItem</defName>
+		<driverClass>NightmareIncarnation.JobDriver_NIIngestManaItem</driverClass>
+		<reportString>Using Target</reportString>
+		<joyDuration>600</joyDuration>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+  <!-- ============= Job - 魔力回復アイテムの給仕               Serving TargetA to TargetB============= -->
+	<JobDef>
+		<defName>Job_NIFeedManaItem</defName>
+		<driverClass>NightmareIncarnation.JobDriver_NIFeedManaItem</driverClass>
+		<reportString>Serving</reportString>
+		<joyDuration>600</joyDuration>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+
+</Defs>

@@ -18,15 +18,10 @@ namespace NightmareIncarnation
 			if (flag)
 			{
 				int num = NI_WorldManager.loadIDs.Count + 1;
-				Predicate<int> <>9__0;
+				Predicate<int> predicate = (int x) => x == num;
 				for (;;)
 				{
 					List<int> loadIDs = NI_WorldManager.loadIDs;
-					Predicate<int> predicate;
-					if ((predicate = <>9__0) == null)
-					{
-						predicate = (<>9__0 = ((int x) => x == num));
-					}
 					if (!GenCollection.Any<int>(loadIDs, predicate))
 					{
 						break;
@@ -61,25 +56,23 @@ namespace NightmareIncarnation
 		// Token: 0x06000086 RID: 134 RVA: 0x000072C4 File Offset: 0x000054C4
 		public Rect DoInterface(float x, float y, float width, int index)
 		{
-			Rect rect;
-			rect..ctor(x, y, width, 53f);
+			Rect rect= new Rect(x, y, width, 53f);
 			rect.height += 24f;
 			Color white = Color.white;
 			bool suspended = this.Suspended;
 			if (suspended)
 			{
-				white..ctor(1f, 0.7f, 0.7f, 0.7f);
+				white=new Color(1f, 0.7f, 0.7f, 0.7f);
 			}
 			GUI.color = white;
-			Text.Font = 1;
+			Text.Font = GameFont.Small;
 			bool flag = index % 2 == 0;
 			if (flag)
 			{
 				Widgets.DrawAltRect(rect);
 			}
 			GUI.BeginGroup(rect);
-			Rect rect2;
-			rect2..ctor(0f, 0f, 24f, 24f);
+			Rect rect2 = new Rect(0f, 0f, 24f, 24f);
 			bool flag2 = this.workPlanStack.IndexOf(this) > 0;
 			if (flag2)
 			{
@@ -94,8 +87,7 @@ namespace NightmareIncarnation
 			bool flag4 = this.workPlanStack.IndexOf(this) < this.workPlanStack.plans.Count - 1;
 			if (flag4)
 			{
-				Rect rect3;
-				rect3..ctor(0f, 48f, 24f, 24f);
+				Rect rect3= new Rect(0f, 48f, 24f, 24f);
 				bool flag5 = Widgets.ButtonImage(rect3, TexButton.ReorderDown, white);
 				if (flag5)
 				{
@@ -104,13 +96,10 @@ namespace NightmareIncarnation
 				}
 				TooltipHandler.TipRegion(rect3, Translator.Translate("ReorderBillDownTip"));
 			}
-			Rect rect4;
-			rect4..ctor(28f, 0f, rect.width - 48f - 20f, rect.height + 5f);
+			Rect rect4 = new Rect(28f, 0f, rect.width - 48f - 20f, rect.height + 5f);
 			Widgets.Label(rect4, this.LabelCap);
-			Rect rect5;
-			rect5..ctor(rect.width - 24f, 0f, 24f, 24f);
-			Rect rect6;
-			rect6..ctor(rect5);
+			Rect rect5 = new Rect(rect.width - 24f, 0f, 24f, 24f);
+			Rect rect6=new Rect(rect5);
 			rect6.x -= rect6.width + 4f;
 			bool flag6 = Widgets.ButtonImage(rect6, TexButton.Suspend, white);
 			if (flag6)
@@ -119,8 +108,7 @@ namespace NightmareIncarnation
 				SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
 			}
 			TooltipHandler.TipRegion(rect6, Translator.Translate("SuspendBillTip"));
-			Rect rect7;
-			rect7..ctor(28f, 28f, 40f, 40f);
+			Rect rect7=new Rect(28f, 28f, 40f, 40f);
 			bool flag7 = this.targetType != RelationType.Meal;
 			if (flag7)
 			{
@@ -140,8 +128,7 @@ namespace NightmareIncarnation
 				}
 			}
 			TooltipHandler.TipRegion(rect7, Translator.Translate("NItxt_AllowJoyTip"));
-			Rect rect8;
-			rect8..ctor(72f, 28f, 40f, 40f);
+			Rect rect8 = new Rect(72f, 28f, 40f, 40f);
 			bool flag9 = this.targetType != RelationType.Meal;
 			if (flag9)
 			{
@@ -162,8 +149,7 @@ namespace NightmareIncarnation
 				}
 			}
 			TooltipHandler.TipRegion(rect8, Translator.Translate("NItxt_AllowOverSqueezeTip"));
-			Rect rect9;
-			rect9..ctor(116f, 28f, 40f, 40f);
+			Rect rect9 = new Rect(116f, 28f, 40f, 40f);
 			bool flag11 = this.targetType != RelationType.Meal && this.targetType > RelationType.Colonist;
 			if (flag11)
 			{
@@ -183,8 +169,7 @@ namespace NightmareIncarnation
 				}
 			}
 			TooltipHandler.TipRegion(rect9, Translator.Translate("NItxt_AllowDownTip"));
-			Rect rect10;
-			rect10..ctor(160f, 28f, 40f, 40f);
+			Rect rect10=new Rect(160f, 28f, 40f, 40f);
 			bool flag13 = this.targetType != RelationType.Meal && this.targetType > RelationType.Colonist;
 			if (flag13)
 			{
@@ -215,7 +200,7 @@ namespace NightmareIncarnation
 					list.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate()
 					{
 						this.MainDishThing = null;
-					}, 4, null, null, 0f, null, null));
+					},MenuOptionPriority.Default, null, null, 0f, null, null));
 					using (IEnumerator<ThingDef> enumerator = CommonData.ManaSourceDefs.AsEnumerable<ThingDef>().GetEnumerator())
 					{
 						while (enumerator.MoveNext())
@@ -224,13 +209,12 @@ namespace NightmareIncarnation
 							list.Add(new FloatMenuOption(t.LabelCap, delegate()
 							{
 								this.MainDishThing = t;
-							}, 4, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, t), null));
+							}, MenuOptionPriority.Default, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, t), null));
 						}
 					}
 					return list;
 				};
-				Rect rect11;
-				rect11..ctor(204f, 32f, 150f, 29f);
+				Rect rect11 = new Rect(204f, 32f, 150f, 29f);
 				bool flag16 = Widgets.ButtonText(rect11, (this.MainDishThing != null) ? this.MainDishThing.LabelCap : Translator.Translate("NItxt_SelectMainDish"), true, false, true);
 				if (flag16)
 				{
@@ -248,7 +232,7 @@ namespace NightmareIncarnation
 					list.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate()
 					{
 						this.MainDishPawn = null;
-					}, 4, null, null, 0f, null, null));
+					}, MenuOptionPriority.Default, null, null, 0f, null, null));
 					IEnumerable<Pawn> enumerable = from z in this.workPlanStack.compRace.parent.Map.mapPawns.AllPawnsSpawned
 					where z.GetComp<CompSuccubusRace>() == null && z != this.workPlanStack.compRace.parent && commonUtl.IsManaConformant(z) && ((this.targetType == RelationType.Colonist && z.IsColonist) || (this.targetType == RelationType.Prisoner && z.IsPrisonerOfColony))
 					select z;
@@ -260,14 +244,13 @@ namespace NightmareIncarnation
 							list.Add(new FloatMenuOption(p.LabelCap, delegate()
 							{
 								this.MainDishPawn = p;
-							}, 4, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, p), null));
+							}, MenuOptionPriority.Default, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, p), null));
 						}
 					}
 					return list;
 				};
-				Rect rect12;
-				rect12..ctor(204f, 32f, 150f, 29f);
-				bool flag18 = Widgets.ButtonText(rect12, (this.MainDishPawn != null) ? this.MainDishPawn.LabelCap : Translator.Translate("NItxt_SelectMainDish"), true, false, true);
+				Rect rect12= new Rect(204f, 32f, 150f, 29f);
+				bool flag18 = Widgets.ButtonText(rect12, (this.MainDishPawn != null) ? this.MainDishPawn.LabelCap : Translator.Translate("NItxt_SelectMainDish").ToString(), true, false, true);
 				if (flag18)
 				{
 					Find.WindowStack.Add(new FloatMenu(func2()));
@@ -278,8 +261,7 @@ namespace NightmareIncarnation
 			bool flag19 = this.targetType != RelationType.Meal;
 			if (flag19)
 			{
-				Rect rect13;
-				rect13..ctor(144f, 0f, 160f, 34f);
+				Rect rect13= new Rect(144f, 0f, 160f, 34f);
 				float squeezeValue = this.SqueezeValue;
 				this.SqueezeValue = Widgets.HorizontalSlider(rect13, squeezeValue, 0.4f, 2.4f, false, TranslatorFormattedStringExtensions.Translate("NItxt_SqueezeValue", squeezeValue.ToString("F1")), null, null, 0.1f);
 				TooltipHandler.TipRegion(rect13, Translator.Translate("NItxt_SqueezeSliderTip"));
@@ -288,16 +270,15 @@ namespace NightmareIncarnation
 			bool suspended2 = this.Suspended;
 			if (suspended2)
 			{
-				Text.Font = 2;
-				Text.Anchor = 4;
-				Rect rect14;
-				rect14..ctor(rect.x + rect.width / 2f - 70f, rect.y + rect.height / 2f - 20f, 140f, 40f);
+				Text.Font = GameFont.Medium;
+				Text.Anchor = TextAnchor.MiddleCenter;
+				Rect rect14 = new Rect(rect.x + rect.width / 2f - 70f, rect.y + rect.height / 2f - 20f, 140f, 40f);
 				GUI.DrawTexture(rect14, TexUI.GrayTextBG);
 				Widgets.Label(rect14, Translator.Translate("SuspendedCaps"));
 				Text.Anchor = 0;
-				Text.Font = 1;
+				Text.Font = GameFont.Small;
 			}
-			Text.Font = 1;
+			Text.Font = GameFont.Small;
 			GUI.color = Color.white;
 			return rect;
 		}

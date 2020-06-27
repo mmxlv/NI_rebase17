@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--======================= Requiring nothing =======================-->
+
+  <!-- 娯楽吸魔 Amusement -->
+  <JoyKindDef>
+    <defName>JoyKind_NISuccubusWork</defName>
+    <label>good idea</label>
+  </JoyKindDef>
+
+  <!--======================= Item consumption =======================-->
+
+
+</Defs>

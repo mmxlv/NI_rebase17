@@ -109,7 +109,7 @@ namespace NightmareIncarnation
 					}
 					comp.tmpJoyMode = true;
 				}
-				Func<Pawn, float> <>9__0;
+				//Func<Pawn, float> <>9__0;
 				for (int i = 0; i < comp.policy.plans.Count; i++)
 				{
 					bool suspended = comp.policy.plans[i].Suspended;
@@ -140,7 +140,7 @@ namespace NightmareIncarnation
 								if (flag9)
 								{
 									pawn2 = comp.policy.plans[i].MainDishPawn;
-									bool flag10 = pawn2.Faction != null && pawn2.Faction == Faction.OfPlayer && pawn2 != pawn && ((comp.policy.plans[i].targetType == RelationType.Colonist && pawn2.IsColonist) || (comp.policy.plans[i].targetType == RelationType.Prisoner && pawn2.IsPrisonerOfColony)) && pawn2.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(pawn2) && commonUtl.IsPassive(pawn2) && commonUtl.HasEnoughtMana(pawn2, comp.policy.plans[i], comp.tmpJoyMode ? 0.2f : 0f) && ReservationUtility.CanReserveAndReach(pawn, pawn2, 1, 3, 1, -1, null, false);
+									bool flag10 = pawn2.Faction != null && pawn2.Faction == Faction.OfPlayer && pawn2 != pawn && ((comp.policy.plans[i].targetType == RelationType.Colonist && pawn2.IsColonist) || (comp.policy.plans[i].targetType == RelationType.Prisoner && pawn2.IsPrisonerOfColony)) && pawn2.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(pawn2) && commonUtl.IsPassive(pawn2) && commonUtl.HasEnoughtMana(pawn2, comp.policy.plans[i], comp.tmpJoyMode ? 0.2f : 0f) && ReservationUtility.CanReserveAndReach(pawn, pawn2,PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false);
 									bool flag11 = flag10;
 									if (flag11)
 									{
@@ -158,11 +158,11 @@ namespace NightmareIncarnation
 								else
 								{
 									IEnumerable<Pawn> enumerable = JobGiver_GetMana.tmpCandidates;
-									Func<Pawn, float> func;
-									if ((func = <>9__0) == null)
-									{
-										func = (<>9__0 = ((Pawn x) => commonUtl.GetPreferWeight(x, pawn)));
-									}
+									Func<Pawn, float> func = (Pawn x) => commonUtl.GetPreferWeight(x, pawn);
+									//if ((func = <>9__0) == null)
+									//{
+								//		func = (<>9__0 = ((Pawn x) => commonUtl.GetPreferWeight(x, pawn)));
+									//}
 									pawn3 = GenCollection.RandomElementByWeight<Pawn>(enumerable, func);
 								}
 								pawn2 = pawn3;
@@ -202,7 +202,7 @@ namespace NightmareIncarnation
 					bool flag3 = job != null;
 					if (flag3)
 					{
-						return new ThinkResult(job, this, new JobTag?(5), false);
+						return new ThinkResult(job, this, new JobTag?(JobTag.SatisfyingNeeds), false);
 					}
 				}
 				bool flag4 = priority > 6f && ticksGame > this.nextTryableTick;
@@ -213,7 +213,7 @@ namespace NightmareIncarnation
 					bool flag5 = job2 != null;
 					if (flag5)
 					{
-						return new ThinkResult(job2, this, new JobTag?(5), false);
+						return new ThinkResult(job2, this, new JobTag?(JobTag.SatisfyingNeeds), false);
 					}
 				}
 				bool flag6 = priority > 0f && ticksGame > this.nextTryableTick;
@@ -224,7 +224,7 @@ namespace NightmareIncarnation
 					bool flag7 = job3 != null;
 					if (flag7)
 					{
-						return new ThinkResult(job3, this, new JobTag?(5), false);
+						return new ThinkResult(job3, this, new JobTag?(JobTag.SatisfyingNeeds), false);
 					}
 				}
 				noJob = ThinkResult.NoJob;

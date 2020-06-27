@@ -32,7 +32,7 @@ namespace NightmareIncarnation
 		// Token: 0x06000069 RID: 105 RVA: 0x0000625C File Offset: 0x0000445C
 		public override string GetReport()
 		{
-			bool flag = this.job.GetTarget(1).Thing is Building_NutrientPasteDispenser && this.Deliveree != null;
+			bool flag = this.job.GetTarget(TargetIndex.A).Thing is Building_NutrientPasteDispenser && this.Deliveree != null;
 			string result;
 			if (flag)
 			{
@@ -79,38 +79,38 @@ namespace NightmareIncarnation
 		// Token: 0x0600006B RID: 107 RVA: 0x0000639A File Offset: 0x0000459A
 		protected override IEnumerable<Toil> MakeNewToils()
 		{
-			ToilFailConditions.FailOnDespawnedNullOrForbidden<JobDriver_NIFeedManaItem>(this, 2);
+			ToilFailConditions.FailOnDespawnedNullOrForbidden<JobDriver_NIFeedManaItem>(this, TargetIndex.B);
 			ToilFailConditions.FailOn<JobDriver_NIFeedManaItem>(this, () => !FoodUtility.ShouldBeFedBySomeone(this.Deliveree));
 			bool flag = this.pawn.inventory != null && this.pawn.inventory.Contains(base.TargetThingA);
 			if (flag)
 			{
-				yield return Toils_Misc.TakeItemFromInventoryToCarrier(this.pawn, 1);
+				yield return Toils_Misc.TakeItemFromInventoryToCarrier(this.pawn, TargetIndex.A);
 			}
 			else
 			{
 				bool flag2 = base.TargetThingA is Building_NutrientPasteDispenser;
 				if (flag2)
 				{
-					yield return ToilFailConditions.FailOnForbidden<Toil>(Toils_Goto.GotoThing(1, 4), 1);
-					yield return Toils_Ingest.TakeMealFromDispenser(1, this.pawn);
+					yield return ToilFailConditions.FailOnForbidden<Toil>(Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.InteractionCell), TargetIndex.A);
+					yield return Toils_Ingest.TakeMealFromDispenser(TargetIndex.A, this.pawn);
 				}
 				else
 				{
-					yield return ToilFailConditions.FailOnForbidden<Toil>(Toils_Goto.GotoThing(1, 3), 1);
-					yield return Toils_Ingest.PickupIngestible(1, this.Deliveree);
+					yield return ToilFailConditions.FailOnForbidden<Toil>(Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.ClosestTouch), TargetIndex.A);
+					yield return Toils_Ingest.PickupIngestible(TargetIndex.A, this.Deliveree);
 				}
 			}
-			yield return Toils_Goto.GotoThing(2, 2);
-			yield return ToilFailConditions.FailOnCannotTouch<Toil>(Toils_Ingest.ChewIngestible(this.Deliveree, 1.5f, 1, 0), 2, 2);
-			yield return Toils_Ingest.FinalizeIngest(this.Deliveree, 1);
+			yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.Touch);
+			yield return ToilFailConditions.FailOnCannotTouch<Toil>(Toils_Ingest.ChewIngestible(this.Deliveree, 1.5f, TargetIndex.A, 0), TargetIndex.B,PathEndMode.Touch);
+			yield return Toils_Ingest.FinalizeIngest(this.Deliveree, TargetIndex.A);
 			yield break;
 		}
 
 		// Token: 0x0400006C RID: 108
-		private const TargetIndex FoodSourceInd = 1;
+		private const TargetIndex FoodSourceInd = TargetIndex.A;
 
 		// Token: 0x0400006D RID: 109
-		private const TargetIndex DelivereeInd = 2;
+		private const TargetIndex DelivereeInd = TargetIndex.B;
 
 		// Token: 0x0400006E RID: 110
 		private const float FeedDurationMultiplier = 1.5f;

@@ -88,8 +88,7 @@ namespace NightmareIncarnation
 		// Token: 0x0600007D RID: 125 RVA: 0x00006AA8 File Offset: 0x00004CA8
 		public void InitManaSqueezePolicy(bool forcedInit = false)
 		{
-			bool flag = forcedInit || !GenCollection.Any<WorkPlan>(this.policy.plans);
-			if (flag)
+			if (forcedInit || !GenCollection.Any<WorkPlan>(policy.plans))
 			{
 				this.policy.plans.Clear();
 				int num = this.Pawn.story.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute);
