@@ -5,24 +5,24 @@ using Verse;
 
 namespace NightmareIncarnation
 {
-	// Token: 0x0200001F RID: 31
 	public class WorkPlanStack : IExposable
 	{
-		// Token: 0x0600007F RID: 127 RVA: 0x00006E6F File Offset: 0x0000506F
+		[Unsaved]
+		public CompSuccubusRace compRace;
+
+		public List<WorkPlan> plans = new List<WorkPlan>();
+
 		public WorkPlanStack(CompSuccubusRace Comp)
 		{
 			this.compRace = Comp;
 		}
 
-		// Token: 0x06000080 RID: 128 RVA: 0x00006E8C File Offset: 0x0000508C
 		public void ExposeData()
 		{
 			Scribe_Collections.Look<WorkPlan>(ref this.plans, "plans",LookMode.Deep, new object[0]);
-			bool flag = Scribe.mode == LoadSaveMode.ResolvingCrossRefs;
-			if (flag)
+			if (Scribe.mode == LoadSaveMode.ResolvingCrossRefs)
 			{
-				bool flag2 = this.plans.RemoveAll((WorkPlan x) => x == null) != 0;
-				if (flag2)
+				if (this.plans.RemoveAll((WorkPlan x) => x == null) != 0)
 				{
 					Log.Error("Some manaSqueezePolicy were null after loading", false);
 				}
@@ -33,7 +33,6 @@ namespace NightmareIncarnation
 			}
 		}
 
-		// Token: 0x06000081 RID: 129 RVA: 0x00006F30 File Offset: 0x00005130
 		public void Reorder(WorkPlan plan, int offset)
 		{
 			int num = this.plans.IndexOf(plan);
@@ -46,42 +45,38 @@ namespace NightmareIncarnation
 			}
 		}
 
-		// Token: 0x06000082 RID: 130 RVA: 0x00006F78 File Offset: 0x00005178
 		public int IndexOf(WorkPlan plan)
 		{
 			return this.plans.IndexOf(plan);
 		}
 
-		// Token: 0x06000083 RID: 131 RVA: 0x00006F98 File Offset: 0x00005198
 		public WorkPlan DoListing(Rect rect, Func<List<FloatMenuOption>> recipeOptionsMaker, ref Vector2 scrollPosition, ref float viewHeight)
 		{
 			WorkPlan result = null;
 			GUI.BeginGroup(rect);
-			Rect rect2= new Rect(0f, 0f, 150f, 29f);
-			Rect rect3 = new Rect(180f, 5f, 150f, 24f);
+			Rect manaCollectionPolicyLabel= new Rect(0f, 0f, 150f, 29f);
+			Rect manaCollectionResultLabel = new Rect(180f, 5f, 150f, 24f);
 			Text.Font = GameFont.Medium;
-			Widgets.Label(rect2, "魔力収集方針");
+			Widgets.Label(manaCollectionPolicyLabel, "Mana Collection Policy");
 			Text.Font = GameFont.Small;
-			Widgets.Label(rect3, "獲得した魔力：" + this.compRace.TotalManaGained.ToString("F2"));
+			Widgets.Label(manaCollectionResultLabel, "Mana Collected：" + this.compRace.TotalManaGained.ToString("F2"));
 			Text.Anchor = 0;
 			GUI.color = Color.white;
-			Rect rect4=new Rect(0f, 35f, rect.width, rect.height - 35f);
-			Rect rect5=new Rect(0f, 0f, rect4.width - 16f, viewHeight);
-			Widgets.BeginScrollView(rect4, ref scrollPosition, rect5, true);
+			Rect scrollbox=new Rect(0f, 35f, rect.width, rect.height - 35f);
+			Rect scrollSelection=new Rect(0f, 0f, scrollbox.width - 16f, viewHeight);
+			Widgets.BeginScrollView(scrollbox, ref scrollPosition, scrollSelection, true);
 			float num = 0f;
 			for (int i = 0; i < this.plans.Count; i++)
 			{
 				WorkPlan workPlan = this.plans[i];
-				Rect rect6 = workPlan.DoInterface(0f, num, rect5.width, i);
-				bool flag = Mouse.IsOver(rect6);
-				if (flag)
+				Rect scrollSelectionItem = workPlan.DoInterface(0f, num, scrollSelection.width, i);
+				if (Mouse.IsOver(scrollSelectionItem))
 				{
 					result = workPlan;
 				}
-				num += rect6.height + 6f;
+				num += scrollSelectionItem.height + 6f;
 			}
-			bool flag2 = Event.current.type ==EventType.Layout;
-			if (flag2)
+			if (Event.current.type == EventType.Layout)
 			{
 				viewHeight = num + 60f;
 			}
@@ -89,12 +84,5 @@ namespace NightmareIncarnation
 			GUI.EndGroup();
 			return result;
 		}
-
-		// Token: 0x040000A9 RID: 169
-		[Unsaved]
-		public CompSuccubusRace compRace;
-
-		// Token: 0x040000AA RID: 170
-		public List<WorkPlan> plans = new List<WorkPlan>();
 	}
 }

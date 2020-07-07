@@ -8,17 +8,36 @@ using Verse.Sound;
 
 namespace NightmareIncarnation
 {
-	// Token: 0x02000020 RID: 32
 	public class WorkPlan : IExposable, ILoadReferenceable
 	{
-		// Token: 0x06000084 RID: 132 RVA: 0x00007130 File Offset: 0x00005330
+		public int loadID = -1;
+		[Unsaved]
+		public WorkPlanStack workPlanStack;
+
+		public bool Suspended;
+
+		public RelationType targetType;
+
+		public bool AllowJoy;
+
+		public bool AllowOverSqueeze;
+
+		public bool AllowDown;
+
+		public bool AllowKill;
+
+		public float SqueezeValue = 0.8f;
+
+		public ThingDef MainDishThing;
+
+		public Pawn MainDishPawn;
+
 		public WorkPlan()
 		{
-			bool flag = this.loadID < 0;
-			if (flag)
+			if (this.loadID < 0)
 			{
-				int num = NI_WorldManager.loadIDs.Count + 1;
-				Predicate<int> predicate = (int x) => x == num;
+				int nextFreeLoadID = NI_WorldManager.loadIDs.Count + 1;
+				Predicate<int> predicate = (int x) => x == nextFreeLoadID;
 				for (;;)
 				{
 					List<int> loadIDs = NI_WorldManager.loadIDs;
@@ -26,10 +45,9 @@ namespace NightmareIncarnation
 					{
 						break;
 					}
-					int num2 = num;
-					num = num2 + 1;
+					nextFreeLoadID++;
 				}
-				this.loadID = num;
+				this.loadID = nextFreeLoadID;
 				NI_WorldManager.loadIDs.Add(this.loadID);
 			}
 			else
@@ -38,7 +56,6 @@ namespace NightmareIncarnation
 			}
 		}
 
-		// Token: 0x06000085 RID: 133 RVA: 0x000071F4 File Offset: 0x000053F4
 		public void ExposeData()
 		{
 			Scribe_Values.Look<int>(ref this.loadID, "loadID", 0, false);
@@ -53,71 +70,60 @@ namespace NightmareIncarnation
 			Scribe_References.Look<Pawn>(ref this.MainDishPawn, "MainDishPawn", false);
 		}
 
-		// Token: 0x06000086 RID: 134 RVA: 0x000072C4 File Offset: 0x000054C4
 		public Rect DoInterface(float x, float y, float width, int index)
 		{
-			Rect rect= new Rect(x, y, width, 53f);
-			rect.height += 24f;
+			Rect workPlanInterface= new Rect(x, y, width, 53f);
+			workPlanInterface.height += 24f;
 			Color white = Color.white;
-			bool suspended = this.Suspended;
-			if (suspended)
+			if (this.Suspended)
 			{
 				white=new Color(1f, 0.7f, 0.7f, 0.7f);
 			}
 			GUI.color = white;
 			Text.Font = GameFont.Small;
-			bool flag = index % 2 == 0;
-			if (flag)
+			if (index % 2 == 0)
 			{
-				Widgets.DrawAltRect(rect);
+				Widgets.DrawAltRect(workPlanInterface);
 			}
-			GUI.BeginGroup(rect);
-			Rect rect2 = new Rect(0f, 0f, 24f, 24f);
-			bool flag2 = this.workPlanStack.IndexOf(this) > 0;
-			if (flag2)
+			GUI.BeginGroup(workPlanInterface);
+			Rect moveBillUpButton = new Rect(0f, 0f, 24f, 24f);
+			if (this.workPlanStack.IndexOf(this) > 0)
 			{
-				bool flag3 = Widgets.ButtonImage(rect2, TexButton.ReorderUp, white);
-				if (flag3)
+				if (Widgets.ButtonImage(moveBillUpButton, TexButton.ReorderUp, white))
 				{
 					this.workPlanStack.Reorder(this, -1);
 					SoundStarter.PlayOneShotOnCamera(SoundDefOf.Tick_High, null);
 				}
-				TooltipHandler.TipRegion(rect2, Translator.Translate("ReorderBillUpTip"));
+				TooltipHandler.TipRegion(moveBillUpButton, Translator.Translate("ReorderBillUpTip"));
 			}
-			bool flag4 = this.workPlanStack.IndexOf(this) < this.workPlanStack.plans.Count - 1;
-			if (flag4)
+			if (this.workPlanStack.IndexOf(this) < this.workPlanStack.plans.Count - 1)
 			{
-				Rect rect3= new Rect(0f, 48f, 24f, 24f);
-				bool flag5 = Widgets.ButtonImage(rect3, TexButton.ReorderDown, white);
+				Rect moveBillDownButton= new Rect(0f, 48f, 24f, 24f);
+				bool flag5 = Widgets.ButtonImage(moveBillDownButton, TexButton.ReorderDown, white);
 				if (flag5)
 				{
 					this.workPlanStack.Reorder(this, 1);
 					SoundStarter.PlayOneShotOnCamera(SoundDefOf.Tick_Low, null);
 				}
-				TooltipHandler.TipRegion(rect3, Translator.Translate("ReorderBillDownTip"));
+				TooltipHandler.TipRegion(moveBillDownButton, Translator.Translate("ReorderBillDownTip"));
 			}
-			Rect rect4 = new Rect(28f, 0f, rect.width - 48f - 20f, rect.height + 5f);
-			Widgets.Label(rect4, this.LabelCap);
-			Rect rect5 = new Rect(rect.width - 24f, 0f, 24f, 24f);
-			Rect rect6=new Rect(rect5);
-			rect6.x -= rect6.width + 4f;
-			bool flag6 = Widgets.ButtonImage(rect6, TexButton.Suspend, white);
-			if (flag6)
+			Rect labelBox = new Rect(28f, 0f, workPlanInterface.width - 48f - 20f, workPlanInterface.height + 5f);
+			Widgets.Label(labelBox, this.LabelCap);
+			Rect suspendBillButton = new Rect(workPlanInterface.width - 24f, 0f, 24f, 24f);
+			suspendBillButton.x -= suspendBillButton.width + 4f;
+			if (Widgets.ButtonImage(suspendBillButton, TexButton.Suspend, white))
 			{
 				this.Suspended = !this.Suspended;
 				SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
 			}
-			TooltipHandler.TipRegion(rect6, Translator.Translate("SuspendBillTip"));
-			Rect rect7=new Rect(28f, 28f, 40f, 40f);
-			bool flag7 = this.targetType != RelationType.Meal;
-			if (flag7)
+			TooltipHandler.TipRegion(suspendBillButton, Translator.Translate("SuspendBillTip"));
+			Rect allowJoyButton=new Rect(28f, 28f, 40f, 40f);
+			if (this.targetType != RelationType.Meal)
 			{
-				bool flag8 = Widgets.ButtonImage(rect7, this.AllowJoy ? IconTex.Policy_AllowJoy : IconTex.Policy_DisallowJoy, white);
-				if (flag8)
+				if (Widgets.ButtonImage(allowJoyButton, this.AllowJoy ? IconTex.Policy_AllowJoy : IconTex.Policy_DisallowJoy, white))
 				{
 					this.AllowJoy = !this.AllowJoy;
-					bool allowJoy = this.AllowJoy;
-					if (allowJoy)
+					if (this.AllowJoy)
 					{
 						SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
 					}
@@ -127,17 +133,14 @@ namespace NightmareIncarnation
 					}
 				}
 			}
-			TooltipHandler.TipRegion(rect7, Translator.Translate("NItxt_AllowJoyTip"));
-			Rect rect8 = new Rect(72f, 28f, 40f, 40f);
-			bool flag9 = this.targetType != RelationType.Meal;
-			if (flag9)
+			TooltipHandler.TipRegion(allowJoyButton, Translator.Translate("NItxt_AllowJoyTip"));
+			Rect allowOverSqueezeButton = new Rect(72f, 28f, 40f, 40f);
+			if (this.targetType != RelationType.Meal)
 			{
-				bool flag10 = Widgets.ButtonImage(rect8, this.AllowOverSqueeze ? IconTex.Policy_AllowOverSqueeze : IconTex.Policy_DisallowOverSqueeze, white);
-				if (flag10)
+				if (Widgets.ButtonImage(allowOverSqueezeButton, this.AllowOverSqueeze ? IconTex.Policy_AllowOverSqueeze : IconTex.Policy_DisallowOverSqueeze, white))
 				{
 					this.AllowOverSqueeze = !this.AllowOverSqueeze;
-					bool allowOverSqueeze = this.AllowOverSqueeze;
-					if (allowOverSqueeze)
+					if (this.AllowOverSqueeze)
 					{
 						SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
 					}
@@ -148,17 +151,14 @@ namespace NightmareIncarnation
 					}
 				}
 			}
-			TooltipHandler.TipRegion(rect8, Translator.Translate("NItxt_AllowOverSqueezeTip"));
-			Rect rect9 = new Rect(116f, 28f, 40f, 40f);
-			bool flag11 = this.targetType != RelationType.Meal && this.targetType > RelationType.Colonist;
-			if (flag11)
+			TooltipHandler.TipRegion(allowOverSqueezeButton, Translator.Translate("NItxt_AllowOverSqueezeTip"));
+			Rect allowDownButton = new Rect(116f, 28f, 40f, 40f);
+			if (this.targetType != RelationType.Meal && this.targetType > RelationType.Colonist)
 			{
-				bool flag12 = Widgets.ButtonImage(rect9, this.AllowDown ? IconTex.Policy_AllowDown : IconTex.Policy_DisallowDown, white);
-				if (flag12)
+				if (Widgets.ButtonImage(allowDownButton, this.AllowDown ? IconTex.Policy_AllowDown : IconTex.Policy_DisallowDown, white))
 				{
 					this.AllowDown = !this.AllowDown;
-					bool allowDown = this.AllowDown;
-					if (allowDown)
+					if (this.AllowDown)
 					{
 						SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
 					}
@@ -168,17 +168,14 @@ namespace NightmareIncarnation
 					}
 				}
 			}
-			TooltipHandler.TipRegion(rect9, Translator.Translate("NItxt_AllowDownTip"));
-			Rect rect10=new Rect(160f, 28f, 40f, 40f);
-			bool flag13 = this.targetType != RelationType.Meal && this.targetType > RelationType.Colonist;
-			if (flag13)
+			TooltipHandler.TipRegion(allowDownButton, Translator.Translate("NItxt_AllowDownTip"));
+			Rect allowKillButton = new Rect(160f, 28f, 40f, 40f);
+			if (this.targetType != RelationType.Meal && this.targetType > RelationType.Colonist)
 			{
-				bool flag14 = Widgets.ButtonImage(rect10, this.AllowKill ? IconTex.Policy_AllowKill : IconTex.Policy_DisallowKill, white);
-				if (flag14)
+				if (Widgets.ButtonImage(allowKillButton, this.AllowKill ? IconTex.Policy_AllowKill : IconTex.Policy_DisallowKill, white))
 				{
 					this.AllowKill = !this.AllowKill;
-					bool allowKill = this.AllowKill;
-					if (allowKill)
+					if (this.AllowKill)
 					{
 						this.AllowOverSqueeze = true;
 						this.AllowDown = true;
@@ -190,14 +187,13 @@ namespace NightmareIncarnation
 					}
 				}
 			}
-			TooltipHandler.TipRegion(rect10, Translator.Translate("NItxt_AllowKillTip"));
-			bool flag15 = this.targetType == RelationType.Meal;
-			if (flag15)
+			TooltipHandler.TipRegion(allowKillButton, Translator.Translate("NItxt_AllowKillTip"));
+			if (this.targetType == RelationType.Meal)
 			{
-				Func<List<FloatMenuOption>> func = delegate()
+				Func<List<FloatMenuOption>> dishOptionFinder = delegate()
 				{
-					List<FloatMenuOption> list = new List<FloatMenuOption>();
-					list.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate()
+					List<FloatMenuOption> dishOptions = new List<FloatMenuOption>();
+					dishOptions.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate()
 					{
 						this.MainDishThing = null;
 					},MenuOptionPriority.Default, null, null, 0f, null, null));
@@ -205,31 +201,30 @@ namespace NightmareIncarnation
 					{
 						while (enumerator.MoveNext())
 						{
-							ThingDef t = enumerator.Current;
-							list.Add(new FloatMenuOption(t.LabelCap, delegate()
+							ThingDef foodSource = enumerator.Current;
+							dishOptions.Add(new FloatMenuOption(foodSource.LabelCap, delegate()
 							{
-								this.MainDishThing = t;
-							}, MenuOptionPriority.Default, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, t), null));
+								this.MainDishThing = foodSource;
+							}, MenuOptionPriority.Default, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, foodSource), null));
 						}
 					}
-					return list;
+					return dishOptions;
 				};
-				Rect rect11 = new Rect(204f, 32f, 150f, 29f);
-				bool flag16 = Widgets.ButtonText(rect11, (this.MainDishThing != null) ? this.MainDishThing.LabelCap : Translator.Translate("NItxt_SelectMainDish"), true, false, true);
-				if (flag16)
+				Rect selectDishButton = new Rect(204f, 32f, 150f, 29f);
+				bool dishButtonAdded = Widgets.ButtonText(selectDishButton, (this.MainDishThing != null) ? this.MainDishThing.LabelCap : Translator.Translate("NItxt_SelectMainDish"), true, false, true);
+				if (dishButtonAdded)
 				{
-					Find.WindowStack.Add(new FloatMenu(func()));
+					Find.WindowStack.Add(new FloatMenu(dishOptionFinder()));
 				}
-				UIHighlighter.HighlightOpportunity(rect11, "NItxt_SelectMainDish");
-				TooltipHandler.TipRegion(rect11, Translator.Translate("NItxt_SelectMainDishThingTip"));
+				UIHighlighter.HighlightOpportunity(selectDishButton, "NItxt_SelectMainDish");
+				TooltipHandler.TipRegion(selectDishButton, Translator.Translate("NItxt_SelectMainDishThingTip"));
 			}
-			bool flag17 = this.targetType == RelationType.Colonist || this.targetType == RelationType.Prisoner;
-			if (flag17)
+			if (this.targetType == RelationType.Colonist || this.targetType == RelationType.Prisoner)
 			{
-				Func<List<FloatMenuOption>> func2 = delegate()
+				Func<List<FloatMenuOption>> pawnOptionFinder = delegate()
 				{
-					List<FloatMenuOption> list = new List<FloatMenuOption>();
-					list.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate()
+					List<FloatMenuOption> ediblePawnOptions = new List<FloatMenuOption>();
+					ediblePawnOptions.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate()
 					{
 						this.MainDishPawn = null;
 					}, MenuOptionPriority.Default, null, null, 0f, null, null));
@@ -240,50 +235,47 @@ namespace NightmareIncarnation
 					{
 						while (enumerator.MoveNext())
 						{
-							Pawn p = enumerator.Current;
-							list.Add(new FloatMenuOption(p.LabelCap, delegate()
+							Pawn ediblePawn = enumerator.Current;
+							ediblePawnOptions.Add(new FloatMenuOption(ediblePawn.LabelCap, delegate()
 							{
-								this.MainDishPawn = p;
-							}, MenuOptionPriority.Default, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, p), null));
+								this.MainDishPawn = ediblePawn;
+							}, MenuOptionPriority.Default, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, ediblePawn), null));
 						}
 					}
-					return list;
+					return ediblePawnOptions;
 				};
-				Rect rect12= new Rect(204f, 32f, 150f, 29f);
-				bool flag18 = Widgets.ButtonText(rect12, (this.MainDishPawn != null) ? this.MainDishPawn.LabelCap : Translator.Translate("NItxt_SelectMainDish").ToString(), true, false, true);
-				if (flag18)
+				Rect selectPawnToEatButton= new Rect(204f, 32f, 150f, 29f);
+				bool selectPawnButtonWasAdded = Widgets.ButtonText(selectPawnToEatButton, (this.MainDishPawn != null) ? this.MainDishPawn.LabelCap : Translator.Translate("NItxt_SelectMainDish").ToString(), true, false, true);
+				if (selectPawnButtonWasAdded)
 				{
-					Find.WindowStack.Add(new FloatMenu(func2()));
+					Find.WindowStack.Add(new FloatMenu(pawnOptionFinder()));
 				}
-				UIHighlighter.HighlightOpportunity(rect12, "NItxt_SelectMainDish");
-				TooltipHandler.TipRegion(rect12, Translator.Translate("NItxt_SelectMainDishTip"));
+				UIHighlighter.HighlightOpportunity(selectPawnToEatButton, "NItxt_SelectMainDish");
+				TooltipHandler.TipRegion(selectPawnToEatButton, Translator.Translate("NItxt_SelectMainDishTip"));
 			}
-			bool flag19 = this.targetType != RelationType.Meal;
-			if (flag19)
+			if (this.targetType != RelationType.Meal)
 			{
-				Rect rect13= new Rect(144f, 0f, 160f, 34f);
+				Rect squeezeAmountSelector= new Rect(144f, 0f, 160f, 34f);
 				float squeezeValue = this.SqueezeValue;
-				this.SqueezeValue = Widgets.HorizontalSlider(rect13, squeezeValue, 0.4f, 2.4f, false, TranslatorFormattedStringExtensions.Translate("NItxt_SqueezeValue", squeezeValue.ToString("F1")), null, null, 0.1f);
-				TooltipHandler.TipRegion(rect13, Translator.Translate("NItxt_SqueezeSliderTip"));
+				this.SqueezeValue = Widgets.HorizontalSlider(squeezeAmountSelector, squeezeValue, 0.4f, 2.4f, false, TranslatorFormattedStringExtensions.Translate("NItxt_SqueezeValue", squeezeValue.ToString("F1")), null, null, 0.1f);
+				TooltipHandler.TipRegion(squeezeAmountSelector, Translator.Translate("NItxt_SqueezeSliderTip"));
 			}
 			GUI.EndGroup();
-			bool suspended2 = this.Suspended;
-			if (suspended2)
+			if (this.Suspended)
 			{
 				Text.Font = GameFont.Medium;
 				Text.Anchor = TextAnchor.MiddleCenter;
-				Rect rect14 = new Rect(rect.x + rect.width / 2f - 70f, rect.y + rect.height / 2f - 20f, 140f, 40f);
-				GUI.DrawTexture(rect14, TexUI.GrayTextBG);
-				Widgets.Label(rect14, Translator.Translate("SuspendedCaps"));
+				Rect suspendedWork = new Rect(workPlanInterface.x + workPlanInterface.width / 2f - 70f, workPlanInterface.y + workPlanInterface.height / 2f - 20f, 140f, 40f);
+				GUI.DrawTexture(suspendedWork, TexUI.GrayTextBG);
+				Widgets.Label(suspendedWork, Translator.Translate("SuspendedCaps"));
 				Text.Anchor = 0;
 				Text.Font = GameFont.Small;
 			}
 			Text.Font = GameFont.Small;
 			GUI.color = Color.white;
-			return rect;
+			return workPlanInterface;
 		}
-
-		// Token: 0x06000087 RID: 135 RVA: 0x00007A68 File Offset: 0x00005C68
+		
 		public string GetUniqueLoadID()
 		{
 			return string.Concat(new object[]
@@ -295,8 +287,6 @@ namespace NightmareIncarnation
 			});
 		}
 
-		// Token: 0x17000013 RID: 19
-		// (get) Token: 0x06000088 RID: 136 RVA: 0x00007AB4 File Offset: 0x00005CB4
 		public string LabelCap
 		{
 			get
@@ -315,39 +305,5 @@ namespace NightmareIncarnation
 				return Translator.Translate("NItxt_Other");
 			}
 		}
-
-		// Token: 0x040000AB RID: 171
-		public int loadID = -1;
-
-		// Token: 0x040000AC RID: 172
-		[Unsaved]
-		public WorkPlanStack workPlanStack;
-
-		// Token: 0x040000AD RID: 173
-		public bool Suspended;
-
-		// Token: 0x040000AE RID: 174
-		public RelationType targetType;
-
-		// Token: 0x040000AF RID: 175
-		public bool AllowJoy;
-
-		// Token: 0x040000B0 RID: 176
-		public bool AllowOverSqueeze;
-
-		// Token: 0x040000B1 RID: 177
-		public bool AllowDown;
-
-		// Token: 0x040000B2 RID: 178
-		public bool AllowKill;
-
-		// Token: 0x040000B3 RID: 179
-		public float SqueezeValue = 0.8f;
-
-		// Token: 0x040000B4 RID: 180
-		public ThingDef MainDishThing;
-
-		// Token: 0x040000B5 RID: 181
-		public Pawn MainDishPawn;
 	}
 }

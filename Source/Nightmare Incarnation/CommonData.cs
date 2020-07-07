@@ -3,10 +3,9 @@ using Verse;
 
 namespace NightmareIncarnation
 {
-	// Token: 0x02000018 RID: 24
 	public static class CommonData
 	{
-		// Token: 0x04000097 RID: 151
+		// 1.1\Defs\ThingDefs_Items\NI_Ingestables.xml
 		public static readonly ThingDef[] ManaSourceDefs = new ThingDef[]
 		{
 			NIThingDefOf.NI_ManaherbTea,

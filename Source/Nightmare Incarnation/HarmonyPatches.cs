@@ -8,11 +8,9 @@ using Verse;
 
 namespace NightmareIncarnation
 {
-	// Token: 0x02000008 RID: 8
 	[StaticConstructorOnStartup]
 	public static class HarmonyPatches
 	{
-		// Token: 0x06000025 RID: 37 RVA: 0x00003574 File Offset: 0x00001774
 		static HarmonyPatches()
 		{
 			Harmony harmony = new Harmony("NightmareIncarnation.HarmonyPatch");
@@ -28,122 +26,101 @@ namespace NightmareIncarnation
 			harmony.Patch(AccessTools.Method(typeof(Thing), "Ingested", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Thing_Ingested_Prefix", null), null, null);
 		}
 
-		// Token: 0x06000026 RID: 38 RVA: 0x00003698 File Offset: 0x00001898
-		private static bool Pawn_HealthTrackerAddHediffPrefix(Pawn ___pawn, Hediff hediff, BodyPartRecord part = null, DamageInfo? dinfo = null, DamageWorker.DamageResult result = null)
+		/// <summary>
+		/// Checks if the given pawn is resistant to the given hediff
+		/// </summary>
+		/// <param name="pawn"></param>
+		/// <param name="hediff"></param>
+		/// <param name="part"></param>
+		/// <param name="dinfo"></param>
+		/// <param name="result"></param>
+		/// <returns></returns>
+		private static bool Pawn_HealthTrackerAddHediffPrefix(Pawn pawn, Hediff hediff, BodyPartRecord part = null, DamageInfo? dinfo = null, DamageWorker.DamageResult result = null)
 		{
-			bool flag = HarmonyPatches.HasResistFor(___pawn, hediff, part, dinfo, result);
-			bool result2;
-			if (flag)
+			if (HarmonyPatches.HasResistFor(pawn, hediff, part, dinfo, result))
 			{
-				Log.Message(___pawn.Label + "に" + hediff.Label + "の状態異常は効かない", false);
-				result2 = false;
+				Log.Message("The pawn "+pawn.Label + "is resistant to" + hediff.Label, false);
+				return false;
+			}
+			return true;
+		}
+
+		
+		private static bool HasResistFor(Pawn pawn, Hediff hediff, BodyPartRecord part = null, DamageInfo? dinfo = null, DamageWorker.DamageResult result = null)
+		{
+			if (commonUtl.IsSuccubus(pawn))
+			{
+				return HarmonyPatches.FleshHediffInvalidFor(pawn, hediff);
+			}
+			return false;
+		}
+
+		private static bool FleshHediffInvalidFor(Pawn pawn, Hediff hediff)
+		{
+			if (!pawn.RaceProps.IsFlesh)
+			{
+				//I think this should be true cause when it steps in here the pawn is not fleshy, right?
+				return false;
 			}
 			else
 			{
-				result2 = true;
-			}
-			return result2;
-		}
-
-		// Token: 0x06000027 RID: 39 RVA: 0x000036E4 File Offset: 0x000018E4
-		private static bool HasResistFor(Pawn pawn, Hediff hediff, BodyPartRecord part = null, DamageInfo? dinfo = null, DamageWorker.DamageResult result = null)
-		{
-			bool flag = pawn.GetComp<CompSuccubusRace>() != null;
-			if (flag)
-			{
-				bool flag2 = hediff is Hediff_Pregnant || HarmonyPatches.FleshHediffInvalidFor(pawn, hediff);
-				bool flag3 = flag2;
-				if (flag3)
+				if (hediff.def == HediffDefOf.Anesthetic)
 				{
-					return true;
+					return pawn.Faction == null || !pawn.Faction.IsPlayer || pawn.CurJob == null || pawn.CurJobDef != JobDefOf.LayDown || (pawn.jobs.posture != PawnPosture.LayingInBed && pawn.jobs.posture != PawnPosture.LayingOnGroundNormal);
+				}
+				if (hediff.def == HediffDefOf.BloodLoss)
+				{
+					HediffSet hediffSet = pawn.health.hediffSet;
+					return hediffSet != null && hediffSet.BleedRateTotal < 0.1f;
+				}
+				if (hediff.def == HediffDefOf.Malnutrition)
+				{
+					Pawn_NeedsTracker needs = pawn.needs;
+					if (needs == null)
+					{
+						return false;
+					}
+					Need_Food food = needs.food;
+					return ((food != null) ? new float?(food.CurLevel) : null) > 0f;
 				}
 			}
 			return false;
 		}
 
-		// Token: 0x06000028 RID: 40 RVA: 0x00003728 File Offset: 0x00001928
-		private static bool FleshHediffInvalidFor(Pawn pawn, Hediff hediff)
+		private static void Pawn_GetGizmos_Postfix(ref IEnumerable<Gizmo> gizmos, Pawn pawn)
 		{
-			bool flag = !pawn.RaceProps.IsFlesh;
-			bool result;
-			if (flag)
+			if (gizmos != null)
 			{
-				result = false;
-			}
-			else
-			{
-				bool flag2 = false;
-				bool flag3 = hediff.def == HediffDefOf.Anesthetic;
-				if (flag3)
-				{
-					flag2 = (pawn.Faction == null || !pawn.Faction.IsPlayer || pawn.CurJob == null || pawn.CurJobDef != JobDefOf.LayDown || (pawn.jobs.posture != PawnPosture.LayingInBed && pawn.jobs.posture != PawnPosture.LayingOnGroundNormal));
-				}
-				bool flag4 = hediff.def == HediffDefOf.BloodLoss;
-				if (flag4)
-				{
-					HediffSet hediffSet = pawn.health.hediffSet;
-					flag2 = (hediffSet != null && hediffSet.BleedRateTotal < 0.1f);
-				}
-				bool flag5 = hediff.def == HediffDefOf.Malnutrition;
-				if (flag5)
-				{
-					Pawn_NeedsTracker needs = pawn.needs;
-					bool flag6;
-					if (needs == null)
-					{
-						flag6 = false;
-					}
-					else
-					{
-						Need_Food food = needs.food;
-						flag6 = (((food != null) ? new float?(food.CurLevel) : null) > 0f);
-					}
-					flag2 = flag6;
-				}
-				result = flag2;
-			}
-			return result;
-		}
-
-		// Token: 0x06000029 RID: 41 RVA: 0x00003850 File Offset: 0x00001A50
-		private static void Pawn_GetGizmos_Postfix(ref IEnumerable<Gizmo> __result, Pawn __instance)
-		{
-			bool flag = __result == null;
-			if (!flag)
-			{
-				List<Gizmo> list = __result.ToList<Gizmo>();
-				CompSuccubusRace compSuccubusRace = ThingCompUtility.TryGetComp<CompSuccubusRace>(__instance);
+				List<Gizmo> listedGizmos = gizmos.ToList<Gizmo>();
+				CompSuccubusRace compSuccubusRace = ThingCompUtility.TryGetComp<CompSuccubusRace>(pawn);
 				bool flag2 = compSuccubusRace != null;
-				if (flag2)
+				if (commonUtl.IsSuccubus(pawn))
 				{
 					foreach (Gizmo item in compSuccubusRace.CompGetGizmosExtra())
 					{
-						list.Add(item);
+						listedGizmos.Add(item);
 					}
 				}
-				__result = list;
+				gizmos = listedGizmos;
 			}
 		}
 
-		// Token: 0x0600002A RID: 42 RVA: 0x000038D4 File Offset: 0x00001AD4
-		private static bool Pawn_PreApplyDamage_Prefix(Pawn __instance, ref DamageInfo dinfo, ref bool absorbed)
+		private static bool Pawn_PreApplyDamage_Prefix(Pawn pawn, ref DamageInfo dinfo, ref bool absorbed)
 		{
-			bool flag = __instance.GetComp<CompSuccubusRace>() != null;
-			if (flag)
+			if (commonUtl.IsSuccubus(pawn))
 			{
-				bool flag2 = GenCollection.Any<Apparel>(__instance.apparel.WornApparel, (Apparel x) => x.def == NIThingDefOf.Apparel_NIHalfPersona);
-				if (flag2)
+				bool wearingSuccubusOutfit = GenCollection.Any<Apparel>(pawn.apparel.WornApparel, (Apparel outfit) => outfit.def == NIThingDefOf.Apparel_NIHalfPersona);
+				if (wearingSuccubusOutfit)
 				{
-					bool flag3 = Rand.Chance(0.1f);
-					if (flag3)
+					if (Rand.Chance(0.1f))
 					{
-						MoteMaker.ThrowText(__instance.DrawPos, __instance.Map, Translator.Translate("回避"), Color.white, 3.65f);
+						MoteMaker.ThrowText(pawn.DrawPos, pawn.Map, "Dodge", Color.white, 3.65f);
 						absorbed = true;
 						return false;
 					}
 				}
-				bool flag4 = GenCollection.Any<Apparel>(__instance.apparel.WornApparel, (Apparel x) => x.def == NIThingDefOf.Apparel_NIBattleGarb);
-				if (flag4)
+				bool wearingSuccubusArmor = GenCollection.Any<Apparel>(pawn.apparel.WornApparel, (Apparel armor) => armor.def == NIThingDefOf.Apparel_NIBattleGarb);
+				if (wearingSuccubusArmor)
 				{
 					dinfo.SetAmount(dinfo.Amount * 0.7f);
 				}
@@ -151,51 +128,35 @@ namespace NightmareIncarnation
 			return true;
 		}
 
-		// Token: 0x0600002B RID: 43 RVA: 0x000039BC File Offset: 0x00001BBC
-		private static bool Thing_Ingested_Prefix(Pawn ingester, float nutritionWanted, Thing __instance)
+		private static bool Thing_Ingested_Prefix(Pawn ingester, float nutritionWanted, Thing thing)
 		{
-			bool flag = __instance == null;
-			bool result;
-			if (flag)
+			if (thing ==  null)
 			{
-				result = true;
+				return true;
 			}
-			else
+			if (thing.Destroyed)
 			{
-				bool destroyed = __instance.Destroyed;
-				if (destroyed)
+				return true;
+			}
+			if (!thing.IngestibleNow)
+			{
+				return true;
+			}
+			
+			CompSuccubusRace comp = ingester.GetComp<CompSuccubusRace>();
+			if (comp != null)
+			{
+				if (CommonData.ManaSourceDefs.Any((ThingDef manaSource) => thing.def == manaSource))
 				{
-					result = true;
-				}
-				else
-				{
-					bool flag2 = !__instance.IngestibleNow;
-					if (flag2)
+					IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset = thing.def.ingestible.outcomeDoers.FirstOrDefault(delegate(IngestionOutcomeDoer ingestionOutcomer)
 					{
-						result = true;
-					}
-					else
-					{
-						CompSuccubusRace comp;
-						bool flag3 = (comp = ingester.GetComp<CompSuccubusRace>()) != null;
-						if (flag3)
-						{
-							bool flag4 = CommonData.ManaSourceDefs.Any((ThingDef x) => __instance.def == x);
-							if (flag4)
-							{
-								IngestionOutcomeDoer_OffsetNeed ingestionOutcomeDoer_OffsetNeed = __instance.def.ingestible.outcomeDoers.FirstOrDefault(delegate(IngestionOutcomeDoer x)
-								{
-									IngestionOutcomeDoer_OffsetNeed ingestionOutcomeDoer_OffsetNeed2;
-									return (ingestionOutcomeDoer_OffsetNeed2 = (x as IngestionOutcomeDoer_OffsetNeed)) != null && ingestionOutcomeDoer_OffsetNeed2.need == NINeedDefOf.NI_Need_Mana;
-								}) as IngestionOutcomeDoer_OffsetNeed;
-								comp.TotalManaGained = Mathf.Min(comp.TotalManaGained + ingestionOutcomeDoer_OffsetNeed.offset, 9999f);
-							}
-						}
-						result = true;
-					}
+						IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset2;
+						return (ingestionOutcomeOffset2 = (ingestionOutcomer as IngestionOutcomeDoer_OffsetNeed)) != null && ingestionOutcomeOffset2.need == NINeedDefOf.NI_Need_Mana;
+					}) as IngestionOutcomeDoer_OffsetNeed;
+					comp.TotalManaGained = Mathf.Min(comp.TotalManaGained + ingestionOutcomeOffset.offset, 9999f);
 				}
 			}
-			return result;
+			return true;
 		}
 	}
 }

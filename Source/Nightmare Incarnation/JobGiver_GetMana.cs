@@ -7,10 +7,16 @@ using Verse.AI;
 
 namespace NightmareIncarnation
 {
-	// Token: 0x0200000B RID: 11
+	/// <summary>
+	/// SuccJobGiver
+	/// </summary>
 	public class JobGiver_GetMana : ThinkNode_JobGiver
 	{
-		// Token: 0x0600003A RID: 58 RVA: 0x00004468 File Offset: 0x00002668
+
+		private int nextTryableTick = -1;
+
+		private static List<Pawn> tmpCandidates = new List<Pawn>();
+
 		public override ThinkNode DeepCopy(bool resolve = true)
 		{
 			JobGiver_GetMana jobGiver_GetMana = (JobGiver_GetMana)base.DeepCopy(resolve);
@@ -18,111 +24,70 @@ namespace NightmareIncarnation
 			return jobGiver_GetMana;
 		}
 
-		// Token: 0x0600003B RID: 59 RVA: 0x00004494 File Offset: 0x00002694
+
 		public override float GetPriority(Pawn pawn)
 		{
 			Need_Mana need_Mana = pawn.needs.AllNeeds.Find((Need x) => x.def == NINeedDefOf.NI_Need_Mana) as Need_Mana;
-			bool flag = need_Mana == null;
-			float result;
-			if (flag)
+			if (need_Mana != null)
 			{
-				result = 0f;
-			}
-			else
-			{
-				bool flag2 = !GenCollection.Any<ThingComp>(pawn.AllComps, (ThingComp x) => x is CompSuccubusRace);
-				if (flag2)
+				if(GenCollection.Any<ThingComp>(pawn.AllComps, (ThingComp x) => x is CompSuccubusRace))
 				{
-					result = 0f;
-				}
-				else
-				{
-					bool flag3 = FoodUtility.ShouldBeFedBySomeone(pawn);
-					if (flag3)
+					
+					if (!FoodUtility.ShouldBeFedBySomeone(pawn))
 					{
-						result = 0f;
-					}
-					else
-					{
-						bool flag4 = need_Mana.CurCategory > ManaAmountCategory.Satisfied;
-						if (flag4)
-						{
-							result = 9.5f;
-						}
-						else
-						{
-							bool flag5 = need_Mana.CurLevelPercentage < 0.4f;
-							if (flag5)
-							{
-								result = 7f;
-							}
-							else
-							{
-								bool flag6 = need_Mana.CurLevelPercentage < 0.8f;
-								if (flag6)
-								{
-									result = 2f;
-								}
-								else
-								{
-									result = 0f;
-								}
-							}
-						}
+						if (need_Mana.CurCategory > ManaAmountCategory.Satisfied)
+							return 9.5f;
+						if (need_Mana.CurLevelPercentage < 0.4f)
+							 return 7f;
+						if (need_Mana.CurLevelPercentage < 0.8f)
+							return 2f;
 					}
 				}
 			}
-			return result;
+			return 0f;
 		}
 
-		// Token: 0x0600003C RID: 60 RVA: 0x00004594 File Offset: 0x00002794
 		protected override Job TryGiveJob(Pawn pawn)
 		{
 			CompSuccubusRace comp = pawn.GetComp<CompSuccubusRace>();
-			bool flag = comp == null;
-			Job result;
-			if (flag)
+			if (comp == null)
 			{
 				Log.Message("Job_NIManaSqueeze is unique to the Succubus races.", false);
-				result = null;
+				return null;
 			}
 			else
 			{
 				float priority = this.GetPriority(pawn);
-				bool flag2 = priority > 6f;
-				if (flag2)
+				if (priority > 6f)
 				{
 					comp.tmpJoyMode = false;
 				}
 				else
 				{
-					bool flag3 = priority > 0f && pawn.needs.joy.CurLevelPercentage < comp.JoyThreshold;
-					if (!flag3)
+					bool canDoJob = priority > 0f && pawn.needs.joy.CurLevelPercentage < comp.JoyThreshold;
+					if (canDoJob)
 					{
-						return null;
+						float succsessChance = 0.5f * (comp.JoyThreshold - pawn.needs.joy.CurLevelPercentage) * Mathf.Clamp01(0.5f * pawn.needs.joy.tolerances.JoyFactorFromTolerance(NIJoyKindDefOf.JoyKind_NISuccubusWork) / comp.JoyTolerancesFactor);
+						if (!Rand.Chance(succsessChance))
+						{
+							return null;
+						}
+						comp.tmpJoyMode = true;
 					}
-					float num = 0.5f * (comp.JoyThreshold - pawn.needs.joy.CurLevelPercentage) * Mathf.Clamp01(0.5f * pawn.needs.joy.tolerances.JoyFactorFromTolerance(NIJoyKindDefOf.JoyKind_NISuccubusWork) / comp.JoyTolerancesFactor);
-					bool flag4 = Rand.Chance(num);
-					if (!flag4)
-					{
 						return null;
-					}
-					comp.tmpJoyMode = true;
 				}
-				//Func<Pawn, float> <>9__0;
+
 				for (int i = 0; i < comp.policy.plans.Count; i++)
 				{
 					bool suspended = comp.policy.plans[i].Suspended;
 					if (!suspended)
 					{
-						bool flag5 = comp.policy.plans[i].targetType == RelationType.Meal && priority > 6f;
-						if (flag5)
+						if (comp.policy.plans[i].targetType == RelationType.Meal && priority > 6f)
 						{
 							Thing thing = null;
 							ThingDef thingDef = null;
-							bool flag6 = commonUtl.TryFindBestManaSourceFor(pawn, pawn, out thing, out thingDef, true, false, false);
-							bool flag7 = thing != null;
-							if (flag7)
+							commonUtl.TryFindBestManaSourceFor(pawn, pawn, out thing, out thingDef, true, false, false);
+							if (thing != null)
 							{
 								return new Job(NIJobDefOf.Job_NIIngestManaItem, thing)
 								{
@@ -132,110 +97,78 @@ namespace NightmareIncarnation
 						}
 						else
 						{
-							bool flag8 = comp.tmpJoyMode && !comp.policy.plans[i].AllowJoy;
-							if (!flag8)
+							bool joyAllowed = comp.tmpJoyMode && !comp.policy.plans[i].AllowJoy;
+							if (!joyAllowed)
 							{
-								bool flag9 = comp.policy.plans[i].MainDishPawn != null;
-								Pawn pawn2;
-								if (flag9)
+								bool foodSourcePawnExists = comp.policy.plans[i].MainDishPawn != null;
+								Pawn foodSourcePawn;
+								if (foodSourcePawnExists)
 								{
-									pawn2 = comp.policy.plans[i].MainDishPawn;
-									bool flag10 = pawn2.Faction != null && pawn2.Faction == Faction.OfPlayer && pawn2 != pawn && ((comp.policy.plans[i].targetType == RelationType.Colonist && pawn2.IsColonist) || (comp.policy.plans[i].targetType == RelationType.Prisoner && pawn2.IsPrisonerOfColony)) && pawn2.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(pawn2) && commonUtl.IsPassive(pawn2) && commonUtl.HasEnoughtMana(pawn2, comp.policy.plans[i], comp.tmpJoyMode ? 0.2f : 0f) && ReservationUtility.CanReserveAndReach(pawn, pawn2,PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false);
-									bool flag11 = flag10;
-									if (flag11)
+									foodSourcePawn = comp.policy.plans[i].MainDishPawn;
+									bool pawnIsValidFoodSource = foodSourcePawn.Faction != null && foodSourcePawn.Faction == Faction.OfPlayer && foodSourcePawn != pawn && ((comp.policy.plans[i].targetType == RelationType.Colonist && foodSourcePawn.IsColonist) || (comp.policy.plans[i].targetType == RelationType.Prisoner && foodSourcePawn.IsPrisonerOfColony)) && foodSourcePawn.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(foodSourcePawn) && commonUtl.IsPassive(foodSourcePawn) && commonUtl.HasEnoughtMana(foodSourcePawn, comp.policy.plans[i], comp.tmpJoyMode ? 0.2f : 0f) && ReservationUtility.CanReserveAndReach(pawn, foodSourcePawn,PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false);
+									if (pawnIsValidFoodSource)
 									{
 										comp.tmpTargetType = comp.policy.plans[i].targetType;
-										return new Job(NIJobDefOf.Job_NIManaSqueeze, pawn2);
+										return new Job(NIJobDefOf.Job_NIManaSqueeze, foodSourcePawn);
 									}
 								}
 								JobGiver_GetMana.tmpCandidates.Clear();
 								JobGiver_GetMana.tmpCandidates = commonUtl.GetPawnsByManaPolicy(pawn, comp.policy.plans[i], comp.tmpJoyMode ? 0.2f : 0f);
-								Pawn pawn3;
 								if (JobGiver_GetMana.tmpCandidates.Count <= 0)
 								{
-									pawn3 = null;
+									foodSourcePawn = null;
 								}
 								else
 								{
 									IEnumerable<Pawn> enumerable = JobGiver_GetMana.tmpCandidates;
 									Func<Pawn, float> func = (Pawn x) => commonUtl.GetPreferWeight(x, pawn);
-									//if ((func = <>9__0) == null)
-									//{
-								//		func = (<>9__0 = ((Pawn x) => commonUtl.GetPreferWeight(x, pawn)));
-									//}
-									pawn3 = GenCollection.RandomElementByWeight<Pawn>(enumerable, func);
+									foodSourcePawn = GenCollection.RandomElementByWeight<Pawn>(enumerable, func);
 								}
-								pawn2 = pawn3;
-								bool flag12 = pawn2 != null;
-								if (flag12)
+								if (foodSourcePawn != null)
 								{
 									comp.tmpTargetType = comp.policy.plans[i].targetType;
-									return new Job(NIJobDefOf.Job_NIManaSqueeze, pawn2);
+									return new Job(NIJobDefOf.Job_NIManaSqueeze, foodSourcePawn);
 								}
 							}
 						}
 					}
 				}
-				result = null;
 			}
-			return result;
+			return null;
 		}
 
-		// Token: 0x0600003D RID: 61 RVA: 0x000049C8 File Offset: 0x00002BC8
 		public override ThinkResult TryIssueJobPackage(Pawn pawn, JobIssueParams jobParams)
 		{
 			float priority = this.GetPriority(pawn);
-			bool flag = priority <= 0f;
 			ThinkResult noJob;
-			if (flag)
+			if (priority <= 0f)
 			{
-				noJob = ThinkResult.NoJob;
+				return ThinkResult.NoJob;
 			}
 			else
 			{
+				Job job=null;
 				int ticksGame = Find.TickManager.TicksGame;
-				bool flag2 = priority > 9f && ticksGame > this.nextTryableTick;
-				if (flag2)
+				if (priority > 9f && ticksGame > this.nextTryableTick && job == null)
 				{
 					this.nextTryableTick = ticksGame + 30;
-					Job job = this.TryGiveJob(pawn);
-					bool flag3 = job != null;
-					if (flag3)
-					{
-						return new ThinkResult(job, this, new JobTag?(JobTag.SatisfyingNeeds), false);
-					}
+					job = this.TryGiveJob(pawn);
 				}
-				bool flag4 = priority > 6f && ticksGame > this.nextTryableTick;
-				if (flag4)
+				if (priority > 6f && ticksGame > this.nextTryableTick && job == null)
 				{
 					this.nextTryableTick = ticksGame + 60;
-					Job job2 = this.TryGiveJob(pawn);
-					bool flag5 = job2 != null;
-					if (flag5)
-					{
-						return new ThinkResult(job2, this, new JobTag?(JobTag.SatisfyingNeeds), false);
-					}
+					job = this.TryGiveJob(pawn);
 				}
-				bool flag6 = priority > 0f && ticksGame > this.nextTryableTick;
-				if (flag6)
+				if (priority > 0f && ticksGame > this.nextTryableTick && job == null)
 				{
 					this.nextTryableTick = ticksGame + 300;
 					Job job3 = this.TryGiveJob(pawn);
-					bool flag7 = job3 != null;
-					if (flag7)
-					{
-						return new ThinkResult(job3, this, new JobTag?(JobTag.SatisfyingNeeds), false);
-					}
 				}
-				noJob = ThinkResult.NoJob;
+				if(job!=null)
+					return new ThinkResult(job, this, new JobTag?(JobTag.SatisfyingNeeds), false);
 			}
-			return noJob;
+			return ThinkResult.NoJob;
 		}
 
-		// Token: 0x0400005A RID: 90
-		private int nextTryableTick = -1;
-
-		// Token: 0x0400005B RID: 91
-		private static List<Pawn> tmpCandidates = new List<Pawn>();
 	}
 }
