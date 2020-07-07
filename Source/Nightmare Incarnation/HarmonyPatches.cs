@@ -29,17 +29,17 @@ namespace NightmareIncarnation
 		/// <summary>
 		/// Checks if the given pawn is resistant to the given hediff
 		/// </summary>
-		/// <param name="pawn"></param>
+		/// <param name="___pawn"></param>
 		/// <param name="hediff"></param>
 		/// <param name="part"></param>
 		/// <param name="dinfo"></param>
 		/// <param name="result"></param>
 		/// <returns></returns>
-		private static bool Pawn_HealthTrackerAddHediffPrefix(Pawn pawn, Hediff hediff, BodyPartRecord part = null, DamageInfo? dinfo = null, DamageWorker.DamageResult result = null)
+		private static bool Pawn_HealthTrackerAddHediffPrefix(Pawn ___pawn, Hediff hediff, BodyPartRecord part = null, DamageInfo? dinfo = null, DamageWorker.DamageResult result = null)
 		{
-			if (HarmonyPatches.HasResistFor(pawn, hediff, part, dinfo, result))
+			if (HarmonyPatches.HasResistFor(___pawn, hediff, part, dinfo, result))
 			{
-				Log.Message("The pawn "+pawn.Label + "is resistant to" + hediff.Label, false);
+				Log.Message("The pawn "+___pawn.Label + "is resistant to" + hediff.Label, false);
 				return false;
 			}
 			return true;
@@ -87,39 +87,39 @@ namespace NightmareIncarnation
 			return false;
 		}
 
-		private static void Pawn_GetGizmos_Postfix(ref IEnumerable<Gizmo> gizmos, Pawn pawn)
+		private static void Pawn_GetGizmos_Postfix(ref IEnumerable<Gizmo> __result, Pawn __instance)
 		{
-			if (gizmos != null)
+			if (__result != null)
 			{
-				List<Gizmo> listedGizmos = gizmos.ToList<Gizmo>();
-				CompSuccubusRace compSuccubusRace = ThingCompUtility.TryGetComp<CompSuccubusRace>(pawn);
+				List<Gizmo> listedGizmos = __result.ToList<Gizmo>();
+				CompSuccubusRace compSuccubusRace = ThingCompUtility.TryGetComp<CompSuccubusRace>(__instance);
 				bool flag2 = compSuccubusRace != null;
-				if (commonUtl.IsSuccubus(pawn))
+				if (commonUtl.IsSuccubus(__instance))
 				{
 					foreach (Gizmo item in compSuccubusRace.CompGetGizmosExtra())
 					{
 						listedGizmos.Add(item);
 					}
 				}
-				gizmos = listedGizmos;
+				__result = listedGizmos;
 			}
 		}
 
-		private static bool Pawn_PreApplyDamage_Prefix(Pawn pawn, ref DamageInfo dinfo, ref bool absorbed)
+		private static bool Pawn_PreApplyDamage_Prefix(Pawn __instance, ref DamageInfo dinfo, ref bool absorbed)
 		{
-			if (commonUtl.IsSuccubus(pawn))
+			if (commonUtl.IsSuccubus(__instance))
 			{
-				bool wearingSuccubusOutfit = GenCollection.Any<Apparel>(pawn.apparel.WornApparel, (Apparel outfit) => outfit.def == NIThingDefOf.Apparel_NIHalfPersona);
+				bool wearingSuccubusOutfit = GenCollection.Any<Apparel>(__instance.apparel.WornApparel, (Apparel outfit) => outfit.def == NIThingDefOf.Apparel_NIHalfPersona);
 				if (wearingSuccubusOutfit)
 				{
 					if (Rand.Chance(0.1f))
 					{
-						MoteMaker.ThrowText(pawn.DrawPos, pawn.Map, "Dodge", Color.white, 3.65f);
+						MoteMaker.ThrowText(__instance.DrawPos, __instance.Map, "Dodge", Color.white, 3.65f);
 						absorbed = true;
 						return false;
 					}
 				}
-				bool wearingSuccubusArmor = GenCollection.Any<Apparel>(pawn.apparel.WornApparel, (Apparel armor) => armor.def == NIThingDefOf.Apparel_NIBattleGarb);
+				bool wearingSuccubusArmor = GenCollection.Any<Apparel>(__instance.apparel.WornApparel, (Apparel armor) => armor.def == NIThingDefOf.Apparel_NIBattleGarb);
 				if (wearingSuccubusArmor)
 				{
 					dinfo.SetAmount(dinfo.Amount * 0.7f);
@@ -128,17 +128,17 @@ namespace NightmareIncarnation
 			return true;
 		}
 
-		private static bool Thing_Ingested_Prefix(Pawn ingester, float nutritionWanted, Thing thing)
+		private static bool Thing_Ingested_Prefix(Pawn ingester, float nutritionWanted, Thing __instance)
 		{
-			if (thing ==  null)
+			if (__instance ==  null)
 			{
 				return true;
 			}
-			if (thing.Destroyed)
+			if (__instance.Destroyed)
 			{
 				return true;
 			}
-			if (!thing.IngestibleNow)
+			if (!__instance.IngestibleNow)
 			{
 				return true;
 			}
@@ -146,9 +146,9 @@ namespace NightmareIncarnation
 			CompSuccubusRace comp = ingester.GetComp<CompSuccubusRace>();
 			if (comp != null)
 			{
-				if (CommonData.ManaSourceDefs.Any((ThingDef manaSource) => thing.def == manaSource))
+				if (CommonData.ManaSourceDefs.Any((ThingDef manaSource) => __instance.def == manaSource))
 				{
-					IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset = thing.def.ingestible.outcomeDoers.FirstOrDefault(delegate(IngestionOutcomeDoer ingestionOutcomer)
+					IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset = __instance.def.ingestible.outcomeDoers.FirstOrDefault(delegate(IngestionOutcomeDoer ingestionOutcomer)
 					{
 						IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset2;
 						return (ingestionOutcomeOffset2 = (ingestionOutcomer as IngestionOutcomeDoer_OffsetNeed)) != null && ingestionOutcomeOffset2.need == NINeedDefOf.NI_Need_Mana;
