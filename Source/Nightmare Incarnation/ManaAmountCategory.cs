@@ -2,11 +2,11 @@
 
 namespace NightmareIncarnation
 {
-	public enum ManaAmountCategory
-	{
-		Satisfied,
-		Insatisfied,
-		Lacking,
-		Poverty
-	}
+    public enum ManaAmountCategory
+    {
+        Satisfied,
+        Insatisfied,
+        Lacking,
+        Poverty
+    }
 }

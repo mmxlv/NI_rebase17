@@ -2,14 +2,14 @@
 
 namespace NightmareIncarnation
 {
-	public enum RelationType
-	{
-		Colonist,
-		Prisoner,
-		Other,
-		Ally,
-		Neutral,
-		Hostile,
-		Meal
-	}
+    public enum RelationType
+    {
+        Colonist,
+        Prisoner,
+        Other,
+        Ally,
+        Neutral,
+        Hostile,
+        Meal
+    }
 }

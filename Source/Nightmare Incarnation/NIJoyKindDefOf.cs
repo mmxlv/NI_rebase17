@@ -3,9 +3,9 @@ using RimWorld;
 
 namespace NightmareIncarnation
 {
-	[DefOf]
-	public static class NIJoyKindDefOf
-	{
-		public static JoyKindDef JoyKind_NISuccubusWork;
-	}
+    [DefOf]
+    public static class NIJoyKindDefOf
+    {
+        public static JoyKindDef JoyKind_NISuccubusWork;
+    }
 }
