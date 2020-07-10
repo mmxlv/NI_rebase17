@@ -93,7 +93,7 @@
 	<defName>NI_BS3c</defName>
 	<title>Wandering Demon</title>
 	<titleShort>Wandering Demon</titleShort>
-	<baseDescription>[PAWN_nameDef] was walking alone in various parts of the demon world But [PAWN_pronoun] never felt lonely. If you are hungry, you can enjoy the thrill of stealing food from other demons and chasing you, and when you get tired of walking on the vast land, look up at the sky and look at the clouds fluttering in the Sacred Mountains, and enjoy the serenity of magic flowing into your body. .. Why am I a succubus? [PAWN_pronoun] has no time to think about such trivial matters. Every day, all the good things, the bad things, and the unpredictable experiences are all fresh and enjoyable.</baseDescription>
+	<baseDescription>[PAWN_nameDef] was walking alone in various parts of the demon world, but [PAWN_pronoun] never felt lonely. If you are hungry, you can enjoy the thrill of stealing food from other demons and chasing you, and when you get tired of walking on the vast land, look up at the sky and look at the clouds fluttering in the Sacred Mountains, and enjoy the serenity of magic flowing into your body. .. Why am I a succubus? [PAWN_pronoun] has no time to think about such trivial matters. Every day, all the good things, the bad things, and the unpredictable experiences are all fresh and enjoyable.</baseDescription>
 	<slot>Childhood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -136,7 +136,7 @@
 	<defName>NI_BS4c</defName>
 	<title>noble born devil</title>
 	<titleShort>Noble Devil</titleShort>
-	<baseDescription>[PAWN_nameDef]は魔界の名家の下に生を受けた、上流魔族の子供です。[PAWN_pronoun]は幼い頃から様々な高等教育を受け、高度な魔術の扱い方を習得し、夢魔としての活躍をみんなから期待されて育ってきました。ただの箱入り娘だと言われたりもしたけれど、[PAWN_possessive]実力はすでに並の夢魔たちを凌駕しています。
+	<baseDescription>[PAWN_nameDef] is a child from a noble demon family from the demon world. [PAWN_pronoun] is a child of noble family from the demon world, who was trained from an early age to utilize advanced magic. It was expected of [PAWN_objective] to become a "dreamer". I was sometimes told [PAWN_pronoun] was very reserved, but [PAWN_possessive] abilities already surpassed those of ordinary dreamers.
 </baseDescription>
 	<slot>Childhood</slot>
 	<spawnCategories>
@@ -170,7 +170,7 @@
 	<defName>NI_BS5c</defName>
 	<title>Evil Devil</title>
 	<titleShort>Devil</titleShort>
-	<baseDescription>[PAWN_nameDef]は幼い頃から才色兼備で人（魔族）の扱いも上手く、他の悪魔たちを言葉巧みに言いくるめては服従させていたことから影の支配者として恐れられていました。[PAWN_possessive]下僕達に対する扱いは決して優しいものではありませんでしたが、心なしか誰ひとりとして嫌がる者はおらず、むしろ悪魔の手本として尊敬するものすらいました。悪魔（ひと）は[PAWN_pronoun]のような者を悪童（しんどう）と呼ぶようです。
+	<baseDescription>[PAWN_nameDef] has been feared as a shadow ruler since [PAWN_pronoun] was a child, as [PAWN_pronoun] was very good at persuading other demons to obey [PAWN_objective]. The treatmen of [PAWN_possessive] servants was cruel, but none of them complained, for they respcted [PAWN_objective] as an examplar of demonkind. Humans would call someone like [PAWN_objective] a devil.
 </baseDescription>
 	<slot>Childhood</slot>
 	<spawnCategories>
@@ -208,7 +208,7 @@
 	<defName>NI_BS6c</defName>
 	<title>mysterious lonely demon</title>
 	<titleShort>Mysterious Demon</titleShort>
-	<baseDescription>[PAWN_nameDef]は気が付いた時には一人で魔界の荒野を彷徨っていました。[PAWN_pronoun]がいつ生を受けたのか、また自分が何者であるのかも知りません。[PAWN_possessive]夢魔には相応しくない得体の知れない魔力は一体何なのか？[PAWN_possessive]正体を暴こうとする者は、[PAWN_possessive]意思がどうであれみんな消えていきました。[PAWN_pronoun]は今日も独りです。
+	<baseDescription>[PAWN_nameDef] found [PAWN_objective]self wandering the wilds of the demon world alone. It is unknown when [PAWN_pronoun] was born, or where [PAWN_pronoun] came from. From where is [PAWN_possessive] magic that no other Dreamer possesses coming from? Everyone who tried to uncover [PAWN_possessive] secrets, has dissapeared. [PAWN_pronoun] is alone to this day.
 </baseDescription>
 	<slot>Childhood</slot>
 	<spawnCategories>
@@ -240,7 +240,7 @@
 	<defName>NI_BS1a</defName>
 	<title>Gentle Genma</title>
 	<titleShort>Gentle Genma</titleShort>
-	<baseDescription>[PAWN_nameDef] is Yumema who treats everyone gently and gently.\nBecause of their unsatanic behaviour, no one else will be popular with the fact unless they claim to be themselves a succubus [PAWN_pronoun].</baseDescription>
+	<baseDescription>[PAWN_nameDef] is a dreamer who is kind and gentle to everyone. Because of [PAWN_possessive] undemonic behavior, no one knows [PAWN_pronoun] is a succubus until [PAWN_pronoun] reveals [PAWN_objective]self.</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -280,7 +280,7 @@
 	<defName>NI_BS2a</defName>
 	<title>Apprentice Muma</title>
 	<titleShort>Apprentice Muma</titleShort>
-	<baseDescription>[PAWN_nameDef] is a succubus that has just arrived in this world. [PAWN_pronoun] who has worked hard in the demon world is confident that she can do well in this world. Let's start with the person at hand!</baseDescription>
+	<baseDescription>[PAWN_nameDef] is a succubus that has just arrived in this world. [PAWN_pronoun] has worked hard in the demon world is confident that [PAWN_pronoun] can do well in this world. Let's start with the person at hand!</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -306,9 +306,9 @@
 
 <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
 	<defName>NI_BS3a</defName>
-	<title>放蕩癖の直らない夢魔</title>
-	<titleShort>根無し草夢魔</titleShort>
-	<baseDescription>人間界に来た[PAWN_nameDef]の目は、確かに明星の如く輝いていました。「この世界が全部自分のものになるなんて！」成人になりながらもあらぬ妄想をしつつ、新天地にワクワクが止まらない[PAWN_pronoun]は自身がサキュバスであることすら忘れ、自由気ままにやりたい放題です。</baseDescription>
+	<title>A curious dreamer with a heart full of excitement</title>
+	<titleShort>curius dreamer</titleShort>
+	<baseDescription>The eyes of [PAWN_nameDef] where sparkling as [PAWN_pronoun] entered the human world. "I can't believe it, this whole world is going to be mine! I can't contain my excitment! So many new things to see and do!". In [PAWN_possessive] excitement [PAWN_nameDef] even forgets [PAWN_pronoun] is a succubus</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -348,7 +348,7 @@
 	<defName>NI_BS4a</defName>
 	<title>noble dreamer</title>
 	<titleShort>noble dreamer</titleShort>
-	<baseDescription>[PAWN_nameDef]は現世に来てからまだ間もないサキュバスですが、溢れる気品や貫禄のオーラは既に一人前の夢魔そのものです。家門の誉れと、ひいては危機に瀕した魔界のため、より多くの魔力を集めようと行動してきた[PAWN_possessive]意思に共感した魔族も多く、[PAWN_possessive]は魔界でも非常に広い人脈を持ちます。</baseDescription>
+	<baseDescription>[PAWN_nameDef] has only been a short time in this world, but [PAWN_possessive] aura of grace and dignity identifies [PAWN_objective] as a fully fledged dreamer. To protect her families honor and by exttension the demon world [PAWN_pronoun] has entered the human world to collect magic power. In preparation [PAWN_pronoun] made many contacts with demons who share [PAWN_possessive] intentions and now form a wide network in the demon world.</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -384,7 +384,7 @@
 	<defName>NI_BS5a</defName>
 	<title>devilish dreamer</title>
 	<titleShort>devilish dreamer</titleShort>
-	<baseDescription>[PAWN_nameDef]は邪悪で強力なサキュバスです。辺境に[PAWN_possessive]館を建て、夜な夜な下僕達を虐げていました。苦しめては回復させ、苦しめては回復させを繰り返す残虐な行為から、魔界の悪魔からは畏怖されていたそうです。現世の人間がひとたび[PAWN_objective]に獲物として認められれば、力尽きるまで逃れることは出来ないでしょう。</baseDescription>
+	<baseDescription>[PAWN_nameDef] is an evil and powerful succubus. [PAWN_pronoun] built [PAWN_possessive] mansion far from civilization and tormented [PAWN_possessive] servants every day. Other demons fear and respect [PAWN_objective] for [PAWN_possessive] cruel way of torturing, injuring and healing [PAWN_possessive] victims over and over again. It's said that once [PAWN_pronoun] recoginized humans as prey, [PAWN_pronoun] wouldn't let [PAWN_possessive] victims escape until they where completely drained.</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>
@@ -424,7 +424,7 @@
 	<defName>NI_BS6a</defName>
 	<title>wandering nightmare</title>
 	<titleShort>wandering nightmare</titleShort>
-	<baseDescription>[PAWN_nameDef] brings ruin to this world. The enormous magical powers of [PAWN_pronoun] are still increasing, and it is difficult to control them no matter what the intention of [PAWN_pronoun] is.\nNo one can account for [PAWN_pronoun]'s atrocious as none have survived.</baseDescription>
+	<baseDescription>[PAWN_nameDef] brings ruin to this world. The enormous magical powers of [PAWN_objective] are still increasing, and it is difficult to control them no matter what the intention of [PAWN_objective] is. No one can account for [PAWN_nameDef]'s atrocities as none have survived.</baseDescription>
 	<slot>Adulthood</slot>
 	<spawnCategories>
 		<li>NI_Backstory</li>

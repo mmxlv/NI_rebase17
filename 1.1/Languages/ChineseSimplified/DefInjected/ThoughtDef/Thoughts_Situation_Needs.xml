@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <NI_NeedMana.stages.0.label>魔力欠缺</NI_NeedMana.stages.0.label>
+  <NI_NeedMana.stages.0.description>魔力有点不足。</NI_NeedMana.stages.0.description>
+  <NI_NeedMana.stages.1.label>魔力不足</NI_NeedMana.stages.1.label>
+  <NI_NeedMana.stages.1.description>魔力不够了。</NI_NeedMana.stages.1.description>
+  <NI_NeedMana.stages.2.label>魔力匮乏</NI_NeedMana.stages.2.label>
+  <NI_NeedMana.stages.2.description>魔力欠缺导致无法集中精力。</NI_NeedMana.stages.2.description>
+  <NI_NeedMana.stages.3.label>魔力失调</NI_NeedMana.stages.3.label>
+  <NI_NeedMana.stages.3.description>身体出现衰弱征兆。必须尽快补充魔力。</NI_NeedMana.stages.3.description>
+  <NI_NeedMana.stages.4.label>魔力枯竭</NI_NeedMana.stages.4.label>
+  <NI_NeedMana.stages.4.description>已经没有力气了。什么都好，想要摄取魔力。</NI_NeedMana.stages.4.description>
+  <NI_NeedMana.stages.5.label>魔力饥渴</NI_NeedMana.stages.5.label>
+  <NI_NeedMana.stages.5.description>即使什么都不做，脸也会发青，出一身汗。魔力，就快要...</NI_NeedMana.stages.5.description>
+  <NI_NeedMana.stages.6.label>魔力饥荒</NI_NeedMana.stages.6.label>
+  <NI_NeedMana.stages.6.description>魔力...魔力啊...谁都好...</NI_NeedMana.stages.6.description>
+
+  <NI_PolicyUnacceptable.stages.0.label>不合适自己的魔力方针</NI_PolicyUnacceptable.stages.0.label>
+  <NI_PolicyUnacceptable.stages.0.description>被迫采取与自己不相符魔力收集方针。没有必要以此来玩弄人...</NI_PolicyUnacceptable.stages.0.description>
+  <NI_PolicyUnacceptable.stages.1.label>不合适自己的魔力方针</NI_PolicyUnacceptable.stages.1.label>
+  <NI_PolicyUnacceptable.stages.1.description>被迫采取与自己不相符魔力收集方针。就算是下酒菜也不能马马虎虎啊！</NI_PolicyUnacceptable.stages.1.description>
+  <NI_PolicyUnacceptable.stages.2.label>不合适自己的魔力方针</NI_PolicyUnacceptable.stages.2.label>
+  <NI_PolicyUnacceptable.stages.2.description>被迫采取与自己不相符魔力收集方针。我自己会去选择心仪的猎物。不要来命令我！</NI_PolicyUnacceptable.stages.2.description>
+  <NI_PolicyUnacceptable.stages.3.label>不合适自己的魔力方针</NI_PolicyUnacceptable.stages.3.label>
+  <NI_PolicyUnacceptable.stages.3.description>被迫采取与自己不相符魔力收集方针。不能肆意妄为的玩弄人类实在是太无聊了。</NI_PolicyUnacceptable.stages.3.description>
+  <NI_PolicyUnacceptable.stages.4.label>不合适自己的魔力方针</NI_PolicyUnacceptable.stages.4.label>
+  <NI_PolicyUnacceptable.stages.4.description>被迫采取与自己不相符魔力收集方针。都说生命凋零的瞬间是最美的，为什么不能理解呢？</NI_PolicyUnacceptable.stages.4.description>
+
+
+</LanguageData>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Succubus -->
+
+  <Apparel_NIUnderwear.label>魅魔内衣</Apparel_NIUnderwear.label>
+  <Apparel_NIUnderwear.description>魅魔所使用的内衣</Apparel_NIUnderwear.description>
+  <Apparel_NIUnderwear.stuffProps.stuffAdjective>魅魔内衣</Apparel_NIUnderwear.stuffProps.stuffAdjective>
+
+  <Apparel_NILongGloves.label>魅魔手套</Apparel_NILongGloves.label>
+  <Apparel_NILongGloves.description>魅魔所使用的长手套</Apparel_NILongGloves.description>
+  <Apparel_NILongGloves.stuffProps.stuffAdjective>魅魔手套</Apparel_NILongGloves.stuffProps.stuffAdjective>
+
+  <Apparel_NIThighHighSocks.label>魅魔丝袜</Apparel_NIThighHighSocks.label>
+  <Apparel_NIThighHighSocks.description>魅魔所使用的长丝袜</Apparel_NIThighHighSocks.description>
+  <Apparel_NIThighHighSocks.stuffProps.stuffAdjective>魅魔丝袜</Apparel_NIThighHighSocks.stuffProps.stuffAdjective>
+
+  <Apparel_NIBabydoll.label>魅魔洋服</Apparel_NIBabydoll.label>
+  <Apparel_NIBabydoll.description>魅魔使用的外套。常作为室内居家服。</Apparel_NIBabydoll.description>
+  <Apparel_NIBabydoll.stuffProps.stuffAdjective>魅魔洋服</Apparel_NIBabydoll.stuffProps.stuffAdjective>
+
+  <Apparel_NIBattleGarb.label>魅魔战甲</Apparel_NIBattleGarb.label>
+  <Apparel_NIBattleGarb.description>穿着者是魅魔种族时，所有的被击伤害减轻30%，技能的魔力消耗量也会减少。</Apparel_NIBattleGarb.description>
+  <Apparel_NIBattleGarb.stuffProps.stuffAdjective>魅魔战甲</Apparel_NIBattleGarb.stuffProps.stuffAdjective>
+
+  <Apparel_NIHalfPersona.label>梦魇之夜</Apparel_NIHalfPersona.label>
+  <Apparel_NIHalfPersona.description>魅魔作战用面具。穿着者是魅魔种族时，所有的被击伤害有10%的几率无效化，技能威力也会进一步加强。</Apparel_NIHalfPersona.description>
+  <Apparel_NIHalfPersona.stuffProps.stuffAdjective>梦魇之夜</Apparel_NIHalfPersona.stuffProps.stuffAdjective>
+
+
+</LanguageData>

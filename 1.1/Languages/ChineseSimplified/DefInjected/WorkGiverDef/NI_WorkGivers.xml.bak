@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 倒れたサキュバスの救助 -->
+
+  <NIWG_FeedManaItem.label>魔力回復アイテムを給仕中</NIWG_FeedManaItem.label>
+  <NIWG_FeedManaItem.verb>給仕</NIWG_FeedManaItem.verb>
+  <NIWG_FeedManaItem.gerund>給仕する</NIWG_FeedManaItem.gerund>
+
+
+</LanguageData>
