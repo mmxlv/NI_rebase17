@@ -39,13 +39,13 @@ namespace NightmareIncarnation
         {
             if (HarmonyPatches.HasResistFor(___pawn, hediff, part, dinfo, result))
             {
-                Log.Message("The pawn "+___pawn.Label + "is resistant to" + hediff.Label, false);
+                Log.Message("The pawn " + ___pawn.Label + "is resistant to" + hediff.Label, false);
                 return false;
             }
             return true;
         }
 
-        
+
         private static bool HasResistFor(Pawn pawn, Hediff hediff, BodyPartRecord part = null, DamageInfo? dinfo = null, DamageWorker.DamageResult result = null)
         {
             if (commonUtl.IsSuccubus(pawn))
@@ -130,7 +130,7 @@ namespace NightmareIncarnation
 
         private static bool Thing_Ingested_Prefix(Pawn ingester, float nutritionWanted, Thing __instance)
         {
-            if (__instance ==  null)
+            if (__instance == null)
             {
                 return true;
             }
@@ -142,13 +142,13 @@ namespace NightmareIncarnation
             {
                 return true;
             }
-            
+
             CompSuccubusRace comp = ingester.GetComp<CompSuccubusRace>();
             if (comp != null)
             {
                 if (CommonData.ManaSourceDefs.Any((ThingDef manaSource) => __instance.def == manaSource))
                 {
-                    IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset = __instance.def.ingestible.outcomeDoers.FirstOrDefault(delegate(IngestionOutcomeDoer ingestionOutcomer)
+                    IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset = __instance.def.ingestible.outcomeDoers.FirstOrDefault(delegate (IngestionOutcomeDoer ingestionOutcomer)
                     {
                         IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset2;
                         return (ingestionOutcomeOffset2 = (ingestionOutcomer as IngestionOutcomeDoer_OffsetNeed)) != null && ingestionOutcomeOffset2.need == NINeedDefOf.NI_Need_Mana;

@@ -38,7 +38,7 @@ namespace NightmareIncarnation
             {
                 int nextFreeLoadID = NI_WorldManager.loadIDs.Count + 1;
                 Predicate<int> predicate = (int x) => x == nextFreeLoadID;
-                for (;;)
+                for (; ; )
                 {
                     List<int> loadIDs = NI_WorldManager.loadIDs;
                     if (!GenCollection.Any<int>(loadIDs, predicate))
@@ -72,12 +72,12 @@ namespace NightmareIncarnation
 
         public Rect DoInterface(float x, float y, float width, int index)
         {
-            Rect workPlanInterface= new Rect(x, y, width, 53f);
+            Rect workPlanInterface = new Rect(x, y, width, 53f);
             workPlanInterface.height += 24f;
             Color white = Color.white;
             if (this.Suspended)
             {
-                white=new Color(1f, 0.7f, 0.7f, 0.7f);
+                white = new Color(1f, 0.7f, 0.7f, 0.7f);
             }
             GUI.color = white;
             Text.Font = GameFont.Small;
@@ -98,7 +98,7 @@ namespace NightmareIncarnation
             }
             if (this.workPlanStack.IndexOf(this) < this.workPlanStack.plans.Count - 1)
             {
-                Rect moveBillDownButton= new Rect(0f, 48f, 24f, 24f);
+                Rect moveBillDownButton = new Rect(0f, 48f, 24f, 24f);
                 bool flag5 = Widgets.ButtonImage(moveBillDownButton, TexButton.ReorderDown, white);
                 if (flag5)
                 {
@@ -117,7 +117,7 @@ namespace NightmareIncarnation
                 SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
             }
             TooltipHandler.TipRegion(suspendBillButton, Translator.Translate("SuspendBillTip"));
-            Rect allowJoyButton=new Rect(28f, 28f, 40f, 40f);
+            Rect allowJoyButton = new Rect(28f, 28f, 40f, 40f);
             if (this.targetType != RelationType.Meal)
             {
                 if (Widgets.ButtonImage(allowJoyButton, this.AllowJoy ? IconTex.Policy_AllowJoy : IconTex.Policy_DisallowJoy, white))
@@ -190,19 +190,19 @@ namespace NightmareIncarnation
             TooltipHandler.TipRegion(allowKillButton, Translator.Translate("NItxt_AllowKillTip"));
             if (this.targetType == RelationType.Meal)
             {
-                Func<List<FloatMenuOption>> dishOptionFinder = delegate()
+                Func<List<FloatMenuOption>> dishOptionFinder = delegate ()
                 {
                     List<FloatMenuOption> dishOptions = new List<FloatMenuOption>();
-                    dishOptions.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate()
+                    dishOptions.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate ()
                     {
                         this.MainDishThing = null;
-                    },MenuOptionPriority.Default, null, null, 0f, null, null));
+                    }, MenuOptionPriority.Default, null, null, 0f, null, null));
                     using (IEnumerator<ThingDef> enumerator = CommonData.ManaSourceDefs.AsEnumerable<ThingDef>().GetEnumerator())
                     {
                         while (enumerator.MoveNext())
                         {
                             ThingDef foodSource = enumerator.Current;
-                            dishOptions.Add(new FloatMenuOption(foodSource.LabelCap, delegate()
+                            dishOptions.Add(new FloatMenuOption(foodSource.LabelCap, delegate ()
                             {
                                 this.MainDishThing = foodSource;
                             }, MenuOptionPriority.Default, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, foodSource), null));
@@ -221,22 +221,22 @@ namespace NightmareIncarnation
             }
             if (this.targetType == RelationType.Colonist || this.targetType == RelationType.Prisoner)
             {
-                Func<List<FloatMenuOption>> pawnOptionFinder = delegate()
+                Func<List<FloatMenuOption>> pawnOptionFinder = delegate ()
                 {
                     List<FloatMenuOption> ediblePawnOptions = new List<FloatMenuOption>();
-                    ediblePawnOptions.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate()
+                    ediblePawnOptions.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate ()
                     {
                         this.MainDishPawn = null;
                     }, MenuOptionPriority.Default, null, null, 0f, null, null));
                     IEnumerable<Pawn> enumerable = from z in this.workPlanStack.compRace.parent.Map.mapPawns.AllPawnsSpawned
-                    where z.GetComp<CompSuccubusRace>() == null && z != this.workPlanStack.compRace.parent && commonUtl.IsManaConformant(z) && ((this.targetType == RelationType.Colonist && z.IsColonist) || (this.targetType == RelationType.Prisoner && z.IsPrisonerOfColony))
-                    select z;
+                                                   where z.GetComp<CompSuccubusRace>() == null && z != this.workPlanStack.compRace.parent && commonUtl.IsManaConformant(z) && ((this.targetType == RelationType.Colonist && z.IsColonist) || (this.targetType == RelationType.Prisoner && z.IsPrisonerOfColony))
+                                                   select z;
                     using (IEnumerator<Pawn> enumerator = enumerable.GetEnumerator())
                     {
                         while (enumerator.MoveNext())
                         {
                             Pawn ediblePawn = enumerator.Current;
-                            ediblePawnOptions.Add(new FloatMenuOption(ediblePawn.LabelCap, delegate()
+                            ediblePawnOptions.Add(new FloatMenuOption(ediblePawn.LabelCap, delegate ()
                             {
                                 this.MainDishPawn = ediblePawn;
                             }, MenuOptionPriority.Default, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, ediblePawn), null));
@@ -244,7 +244,7 @@ namespace NightmareIncarnation
                     }
                     return ediblePawnOptions;
                 };
-                Rect selectPawnToEatButton= new Rect(204f, 32f, 150f, 29f);
+                Rect selectPawnToEatButton = new Rect(204f, 32f, 150f, 29f);
                 bool selectPawnButtonWasAdded = Widgets.ButtonText(selectPawnToEatButton, (this.MainDishPawn != null) ? this.MainDishPawn.LabelCap : Translator.Translate("NItxt_SelectMainDish").ToString(), true, false, true);
                 if (selectPawnButtonWasAdded)
                 {
@@ -255,7 +255,7 @@ namespace NightmareIncarnation
             }
             if (this.targetType != RelationType.Meal)
             {
-                Rect squeezeAmountSelector= new Rect(144f, 0f, 160f, 34f);
+                Rect squeezeAmountSelector = new Rect(144f, 0f, 160f, 34f);
                 float squeezeValue = this.SqueezeValue;
                 this.SqueezeValue = Widgets.HorizontalSlider(squeezeAmountSelector, squeezeValue, 0.4f, 2.4f, false, TranslatorFormattedStringExtensions.Translate("NItxt_SqueezeValue", squeezeValue.ToString("F1")), null, null, 0.1f);
                 TooltipHandler.TipRegion(squeezeAmountSelector, Translator.Translate("NItxt_SqueezeSliderTip"));
@@ -275,7 +275,7 @@ namespace NightmareIncarnation
             GUI.color = Color.white;
             return workPlanInterface;
         }
-        
+
         public string GetUniqueLoadID()
         {
             return string.Concat(new object[]
@@ -293,14 +293,14 @@ namespace NightmareIncarnation
             {
                 switch (this.targetType)
                 {
-                case RelationType.Colonist:
-                    return Translator.Translate("NItxt_Colonist");
-                case RelationType.Prisoner:
-                    return Translator.Translate("NItxt_Prisoner");
-                case RelationType.Hostile:
-                    return Translator.Translate("NItxt_Enemy");
-                case RelationType.Meal:
-                    return Translator.Translate("NItxt_Meal");
+                    case RelationType.Colonist:
+                        return Translator.Translate("NItxt_Colonist");
+                    case RelationType.Prisoner:
+                        return Translator.Translate("NItxt_Prisoner");
+                    case RelationType.Hostile:
+                        return Translator.Translate("NItxt_Enemy");
+                    case RelationType.Meal:
+                        return Translator.Translate("NItxt_Meal");
                 }
                 return Translator.Translate("NItxt_Other");
             }

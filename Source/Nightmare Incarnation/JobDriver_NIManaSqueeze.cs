@@ -14,6 +14,7 @@ namespace NightmareIncarnation
     //TODO Create an enum for the forcedThoughstages
     public class JobDriver_NIManaSqueeze : JobDriver
     {
+        private const TargetIndex VictimInd = TargetIndex.A;
 
         private bool JoyMode;
 
@@ -37,21 +38,11 @@ namespace NightmareIncarnation
 
         private PawnRelationDef[] RomanticRelationshipDefs = new[] { PawnRelationDefOf.Lover, PawnRelationDefOf.Fiance, PawnRelationDefOf.Spouse };
 
-        protected Pawn Victim
-        {
-            get
-            {
-                return (Pawn)this.job.targetA.Thing;
-            }
-        }
+        protected Pawn Actor => GetActor();
 
-        protected CompSuccubusRace CompRace
-        {
-            get
-            {
-                return this.pawn.GetComp<CompSuccubusRace>();
-            }
-        }
+        protected Pawn Victim => job.GetTarget(VictimInd).Pawn;
+
+        protected CompSuccubusRace CompRace => Actor.GetComp<CompSuccubusRace>();
 
         public override void ExposeData()
         {
@@ -66,26 +57,22 @@ namespace NightmareIncarnation
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            Pawn pawn = this.pawn;
-            LocalTargetInfo localTargetInfo = this.Victim;
-            Job job = this.job;
-            bool canReserveToil = ReservationUtility.Reserve(pawn, localTargetInfo, job, 1, -1, null, errorOnFailed);
-            if (!canReserveToil)
+            if (!Actor.Reserve(Victim, job, 1, -1, null, errorOnFailed))
                 return false;
-            
-            CompSuccubusRace compRace;
-            bool isSuccubus = (compRace = pawn.GetComp<CompSuccubusRace>()) != null;
-            if (isSuccubus)
+
+            if (CompRace != null)
             {
-                this.JoyMode = compRace.tmpJoyMode;
-                this.workPlan = compRace.policy.plans.Find((WorkPlan x) => x.targetType == compRace.tmpTargetType);
-                Pawn_StoryTracker story = pawn.story;
-                int? num = (story != null) ? new int?(story.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute)) : null;
-                bool flag3 = (pawn.story.traits.HasTrait(TraitDefOf.Bloodlust) || pawn.story.traits.HasTrait(TraitDefOf.Psychopath) || (num != null && (num == 5 || num == 6))) && commonUtl.HasEnoughtMana(this.Victim, this.workPlan, 0f);
-                this.SqueezeAmount = ((this.JoyMode && !flag3) ? 0.2f : this.workPlan.SqueezeValue);
-                this.manaGainPerTick = (this.JoyMode ? 0.8f : 1f) * this.SqueezeAmount / (float)this.job.def.joyDuration;
-                this.joyGainPerTick = 0.25f * compRace.JoyTolerancesFactor / (float)this.job.def.joyDuration;
-                this.joyGainPerTickOffset = 0.25f / (compRace.JoyTolerancesFactor * (float)this.job.def.joyDuration);
+                this.JoyMode = CompRace.tmpJoyMode;
+                this.workPlan = CompRace.policy.plans.FirstOrDefault(x => x.targetType == CompRace.tmpTargetType);
+                int traitDegree = Actor.story.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute);
+                bool forced = commonUtl.HasEnoughtMana(Victim, workPlan, 0f)
+                              && (Actor.story.traits.HasTrait(TraitDefOf.Bloodlust)
+                                  || Actor.story.traits.HasTrait(TraitDefOf.Psychopath)
+                                  || (traitDegree == 5 || traitDegree == 6));
+                this.SqueezeAmount = (JoyMode && !forced) ? 0.2f : workPlan.SqueezeValue;
+                this.manaGainPerTick = (JoyMode ? 0.8f : 1f) * SqueezeAmount / job.def.joyDuration;
+                this.joyGainPerTick = 0.25f * CompRace.JoyTolerancesFactor / job.def.joyDuration;
+                this.joyGainPerTickOffset = 0.25f / (CompRace.JoyTolerancesFactor * job.def.joyDuration);
                 return true;
             }
             return false;
@@ -93,127 +80,135 @@ namespace NightmareIncarnation
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            Need_Mana succubusManaNeed = this.pawn.needs.AllNeeds.Find((Need x) => x.def == NINeedDefOf.NI_Need_Mana) as Need_Mana;
-            Need_Mana victimManaNeed = this.Victim.needs.AllNeeds.Find((Need x) => x.def == NINeedDefOf.NI_Need_Mana) as Need_Mana;
-            ToilFailConditions.FailOnDespawnedNullOrForbidden<JobDriver_NIManaSqueeze>(this,TargetIndex.A);
-            ToilFailConditions.FailOn<JobDriver_NIManaSqueeze>(this, () => !commonUtl.IsPassive(this.Victim) || this.workPlan.Suspended || (this.JoyMode && !this.workPlan.AllowJoy) || (!this.workPlan.AllowOverSqueeze && commonUtl.GetMana(this.Victim) <= 0f) || (!this.workPlan.AllowDown && (this.Victim.Downed || this.Victim.health.HasHediffsNeedingTendByPlayer(false) || commonUtl.GetNetMana(this.Victim) < -0.79f)) || (!this.workPlan.AllowKill && commonUtl.GetNetMana(this.Victim) < -0.95f));
-            ToilFailConditions.FailOnAggroMentalState<JobDriver_NIManaSqueeze>(this, TargetIndex.A);
-            base.AddFinishAction(delegate()
+            Need_Mana succubusManaNeed = Actor.needs.TryGetNeed<Need_Mana>();
+            Need_Mana victimManaNeed = Victim.needs.TryGetNeed<Need_Mana>();
+            this.FailOnDespawnedNullOrForbidden(VictimInd);
+            this.FailOnAggroMentalState(VictimInd);
+            this.FailOn(() =>
             {
-                bool victimWaiting = this.Victim != this.pawn && this.Victim.CurJobDef == JobDefOf.Wait_MaintainPosture;
-                if (victimWaiting)
+                return !commonUtl.IsPassive(Victim)
+                       || workPlan.Suspended
+                       || (JoyMode && !workPlan.AllowJoy)
+                       || (!workPlan.AllowOverSqueeze && commonUtl.GetMana(Victim) <= 0f)
+                       || (!workPlan.AllowDown
+                           && (Victim.Downed
+                               || Victim.health.HasHediffsNeedingTendByPlayer(false)
+                               || commonUtl.GetNetMana(Victim) < -0.79f))
+                       || (!workPlan.AllowKill && commonUtl.GetNetMana(Victim) < -0.95f);
+            });
+            AddFinishAction(() =>
+            {
+                if (Victim.CurJobDef == JobDefOf.Wait_MaintainPosture)
                 {
-                    this.Victim.jobs.EndCurrentJob(JobCondition.InterruptForced, true);
+                    Victim.jobs.EndCurrentJob(JobCondition.InterruptForced, true);
                 }
-                if (this.totalGainMana > 0f)
+                if (totalGainMana > 0f)
                 {
-                    this.ApplyJobThought(this.pawn, this.Victim);
-                    this.CompRace.TotalManaGained = Mathf.Min(this.CompRace.TotalManaGained + (float)Mathf.RoundToInt(this.totalGainMana / 0.01f) * 0.01f, 9999f);
+                    ApplyJobThought(pawn, Victim);
+                    CompRace.TotalManaGained = Mathf.Min(CompRace.TotalManaGained + Mathf.RoundToInt(totalGainMana / 0.01f) * 0.01f, 9999f);
                 }
             });
 
-            PathEndMode interactionCell =PathEndMode.OnCell;
-            Toil gotoToil = Toils_Goto.GotoThing(TargetIndex.A, interactionCell);
-            yield return gotoToil;
-            yield return Toils_General.Do(delegate()
+            yield return Toils_Goto.GotoThing(VictimInd, PathEndMode.OnCell);
+
+            Toil work = new Toil
             {
-            });
-            Toil work = new Toil();
-            work.initAction = delegate()
-            {
-                Pawn actor = work.actor;
-                Pawn pawn = (Pawn)this.job.GetTarget(TargetIndex.A).Thing;
-                actor.pather.StopDead();
-                PawnUtility.ForceWait(pawn, this.job.def.joyDuration, null, true);
-            };
-            work.tickAction = delegate()
-            {
-                this.totalGainMana += this.manaGainPerTick;
-                succubusManaNeed.CurLevel += this.manaGainPerTick;
-                float drainedMana = victimManaNeed.CurLevel - this.manaGainPerTick;
-                victimManaNeed.CurLevel = ((drainedMana < 0f) ? 0f : drainedMana);
-                if (drainedMana < 0f)
+                initAction = delegate
                 {
-                    HealthUtility.AdjustSeverity(this.Victim, NIHediffDefOf.VigorRavage, -drainedMana);
-                }
-                int ticksGame = Find.TickManager.TicksGame;
-                bool throwHeartParticles = ticksGame > this.moteInterval + this.motethrownTick;
-                if (throwHeartParticles)
+                    Actor.pather.StopDead();
+                    PawnUtility.ForceWait(Victim, job.def.joyDuration, null, true);
+                },
+                tickAction = delegate
                 {
-                    this.motethrownTick = ticksGame;
-                    MoteMaker.ThrowMetaIcon(this.Victim.Position, this.pawn.Map, ThingDefOf.Mote_Heart);
-                }
-                if (this.JoyMode)
-                {
-                    this.pawn.skills.Learn(SkillDefOf.Social, 0.02f, false);
-                    this.pawn.needs.joy.GainJoy(this.joyGainPerTick, NIJoyKindDefOf.JoyKind_NISuccubusWork);
-                    this.pawn.needs.joy.CurLevel += this.joyGainPerTickOffset;
-                    bool joyneedFullfilled = this.pawn.needs.joy.CurLevelPercentage >= 1f;
-                    if (joyneedFullfilled)
+                    totalGainMana += manaGainPerTick;
+                    succubusManaNeed.CurLevel += manaGainPerTick;
+                    float drainedMana = victimManaNeed.CurLevel - manaGainPerTick;
+                    victimManaNeed.CurLevel = (drainedMana < 0f) ? 0f : drainedMana;
+                    if (drainedMana < 0f)
                     {
-                        this.pawn.jobs.EndCurrentJob(JobCondition.Succeeded, true);
+                        HealthUtility.AdjustSeverity(Victim, NIHediffDefOf.VigorRavage, -drainedMana);
                     }
-                }
-                else
-                {
-                    this.pawn.skills.Learn(SkillDefOf.Social, 0.01f, false);
-                }
-                if (this.totalGainMana > this.SqueezeAmount)
-                {
-                    if (!this.JoyMode)
+
+                    int ticksGame = Find.TickManager.TicksGame;
+                    if (ticksGame > moteInterval + motethrownTick)
                     {
-                        this.pawn.needs.joy.CurLevel += 0.1f;
+                        motethrownTick = ticksGame;
+                        MoteMaker.ThrowMetaIcon(Victim.Position, pawn.Map, ThingDefOf.Mote_Heart);
                     }
-                    this.pawn.needs.food.CurLevel += 0.05f;
-                    this.pawn.jobs.EndCurrentJob(JobCondition.Succeeded, true);
-                }
+
+                    if (this.JoyMode)
+                    {
+                        Actor.skills.Learn(SkillDefOf.Social, 0.02f, false);
+                        Actor.needs.joy.GainJoy(joyGainPerTick, NIJoyKindDefOf.JoyKind_NISuccubusWork);
+                        Actor.needs.joy.CurLevel += joyGainPerTickOffset;
+                        if (Actor.needs.joy.CurLevelPercentage >= 1f)
+                        {
+                            Actor.jobs.EndCurrentJob(JobCondition.Succeeded, true);
+                        }
+                    }
+                    else
+                    {
+                        Actor.skills.Learn(SkillDefOf.Social, 0.01f, false);
+                    }
+
+                    if (totalGainMana > SqueezeAmount)
+                    {
+                        if (!JoyMode)
+                        {
+                            Actor.needs.joy.CurLevel += 0.1f;
+                        }
+                        Actor.needs.food.CurLevel += 0.05f;
+                        Actor.jobs.EndCurrentJob(JobCondition.Succeeded, true);
+                    }
+                },
+                defaultCompleteMode = ToilCompleteMode.Never,
             };
-            work.defaultCompleteMode =ToilCompleteMode.Never;
-            ToilEffects.PlaySustainerOrSound(ToilEffects.WithProgressBar(ToilFailConditions.FailOnCannotTouch<Toil>(work, TargetIndex.A, interactionCell), TargetIndex.A, new Func<float>(this.GetProgress), false, -0.5f), NISoundDefOf.Recipe_Surgery);
-            work.activeSkill = (() => SkillDefOf.Social);
+            work.PlaySustainerOrSound(NISoundDefOf.Recipe_Surgery);
+            work.WithProgressBar(VictimInd, new Func<float>(this.GetProgress));
+            work.FailOnCannotTouch(VictimInd, PathEndMode.OnCell);
+            work.activeSkill = () => SkillDefOf.Social;
             yield return work;
-            yield break;
         }
 
         public override string GetReport()
         {
-            if (this.JoyMode)
+            if (JoyMode)
             {
                 return TranslatorFormattedStringExtensions.Translate("NItxt_Teasing", this.Victim);
             }
             return base.GetReport();
         }
 
-        private void ApplyJobThought(Pawn succubus, Pawn target)
+        private void ApplyJobThought(Pawn succubus, Pawn victim)
         {
-            var relations = PawnRelationUtility.GetRelations(succubus, target);
+            IEnumerable<PawnRelationDef> relations = PawnRelationUtility.GetRelations(succubus, victim);
             bool inRomanticRelationship = relations.Intersect(RomanticRelationshipDefs).Any();
-            if (!target.Dead) 
+            if (!victim.Dead)
             {
                 if (inRomanticRelationship)
                 {
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, succubus, target, 4);
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterOpLover, succubus, target, 0);
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodLover, target, succubus, 0);
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpLover, target, succubus, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, succubus, victim, 4);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterOpLover, succubus, victim, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodLover, victim, succubus, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpLover, victim, succubus, 0);
                 }
                 else
-                {    
-                    ApplyThoughtsForLiving(succubus, target);
+                {
+                    ApplyThoughtsForLiving(succubus, victim);
 
                     //if the target has a lover that is not the succ, add thoughts about the succ to the lover
-                    Pawn romanticPartnerOfTarget = this.GetLover(target); 
+                    Pawn romanticPartnerOfTarget = GetLover(victim);
                     if (romanticPartnerOfTarget != null && romanticPartnerOfTarget != succubus)
                     {
                         if (romanticPartnerOfTarget.story != null && romanticPartnerOfTarget.story.traits.HasTrait(NITraitDefOf.Jealous))
                         {
-                            JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodJealousy, romanticPartnerOfTarget, succubus, 1);
+                            AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodJealousy, romanticPartnerOfTarget, succubus, 1);
                         }
                         else
                         {
-                            JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodJealousy, romanticPartnerOfTarget, succubus, 0);
+                            AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodJealousy, romanticPartnerOfTarget, succubus, 0);
                         }
-                        JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpJealousy, romanticPartnerOfTarget, succubus, 0);
+                        AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpJealousy, romanticPartnerOfTarget, succubus, 0);
                     }
                 }
             }
@@ -221,57 +216,55 @@ namespace NightmareIncarnation
             {
                 if (inRomanticRelationship)
                 {
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMoodKillLover, succubus, target, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMoodKillLover, succubus, victim, 0);
                 }
                 else
                 {
                     Pawn_StoryTracker succubusStory = succubus.story;
                     if (succubusStory.traits.HasTrait(TraitDefOf.Kind) || succubusStory.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute) == 1)
-                        JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMoodKillKind, succubus, target, 0);
+                        AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMoodKillKind, succubus, victim, 0);
                     if (succubusStory.traits.HasTrait(TraitDefOf.Bloodlust) || succubusStory.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute) == 5)
                     {
-                        JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMoodKillEvil, succubus, target, 0);
+                        AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMoodKillEvil, succubus, victim, 0);
                     }
-                    else if(!succubusStory.traits.HasTrait(TraitDefOf.Psychopath))
-                        JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMoodKill, succubus, target, 0);
+                    else if (!succubusStory.traits.HasTrait(TraitDefOf.Psychopath))
+                        AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMoodKill, succubus, victim, 0);
                 }
-                if (target.IsColonist)
+                if (victim.IsColonist)
                 {
-                    List<Pawn> colonists = (from x in Find.WorldPawns.AllPawnsAlive where x.IsColonist && x != succubus select x).ToList<Pawn>();
-                    Func<Pawn, bool> predicate = (Pawn x) => !x.Dead && x.IsColonist && x != succubus;
+                    List<Pawn> colonists = (from x in Find.WorldPawns.AllPawnsAlive where x.IsColonist && x != succubus select x).ToList();
                     foreach (Map map in Find.Maps)
                     {
                         IEnumerable<Pawn> allPawns = map.mapPawns.AllPawns;
-                        colonists.AddRange(allPawns.Where(predicate));
+                        colonists.AddRange(allPawns.Where(x => !x.Dead && x.IsColonist && x != succubus));
                     }
                     foreach (Pawn pawn in colonists)
                     {
-                        JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpKilledColonist, pawn, succubus, 0);
+                        AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpKilledColonist, pawn, succubus, 0);
                     }
                 }
                 else
                 {
-                    if (target.IsPrisoner)
+                    if (victim.IsPrisoner)
                     {
                         List<Pawn> allPawnsExceptSuc = (from x in Find.WorldPawns.AllPawnsAlive
-                                            where (x.IsColonist || x.IsPrisoner) && x != succubus
-                                            select x).ToList<Pawn>();
-                        Func<Pawn, bool> predicate2 = (Pawn x) => !x.Dead && (x.IsColonist || x.IsPrisoner) && x != succubus;
+                                                        where (x.IsColonist || x.IsPrisoner) && x != succubus
+                                                        select x).ToList<Pawn>();
                         foreach (Map map2 in Find.Maps)
                         {
                             IEnumerable<Pawn> allPawns2 = map2.mapPawns.AllPawns;
-                            allPawnsExceptSuc.AddRange(allPawns2.Where(predicate2));
+                            allPawnsExceptSuc.AddRange(allPawns2.Where(x => !x.Dead && (x.IsColonist || x.IsPrisoner) && x != succubus));
                         }
                         foreach (Pawn pawn in allPawnsExceptSuc)
                         {
-                            JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpKilledPrisoner, pawn, succubus, 0);
+                            AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpKilledPrisoner, pawn, succubus, 0);
                         }
                     }
                 }
-                Pawn romanticPartnerOfTarget = this.GetLover(target);
+                Pawn romanticPartnerOfTarget = GetLover(victim);
                 if (romanticPartnerOfTarget != null && romanticPartnerOfTarget != succubus)
                 {
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpKilledLover, romanticPartnerOfTarget, succubus, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpKilledLover, romanticPartnerOfTarget, succubus, 0);
                 }
             }
         }
@@ -285,49 +278,49 @@ namespace NightmareIncarnation
                 if (target.gender == pawn.gender)
                 {
                     if (succubusStory.traits.HasTrait(TraitDefOf.Gay))
-                        JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 3);
+                        AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 3);
                     if (targetStory.traits.HasTrait(TraitDefOf.Gay))
                     {
-                        JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodLes, target, pawn, 0);
-                        JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpDesire, target, pawn, 0);
+                        AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodLes, target, pawn, 0);
+                        AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpDesire, target, pawn, 0);
                     }
 
                 }
                 //Succubus thoughts
                 if (succubusStory.traits.HasTrait(TraitDefOf.Kind) || succubusStory.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute) == 1 || targetStory.traits.HasTrait(TraitDefOf.Ascetic))
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 5);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 5);
                 if (succubusStory.traits.HasTrait(TraitDefOf.DislikesMen) && target.gender == Gender.Male)
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 2);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 2);
                 if (succubusStory.traits.HasTrait(TraitDefOf.DislikesWomen) && target.gender == Gender.Female)
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 1);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 1);
                 if (succubusStory.traits.HasTrait(TraitDefOf.Bloodlust) || succubusStory.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute) == 5)
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracterMood, pawn, target, 0);
 
                 //Target thoughts
                 if (targetStory.traits.HasTrait(TraitDefOf.Ascetic))
                 {
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodAscetic, target, pawn, 0);
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOp, target, pawn, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodAscetic, target, pawn, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOp, target, pawn, 0);
                 }
                 if (targetStory.traits.HasTrait(TraitDefOf.DislikesMen) && pawn.gender == Gender.Male)
                 {
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodDislikeMen, target, pawn, 0);
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOp, target, pawn, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodDislikeMen, target, pawn, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOp, target, pawn, 0);
                 }
                 if (targetStory.traits.HasTrait(NITraitDefOf.Masochist))
                 {
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodMaso, target, pawn, 0);
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpDesire, target, pawn, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodMaso, target, pawn, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOpDesire, target, pawn, 0);
                 }
                 if (targetStory.traits.HasTrait(TraitDefOf.DislikesWomen) && pawn.gender == Gender.Female)
                 {
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodDislikeFem, target, pawn, 0);
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOp, target, pawn, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMoodDislikeFem, target, pawn, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOp, target, pawn, 0);
                 }
                 else
                 {
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMood, target, pawn, 0);
-                    JobDriver_NIManaSqueeze.AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOp, target, pawn, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeMood, target, pawn, 0);
+                    AddSucJobThought(NIThoughtDefOf.NI_SuccubusInteracteeOp, target, pawn, 0);
                 }
             }
         }
@@ -342,8 +335,7 @@ namespace NightmareIncarnation
             {
                 thought_Memory.moodPowerFactor = ((thought_Memory.MoodOffset() < 0f) ? 0.5f : 1f);
             }
-            Thought_MemorySocial thought_MemorySocial = thought_Memory as Thought_MemorySocial;
-            if (thought_MemorySocial != null && commonUtl.IsSuccubus(affecter))
+            if (thought_Memory is Thought_MemorySocial thought_MemorySocial && commonUtl.IsSuccubus(affecter))
             {
                 if (thought_MemorySocial.opinionOffset < 0f)
                 {
@@ -361,16 +353,8 @@ namespace NightmareIncarnation
             affected.needs.mood.thoughts.memories.TryGainMemory(thought_Memory, affecter);
         }
 
-        private Pawn GetLover(Pawn pawn)
-        {
-            return LovePartnerRelationUtility.ExistingMostLikedLovePartner(pawn, false);
-        }
+        private Pawn GetLover(Pawn pawn) => LovePartnerRelationUtility.ExistingMostLikedLovePartner(pawn, false);
 
-        private float GetProgress()
-        {
-            return this.totalGainMana / this.SqueezeAmount;
-        }
-
-
+        private float GetProgress() => this.totalGainMana / this.SqueezeAmount;
     }
 }

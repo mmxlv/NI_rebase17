@@ -1,70 +1,58 @@
 ﻿using System;
 using RimWorld;
+using UnityEngine.Assertions.Must;
 using Verse;
 using Verse.AI;
 
 namespace NightmareIncarnation
 {
+    /// <summary>
+    /// Create works for pawns to feed succubi who can't eat on their own. Someone have to feed them.
+    /// </summary>
     public class WorkGiver_NIFeedManaItem : WorkGiver_Scanner
     {
-        public override ThingRequest PotentialWorkThingRequest
-        {
-            get
-            {
-                return ThingRequest.ForGroup(ThingRequestGroup.Pawn);
-            }
-        }
+        public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForGroup(ThingRequestGroup.Pawn);
 
-        public override PathEndMode PathEndMode
-        {
-            get
-            {
-                return PathEndMode.ClosestTouch;
-            }
-        }
+        public override PathEndMode PathEndMode => PathEndMode.ClosestTouch;
 
-        public override Danger MaxPathDanger(Pawn pawn)
-        {
-            return Danger.Deadly;
-        }
+        public override Danger MaxPathDanger(Pawn pawn) => Danger.Deadly;
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            Pawn target = t as Pawn;
-            if (target == null || target == pawn)
+            if (!(t is Pawn succubus)
+                || succubus == pawn
+                || !commonUtl.IsSuccubus(succubus)
+                || !FoodUtility.ShouldBeFedBySomeone(succubus))
+            {
                 return false;
-            if (!commonUtl.IsSuccubus(target))
+            }
+
+            Need_Mana needMana = succubus.needs.TryGetNeed<Need_Mana>();
+            if (needMana == null || needMana.CurLevelPercentage > 0.35f)
                 return false;
-            if (!FoodUtility.ShouldBeFedBySomeone(target))
+
+            if (!pawn.CanReserve(succubus, 1, -1, null, forced))
                 return false;
-            Need_Mana need_Mana = target.needs.AllNeeds.Find((Need x) => x.def == NINeedDefOf.NI_Need_Mana) as Need_Mana;
-            if (need_Mana == null || need_Mana.CurLevelPercentage > 0.35f)
-                return false;
-            LocalTargetInfo localTargetInfo = t;
-            if (!ReservationUtility.CanReserve(pawn, localTargetInfo, 1, -1, null, forced))
-                return false;
-            Thing thing;
-            ThingDef thingDef;
-            if (!commonUtl.TryFindBestManaSourceFor(pawn, target, out thing, out thingDef, true, false, false))
+
+            if (!commonUtl.TryFindBestManaSourceFor(pawn, succubus, out _, out _))
             {
                 JobFailReason.Is(Translator.Translate("NItxt_NoManaSource"), null);
                 return false;
             }
+
             return true;
         }
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            Pawn target = (Pawn)t;
-            Thing thing;
-            ThingDef thingDef;
-            if (commonUtl.TryFindBestManaSourceFor(pawn, target, out thing, out thingDef, true, false, false))
+            Pawn succubus = (Pawn)t;
+            if (commonUtl.TryFindBestManaSourceFor(pawn, succubus, out Thing manaSource, out _))
             {
                 return new Job(NIJobDefOf.Job_NIFeedManaItem)
                 {
-                    targetA = thing,
-                    targetB = target,
-                    count = commonUtl.EstimateIngestCountOf(target, thing)
+                    targetA = manaSource,
+                    targetB = succubus,
+                    count = commonUtl.EstimateIngestCountOf(succubus, manaSource)
                 };
             }
             return null;

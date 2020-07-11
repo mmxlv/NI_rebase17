@@ -4,6 +4,7 @@ using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;
+using Verse.Noise;
 
 namespace NightmareIncarnation
 {
@@ -18,49 +19,67 @@ namespace NightmareIncarnation
 
         private const float BaseManaDeficiencyServerityPerInterval = 0.0012f;
 
+        private const float TicksBetweenCalls = 150f;
+
         private int lastNonDryingoutManaTick;
 
         public Need_Mana(Pawn pawn) : base(pawn)
         {
         }
 
+        /// <summary>
+        /// Get called every 150 ticks.
+        /// </summary>
         public override void NeedInterval()
         {
-            if (!CaravanUtility.IsCaravanMember(this.pawn))
+            if (pawn.IsCaravanMember())
             {
-                CompSuccubusRace comp;
-                bool isSuccubus = (comp = this.pawn.GetComp<CompSuccubusRace>()) != null;
-                if (isSuccubus)
+                return;
+            }
+
+            if (pawn.GetComp<CompSuccubusRace>() is CompSuccubusRace comp)
+            {
+                if (!base.IsFrozen)
                 {
-                    if (!base.IsFrozen)
+                    switch (CurCategory)
                     {
-                        switch (this.CurCategory)
-                        {
                         case ManaAmountCategory.Satisfied:
-                            this.CurLevel -= comp.ManaFallPerTick * 150f * comp.ManaFallFactor;
+                            CurLevel -= comp.ManaFallPerTick * TicksBetweenCalls * comp.ManaFallFactor;
                             break;
                         case ManaAmountCategory.Insatisfied:
-                            this.CurLevel -= comp.ManaFallPerTick * 150f * comp.ManaFallFactor * 0.5f;
+                            CurLevel -= comp.ManaFallPerTick * TicksBetweenCalls * comp.ManaFallFactor * 0.5f;
                             break;
                         case ManaAmountCategory.Lacking:
-                            this.CurLevel -= comp.ManaFallPerTick * 150f * comp.ManaFallFactor * 0.25f;
+                            CurLevel -= comp.ManaFallPerTick * TicksBetweenCalls * comp.ManaFallFactor * 0.25f;
                             break;
-                        }
-
-                        //changing curLevel changes the outcome of this.CurCategory, so it needs to be checked again
-                        this.CurLevel += 0.001f;
-                        if (this.CurCategory == ManaAmountCategory.Poverty)
-                        {
-                            HealthUtility.AdjustSeverity(this.pawn, NIHediffDefOf.VigorRavage, 0.0012f);
-                        }
-                        else
-                        {
-                            HealthUtility.AdjustSeverity(this.pawn, NIHediffDefOf.VigorRavage, -0.0012f);
-                        }
                     }
-                    if (this.CurCategory != ManaAmountCategory.Poverty)
+
+                    if (this.CurCategory == ManaAmountCategory.Poverty)
                     {
-                        this.lastNonDryingoutManaTick = Find.TickManager.TicksGame;
+                        HealthUtility.AdjustSeverity(pawn, NIHediffDefOf.VigorRavage, BaseManaDeficiencyServerityPerInterval);
+                    }
+                    else
+                    {
+                        HealthUtility.AdjustSeverity(pawn, NIHediffDefOf.VigorRavage, -BaseManaDeficiencyServerityPerInterval);
+                    }
+                }
+                if (CurCategory != ManaAmountCategory.Poverty)
+                {
+                    lastNonDryingoutManaTick = Find.TickManager.TicksGame;
+                }
+            }
+            else
+            {
+                if (!base.IsFrozen)
+                {
+                    CurLevel += BaseManaRecoveryPerIntervalNonSuccubus;
+                    if (CurCategory == ManaAmountCategory.Poverty)
+                    {
+                        HealthUtility.AdjustSeverity(pawn, NIHediffDefOf.VigorRavage, BaseManaDeficiencyServerityPerInterval);
+                    }
+                    else
+                    {
+                        HealthUtility.AdjustSeverity(pawn, NIHediffDefOf.VigorRavage, -BaseManaDeficiencyServerityPerInterval);
                     }
                 }
             }
@@ -72,28 +91,19 @@ namespace NightmareIncarnation
             Scribe_Values.Look<int>(ref this.lastNonDryingoutManaTick, "lastNonDryingoutManaTick", 0, false);
         }
 
-        public override void SetInitialLevel()
-        {
-            base.CurLevelPercentage = 1f;
-        }
+        public override void SetInitialLevel() => CurLevelPercentage = 1f;
 
-        public override int GUIChangeArrow
-        {
-            get
-            {
-                return -1;
-            }
-        }
+        public override int GUIChangeArrow => -1;
 
         public ManaAmountCategory CurCategory
         {
             get
             {
-                if (base.CurLevelPercentage <= 0f)
+                if (CurLevelPercentage <= 0f)
                     return ManaAmountCategory.Poverty;
-                if(base.CurLevelPercentage < 0.15f)
+                if (CurLevelPercentage < 0.15f)
                     return ManaAmountCategory.Lacking;
-                if(base.CurLevelPercentage < 0.3f)
+                if (CurLevelPercentage < 0.3f)
                     return ManaAmountCategory.Insatisfied;
                 return ManaAmountCategory.Satisfied;
             }
@@ -103,21 +113,20 @@ namespace NightmareIncarnation
         {
             get
             {
-                bool isSuccubus = this.pawn.story != null && this.pawn.GetComp<CompSuccubusRace>() != null;
-                if (isSuccubus)
+                if (pawn.story != null && pawn.GetComp<CompSuccubusRace>() != null)
                 {
-                    switch (this.pawn.story.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute))
+                    switch (pawn.story.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute))
                     {
-                    case 1:
-                    case 2:
-                    case 3:
-                        return 1f;
-                    case 4:
-                        return 2f;
-                    case 5:
-                        return 2f;
-                    case 6:
-                        return 5f;
+                        case 1:
+                        case 2:
+                        case 3:
+                            return 1f;
+                        case 4:
+                            return 2f;
+                        case 5:
+                            return 2f;
+                        case 6:
+                            return 5f;
                     }
                 }
                 return 1f;
@@ -142,14 +151,14 @@ namespace NightmareIncarnation
 
         public override void DrawOnGUI(Rect rect, int maxThresholdMarkers = 2147483647, float customMargin = -1f, bool drawArrows = true, bool doTooltip = true)
         {
-            if (this.threshPercents == null)
+            if (threshPercents == null)
             {
-                this.threshPercents = new List<float>();
+                threshPercents = new List<float>();
             }
-            this.threshPercents.Clear();
-            this.threshPercents.Add(0.3f);
-            this.threshPercents.Add(0.15f);
-            this.DrawOnGUICustom(rect, maxThresholdMarkers, customMargin, drawArrows, doTooltip);
+            threshPercents.Clear();
+            threshPercents.Add(0.3f);
+            threshPercents.Add(0.15f);
+            DrawOnGUICustom(rect, maxThresholdMarkers, customMargin, drawArrows, doTooltip);
         }
 
         private void DrawOnGUICustom(Rect guiRect, int maxThresholdMarkers = 2147483647, float customMargin = -1f, bool drawArrows = true, bool doTooltip = true)
@@ -174,7 +183,7 @@ namespace NightmareIncarnation
             {
                 someHeight *= Mathf.InverseLerp(0f, 50f, guiRect.height);
             }
-            Text.Font = ((guiRect.height <= 55f) ?GameFont.Tiny : GameFont.Small);
+            Text.Font = ((guiRect.height <= 55f) ? GameFont.Tiny : GameFont.Small);
             Text.Anchor = TextAnchor.LowerLeft;
 
             Rect labelBox = new Rect(guiRect.x + margin + guiRect.width * 0.1f, guiRect.y, guiRect.width - margin - guiRect.width * 0.1f, guiRect.height / 2f);
