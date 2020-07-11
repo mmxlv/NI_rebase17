@@ -21,22 +21,22 @@ namespace NightmareIncarnation
             {
                 switch (need_Mana.CurCategory)
                 {
-                case ManaAmountCategory.Satisfied:
-                    return ThoughtState.Inactive;
-                case ManaAmountCategory.Insatisfied:
-                    return ThoughtState.ActiveAtStage(0);
-                case ManaAmountCategory.Lacking:
-                    return ThoughtState.ActiveAtStage(1);
-                case ManaAmountCategory.Poverty:
-                {
-                    Hediff firstHediffOfDef = pawn.health.hediffSet.GetFirstHediffOfDef(NIHediffDefOf.ManaDeficiency, false);
-                    int currentDefficiencyStage = (firstHediffOfDef != null) ? firstHediffOfDef.CurStageIndex : 0;
-                    result = ThoughtState.ActiveAtStage(2 + currentDefficiencyStage);
-                    break;
-                }
-                default:
-                    Log.Error("Not implemented mana need category encountered: " + need_Mana.CurCategory.ToString() + " This should never happen, setting thoughtstate to inactive");
-                    return ThoughtState.Inactive;
+                    case ManaAmountCategory.Satisfied:
+                        return ThoughtState.Inactive;
+                    case ManaAmountCategory.Insatisfied:
+                        return ThoughtState.ActiveAtStage(0);
+                    case ManaAmountCategory.Lacking:
+                        return ThoughtState.ActiveAtStage(1);
+                    case ManaAmountCategory.Poverty:
+                        {
+                            Hediff firstHediffOfDef = pawn.health.hediffSet.GetFirstHediffOfDef(NIHediffDefOf.ManaDeficiency, false);
+                            int currentDefficiencyStage = (firstHediffOfDef != null) ? firstHediffOfDef.CurStageIndex : 0;
+                            result = ThoughtState.ActiveAtStage(2 + currentDefficiencyStage);
+                            break;
+                        }
+                    default:
+                        Log.Error("Not implemented mana need category encountered: " + need_Mana.CurCategory.ToString() + " This should never happen, setting thoughtstate to inactive");
+                        return ThoughtState.Inactive;
                 }
             }
             return ThoughtState.Inactive;

@@ -10,7 +10,7 @@ namespace NightmareIncarnation
     /// <summary>
     /// Collection of Utility methods for Succubus interactions
     /// </summary>
-    
+
     public static class commonUtl
     {
         /// <summary>
@@ -27,16 +27,45 @@ namespace NightmareIncarnation
             switch (targetType)
             {
                 case RelationType.Colonist:
-                    result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn colonist) => colonist.Faction != null && colonist.Faction == Faction.OfPlayer && colonist.IsColonist && colonist != pawn && !colonist.IsPrisonerOfColony && !IsSuccubus(colonist) && commonUtl.IsManaConformant(colonist) && commonUtl.IsPassive(colonist) && commonUtl.HasEnoughtMana(colonist, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, colonist, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false));
+                    result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll(colonist => colonist.IsColonist
+                                                                                   && colonist != pawn
+                                                                                   && !colonist.IsPrisonerOfColony
+                                                                                   && !IsSuccubus(colonist)
+                                                                                   && IsManaConformant(colonist)
+                                                                                   && IsPassive(colonist)
+                                                                                   && HasEnoughtMana(colonist, workPlan, forcedValue)
+                                                                                   && ReservationUtility.CanReserveAndReach(pawn, colonist, PathEndMode.OnCell, Danger.Deadly));
                     break;
                 case RelationType.Prisoner:
-                    result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn prisoner) => prisoner.IsPrisonerOfColony && prisoner != pawn && !IsSuccubus(prisoner) && commonUtl.IsManaConformant(prisoner) && commonUtl.IsPassive(prisoner) && commonUtl.HasEnoughtMana(prisoner, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, prisoner, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false));
+                    result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll(prisoner => prisoner.IsPrisonerOfColony
+                                                                                   && prisoner != pawn
+                                                                                   && !IsSuccubus(prisoner)
+                                                                                   && IsManaConformant(prisoner)
+                                                                                   && IsPassive(prisoner)
+                                                                                   && HasEnoughtMana(prisoner, workPlan, forcedValue)
+                                                                                   && ReservationUtility.CanReserveAndReach(pawn, prisoner, PathEndMode.OnCell, Danger.Deadly));
                     break;
                 case RelationType.Hostile:
-                    result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn hostile) => hostile.Faction != null && FactionUtility.HostileTo(hostile.Faction, Faction.OfPlayer) && !hostile.IsPrisonerOfColony && hostile != pawn && hostile.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(hostile) && commonUtl.IsPassive(hostile) && commonUtl.HasEnoughtMana(pawn, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, hostile, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false));
+                    result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll(hostile => hostile.HostileTo(Faction.OfPlayer)
+                                                                                  && !hostile.IsPrisonerOfColony
+                                                                                  && hostile != pawn
+                                                                                  && !IsSuccubus(hostile)
+                                                                                  && IsManaConformant(hostile)
+                                                                                  && IsPassive(hostile)
+                                                                                  && HasEnoughtMana(pawn, workPlan, forcedValue)
+                                                                                  && ReservationUtility.CanReserveAndReach(pawn, hostile, PathEndMode.OnCell, Danger.Deadly));
                     break;
                 default:
-                    result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll((Pawn other) => other.Faction != Faction.OfPlayer && (other.Faction == null || (other.Faction != null && FactionUtility.HostileTo(other.Faction, Faction.OfPlayer))) && !other.IsPrisonerOfColony && other != pawn && other.GetComp<CompSuccubusRace>() == null && commonUtl.IsManaConformant(other) && commonUtl.IsPassive(other) && commonUtl.HasEnoughtMana(pawn, workPlan, forcedValue) && ReservationUtility.CanReserveAndReach(pawn, other, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, false));
+                    result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll(other => other.Faction != Faction.OfPlayer
+                                                                                && (other.Faction == null
+                                                                                    || (other.Faction != null && FactionUtility.HostileTo(other.Faction, Faction.OfPlayer)))
+                                                                                && !other.IsPrisonerOfColony
+                                                                                && other != pawn
+                                                                                && !IsSuccubus(other)
+                                                                                && IsManaConformant(other)
+                                                                                && IsPassive(other)
+                                                                                && HasEnoughtMana(pawn, workPlan, forcedValue)
+                                                                                && ReservationUtility.CanReserveAndReach(pawn, other, PathEndMode.OnCell, Danger.Deadly));
                     break;
             }
             return result;
@@ -51,7 +80,7 @@ namespace NightmareIncarnation
         {
             if (pawn != null && pawn.Spawned)
             {
-                return (pawn.needs.AllNeeds.Find((Need needForMaba) => needForMaba.def == NINeedDefOf.NI_Need_Mana) != null);
+                return pawn.needs.AllNeeds.Any(needForMana => needForMana.def == NINeedDefOf.NI_Need_Mana);
             }
             return false;
         }
@@ -63,7 +92,10 @@ namespace NightmareIncarnation
         /// <returns></returns>
         public static bool IsPassive(Pawn pawn)
         {
-            return !pawn.InAggroMentalState && ((pawn.Faction == Faction.OfPlayer && !pawn.Drafted) || pawn.IsPrisonerOfColony || (pawn.Faction != Faction.OfPlayer && pawn.Downed));
+            return !pawn.InAggroMentalState
+                   && ((pawn.Faction == Faction.OfPlayer && !pawn.Drafted)
+                       || pawn.IsPrisonerOfColony
+                       || (pawn.Faction != Faction.OfPlayer && pawn.Downed));
         }
 
         /// <summary>
@@ -74,7 +106,7 @@ namespace NightmareIncarnation
         public static float GetMana(Pawn pawn)
         {
             Need_Mana needMana = (pawn.needs.AllNeeds.Find((Need needForMana) => needForMana.def == NINeedDefOf.NI_Need_Mana) as Need_Mana);
-            if (needMana!=null)
+            if (needMana != null)
             {
                 return needMana.CurLevel;
             }
@@ -82,27 +114,29 @@ namespace NightmareIncarnation
         }
 
         /// <summary>
-        /// Gets the current level of the Vifor Ravage hediff
+        /// Gets the current level of the Vifor Ravage hediff for non-succubi
         /// </summary>
         /// <param name="pawn"></param>
         /// <returns></returns>
         public static float GetVigorRavageLv(Pawn pawn)
         {
-            HediffSet hediffSet = pawn.health.hediffSet;
-            Hediff hediff = (hediffSet != null) ? hediffSet.GetFirstHediffOfDef(NIHediffDefOf.VigorRavage, false) : null;
-            return (hediff != null) ? hediff.Severity : 0f;
+            if (pawn.health.hediffSet.GetFirstHediffOfDef(NIHediffDefOf.VigorRavage) is Hediff hediff)
+                return hediff.Severity;
+            else
+                return 0f;
         }
 
         /// <summary>
-        /// Gets the current level of mana deficiency
+        /// Gets the current level of mana deficiency for succubi
         /// </summary>
         /// <param name="pawn"></param>
         /// <returns></returns>
         public static float GetDeficiencyLv(Pawn pawn)
         {
-            HediffSet hediffSet = pawn.health.hediffSet;
-            Hediff hediff = (hediffSet != null) ? hediffSet.GetFirstHediffOfDef(NIHediffDefOf.ManaDeficiency, false) : null;
-            return (hediff != null) ? hediff.Severity : 0f;
+            if (pawn.health.hediffSet.GetFirstHediffOfDef(NIHediffDefOf.ManaDeficiency) is Hediff hediff)
+                return hediff.Severity;
+            else
+                return 0f;
         }
 
         /// <summary>
@@ -110,10 +144,9 @@ namespace NightmareIncarnation
         /// </summary>
         /// <param name="pawn"></param>
         /// <returns></returns>
-        // Notes: vigor Ravage is a hediff that only applies to non succcubus, so I assume it gets applied after they have been succed by one?
         public static float GetNetMana(Pawn pawn)
         {
-            return commonUtl.GetMana(pawn) - ((pawn.GetComp<CompSuccubusRace>() == null) ? commonUtl.GetVigorRavageLv(pawn) : commonUtl.GetDeficiencyLv(pawn));
+            return GetMana(pawn) - ((pawn.GetComp<CompSuccubusRace>() == null) ? GetVigorRavageLv(pawn) : GetDeficiencyLv(pawn));
         }
 
         /// <summary>
@@ -131,17 +164,19 @@ namespace NightmareIncarnation
             {
                 if (workPlan.AllowDown)
                 {
-                    return workPlan.AllowKill || commonUtl.GetNetMana(pawn) - squuezeAmount >= -0.95f;
+                    return workPlan.AllowKill || GetNetMana(pawn) - squuezeAmount >= -0.95f;
                 }
-                return commonUtl.GetNetMana(pawn) - squuezeAmount >= -0.79f && !pawn.Downed && !pawn.health.HasHediffsNeedingTendByPlayer(false);
+                else
+                    return GetNetMana(pawn) - squuezeAmount >= -0.79f && !pawn.Downed && !pawn.health.HasHediffsNeedingTendByPlayer();
             }
             else
             {
                 if (workPlan.AllowDown)
                 {
-                    return commonUtl.GetMana(pawn) >= squuezeAmount;
+                    return GetMana(pawn) >= squuezeAmount;
                 }
-                return commonUtl.GetMana(pawn) >= squuezeAmount && !pawn.Downed && !pawn.health.HasHediffsNeedingTendByPlayer(false);
+                else
+                    return GetMana(pawn) >= squuezeAmount && !pawn.Downed && !pawn.health.HasHediffsNeedingTendByPlayer();
             }
         }
 
@@ -158,30 +193,32 @@ namespace NightmareIncarnation
         /// <returns></returns>
         public static float GetPreferWeight(Pawn target, Pawn succubus)
         {
-            bool pawnCanSucc = IsSuccubus(succubus)&& target.story != null && succubus.story != null;
-            if (pawnCanSucc)
+            if (!IsSuccubus(succubus)
+                || target.story == null
+                || succubus.story == null)
             {
-                if (isInRomanticRelationship(target, succubus))
-                {
-                    return 3f;
-                }
-                if (succubus.story.traits.HasTrait(TraitDefOf.DislikesMen) && target.gender == Gender.Male)
-                {
-                    return 0.01f;
-                }
-                if (succubus.story.traits.HasTrait(TraitDefOf.DislikesWomen) && target.gender == Gender.Female)
-                {
-                    return 0.01f;
-                }
-                if (succubus.story.traits.HasTrait(TraitDefOf.Gay))
-                {
-                    return (target.gender == succubus.gender) ? 2f : 0.1f;
-                }else  
-                {
-                    return 1f;
-                }
-            }    
-            return 0f;
+                return 0f;
+            }
+            if (isInRomanticRelationship(target, succubus))
+            {
+                return 3f;
+            }
+            if (succubus.story.traits.HasTrait(TraitDefOf.DislikesMen) && target.gender == Gender.Male)
+            {
+                return 0.01f;
+            }
+            if (succubus.story.traits.HasTrait(TraitDefOf.DislikesWomen) && target.gender == Gender.Female)
+            {
+                return 0.01f;
+            }
+            if (succubus.story.traits.HasTrait(TraitDefOf.Gay))
+            {
+                return (target.gender == succubus.gender) ? 2f : 0.1f;
+            }
+            else
+            {
+                return 1f;
+            }
         }
 
         private static bool isInRomanticRelationship(Pawn fistPawn, Pawn otherPawn)
@@ -191,7 +228,6 @@ namespace NightmareIncarnation
 
         /// <summary>
         /// gets the best mana source in the holder'S inventory, if there is one
-        /// 
         /// </summary>
         /// <param name="holder"></param>
         /// <param name="eater"></param>
@@ -207,21 +243,19 @@ namespace NightmareIncarnation
                 eater = holder;
             }
             ThingOwner<Thing> innerContainer = holder.inventory.innerContainer;
-            for(int itemCount = 0; itemCount < innerContainer.Count; itemCount++)
+            for (int itemCount = 0; itemCount < innerContainer.Count; itemCount++)
             {
                 Thing inventoryItem = innerContainer[itemCount];
-                bool isUsableManaSource = CommonData.ManaSourceDefs.Any((ThingDef manaSource) => manaSource == inventoryItem.def) && inventoryItem.IngestibleNow;
-                if (isUsableManaSource)
+                if (CommonData.ManaSourceDefs.Any((ThingDef manaSource) => manaSource == inventoryItem.def) && inventoryItem.IngestibleNow)
                 {
-                    bool succubusIsCarryingManasource = holder == eater && IsSuccubus(eater);
-                    if (succubusIsCarryingManasource)
+                    if (holder == eater && IsSuccubus(eater))
                     {
                         WorkPlan workPlan = eater.GetComp<CompSuccubusRace>().policy.plans.Find((WorkPlan mealWorkplan) => mealWorkplan.targetType == RelationType.Meal);
                         if (workPlan.MainDishThing != null)
                         {
                             if (inventoryItem.def == workPlan.MainDishThing)
                             {
-                                if ((float)inventoryItem.stackCount>=0f)
+                                if (inventoryItem.stackCount >= 0f)
                                 {
                                     return inventoryItem;
                                 }
@@ -230,7 +264,7 @@ namespace NightmareIncarnation
                     }
                     else
                     {
-                        if ((float)inventoryItem.stackCount >= 0f)
+                        if (inventoryItem.stackCount >= 0f)
                         {
                             return inventoryItem;
                         }
@@ -238,7 +272,7 @@ namespace NightmareIncarnation
                 }
             }
             return null;
-            
+
         }
 
         /// <summary>
@@ -251,20 +285,12 @@ namespace NightmareIncarnation
         /// <returns></returns>
         public static Thing BestManaSourceOnMap(Pawn getter, Pawn eater, bool allowForbidden = false, bool forceScanWholeMap = false)
         {
-            bool getterIsIncapableOfCarrying = !getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation) && getter != eater;
-            if (getterIsIncapableOfCarrying)
+            if (!getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation) && getter != eater)
             {
                 return null;
             }
-            IEnumerable<Thing> manaSourceItems = from items in getter.Map.listerThings.AllThings
-            where CommonData.ManaSourceDefs.Any((ThingDef manaSourceDef) => items.def == manaSourceDef)
-            select items;
-            //??? is enumerable returning false when empty? otherwise it doesn't work
-            //    bool flag2 = !manaSourceItems.EnumerableNullOrEmpty();
-            //    if (flag2)
-            //    {
-            //        result = null;
-            //    }
+
+            IEnumerable<Thing> manaSourceItems = getter.Map.listerThings.AllThings.Where(x => CommonData.ManaSourceDefs.Any((ThingDef manaSourceDef) => x.def == manaSourceDef));
             if (manaSourceItems.EnumerableNullOrEmpty())
             {
                 return null;
@@ -284,8 +310,25 @@ namespace NightmareIncarnation
                 }
             }
             ThingRequest thingRequest = ThingRequest.ForUndefined();
-            Predicate<Thing> allowedManaSourceFinder = (Thing item) => item.Spawned && CommonData.ManaSourceDefs.Any((ThingDef manaSourceDef) => item.def == manaSourceDef) && (allowForbidden || !ForbidUtility.IsForbidden(item, Faction.OfPlayer)) && (restric == null || item.def == restric) && ReservationUtility.CanReserve(getter, item, 1, -1, null, false);
-            Thing thing = GenClosest.ClosestThingReachable(getter.Position, getter.Map, thingRequest, PathEndMode.Touch, TraverseParms.For(getter, Danger.Deadly, 0, false), 9999f, allowedManaSourceFinder, manaSourceItems, 0, -1, false, RegionType.Set_Passable, false);
+            bool allowedManaSourceFinder(Thing item) => item.Spawned
+                                                        && CommonData.ManaSourceDefs.Any((ThingDef manaSourceDef) => item.def == manaSourceDef)
+                                                        && (allowForbidden || !ForbidUtility.IsForbidden(item, Faction.OfPlayer))
+                                                        && (restric == null || item.def == restric)
+                                                        && ReservationUtility.CanReserve(getter, item, 1, -1, null, false);
+
+            Thing thing = GenClosest.ClosestThingReachable(root: getter.Position,
+                                                           map: getter.Map,
+                                                           thingReq: thingRequest,
+                                                           peMode: PathEndMode.Touch,
+                                                           traverseParams: TraverseParms.For(getter, Danger.Deadly, 0, false),
+                                                           maxDistance: 9999f,
+                                                           validator: allowedManaSourceFinder,
+                                                           customGlobalSearchSet: manaSourceItems,
+                                                           searchRegionsMin: 0,
+                                                           searchRegionsMax: -1,
+                                                           forceAllowGlobalSearch: false,
+                                                           traversableRegionTypes: RegionType.Set_Passable,
+                                                           ignoreEntirelyForbiddenRegions: false);
             return thing;
         }
 
@@ -388,8 +431,8 @@ namespace NightmareIncarnation
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="getter"></param>
-        /// <param name="eater"></param>
+        /// <param name="getter">Pawn who will deliver mana.</param>
+        /// <param name="eater">Pawn who will eat.</param>
         /// <param name="manaSource"></param>
         /// <param name="manaSourceDef"></param>
         /// <param name="canUseInventory"></param>
@@ -398,75 +441,26 @@ namespace NightmareIncarnation
         /// <returns></returns>
         public static bool TryFindBestManaSourceFor(Pawn getter, Pawn eater, out Thing manaSource, out ThingDef manaSourceDef, bool canUseInventory = true, bool allowForbidden = false, bool forceScanWholeMap = false)
         {
-            bool getterCanCarry = getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation);
-            // maybe planned functionality?
-            // bool eaterIsNotTeetotaler= !PawnUtility.IsTeetotaler(eater);
             Thing inventoryManaSource = null;
             if (canUseInventory)
             {
-                if (getterCanCarry)
+                if (getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
                 {
-                    inventoryManaSource = commonUtl.BestManaSourceInInventory(getter, eater);
+                    inventoryManaSource = BestManaSourceInInventory(getter, eater);
                 }
                 if (inventoryManaSource != null)
                 {
-                    if (getter.Faction != Faction.OfPlayer)
-                    {
-                        manaSource = inventoryManaSource;
-                        manaSourceDef = manaSource.def;
-                        return true;
-                    }
-                    CompRottable compRottable = ThingCompUtility.TryGetComp<CompRottable>(inventoryManaSource);
-                    if (compRottable != null && compRottable.TicksUntilRotAtCurrentTemp < 30000)
-                    {
-                        manaSource = inventoryManaSource;
-                        manaSourceDef = manaSource.def;
-                        return true;
-                    }
-                }
-            }
-            Thing mapManaSource = commonUtl.BestManaSourceOnMap(getter, eater, allowForbidden, forceScanWholeMap);
-            if (inventoryManaSource!=null || mapManaSource != null)
-            {
-                if (mapManaSource != null)
-                {
-                    manaSource = mapManaSource;
+                    manaSource = inventoryManaSource;
                     manaSourceDef = manaSource.def;
                     return true;
                 }
-                //This code vvv is inreachable, in order to reach it inventoryManaSource cannot be null, but it is always null at this point
-                //I need to explore what this method is supposed to do and recreate it accordingly
-            //    else
-            //    {
-            //        ThingDef finalIngestibleDef = FoodUtility.GetFinalIngestibleDef(inventoryManaSource, false);
-            //        bool flag9 = mapManaSource == null;
-            //        if (inventoryManaSource!=null)
-            //        {
-            //            float num = FoodUtility.FoodOptimality(eater, mapManaSource, mapManaSource.def, (float)(getter.Position - mapManaSource.Position).LengthManhattan, false);
-            //            float num2 = FoodUtility.FoodOptimality(eater, inventoryManaSource, finalIngestibleDef, 0f, false);
-            //            num2 -= 32f;
-            //            bool flag10 = num > num2;
-            //            if (flag10)
-            //            {
-            //                manaSource = mapManaSource;
-            //                manaSourceDef = manaSource.def;
-            //                result = true;
-            //            }
-            //            else
-            //            {
-            //                manaSource = inventoryManaSource;
-            //                manaSourceDef = FoodUtility.GetFinalIngestibleDef(manaSource, false);
-            //                result = true;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            manaSource = inventoryManaSource;
-            //            manaSourceDef = finalIngestibleDef;
-            //            result = true;
-            //        }
-            //    }
-            //    return result;
+            }
+            Thing mapManaSource = BestManaSourceOnMap(getter, eater, allowForbidden, forceScanWholeMap);
+            if (mapManaSource != null)
+            {
+                manaSource = mapManaSource;
+                manaSourceDef = manaSource.def;
+                return true;
             }
             manaSource = null;
             manaSourceDef = null;
@@ -484,8 +478,8 @@ namespace NightmareIncarnation
             if (!IsSuccubus(pawn))
             {
                 return 1;
-            }            
-            IngestionOutcomeDoer_OffsetNeed ingestionOutcomeDoer_OffsetNeed = manaSource.def.ingestible.outcomeDoers.FirstOrDefault(delegate(IngestionOutcomeDoer manaNeedIngestionOffset)
+            }
+            IngestionOutcomeDoer_OffsetNeed ingestionOutcomeDoer_OffsetNeed = manaSource.def.ingestible.outcomeDoers.FirstOrDefault(delegate (IngestionOutcomeDoer manaNeedIngestionOffset)
             {
                 IngestionOutcomeDoer_OffsetNeed ingestionOutcomeDoer_OffsetNeed2;
                 return (ingestionOutcomeDoer_OffsetNeed2 = (manaNeedIngestionOffset as IngestionOutcomeDoer_OffsetNeed)) != null && ingestionOutcomeDoer_OffsetNeed2.need == NINeedDefOf.NI_Need_Mana;

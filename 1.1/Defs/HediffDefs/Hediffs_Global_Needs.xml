@@ -6,8 +6,8 @@
     <label>mana deficiency</label>
     <lethalSeverity>1</lethalSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
-  	<description>2</description>
-	<stages>
+    <description>2</description>
+    <stages>
       <li>
         <label>magical circulation disorder</label>
         <capMods>
@@ -69,7 +69,7 @@
     <label>energy breakdown</label>
     <lethalSeverity>1</lethalSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
-  	<description>1</description>
+    <description>1</description>
     <stages>
       <li>
         <label>tired</label>
