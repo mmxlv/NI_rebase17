@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <NI_ScColonist.label>サキュバス</NI_ScColonist.label>
+  <NI_ScColonist.labelPlural>サキュバスs</NI_ScColonist.labelPlural>
+  <NI_ScColonist.labelMale>male サキュバス</NI_ScColonist.labelMale>
+  <NI_ScColonist.labelMalePlural>male サキュバスs</NI_ScColonist.labelMalePlural>
+  <NI_ScColonist.labelFemale>female サキュバス</NI_ScColonist.labelFemale>
+  <NI_ScColonist.labelFemalePlural>female サキュバスs</NI_ScColonist.labelFemalePlural>
+
+
+</LanguageData>

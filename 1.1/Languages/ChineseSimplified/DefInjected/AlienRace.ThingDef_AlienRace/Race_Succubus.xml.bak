@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- ”BaseNRPawn”は自分の作るRaceに合わせた略称などに変更すると良いでしょう。 -->
+
+  <NI_Race.label>サキュバス</NI_Race.label>
+  <NI_Race.description>さきゅばーす！</NI_Race.description>
+  <NI_Race.tools.0.label>左手</NI_Race.tools.0.label>
+  <NI_Race.tools.1.label>右手</NI_Race.tools.1.label>
+  <NI_Race.tools.2.label>頭</NI_Race.tools.2.label>
+  <NI_Race.tools.3.label>角</NI_Race.tools.3.label>
+
+
+</LanguageData>

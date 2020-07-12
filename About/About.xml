@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>[1.0]Nightmare Incarnation</name>
-	<author>匿名希望</author>
-	<supportedVersions><li>1.0</li></supportedVersions>
+	<name>Nightmare Incarnation</name>
+	<author>匿名希望 aka IGNI</author>
+	<supportedVersions>
+		<li>1.0</li>
+		<li>1.1</li>
+	</supportedVersions>
+	<packageId>bearlyAlive.NightmareIncarnation.RJWCompatible</packageId>
 	<description>
 ver0.1
 

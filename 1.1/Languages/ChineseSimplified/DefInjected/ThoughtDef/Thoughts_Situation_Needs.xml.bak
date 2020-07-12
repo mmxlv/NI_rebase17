@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <NI_NeedMana.stages.0.label>魔力が少ない</NI_NeedMana.stages.0.label>
+  <NI_NeedMana.stages.0.description>魔力がちょっと足りない。</NI_NeedMana.stages.0.description>
+  <NI_NeedMana.stages.1.label>魔力不足</NI_NeedMana.stages.1.label>
+  <NI_NeedMana.stages.1.description>魔力が足りない。</NI_NeedMana.stages.1.description>
+  <NI_NeedMana.stages.2.label>魔力欠乏</NI_NeedMana.stages.2.label>
+  <NI_NeedMana.stages.2.description>魔力が足りなくて集中できない。</NI_NeedMana.stages.2.description>
+  <NI_NeedMana.stages.3.label>魔力失調</NI_NeedMana.stages.3.label>
+  <NI_NeedMana.stages.3.description>自分の体が衰弱していく。早く魔力を補給しなければ。</NI_NeedMana.stages.3.description>
+  <NI_NeedMana.stages.4.label>魔力喪失</NI_NeedMana.stages.4.label>
+  <NI_NeedMana.stages.4.description>もう力が出ない。何でもいいから魔力を摂りたい。</NI_NeedMana.stages.4.description>
+  <NI_NeedMana.stages.5.label>魔力飢餓</NI_NeedMana.stages.5.label>
+  <NI_NeedMana.stages.5.description>何もしなくても顔が青ざめ、脂汗が出てくる。魔力を、早く・・・</NI_NeedMana.stages.5.description>
+  <NI_NeedMana.stages.6.label>極度の魔力飢餓</NI_NeedMana.stages.6.label>
+  <NI_NeedMana.stages.6.description>魔力...魔力を...誰か...</NI_NeedMana.stages.6.description>
+
+  <NI_PolicyUnacceptable.stages.0.label>自分に合わない魔力方針</NI_PolicyUnacceptable.stages.0.label>
+  <NI_PolicyUnacceptable.stages.0.description>自分に合わない魔力収集方針を強要されている。必要も無いのに娯楽で人を弄ぶなんて...。</NI_PolicyUnacceptable.stages.0.description>
+  <NI_PolicyUnacceptable.stages.1.label>自分に合わない魔力方針</NI_PolicyUnacceptable.stages.1.label>
+  <NI_PolicyUnacceptable.stages.1.description>自分に合わない魔力収集方針を強要されている。つまみ食いも自由に出来ないなんて！</NI_PolicyUnacceptable.stages.1.description>
+  <NI_PolicyUnacceptable.stages.2.label>自分に合わない魔力方針</NI_PolicyUnacceptable.stages.2.label>
+  <NI_PolicyUnacceptable.stages.2.description>自分に合わない魔力収集方針を強要されている。自分が食べる相手くらい自分で選ぶ。私に指図しないで！</NI_PolicyUnacceptable.stages.2.description>
+  <NI_PolicyUnacceptable.stages.3.label>自分に合わない魔力方針</NI_PolicyUnacceptable.stages.3.label>
+  <NI_PolicyUnacceptable.stages.3.description>自分に合わない魔力収集方針を強要されている。限界を超えて人間を弄べないのは何とも味気ない。</NI_PolicyUnacceptable.stages.3.description>
+  <NI_PolicyUnacceptable.stages.4.label>自分に合わない魔力方針</NI_PolicyUnacceptable.stages.4.label>
+  <NI_PolicyUnacceptable.stages.4.description>自分に合わない魔力収集方針を強要されている。人は散る瞬間こそが最も美しいというのに、何故それを理解できないのか。</NI_PolicyUnacceptable.stages.4.description>
+
+
+</LanguageData>

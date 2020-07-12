@@ -2,31 +2,16 @@
 
 <Defs>
 
-
-
   <NeedDef>
-
     <defName>NI_Need_Mana</defName>
-
-    <needClass>NightmareIncarnation.Need_Mana</needClass>
-
     <label>Mana</label>
-
     <description>Mana is necessary for the demons to maintain form and exercise magic in this world.</description>
-
+    <needClass>NightmareIncarnation.Need_Mana</needClass>
     <listPriority>19</listPriority>
-
     <major>true</major>
     <minIntelligence>Humanlike</minIntelligence>
-
     <showForCaravanMembers>true</showForCaravanMembers>
-
     <scaleBar>true</scaleBar>
-
   </NeedDef>
-
-
-
-
 
 </Defs>

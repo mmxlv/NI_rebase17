@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <ManaDeficiency.label>魔力欠乏症</ManaDeficiency.label>
+  <ManaDeficiency.stages.0.label>魔力循環不調</ManaDeficiency.stages.0.label>
+  <ManaDeficiency.stages.1.label>魔力枯渇</ManaDeficiency.stages.1.label>
+  <ManaDeficiency.stages.2.label>魔力飢餓</ManaDeficiency.stages.2.label>
+  <ManaDeficiency.stages.3.label>朦朧</ManaDeficiency.stages.3.label>
+  <ManaDeficiency.stages.4.label>衰弱</ManaDeficiency.stages.4.label>
+
+  <VigorRavage.label>精力崩壊</VigorRavage.label>
+  <VigorRavage.stages.0.label>わずかな疲れ</VigorRavage.stages.0.label>
+  <VigorRavage.stages.1.label>疲労</VigorRavage.stages.1.label>
+  <VigorRavage.stages.2.label>過労</VigorRavage.stages.2.label>
+  <VigorRavage.stages.3.label>極度の過労</VigorRavage.stages.3.label>
+  <VigorRavage.stages.4.label>衰弱</VigorRavage.stages.4.label>
+
+
+</LanguageData>
