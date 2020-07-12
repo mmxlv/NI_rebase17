@@ -1,24 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Nightmare Incarnation</name>
-	<author>匿名希望 aka IGNI</author>
-	<supportedVersions>
-		<li>1.0</li>
-		<li>1.1</li>
-	</supportedVersions>
-	<packageId>bearlyAlive.NightmareIncarnation.RJWCompatible</packageId>
-	<description>
-ver0.1
+  <name>Nightmare Incarnation</name>
+  <author>匿名希望 aka IGNI</author>
+  <supportedVersions>
+    <li>1.1</li>
+  </supportedVersions>
+  <packageId>bearlyAlive.NightmareIncarnation.RJWCompatible</packageId>
+  <modDependencies>
+    <li>
+      <packageId>erdelf.HumanoidAlienRaces</packageId>
+      <displayName>Humanoid Alien Races 2.0</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=839005762</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <description>ver0.1
 
-AlienRace練習用。
-さきゅばす。
+    AlienRace練習用。
+    さきゅばす。
 
-[前提mod]
-・Humanoid Alien Race 2.0
+    [前提mod]
+    ・Humanoid Alien Race 2.0
 
 
-当MODの複製・転載・再配布は固く禁じます。
-!!!Copy, reprinting and distribution are strictly prohibited!!!
+    当MODの複製・転載・再配布は固く禁じます。
+    !!!Copy, reprinting and distribution are strictly prohibited!!!
 
-</description>
+  </description>
 </ModMetaData>

@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonData.cs" />
+    <Compile Include="ManaUtl.cs" />
     <Compile Include="commonUtl.cs" />
     <Compile Include="CompProperties_SuccubusRace.cs" />
     <Compile Include="CompSuccubusRace.cs" />

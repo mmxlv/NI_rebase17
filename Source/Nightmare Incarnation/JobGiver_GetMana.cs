@@ -27,8 +27,8 @@ namespace NightmareIncarnation
 
         public override float GetPriority(Pawn pawn)
         {
-            if (pawn.needs.TryGetNeed<Need_Mana>() is Need_Mana needMana
-                && commonUtl.IsSuccubus(pawn)
+            if (ManaUtl.IsSuccubus(pawn)
+                && pawn.needs.TryGetNeed<Need_Mana>() is Need_Mana needMana
                 && !FoodUtility.ShouldBeFedBySomeone(pawn))
             {
                 if (needMana.CurCategory > ManaAmountCategory.Satisfied)
@@ -79,46 +79,44 @@ namespace NightmareIncarnation
             for (int i = 0; i < comp.policy.plans.Count; i++)
             {
                 WorkPlan currentPlan = comp.policy.plans[i];
-                if (!currentPlan.Suspended)
+                if (currentPlan.Suspended)
+                    continue;
+                
+                if (currentPlan.targetType == RelationType.Meal && priority > 6f)
                 {
-                    if (currentPlan.targetType == RelationType.Meal && priority > 6f)
+                    commonUtl.TryFindBestManaSourceFor(pawn, pawn, out Thing manaSource, out _);
+                    if (manaSource != null)
                     {
-                        commonUtl.TryFindBestManaSourceFor(pawn, pawn, out Thing manaSource, out _);
-                        if (manaSource != null)
+                        return new Job(NIJobDefOf.Job_NIIngestManaItem, manaSource)
                         {
-                            return new Job(NIJobDefOf.Job_NIIngestManaItem, manaSource)
-                            {
-                                count = commonUtl.EstimateIngestCountOf(pawn, manaSource)
-                            };
-                        }
+                            count = commonUtl.EstimateIngestCountOf(pawn, manaSource)
+                        };
                     }
-                    // not meal, so only pawn sources remaining
-                    else if (!comp.tmpJoyMode || currentPlan.AllowJoy)
+                }
+                // not meal, so only pawn sources remaining
+                else if (!comp.tmpJoyMode || currentPlan.AllowJoy)
+                {
+                    Pawn foodSourcePawn = currentPlan.MainDishPawn;
+                    if (foodSourcePawn != null
+                        && foodSourcePawn.Faction == Faction.OfPlayer
+                        && ((currentPlan.targetType == RelationType.Colonist && foodSourcePawn.IsColonist)
+                            || (currentPlan.targetType == RelationType.Prisoner && foodSourcePawn.IsPrisonerOfColony))
+                        && !ManaUtl.IsSuccubus(foodSourcePawn)
+                        && commonUtl.IsPassive(foodSourcePawn)
+                        && ManaUtl.CanBeSqueezed(foodSourcePawn, currentPlan, comp.tmpJoyMode ? 0.2f : 0f)
+                        && ReservationUtility.CanReserveAndReach(pawn, foodSourcePawn, PathEndMode.OnCell, Danger.Deadly))
                     {
-                        Pawn foodSourcePawn = currentPlan.MainDishPawn;
-                        if (foodSourcePawn != null
-                            && foodSourcePawn.Faction == Faction.OfPlayer
-                            && ((currentPlan.targetType == RelationType.Colonist && foodSourcePawn.IsColonist)
-                                || (currentPlan.targetType == RelationType.Prisoner && foodSourcePawn.IsPrisonerOfColony))
-                            && !commonUtl.IsSuccubus(foodSourcePawn)
-                            && commonUtl.IsManaConformant(foodSourcePawn)
-                            && commonUtl.IsPassive(foodSourcePawn)
-                            && commonUtl.HasEnoughtMana(foodSourcePawn, currentPlan, comp.tmpJoyMode ? 0.2f : 0f)
-                            && ReservationUtility.CanReserveAndReach(pawn, foodSourcePawn, PathEndMode.OnCell, Danger.Deadly))
-                        {
-                            comp.tmpTargetType = currentPlan.targetType;
-                            return new Job(NIJobDefOf.Job_NIManaSqueeze, foodSourcePawn);
-                        }
-                        // no pawn specified in workPlan, find one.
-                        tmpCandidates.Clear();
-                        tmpCandidates = commonUtl.GetPawnsByManaPolicy(pawn, currentPlan, comp.tmpJoyMode ? 0.2f : 0f);
-                        if (tmpCandidates.Count > 0)
-                        {
-                            float func(Pawn x) => commonUtl.GetPreferWeight(x, pawn);
-                            foodSourcePawn = GenCollection.RandomElementByWeight(tmpCandidates, func);
-                            comp.tmpTargetType = currentPlan.targetType;
-                            return new Job(NIJobDefOf.Job_NIManaSqueeze, foodSourcePawn);
-                        }
+                        comp.tmpTargetType = currentPlan.targetType;
+                        return new Job(NIJobDefOf.Job_NIManaSqueeze, foodSourcePawn);
+                    }
+                    // no pawn specified in workPlan, find one.
+                    tmpCandidates.Clear();
+                    tmpCandidates = ManaUtl.GetPawnsByManaPolicy(pawn, currentPlan, comp.tmpJoyMode ? 0.2f : 0f);
+                    if (tmpCandidates.Count > 0)
+                    {
+                        foodSourcePawn = tmpCandidates.RandomElementByWeight(candidate => commonUtl.GetPreferWeight(candidate, pawn));
+                        comp.tmpTargetType = currentPlan.targetType;
+                        return new Job(NIJobDefOf.Job_NIManaSqueeze, foodSourcePawn);
                     }
                 }
             }

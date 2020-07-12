@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<LanguageData>
-
-  <!-- 特にこだわりが無ければ下記のNRの部分を貴方の設定したRaceの略称辺りにでも変更すると良いでしょう -->
-
-  <NamerPersonNI.rulePack.rulesStrings.0>name->[NIFirstname] [NILastname]</NamerPersonNI.rulePack.rulesStrings.0>
-
-
-</LanguageData>

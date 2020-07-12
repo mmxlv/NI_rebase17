@@ -229,7 +229,7 @@ namespace NightmareIncarnation
                         this.MainDishPawn = null;
                     }, MenuOptionPriority.Default, null, null, 0f, null, null));
                     IEnumerable<Pawn> enumerable = from z in this.workPlanStack.compRace.parent.Map.mapPawns.AllPawnsSpawned
-                                                   where z.GetComp<CompSuccubusRace>() == null && z != this.workPlanStack.compRace.parent && commonUtl.IsManaConformant(z) && ((this.targetType == RelationType.Colonist && z.IsColonist) || (this.targetType == RelationType.Prisoner && z.IsPrisonerOfColony))
+                                                   where z.GetComp<CompSuccubusRace>() == null && z != this.workPlanStack.compRace.parent && ((this.targetType == RelationType.Colonist && z.IsColonist) || (this.targetType == RelationType.Prisoner && z.IsPrisonerOfColony))
                                                    select z;
                     using (IEnumerator<Pawn> enumerator = enumerable.GetEnumerator())
                     {
