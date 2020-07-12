@@ -4,3 +4,5 @@ Source/.vs
 Source/Nightmare Incarnation/bin
 Source/Nightmare Incarnation/obj
 1.*/Assemblies/*.xml *.pdb
+/Source/Nightmare Incarnation/Nightmare Incarnation.csproj.user
+/Source/Nightmare Incarnation/Defs
