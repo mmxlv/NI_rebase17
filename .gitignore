@@ -1,5 +1,4 @@
 *.dll
-!Nightmare Incarnation.dll
 Source/.vs
 Source/Nightmare Incarnation/bin
 Source/Nightmare Incarnation/obj
