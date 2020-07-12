@@ -10,6 +10,5 @@ namespace NightmareIncarnation
         Ally,
         Neutral,
         Hostile,
-        Meal
     }
 }

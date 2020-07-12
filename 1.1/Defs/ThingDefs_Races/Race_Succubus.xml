@@ -1,41 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+  
   <AlienRace.RaceSettings>
     <defName>NI_Setting</defName>
     <pawnKindSettings>
-      <!--slave-->
-      <!--<alienslavekinds>
-      <li>
-        <kindDefs>
-        <li>例:NR_Villager</li>
-        </kindDefs>
-        <chance>3.5</chance>
-      </li>
-      <li>
-        <kindDefs>
-        <li>NR_Colonist</li>
-        </kindDefs>
-        <chance>5.0</chance>
-      </li>
-    </alienslavekinds>-->
-      <!--exile-->
-      <!--<alienwandererkinds>
-      <li>
-        <pawnKindEntries>
-          <li>
-            <kindDefs>
-              <li>NR_Colonist</li>
-            </kindDefs>
-            <chance>10</chance>
-          </li>
-        </pawnKindEntries>
-        <factionDefs>
-          <li>PlayerColony</li>
-        </factionDefs>
-      </li>
-    </alienwandererkinds>-->
-      <!--This Starting Colonists term controls the establishment of this Race when the game starts or when you hit random generation such as EdB.-->
-      <!--The vanilla own colony is set in the above FactionDefs. If you add Player Tribe here, even the barbarians can use this Race.-->
       <startingColonists>
         <li>
           <pawnKindEntries>
@@ -501,7 +469,7 @@
         </li>
         <li>
           <def>HumanlikeAdult</def>
-          <minAge>18</minAge>
+          <minAge>17</minAge>
         </li>
       </lifeStageAges>
       <!--成長過程の設定です。解説者は特に触っていません。-->
@@ -516,8 +484,8 @@
       </specialShadowData>
       <ageGenerationCurve>
         <points>
-          <li>(14,0)</li>
-          <li>(16,40)</li>
+          <li>(17,0)</li>
+          <li>(18,40)</li>
           <li>(20,50)</li>
           <li>(30,5)</li>
           <li>(50,0)</li>

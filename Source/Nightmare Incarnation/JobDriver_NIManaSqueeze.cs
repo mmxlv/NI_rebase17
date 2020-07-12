@@ -87,7 +87,7 @@ namespace NightmareIncarnation
             this.FailOnAggroMentalState(VictimInd);
             this.FailOn(() =>
             {
-                return !commonUtl.IsPassive(Victim)
+                return !CommonUtl.IsPassive(Victim)
                        || workPlan.Suspended
                        || (JoyMode && !workPlan.AllowJoy)
                        || (!workPlan.AllowOverSqueeze
@@ -334,7 +334,7 @@ namespace NightmareIncarnation
             {
                 thought_Memory.moodPowerFactor = ((thought_Memory.MoodOffset() < 0f) ? 0.5f : 1f);
             }
-            if (thought_Memory is Thought_MemorySocial thought_MemorySocial && ManaUtl.IsSuccubus(affecter))
+            if (thought_Memory is Thought_MemorySocial thought_MemorySocial && CommonUtl.IsSuccubus(affecter))
             {
                 if (thought_MemorySocial.opinionOffset < 0f)
                 {

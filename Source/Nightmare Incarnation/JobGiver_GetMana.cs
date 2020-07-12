@@ -27,7 +27,7 @@ namespace NightmareIncarnation
 
         public override float GetPriority(Pawn pawn)
         {
-            if (ManaUtl.IsSuccubus(pawn)
+            if (CommonUtl.IsSuccubus(pawn)
                 && pawn.needs.TryGetNeed<Need_Mana>() is Need_Mana needMana
                 && !FoodUtility.ShouldBeFedBySomeone(pawn))
             {
@@ -81,28 +81,16 @@ namespace NightmareIncarnation
                 WorkPlan currentPlan = comp.policy.plans[i];
                 if (currentPlan.Suspended)
                     continue;
-                
-                if (currentPlan.targetType == RelationType.Meal && priority > 6f)
-                {
-                    commonUtl.TryFindBestManaSourceFor(pawn, pawn, out Thing manaSource, out _);
-                    if (manaSource != null)
-                    {
-                        return new Job(NIJobDefOf.Job_NIIngestManaItem, manaSource)
-                        {
-                            count = commonUtl.EstimateIngestCountOf(pawn, manaSource)
-                        };
-                    }
-                }
-                // not meal, so only pawn sources remaining
-                else if (!comp.tmpJoyMode || currentPlan.AllowJoy)
+
+                if (!comp.tmpJoyMode || currentPlan.AllowJoy)
                 {
                     Pawn foodSourcePawn = currentPlan.MainDishPawn;
                     if (foodSourcePawn != null
                         && foodSourcePawn.Faction == Faction.OfPlayer
                         && ((currentPlan.targetType == RelationType.Colonist && foodSourcePawn.IsColonist)
                             || (currentPlan.targetType == RelationType.Prisoner && foodSourcePawn.IsPrisonerOfColony))
-                        && !ManaUtl.IsSuccubus(foodSourcePawn)
-                        && commonUtl.IsPassive(foodSourcePawn)
+                        && !CommonUtl.IsSuccubus(foodSourcePawn)
+                        && CommonUtl.IsPassive(foodSourcePawn)
                         && ManaUtl.CanBeSqueezed(foodSourcePawn, currentPlan, comp.tmpJoyMode ? 0.2f : 0f)
                         && ReservationUtility.CanReserveAndReach(pawn, foodSourcePawn, PathEndMode.OnCell, Danger.Deadly))
                     {
@@ -114,7 +102,7 @@ namespace NightmareIncarnation
                     tmpCandidates = ManaUtl.GetPawnsByManaPolicy(pawn, currentPlan, comp.tmpJoyMode ? 0.2f : 0f);
                     if (tmpCandidates.Count > 0)
                     {
-                        foodSourcePawn = tmpCandidates.RandomElementByWeight(candidate => commonUtl.GetPreferWeight(candidate, pawn));
+                        foodSourcePawn = tmpCandidates.RandomElementByWeight(candidate => CommonUtl.GetPreferWeight(candidate, pawn));
                         comp.tmpTargetType = currentPlan.targetType;
                         return new Job(NIJobDefOf.Job_NIManaSqueeze, foodSourcePawn);
                     }

@@ -21,9 +21,7 @@ namespace NightmareIncarnation
                 typeof(DamageInfo),
                 typeof(DamageWorker.DamageResult)
             }, null), new HarmonyMethod(typeof(HarmonyPatches), "Pawn_HealthTrackerAddHediffPrefix", null), null, null);
-            //harmony.Patch(AccessTools.Method(typeof(Pawn), "GetGizmos", null, null), null, new HarmonyMethod(typeof(HarmonyPatches), "Pawn_GetGizmos_Postfix", null), null);
             harmony.Patch(AccessTools.Method(typeof(Pawn), "PreApplyDamage", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Pawn_PreApplyDamage_Prefix", null), null, null);
-            harmony.Patch(AccessTools.Method(typeof(Thing), "Ingested", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Thing_Ingested_Prefix", null), null, null);
             harmony.Patch(AccessTools.Method(typeof(Pawn_NeedsTracker), "ShouldHaveNeed", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Pawn_NeedsTracker_ShouldHaveNeed_Prefix", null), null, null);
         }
 
@@ -41,7 +39,7 @@ namespace NightmareIncarnation
         /// </returns>
         private static bool Pawn_HealthTrackerAddHediffPrefix(Pawn ___pawn, Hediff hediff, BodyPartRecord part = null, DamageInfo? dinfo = null, DamageWorker.DamageResult result = null)
         {
-            if (ManaUtl.IsSuccubus(___pawn) && FleshHediffInvalidFor(___pawn, hediff))
+            if (CommonUtl.IsSuccubus(___pawn) && FleshHediffInvalidFor(___pawn, hediff))
             {
                 return false;
             }
@@ -70,26 +68,9 @@ namespace NightmareIncarnation
             return false;
         }
 
-        //private static void Pawn_GetGizmos_Postfix(ref IEnumerable<Gizmo> __result, Pawn __instance)
-        //{
-        //    if (__result != null)
-        //    {
-        //        List<Gizmo> listedGizmos = __result.ToList<Gizmo>();
-        //        CompSuccubusRace compSuccubusRace = ThingCompUtility.TryGetComp<CompSuccubusRace>(__instance);
-        //        if (commonUtl.IsSuccubus(__instance))
-        //        {
-        //            foreach (Gizmo item in compSuccubusRace.CompGetGizmosExtra())
-        //            {
-        //                listedGizmos.Add(item);
-        //            }
-        //        }
-        //        __result = listedGizmos;
-        //    }
-        //}
-
         private static bool Pawn_PreApplyDamage_Prefix(Pawn __instance, ref DamageInfo dinfo, ref bool absorbed)
         {
-            if (ManaUtl.IsSuccubus(__instance))
+            if (CommonUtl.IsSuccubus(__instance))
             {
                 if (__instance.apparel.WornApparel.Any(outfit => outfit.def == NIThingDefOf.Apparel_NIHalfPersona))
                 {
@@ -108,36 +89,6 @@ namespace NightmareIncarnation
             return true;
         }
 
-        private static bool Thing_Ingested_Prefix(Pawn ingester, float nutritionWanted, Thing __instance)
-        {
-            if (__instance == null)
-            {
-                return true;
-            }
-            if (__instance.Destroyed)
-            {
-                return true;
-            }
-            if (!__instance.IngestibleNow)
-            {
-                return true;
-            }
-
-            CompSuccubusRace comp = ingester.GetComp<CompSuccubusRace>();
-            if (comp != null)
-            {
-                if (CommonData.ManaSourceDefs.Any(manaSource => __instance.def == manaSource))
-                {
-                    IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset = __instance.def.ingestible.outcomeDoers.FirstOrDefault(delegate (IngestionOutcomeDoer ingestionOutcomer)
-                    {
-                        IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset2;
-                        return (ingestionOutcomeOffset2 = (ingestionOutcomer as IngestionOutcomeDoer_OffsetNeed)) != null && ingestionOutcomeOffset2.need == NINeedDefOf.NI_Need_Mana;
-                    }) as IngestionOutcomeDoer_OffsetNeed;
-                    comp.TotalManaGained = Mathf.Min(comp.TotalManaGained + ingestionOutcomeOffset.offset, 9999f);
-                }
-            }
-            return true;
-        }
 
         /// <summary>
         /// Add Need_Mana only if succubus.
@@ -148,7 +99,7 @@ namespace NightmareIncarnation
         /// </returns>
         private static bool Pawn_NeedsTracker_ShouldHaveNeed_Prefix(ref bool __result, NeedDef nd, Pawn ___pawn)
         {
-            if (nd == NINeedDefOf.NI_Need_Mana && !ManaUtl.IsSuccubus(___pawn))
+            if (nd == NINeedDefOf.NI_Need_Mana && !CommonUtl.IsSuccubus(___pawn))
             {
                 __result = false;
                 return false;

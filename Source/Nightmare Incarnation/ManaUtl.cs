@@ -65,16 +65,16 @@ namespace NightmareIncarnation
                 case RelationType.Colonist:
                     result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll(colonist => colonist.IsFreeColonist
                                                                                    && colonist != pawn
-                                                                                   && !IsSuccubus(colonist)
-                                                                                   && commonUtl.IsPassive(colonist)
+                                                                                   && !CommonUtl.IsSuccubus(colonist)
+                                                                                   && CommonUtl.IsPassive(colonist)
                                                                                    && CanBeSqueezed(colonist, workPlan, forcedValue)
                                                                                    && ReservationUtility.CanReserveAndReach(pawn, colonist, PathEndMode.OnCell, Danger.Deadly));
                     break;
                 case RelationType.Prisoner:
                     result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll(prisoner => prisoner.IsPrisonerOfColony
                                                                                    && prisoner != pawn
-                                                                                   && !IsSuccubus(prisoner)
-                                                                                   && commonUtl.IsPassive(prisoner)
+                                                                                   && !CommonUtl.IsSuccubus(prisoner)
+                                                                                   && CommonUtl.IsPassive(prisoner)
                                                                                    && CanBeSqueezed(prisoner, workPlan, forcedValue)
                                                                                    && ReservationUtility.CanReserveAndReach(pawn, prisoner, PathEndMode.OnCell, Danger.Deadly));
                     break;
@@ -82,8 +82,8 @@ namespace NightmareIncarnation
                     result = pawn.Map.mapPawns.AllPawnsSpawned.FindAll(hostile => hostile.HostileTo(Faction.OfPlayer)
                                                                                   && !hostile.IsPrisonerOfColony
                                                                                   && hostile != pawn
-                                                                                  && !IsSuccubus(hostile)
-                                                                                  && commonUtl.IsPassive(hostile)
+                                                                                  && !CommonUtl.IsSuccubus(hostile)
+                                                                                  && CommonUtl.IsPassive(hostile)
                                                                                   && CanBeSqueezed(pawn, workPlan, forcedValue)
                                                                                   && ReservationUtility.CanReserveAndReach(pawn, hostile, PathEndMode.OnCell, Danger.Deadly));
                     break;
@@ -93,14 +93,13 @@ namespace NightmareIncarnation
                                                                                     || (other.Faction != null && FactionUtility.HostileTo(other.Faction, Faction.OfPlayer)))
                                                                                 && !other.IsPrisonerOfColony
                                                                                 && other != pawn
-                                                                                && !IsSuccubus(other)
-                                                                                && commonUtl.IsPassive(other)
+                                                                                && !CommonUtl.IsSuccubus(other)
+                                                                                && CommonUtl.IsPassive(other)
                                                                                 && CanBeSqueezed(pawn, workPlan, forcedValue)
                                                                                 && ReservationUtility.CanReserveAndReach(pawn, other, PathEndMode.OnCell, Danger.Deadly));
                     break;
             }
             return result;
         }
-        public static bool IsSuccubus(Pawn pawn) => pawn.def.defName == "NI_Race";
     }
 }

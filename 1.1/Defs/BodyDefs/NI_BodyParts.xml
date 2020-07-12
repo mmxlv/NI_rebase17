@@ -9,12 +9,8 @@
     <skinCovered>false</skinCovered>
     <alive>false</alive>
     <bleedRate>0</bleedRate>
-<!--
-    <tags>
-      <li>MovingLimbCore</li>
-    </tags>
--->
   </BodyPartDef>
+
   <BodyPartDef>
     <defName>NI_RightWing</defName>
     <label>Wing</label>
@@ -23,11 +19,6 @@
     <skinCovered>false</skinCovered>
     <alive>false</alive>
     <bleedRate>0</bleedRate>
-<!--
-    <tags>
-      <li>MovingLimbCore</li>
-    </tags>
--->
   </BodyPartDef>
 
 </Defs>

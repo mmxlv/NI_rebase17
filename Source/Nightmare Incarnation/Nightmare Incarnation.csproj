@@ -65,16 +65,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonData.cs" />
     <Compile Include="ManaUtl.cs" />
-    <Compile Include="commonUtl.cs" />
+    <Compile Include="CommonUtl.cs" />
     <Compile Include="CompProperties_SuccubusRace.cs" />
     <Compile Include="CompSuccubusRace.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="IconTex.cs" />
     <Compile Include="ITab_ManaPolicy.cs" />
-    <Compile Include="JobDriver_NIFeedManaItem.cs" />
-    <Compile Include="JobDriver_NIIngestManaItem.cs" />
     <Compile Include="JobDriver_NIManaSqueeze.cs" />
     <Compile Include="JobGiver_GetMana.cs" />
     <Compile Include="ManaAmountCategory.cs" />
@@ -94,7 +91,6 @@
     <Compile Include="ThoughtWorker_NIManaTrait.cs" />
     <Compile Include="ThoughtWorker_NINeedMana.cs" />
     <Compile Include="ThoughtWorker_NIPolicyUnacceptable.cs" />
-    <Compile Include="WorkGiver_NIFeedManaItem.cs" />
     <Compile Include="WorkPlan.cs" />
     <Compile Include="WorkPlanStack.cs" />
   </ItemGroup>
@@ -106,18 +102,15 @@
     <Content Include="Defs\HediffDefs\Hediffs_Global_Needs.xml" />
     <Content Include="Defs\JobDefs\NI_Jobs.xml" />
     <Content Include="Defs\Joy\NI_JoyKinds.xml" />
-    <Content Include="Defs\Names\RulePacks_NameMakers_NR.xml" />
     <Content Include="Defs\NeedDefs\Needs.xml" />
     <Content Include="Defs\PawnKindDefs_Humanlikes\PawnKinds_Succubus.xml" />
     <Content Include="Defs\ThingDefs_Items\NI_Apparel.xml" />
-    <Content Include="Defs\ThingDefs_Items\NI_Ingestable.xml" />
     <Content Include="Defs\ThingDefs_Items\NI_Resource.xml" />
     <Content Include="Defs\ThingDefs_Races\Race_Succubus.xml" />
     <Content Include="Defs\ThinkTreeDefs\Succubus.xml" />
     <Content Include="Defs\ThoughtDefs\Thoughts_Situation_Needs.xml" />
     <Content Include="Defs\ThoughtDefs\Thoughts_Situation_Social.xml" />
     <Content Include="Defs\TraitDefs\Traits_Spectrum.xml" />
-    <Content Include="Defs\WorkGiverDefs\NI_WorkGivers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

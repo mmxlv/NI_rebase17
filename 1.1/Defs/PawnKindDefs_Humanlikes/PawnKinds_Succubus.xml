@@ -4,9 +4,6 @@
   <PawnKindDef Name="NI_KindBase" Abstract="True">
     <defaultFactionType>PlayerColony</defaultFactionType>
     <race>NI_Race</race>
-    <backstoryCategories>
-      <li>NI_Backstory</li>
-    </backstoryCategories>
     <chemicalAddictionChance>0.001</chemicalAddictionChance>
     <baseRecruitDifficulty>0.50</baseRecruitDifficulty>
     <apparelTags>
@@ -20,9 +17,13 @@
     <label>Succubus</label>
     <combatPower>50</combatPower>
     <isFighter>false</isFighter>
-    <backstoryCategories>
-      <li>NI_Backstory</li>
-    </backstoryCategories>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>NI_Backstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
     <backstoryCryptosleepCommonality>0.0</backstoryCryptosleepCommonality>
     <gearHealthRange>
       <min>0.2</min>

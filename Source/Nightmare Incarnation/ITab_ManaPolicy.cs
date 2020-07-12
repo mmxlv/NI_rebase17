@@ -14,7 +14,7 @@ namespace NightmareIncarnation
 
         private float viewHeight = 1000f;
 
-        private Vector2 scrollPosition = default(Vector2);
+        private Vector2 scrollPosition = default;
 
         private WorkPlan mouseoverPlan;
 
@@ -60,7 +60,6 @@ namespace NightmareIncarnation
             };
             this.mouseoverPlan = this.CompRace.policy.DoListing(rect2, recipeOptionsMaker, ref this.scrollPosition, ref this.viewHeight);
         }
-
 
     }
 }
