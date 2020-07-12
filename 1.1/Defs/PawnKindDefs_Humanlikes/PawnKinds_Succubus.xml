@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-<PawnKindDef Name="NI_KindBase" Abstract="True">
+  <PawnKindDef Name="NI_KindBase" Abstract="True">
     <defaultFactionType>PlayerColony</defaultFactionType>
     <race>NI_Race</race>
-	<backstoryCategories>
-		<li>NI_Backstory</li>
-	</backstoryCategories>
+    <backstoryCategories>
+      <li>NI_Backstory</li>
+    </backstoryCategories>
     <chemicalAddictionChance>0.001</chemicalAddictionChance>
     <baseRecruitDifficulty>0.50</baseRecruitDifficulty>
     <apparelTags>
-	<li>NI_SuccubusCommon</li>
-		<!--<li>IndustrialBasic</li>-->
+      <li>NI_SuccubusCommon</li>
+      <!--<li>IndustrialBasic</li>-->
     </apparelTags>
-</PawnKindDef>
+  </PawnKindDef>
 
-<PawnKindDef ParentName="NI_KindBase">
+  <PawnKindDef ParentName="NI_KindBase">
     <defName>NI_ScColonist</defName>
     <label>Succubus</label>
     <combatPower>50</combatPower>

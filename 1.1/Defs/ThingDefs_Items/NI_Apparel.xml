@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-	<!--====================Base Defs=======================-->
+  <!--====================Base Defs=======================-->
 
   <ThingDef Name="NI_ApparelBase" Abstract="True">
     <thingClass>Apparel</thingClass>
@@ -12,7 +12,7 @@
     <selectable>True</selectable>
     <pathCost>10</pathCost>
     <useHitPoints>True</useHitPoints>
-		<techLevel>Medieval</techLevel>
+    <techLevel>Medieval</techLevel>
     <graphicData>
       <onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
     </graphicData>
@@ -41,7 +41,7 @@
     </comps>
     <apparel>
       <tags>
-	<li>NI_Apparel</li>
+        <li>NI_Apparel</li>
       </tags>
     </apparel>
     <tradeTags>
@@ -76,7 +76,7 @@
       </defaultIngredientFilter>
     </recipeMaker>
   </ThingDef>
-  
+
   <ThingDef Name="NI_ArmorSmithableBase" ParentName="NI_ApparelBase" Abstract="True">
     <recipeMaker>
       <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -154,7 +154,7 @@
       <StuffEffectMultiplierInsulation_Heat>0.10</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
     </statBases>
-		<apparel>
+    <apparel>
       <bodyPartGroups>
         <li>Torso</li>
         <li>Neck</li>
@@ -200,7 +200,7 @@
       <StuffEffectMultiplierInsulation_Heat>0.10</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
     </statBases>
-		<apparel>
+    <apparel>
       <bodyPartGroups>
         <li>Arms</li>
         <li>Hands</li>
@@ -245,7 +245,7 @@
       <StuffEffectMultiplierInsulation_Heat>0.10</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
     </statBases>
-		<apparel>
+    <apparel>
       <bodyPartGroups>
         <li>Legs</li>
         <li>Feet</li>
@@ -338,7 +338,7 @@
     </colorGenerator>
   </ThingDef>
 
-	<ThingDef ParentName="NI_ArmorMachineableBase">
+  <ThingDef ParentName="NI_ArmorMachineableBase">
     <defName>Apparel_NIBattleGarb</defName>
     <label>Nightmare Battle Garb</label>
     <description>Succubus battle costume. If the wearer is a Succubus, all damage taken is reduced by 30%, and the magic essence consumption of the skill is reduced.</description>
@@ -381,17 +381,17 @@
     </costList>
     <apparel>
       <bodyPartGroups>
-	<li>Torso</li>
+        <li>Torso</li>
         <li>Neck</li>
-	<li>Shoulders</li>
-	<li>Arms</li>
-	<li>Legs</li>
-	<li>Hands</li>
-	<li>Feet</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
+        <li>Legs</li>
+        <li>Hands</li>
+        <li>Feet</li>
       </bodyPartGroups>
       <wornGraphicPath>Things/Pawn/NI_Succubus/Apparels/BattleGarb</wornGraphicPath>
       <layers>
-	<li>Shell</li>
+        <li>Shell</li>
       </layers>
       <tags>
         <li>NI_SuccubusGreater</li>
@@ -411,7 +411,7 @@
     </colorGenerator>
   </ThingDef>
 
-	<ThingDef ParentName="NI_ArmorMachineableBase">
+  <ThingDef ParentName="NI_ArmorMachineableBase">
     <defName>Apparel_NIHalfPersona</defName>
     <label>Nightmare Half Persona</label>
     <description>Succubus battle mask. If the wearer is a Succubus, there is a 10% chance to nullify any damage taken and the skill power is further enhanced.</description>
@@ -432,15 +432,15 @@
     </graphicData>
     <statBases>
       <WorkToMake>21000</WorkToMake>
-	<MaxHitPoints>1800</MaxHitPoints>
-	<Mass>1.35</Mass>
-	<Flammability>0.4</Flammability>
-	<ArmorRating_Sharp>0.96</ArmorRating_Sharp>
-	<ArmorRating_Blunt>0.40</ArmorRating_Blunt>
-	<ArmorRating_Heat>0.88</ArmorRating_Heat>
-	<Insulation_Cold>8</Insulation_Cold>
-	<Insulation_Heat>6</Insulation_Heat>
-	<EquipDelay>3</EquipDelay>
+      <MaxHitPoints>1800</MaxHitPoints>
+      <Mass>1.35</Mass>
+      <Flammability>0.4</Flammability>
+      <ArmorRating_Sharp>0.96</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.40</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.88</ArmorRating_Heat>
+      <Insulation_Cold>8</Insulation_Cold>
+      <Insulation_Heat>6</Insulation_Heat>
+      <EquipDelay>3</EquipDelay>
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>0</MoveSpeed>
@@ -457,11 +457,11 @@
     </costList>
     <apparel>
       <bodyPartGroups>
-	<li>FullHead</li>
+        <li>FullHead</li>
       </bodyPartGroups>
       <wornGraphicPath>Things/Pawn/NI_Succubus/Apparels/HalfPersona</wornGraphicPath>
       <layers>
-	<li>Overhead</li>
+        <li>Overhead</li>
       </layers>
       <tags>
         <li>NI_SuccubusGreater</li>

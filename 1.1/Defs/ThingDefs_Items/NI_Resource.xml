@@ -1,65 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-	<ThingDef ParentName="RockBase">
-		<defName>LF_MineableMagicCrystalVein</defName>
-		<label>魔晶鉱脈</label>
-		<description>魔晶鉱石を含んだ鉱床。</description>
-		<graphicData>
-			<texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
-			<shaderType>CutoutComplex</shaderType>
-			<color>(110,104,114)</color>
-			<colorTwo>(68,65,70)</colorTwo>
-		</graphicData>
-		<statBases>
-			<MaxHitPoints>5000</MaxHitPoints>
-		</statBases>
-		<building>
-			<isResourceRock>true</isResourceRock>
-			<mineableThing>LF_MagicCrystal</mineableThing>
-			<mineableYield>5</mineableYield>
-			<mineableScatterCommonality>0.06</mineableScatterCommonality>
-			<mineableScatterLumpSizeRange>
-				<min>2</min>
-				<max>5</max>
-			</mineableScatterLumpSizeRange>
-		</building>
-	</ThingDef>
-  
-	<ThingDef>
-	<!--ResourceBaseからの継承項目-->
-		<thingClass>ThingWithComps</thingClass>
-		<category>Item</category>
-		<resourceReadoutPriority>Middle</resourceReadoutPriority>
-		<selectable>true</selectable>
-		<altitudeLayer>Item</altitudeLayer>
-		<stackLimit>75</stackLimit>
-		<comps>
-			<li Class="CompProperties_Forbiddable"/>
-		</comps>
-		<alwaysHaulable>true</alwaysHaulable>
-		<drawGUIOverlay>true</drawGUIOverlay>
-		<rotatable>false</rotatable>
-		<pathCost>15</pathCost>
-		<stuffProps>
-			<commonality>0</commonality>
-		</stuffProps>
-		<tradeability>Sellable</tradeability>
-		<defName>LF_MagicCrystal</defName>
-		<label>magic ore</label>
-		<description>a very rare gemstone that gives off a transparent and mysterious glow. Although it is not widely known, it seems that high-purity samples contain a great deal of magical power and have various utility values in the field of magic.</description>
-		<graphicData>
-			<texPath>Things/Item/Resource/LF_MagicCrystal</texPath>
-			<graphicClass>Graphic_StackCount</graphicClass>
-		</graphicData>
-		<useHitPoints>false</useHitPoints>
-		<soundInteract>Metal_Drop</soundInteract>
-		<soundDrop>Metal_Drop</soundDrop>
-		<statBases>
-			<MarketValue>40</MarketValue>
-			<Mass>1</Mass>
-			<Beauty>8</Beauty>
-<!--
+  <ThingDef ParentName="RockBase">
+    <defName>LF_MineableMagicCrystalVein</defName>
+    <label>魔晶鉱脈</label>
+    <description>魔晶鉱石を含んだ鉱床。</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(110,104,114)</color>
+      <colorTwo>(68,65,70)</colorTwo>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>5000</MaxHitPoints>
+    </statBases>
+    <building>
+      <isResourceRock>true</isResourceRock>
+      <mineableThing>LF_MagicCrystal</mineableThing>
+      <mineableYield>5</mineableYield>
+      <mineableScatterCommonality>0.06</mineableScatterCommonality>
+      <mineableScatterLumpSizeRange>
+        <min>2</min>
+        <max>5</max>
+      </mineableScatterLumpSizeRange>
+    </building>
+  </ThingDef>
+
+    <!--ResourceBaseからの継承項目-->
+  <ThingDef>
+    <defName>LF_MagicCrystal</defName>
+    <label>magic ore</label>
+    <description>a very rare gemstone that gives off a transparent and mysterious glow. Although it is not widely known, it seems that high-purity samples contain a great deal of magical power and have various utility values in the field of magic.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <selectable>true</selectable>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>75</stackLimit>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+    </comps>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+    <pathCost>15</pathCost>
+    <stuffProps>
+      <commonality>0</commonality>
+    </stuffProps>
+    <tradeability>Sellable</tradeability>
+    <graphicData>
+      <texPath>Things/Item/Resource/LF_MagicCrystal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <useHitPoints>false</useHitPoints>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>40</MarketValue>
+      <Mass>1</Mass>
+      <Beauty>8</Beauty>
+      <!--
       <StuffPower_Armor_Sharp>1.08</StuffPower_Armor_Sharp>
       <StuffPower_Armor_Blunt>0.54</StuffPower_Armor_Blunt>
       <StuffPower_Armor_Heat>0.9</StuffPower_Armor_Heat>
@@ -68,17 +68,17 @@
       <SharpDamageMultiplier>1.1</SharpDamageMultiplier>
       <BluntDamageMultiplier>1.5</BluntDamageMultiplier>
 -->
-		</statBases>
-		<thingCategories>
-			<li>ResourcesRaw</li>
-		</thingCategories>
-		<deepCommonality>0.5</deepCommonality>
-		<deepCountPerPortion>2</deepCountPerPortion>
-		<deepLumpSizeRange>
-			<min>2</min>
-			<max>4</max>
-		</deepLumpSizeRange>
-<!--
+    </statBases>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <deepCommonality>0.5</deepCommonality>
+    <deepCountPerPortion>2</deepCountPerPortion>
+    <deepLumpSizeRange>
+      <min>2</min>
+      <max>4</max>
+    </deepLumpSizeRange>
+    <!--
     <stuffProps>
       <categories>
         <li>Metallic</li>
@@ -101,5 +101,5 @@
       <smeltable>true</smeltable>
     </stuffProps>
 -->
-	</ThingDef>
+  </ThingDef>
 </Defs>
