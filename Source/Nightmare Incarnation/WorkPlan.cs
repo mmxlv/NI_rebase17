@@ -117,43 +117,40 @@ namespace NightmareIncarnation
                 SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
             }
             TooltipHandler.TipRegion(suspendBillButton, Translator.Translate("SuspendBillTip"));
+
             Rect allowJoyButton = new Rect(28f, 28f, 40f, 40f);
-            if (this.targetType != RelationType.Meal)
+            if (Widgets.ButtonImage(allowJoyButton, this.AllowJoy ? IconTex.Policy_AllowJoy : IconTex.Policy_DisallowJoy, white))
             {
-                if (Widgets.ButtonImage(allowJoyButton, this.AllowJoy ? IconTex.Policy_AllowJoy : IconTex.Policy_DisallowJoy, white))
+                this.AllowJoy = !this.AllowJoy;
+                if (this.AllowJoy)
                 {
-                    this.AllowJoy = !this.AllowJoy;
-                    if (this.AllowJoy)
-                    {
-                        SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
-                    }
-                    else
-                    {
-                        SoundStarter.PlayOneShotOnCamera(SoundDefOf.Designate_Cancel, null);
-                    }
+                    SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
+                }
+                else
+                {
+                    SoundStarter.PlayOneShotOnCamera(SoundDefOf.Designate_Cancel, null);
                 }
             }
             TooltipHandler.TipRegion(allowJoyButton, Translator.Translate("NItxt_AllowJoyTip"));
+
             Rect allowOverSqueezeButton = new Rect(72f, 28f, 40f, 40f);
-            if (this.targetType != RelationType.Meal)
+            if (Widgets.ButtonImage(allowOverSqueezeButton, this.AllowOverSqueeze ? IconTex.Policy_AllowOverSqueeze : IconTex.Policy_DisallowOverSqueeze, white))
             {
-                if (Widgets.ButtonImage(allowOverSqueezeButton, this.AllowOverSqueeze ? IconTex.Policy_AllowOverSqueeze : IconTex.Policy_DisallowOverSqueeze, white))
+                this.AllowOverSqueeze = !this.AllowOverSqueeze;
+                if (this.AllowOverSqueeze)
                 {
-                    this.AllowOverSqueeze = !this.AllowOverSqueeze;
-                    if (this.AllowOverSqueeze)
-                    {
-                        SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
-                    }
-                    else
-                    {
-                        this.AllowKill = false;
-                        SoundStarter.PlayOneShotOnCamera(SoundDefOf.Designate_Cancel, null);
-                    }
+                    SoundStarter.PlayOneShotOnCamera(SoundDefOf.Click, null);
+                }
+                else
+                {
+                    this.AllowKill = false;
+                    SoundStarter.PlayOneShotOnCamera(SoundDefOf.Designate_Cancel, null);
                 }
             }
             TooltipHandler.TipRegion(allowOverSqueezeButton, Translator.Translate("NItxt_AllowOverSqueezeTip"));
+
             Rect allowDownButton = new Rect(116f, 28f, 40f, 40f);
-            if (this.targetType != RelationType.Meal && this.targetType > RelationType.Colonist)
+            if (this.targetType > RelationType.Colonist)
             {
                 if (Widgets.ButtonImage(allowDownButton, this.AllowDown ? IconTex.Policy_AllowDown : IconTex.Policy_DisallowDown, white))
                 {
@@ -169,8 +166,9 @@ namespace NightmareIncarnation
                 }
             }
             TooltipHandler.TipRegion(allowDownButton, Translator.Translate("NItxt_AllowDownTip"));
+
             Rect allowKillButton = new Rect(160f, 28f, 40f, 40f);
-            if (this.targetType != RelationType.Meal && this.targetType > RelationType.Colonist)
+            if (this.targetType > RelationType.Colonist)
             {
                 if (Widgets.ButtonImage(allowKillButton, this.AllowKill ? IconTex.Policy_AllowKill : IconTex.Policy_DisallowKill, white))
                 {
@@ -188,62 +186,32 @@ namespace NightmareIncarnation
                 }
             }
             TooltipHandler.TipRegion(allowKillButton, Translator.Translate("NItxt_AllowKillTip"));
-            if (this.targetType == RelationType.Meal)
-            {
-                Func<List<FloatMenuOption>> dishOptionFinder = delegate ()
-                {
-                    List<FloatMenuOption> dishOptions = new List<FloatMenuOption>();
-                    dishOptions.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate ()
-                    {
-                        this.MainDishThing = null;
-                    }, MenuOptionPriority.Default, null, null, 0f, null, null));
-                    using (IEnumerator<ThingDef> enumerator = CommonData.ManaSourceDefs.AsEnumerable<ThingDef>().GetEnumerator())
-                    {
-                        while (enumerator.MoveNext())
-                        {
-                            ThingDef foodSource = enumerator.Current;
-                            dishOptions.Add(new FloatMenuOption(foodSource.LabelCap, delegate ()
-                            {
-                                this.MainDishThing = foodSource;
-                            }, MenuOptionPriority.Default, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, foodSource), null));
-                        }
-                    }
-                    return dishOptions;
-                };
-                Rect selectDishButton = new Rect(204f, 32f, 150f, 29f);
-                bool dishButtonAdded = Widgets.ButtonText(selectDishButton, (this.MainDishThing != null) ? this.MainDishThing.LabelCap : Translator.Translate("NItxt_SelectMainDish"), true, false, true);
-                if (dishButtonAdded)
-                {
-                    Find.WindowStack.Add(new FloatMenu(dishOptionFinder()));
-                }
-                UIHighlighter.HighlightOpportunity(selectDishButton, "NItxt_SelectMainDish");
-                TooltipHandler.TipRegion(selectDishButton, Translator.Translate("NItxt_SelectMainDishThingTip"));
-            }
+
             if (this.targetType == RelationType.Colonist || this.targetType == RelationType.Prisoner)
             {
-                Func<List<FloatMenuOption>> pawnOptionFinder = delegate ()
+                List<FloatMenuOption> pawnOptionFinder()
                 {
-                    List<FloatMenuOption> ediblePawnOptions = new List<FloatMenuOption>();
-                    ediblePawnOptions.Add(new FloatMenuOption(Translator.Translate("NoneBrackets"), delegate ()
+                    List<FloatMenuOption> ediblePawnOptions = new List<FloatMenuOption>
                     {
-                        this.MainDishPawn = null;
-                    }, MenuOptionPriority.Default, null, null, 0f, null, null));
-                    IEnumerable<Pawn> enumerable = from z in this.workPlanStack.compRace.parent.Map.mapPawns.AllPawnsSpawned
-                                                   where z.GetComp<CompSuccubusRace>() == null && z != this.workPlanStack.compRace.parent && ((this.targetType == RelationType.Colonist && z.IsColonist) || (this.targetType == RelationType.Prisoner && z.IsPrisonerOfColony))
-                                                   select z;
-                    using (IEnumerator<Pawn> enumerator = enumerable.GetEnumerator())
+                        new FloatMenuOption(Translator.Translate("NoneBrackets"), () => MainDishPawn = null)
+                    };
+
+                    foreach (Pawn ediblePawn in workPlanStack.compRace.parent.Map.mapPawns.AllPawnsSpawned.Where(p => !CommonUtl.IsSuccubus(p)
+                                                                                                                      && p != workPlanStack.compRace.parent
+                                                                                                                      && ((targetType == RelationType.Colonist && p.IsFreeColonist)
+                                                                                                                          || (targetType == RelationType.Prisoner && p.IsPrisonerOfColony))))
                     {
-                        while (enumerator.MoveNext())
-                        {
-                            Pawn ediblePawn = enumerator.Current;
-                            ediblePawnOptions.Add(new FloatMenuOption(ediblePawn.LabelCap, delegate ()
-                            {
-                                this.MainDishPawn = ediblePawn;
-                            }, MenuOptionPriority.Default, null, null, 29f, (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, ediblePawn), null));
-                        }
+                        ediblePawnOptions.Add(new FloatMenuOption(ediblePawn.LabelCap,
+                                                                  () => MainDishPawn = ediblePawn,
+                                                                  MenuOptionPriority.Default,
+                                                                  null,
+                                                                  null,
+                                                                  29f,
+                                                                  (Rect tmprect) => Widgets.InfoCardButton(tmprect.x + 5f, tmprect.y + (tmprect.height - 24f) / 2f, ediblePawn),
+                                                                  null));
                     }
                     return ediblePawnOptions;
-                };
+                }
                 Rect selectPawnToEatButton = new Rect(204f, 32f, 150f, 29f);
                 bool selectPawnButtonWasAdded = Widgets.ButtonText(selectPawnToEatButton, (this.MainDishPawn != null) ? this.MainDishPawn.LabelCap : Translator.Translate("NItxt_SelectMainDish").ToString(), true, false, true);
                 if (selectPawnButtonWasAdded)
@@ -253,13 +221,11 @@ namespace NightmareIncarnation
                 UIHighlighter.HighlightOpportunity(selectPawnToEatButton, "NItxt_SelectMainDish");
                 TooltipHandler.TipRegion(selectPawnToEatButton, Translator.Translate("NItxt_SelectMainDishTip"));
             }
-            if (this.targetType != RelationType.Meal)
-            {
-                Rect squeezeAmountSelector = new Rect(144f, 0f, 160f, 34f);
-                float squeezeValue = this.SqueezeValue;
-                this.SqueezeValue = Widgets.HorizontalSlider(squeezeAmountSelector, squeezeValue, 0.4f, 2.4f, false, TranslatorFormattedStringExtensions.Translate("NItxt_SqueezeValue", squeezeValue.ToString("F1")), null, null, 0.1f);
-                TooltipHandler.TipRegion(squeezeAmountSelector, Translator.Translate("NItxt_SqueezeSliderTip"));
-            }
+
+            Rect squeezeAmountSelector = new Rect(144f, 0f, 160f, 34f);
+            float squeezeValue = SqueezeValue;
+            SqueezeValue = Widgets.HorizontalSlider(squeezeAmountSelector, squeezeValue, 0.4f, 2.4f, false, TranslatorFormattedStringExtensions.Translate("NItxt_SqueezeValue", squeezeValue.ToString("F1")), null, null, 0.1f);
+            TooltipHandler.TipRegion(squeezeAmountSelector, Translator.Translate("NItxt_SqueezeSliderTip"));
             GUI.EndGroup();
             if (this.Suspended)
             {
@@ -299,8 +265,8 @@ namespace NightmareIncarnation
                         return Translator.Translate("NItxt_Prisoner");
                     case RelationType.Hostile:
                         return Translator.Translate("NItxt_Enemy");
-                    case RelationType.Meal:
-                        return Translator.Translate("NItxt_Meal");
+                        //case RelationType.Meal:
+                        //    return Translator.Translate("NItxt_Meal");
                 }
                 return Translator.Translate("NItxt_Other");
             }

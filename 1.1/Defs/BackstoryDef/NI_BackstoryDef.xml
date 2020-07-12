@@ -1,452 +1,398 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-<AlienRace.BackstoryDef Name="NI_Backstory_Base" Abstract="True">
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	
-	<!--ここで設定する項目はThingDefs_Races内で設定したよりも上位の権限を持っています。-->
-	<!--<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>2</degree>
-			<chance>100</chance>
-		</li>
-	</forcedTraits>-->
-<!--Beautyのdegree1は可愛いなので上記例だとThingDefs_Races内の設定で+10％の抽選後、さらに20％の確率で可愛いがPawnに付与されます。-->
+  <AlienRace.BackstoryDef Name="NI_Backstory_Base" Abstract="True">
+    <spawnCategories>
+      <li>NI_Backstory</li>
+    </spawnCategories>
+    <bodyTypeGlobal>Female</bodyTypeGlobal>
+    <bodyTypeMale>Female</bodyTypeMale>
+    <bodyTypeFemale>Female</bodyTypeFemale>
+  </AlienRace.BackstoryDef>
 
+  <!--====================== 幼年期 =====================-->
 
-<!--以下で体型を制御します、設定に慣れれば特定のバックストーリーを持つPawnは特定の体型で特定の性別と言ったことも可能です。-->
-<!--この項目ではすべてFemaleとなっていますがテクスチャーフォルダに対応するテクスチャが無い場合は当然エラーになります。-->
-	<bodyTypeGlobal>Female</bodyTypeGlobal><!--バニラのFat、Thin、Hulk体型に設定されているキャラは女性の体型、装備体型を割り当てられます。-->
-	<bodyTypeMale>Female</bodyTypeMale><!--バニラの女性体型に設定されているキャラは女性の体型、装備体型を割り当てられます。-->
-	<bodyTypeFemale>Female</bodyTypeFemale><!--バニラの女性体型に設定されているキャラは女性の体型、装備体型を割り当てられます。-->
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS1c</defName>
+    <title>Gentle Devil</title>
+    <titleShort>Gentle Devil</titleShort>
+    <baseDescription>[PAWN_nameDef] Was a child of Yumema who was so kind that she couldn't look like a devil. Therefore [PAWN_pronoun] was always teased and bullied by other demons.</baseDescription>
+    <slot>Childhood</slot>
+    <skillGains>
+      <li>
+        <defName>Social</defName>
+        <amount>2</amount>
+      </li>
+      <li>
+        <defName>Plants</defName>
+        <amount>1</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>1</degree>
+        <chance>100</chance>
+      </li>
+      <li>
+        <defName>Kind</defName>
+        <chance>100</chance>
+      </li>
+    </forcedTraits>
+    <linkedBackstory>NI_BS1a</linkedBackstory>
+  </AlienRace.BackstoryDef>
 
-</AlienRace.BackstoryDef>
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS2c</defName>
+    <title>young dream apprentice</title>
+    <titleShort>Dream Apprentice</titleShort>
+    <baseDescription>[PAWN_nameDef] was training in Makai aiming to be a full-fledged succubus. [PAWN_pronoun] has learned how to handle magical powers, and is able to do his or her job accordingly. The days of [PAWN_possessive] training will continue, with the dream of visiting the human world.</baseDescription>
+    <slot>Childhood</slot>
+    <skillGains>
+      <li>
+        <defName>Intellectual</defName>
+        <amount>2</amount>
+      </li>
+      <li>
+        <defName>Medicine</defName>
+        <amount>3</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>2</degree>
+        <chance>100</chance>
+      </li>
+    </forcedTraits>
+    <linkedBackstory>NI_BS2a</linkedBackstory>
+  </AlienRace.BackstoryDef>
 
-<!--====================== 幼年期 =====================-->
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS3c</defName>
+    <title>Wandering Demon</title>
+    <titleShort>Wandering Demon</titleShort>
+    <baseDescription>[PAWN_nameDef] was walking alone in various parts of the demon world, but [PAWN_pronoun] never felt lonely. If you are hungry, you can enjoy the thrill of stealing food from other demons and chasing you, and when you get tired of walking on the vast land, look up at the sky and look at the clouds fluttering in the Sacred Mountains, and enjoy the serenity of magic flowing into your body. .. Why am I a succubus? [PAWN_pronoun] has no time to think about such trivial matters. Every day, all the good things, the bad things, and the unpredictable experiences are all fresh and enjoyable.</baseDescription>
+    <slot>Childhood</slot>
+    <skillGains>
+      <li>
+        <defName>Plants</defName>
+        <amount>1</amount>
+      </li>
+      <li>
+        <defName>Social</defName>
+        <amount>1</amount>
+      </li>
+      <li>
+        <defName>Animals</defName>
+        <amount>1</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>3</degree>
+        <chance>100</chance>
+      </li>
+      <li>
+        <defName>NaturalMood</defName>
+        <degree>2</degree>
+        <chance>40</chance>
+      </li>
+      <li>
+        <defName>SpeedOffset</defName>
+        <degree>1</degree>
+        <chance>20</chance>
+      </li>
+    </forcedTraits>
+    <linkedBackstory>NI_BS3a</linkedBackstory>
+  </AlienRace.BackstoryDef>
 
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS1c</defName>
-	<title>Gentle Devil</title>
-	<titleShort>Gentle Devil</titleShort>
-	<baseDescription>[PAWN_nameDef] Was a child of Yumema who was so kind that she couldn't look like a devil. Therefore [PAWN_pronoun] was always teased and bullied by other demons.</baseDescription>
-	<slot>Childhood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Social</defName>
-			<amount>2</amount>
-		</li>
-		<li>
-			<defName>Plants</defName>
-			<amount>1</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>1</degree>
-			<chance>100</chance>
-		</li>
-		<li>
-			<defName>Kind</defName>
-			<chance>100</chance>
-		</li>
-	</forcedTraits>
-	<linkedBackstory>NI_BS1a</linkedBackstory>
-</AlienRace.BackstoryDef>
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS4c</defName>
+    <title>noble born devil</title>
+    <titleShort>Noble Devil</titleShort>
+    <baseDescription>[PAWN_nameDef] is a child from a noble demon family from the demon world. [PAWN_pronoun] is a child of noble family from the demon world, who was trained from an early age to utilize advanced magic. It was expected of [PAWN_objective] to become a "dreamer". I was sometimes told [PAWN_pronoun] was very reserved, but [PAWN_possessive] abilities already surpassed those of ordinary dreamers.</baseDescription>
+    <slot>Childhood</slot>
+    <skillGains>
+      <li>
+        <defName>Intellectual</defName>
+        <amount>4</amount>
+      </li>
+      <li>
+        <defName>Medicine</defName>
+        <amount>5</amount>
+      </li>
+      <li>
+        <defName>Artistic</defName>
+        <amount>5</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>4</degree>
+        <chance>100</chance>
+      </li>
+    </forcedTraits>
+    <linkedBackstory>NI_BS4a</linkedBackstory>
+  </AlienRace.BackstoryDef>
 
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS2c</defName>
-	<title>young dream apprentice</title>
-	<titleShort>Dream Apprentice</titleShort>
-	<baseDescription>[PAWN_nameDef] was training in Makai aiming to be a full-fledged succubus. [PAWN_pronoun] has learned how to handle magical powers, and is able to do his or her job accordingly. The days of [PAWN_possessive] training will continue, with the dream of visiting the human world.</baseDescription>
-	<slot>Childhood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Intellectual</defName>
-			<amount>2</amount>
-		</li>
-		<li>
-			<defName>Medicine</defName>
-			<amount>3</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>2</degree>
-			<chance>100</chance>
-		</li>
-	</forcedTraits>
-	<linkedBackstory>NI_BS2a</linkedBackstory>
-</AlienRace.BackstoryDef>
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS5c</defName>
+    <title>Evil Devil</title>
+    <titleShort>Devil</titleShort>
+    <baseDescription>[PAWN_nameDef] has been feared as a shadow ruler since [PAWN_pronoun] was a child, as [PAWN_pronoun] was very good at persuading other demons to obey [PAWN_objective]. The treatmen of [PAWN_possessive] servants was cruel, but none of them complained, for they respcted [PAWN_objective] as an examplar of demonkind. Humans would call someone like [PAWN_objective] a devil.</baseDescription>
+    <slot>Childhood</slot>
+    <skillGains>
+      <li>
+        <defName>Intellectual</defName>
+        <amount>3</amount>
+      </li>
+      <li>
+        <defName>Social</defName>
+        <amount>1</amount>
+      </li>
+      <li>
+        <defName>Crafting</defName>
+        <amount>1</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>5</degree>
+        <chance>100</chance>
+      </li>
+      <li>
+        <defName>Bloodlust</defName>
+        <chance>25</chance>
+      </li>
+    </forcedTraits>
+    <linkedBackstory>NI_BS5a</linkedBackstory>
+  </AlienRace.BackstoryDef>
 
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS3c</defName>
-	<title>Wandering Demon</title>
-	<titleShort>Wandering Demon</titleShort>
-	<baseDescription>[PAWN_nameDef] was walking alone in various parts of the demon world, but [PAWN_pronoun] never felt lonely. If you are hungry, you can enjoy the thrill of stealing food from other demons and chasing you, and when you get tired of walking on the vast land, look up at the sky and look at the clouds fluttering in the Sacred Mountains, and enjoy the serenity of magic flowing into your body. .. Why am I a succubus? [PAWN_pronoun] has no time to think about such trivial matters. Every day, all the good things, the bad things, and the unpredictable experiences are all fresh and enjoyable.</baseDescription>
-	<slot>Childhood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Plants</defName>
-			<amount>1</amount>
-		</li>
-		<li>
-			<defName>Social</defName>
-			<amount>1</amount>
-		</li>
-		<li>
-			<defName>Animals</defName>
-			<amount>1</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>3</degree>
-			<chance>100</chance>
-		</li>
-		<li>
-			<defName>NaturalMood</defName>
-			<degree>2</degree>
-			<chance>40</chance>
-		</li>
-		<li>
-			<defName>SpeedOffset</defName>
-			<degree>1</degree>
-			<chance>20</chance>
-		</li>
-	</forcedTraits>
-	<linkedBackstory>NI_BS3a</linkedBackstory>
-</AlienRace.BackstoryDef>
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS6c</defName>
+    <title>mysterious lonely demon</title>
+    <titleShort>Mysterious Demon</titleShort>
+    <baseDescription>[PAWN_nameDef] found [PAWN_objective]self wandering the wilds of the demon world alone. It is unknown when [PAWN_pronoun] was born, or where [PAWN_pronoun] came from. From where is [PAWN_possessive] magic that no other Dreamer possesses coming from? Everyone who tried to uncover [PAWN_possessive] secrets, has dissapeared. [PAWN_pronoun] is alone to this day.</baseDescription>
+    <slot>Childhood</slot>
+    <skillGains>
+      <li>
+        <defName>Melee</defName>
+        <amount>4</amount>
+      </li>
+      <li>
+        <defName>Shooting</defName>
+        <amount>4</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>6</degree>
+        <chance>100</chance>
+      </li>
+    </forcedTraits>
+    <linkedBackstory>NI_BS6a</linkedBackstory>
+  </AlienRace.BackstoryDef>
 
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS4c</defName>
-	<title>noble born devil</title>
-	<titleShort>Noble Devil</titleShort>
-	<baseDescription>[PAWN_nameDef] is a child from a noble demon family from the demon world. [PAWN_pronoun] is a child of noble family from the demon world, who was trained from an early age to utilize advanced magic. It was expected of [PAWN_objective] to become a "dreamer". I was sometimes told [PAWN_pronoun] was very reserved, but [PAWN_possessive] abilities already surpassed those of ordinary dreamers.
-</baseDescription>
-	<slot>Childhood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Intellectual</defName>
-			<amount>4</amount>
-		</li>
-		<li>
-			<defName>Medicine</defName>
-			<amount>5</amount>
-		</li>
-		<li>
-			<defName>Artistic</defName>
-			<amount>5</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>4</degree>
-			<chance>100</chance>
-		</li>
-	</forcedTraits>
-	<linkedBackstory>NI_BS4a</linkedBackstory>
-</AlienRace.BackstoryDef>
+  <!--====================== 青年期 ======================-->
 
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS5c</defName>
-	<title>Evil Devil</title>
-	<titleShort>Devil</titleShort>
-	<baseDescription>[PAWN_nameDef] has been feared as a shadow ruler since [PAWN_pronoun] was a child, as [PAWN_pronoun] was very good at persuading other demons to obey [PAWN_objective]. The treatmen of [PAWN_possessive] servants was cruel, but none of them complained, for they respcted [PAWN_objective] as an examplar of demonkind. Humans would call someone like [PAWN_objective] a devil.
-</baseDescription>
-	<slot>Childhood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Intellectual</defName>
-			<amount>3</amount>
-		</li>
-		<li>
-			<defName>Social</defName>
-			<amount>1</amount>
-		</li>
-		<li>
-			<defName>Crafting</defName>
-			<amount>1</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>5</degree>
-			<chance>100</chance>
-		</li>
-		<li>
-			<defName>Bloodlust</defName>
-			<chance>25</chance>
-		</li>
-	</forcedTraits>
-	<linkedBackstory>NI_BS5a</linkedBackstory>
-</AlienRace.BackstoryDef>
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS1a</defName>
+    <title>Gentle Genma</title>
+    <titleShort>Gentle Genma</titleShort>
+    <baseDescription>[PAWN_nameDef] is a dreamer who is kind and gentle to everyone. Because of [PAWN_possessive] undemonic behavior, no one knows [PAWN_pronoun] is a succubus until [PAWN_pronoun] reveals [PAWN_objective]self.</baseDescription>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <li>
+        <defName>Social</defName>
+        <amount>3</amount>
+      </li>
+      <li>
+        <defName>Plants</defName>
+        <amount>2</amount>
+      </li>
+      <li>
+        <defName>Cooking</defName>
+        <amount>2</amount>
+      </li>
+      <li>
+        <defName>Animals</defName>
+        <amount>1</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>1</degree>
+        <chance>100</chance>
+      </li>
+      <li>
+        <defName>Kind</defName>
+        <chance>100</chance>
+      </li>
+    </forcedTraits>
+  </AlienRace.BackstoryDef>
 
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS6c</defName>
-	<title>mysterious lonely demon</title>
-	<titleShort>Mysterious Demon</titleShort>
-	<baseDescription>[PAWN_nameDef] found [PAWN_objective]self wandering the wilds of the demon world alone. It is unknown when [PAWN_pronoun] was born, or where [PAWN_pronoun] came from. From where is [PAWN_possessive] magic that no other Dreamer possesses coming from? Everyone who tried to uncover [PAWN_possessive] secrets, has dissapeared. [PAWN_pronoun] is alone to this day.
-</baseDescription>
-	<slot>Childhood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Melee</defName>
-			<amount>4</amount>
-		</li>
-		<li>
-			<defName>Shooting</defName>
-			<amount>4</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>6</degree>
-			<chance>100</chance>
-		</li>
-	</forcedTraits>
-	<linkedBackstory>NI_BS6a</linkedBackstory>
-</AlienRace.BackstoryDef>
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS2a</defName>
+    <title>Apprentice Muma</title>
+    <titleShort>Apprentice Muma</titleShort>
+    <baseDescription>[PAWN_nameDef] is a succubus that has just arrived in this world. [PAWN_pronoun] has worked hard in the demon world is confident that [PAWN_pronoun] can do well in this world. Let's start with the person at hand!</baseDescription>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <li>
+        <defName>Intellectual</defName>
+        <amount>2</amount>
+      </li>
+      <li>
+        <defName>Medicine</defName>
+        <amount>3</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>2</degree>
+        <chance>100</chance>
+      </li>
+    </forcedTraits>
+  </AlienRace.BackstoryDef>
 
-<!--====================== 青年期 ======================-->
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS3a</defName>
+    <title>A curious dreamer with a heart full of excitement</title>
+    <titleShort>curius dreamer</titleShort>
+    <baseDescription>The eyes of [PAWN_nameDef] where sparkling as [PAWN_pronoun] entered the human world. "I can't believe it, this whole world is going to be mine! I can't contain my excitment! So many new things to see and do!". In [PAWN_possessive] excitement [PAWN_nameDef] even forgets [PAWN_pronoun] is a succubus</baseDescription>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <li>
+        <defName>Melee</defName>
+        <amount>1</amount>
+      </li>
+      <li>
+        <defName>Shooting</defName>
+        <amount>1</amount>
+      </li>
+      <li>
+        <defName>Plants</defName>
+        <amount>1</amount>
+      </li>
+      <li>
+        <defName>Social</defName>
+        <amount>1</amount>
+      </li>
+      <li>
+        <defName>Animals</defName>
+        <amount>1</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>3</degree>
+        <chance>100</chance>
+      </li>
+    </forcedTraits>
+  </AlienRace.BackstoryDef>
 
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS1a</defName>
-	<title>Gentle Genma</title>
-	<titleShort>Gentle Genma</titleShort>
-	<baseDescription>[PAWN_nameDef] is a dreamer who is kind and gentle to everyone. Because of [PAWN_possessive] undemonic behavior, no one knows [PAWN_pronoun] is a succubus until [PAWN_pronoun] reveals [PAWN_objective]self.</baseDescription>
-	<slot>Adulthood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Social</defName>
-			<amount>3</amount>
-		</li>
-		<li>
-			<defName>Plants</defName>
-			<amount>2</amount>
-		</li>
-		<li>
-			<defName>Cooking</defName>
-			<amount>2</amount>
-		</li>
-		<li>
-			<defName>Animals</defName>
-			<amount>1</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>1</degree>
-			<chance>100</chance>
-		</li>
-		<li>
-			<defName>Kind</defName>
-			<chance>100</chance>
-		</li>
-	</forcedTraits>
-</AlienRace.BackstoryDef>
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS4a</defName>
+    <title>noble dreamer</title>
+    <titleShort>noble dreamer</titleShort>
+    <baseDescription>[PAWN_nameDef] has only been a short time in this world, but [PAWN_possessive] aura of grace and dignity identifies [PAWN_objective] as a fully fledged dreamer. To protect her families honor and by exttension the demon world [PAWN_pronoun] has entered the human world to collect magic power. In preparation [PAWN_pronoun] made many contacts with demons who share [PAWN_possessive] intentions and now form a wide network in the demon world.</baseDescription>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <li>
+        <defName>Cooking</defName>
+        <amount>2</amount>
+      </li>
+      <li>
+        <defName>Intellectual</defName>
+        <amount>4</amount>
+      </li>
+      <li>
+        <defName>Social</defName>
+        <amount>5</amount>
+      </li>
+      <li>
+        <defName>Artistic</defName>
+        <amount>3</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>4</degree>
+        <chance>100</chance>
+      </li>
+    </forcedTraits>
+  </AlienRace.BackstoryDef>
 
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS2a</defName>
-	<title>Apprentice Muma</title>
-	<titleShort>Apprentice Muma</titleShort>
-	<baseDescription>[PAWN_nameDef] is a succubus that has just arrived in this world. [PAWN_pronoun] has worked hard in the demon world is confident that [PAWN_pronoun] can do well in this world. Let's start with the person at hand!</baseDescription>
-	<slot>Adulthood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Intellectual</defName>
-			<amount>2</amount>
-		</li>
-		<li>
-			<defName>Medicine</defName>
-			<amount>3</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>3</degree>
-			<chance>50</chance>
-		</li>
-	</forcedTraits>
-</AlienRace.BackstoryDef>
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS5a</defName>
+    <title>devilish dreamer</title>
+    <titleShort>devilish dreamer</titleShort>
+    <baseDescription>[PAWN_nameDef] is an evil and powerful succubus. [PAWN_pronoun] built [PAWN_possessive] mansion far from civilization and tormented [PAWN_possessive] servants every day. Other demons fear and respect [PAWN_objective] for [PAWN_possessive] cruel way of torturing, injuring and healing [PAWN_possessive] victims over and over again. It's said that once [PAWN_pronoun] recoginized humans as prey, [PAWN_pronoun] wouldn't let [PAWN_possessive] victims escape until they where completely drained.</baseDescription>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <li>
+        <defName>Construction</defName>
+        <amount>1</amount>
+      </li>
+      <li>
+        <defName>Social</defName>
+        <amount>2</amount>
+      </li>
+      <li>
+        <defName>Medicine</defName>
+        <amount>5</amount>
+      </li>
+      <li>
+        <defName>Crafting</defName>
+        <amount>2</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>5</degree>
+        <chance>100</chance>
+      </li>
+      <li>
+        <defName>Bloodlust</defName>
+        <chance>25</chance>
+      </li>
+    </forcedTraits>
+  </AlienRace.BackstoryDef>
 
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS3a</defName>
-	<title>A curious dreamer with a heart full of excitement</title>
-	<titleShort>curius dreamer</titleShort>
-	<baseDescription>The eyes of [PAWN_nameDef] where sparkling as [PAWN_pronoun] entered the human world. "I can't believe it, this whole world is going to be mine! I can't contain my excitment! So many new things to see and do!". In [PAWN_possessive] excitement [PAWN_nameDef] even forgets [PAWN_pronoun] is a succubus</baseDescription>
-	<slot>Adulthood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Melee</defName>
-			<amount>1</amount>
-		</li>
-		<li>
-			<defName>Shooting</defName>
-			<amount>1</amount>
-		</li>
-		<li>
-			<defName>Plants</defName>
-			<amount>1</amount>
-		</li>
-		<li>
-			<defName>Social</defName>
-			<amount>1</amount>
-		</li>
-		<li>
-			<defName>Animals</defName>
-			<amount>1</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>3</degree>
-			<chance>100</chance>
-		</li>
-	</forcedTraits>
-</AlienRace.BackstoryDef>
-
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS4a</defName>
-	<title>noble dreamer</title>
-	<titleShort>noble dreamer</titleShort>
-	<baseDescription>[PAWN_nameDef] has only been a short time in this world, but [PAWN_possessive] aura of grace and dignity identifies [PAWN_objective] as a fully fledged dreamer. To protect her families honor and by exttension the demon world [PAWN_pronoun] has entered the human world to collect magic power. In preparation [PAWN_pronoun] made many contacts with demons who share [PAWN_possessive] intentions and now form a wide network in the demon world.</baseDescription>
-	<slot>Adulthood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Cooking</defName>
-			<amount>2</amount>
-		</li>
-		<li>
-			<defName>Intellectual</defName>
-			<amount>4</amount>
-		</li>
-		<li>
-			<defName>Social</defName>
-			<amount>5</amount>
-		</li>
-		<li>
-			<defName>Artistic</defName>
-			<amount>3</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>4</degree>
-			<chance>100</chance>
-		</li>
-	</forcedTraits>
-</AlienRace.BackstoryDef>
-
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS5a</defName>
-	<title>devilish dreamer</title>
-	<titleShort>devilish dreamer</titleShort>
-	<baseDescription>[PAWN_nameDef] is an evil and powerful succubus. [PAWN_pronoun] built [PAWN_possessive] mansion far from civilization and tormented [PAWN_possessive] servants every day. Other demons fear and respect [PAWN_objective] for [PAWN_possessive] cruel way of torturing, injuring and healing [PAWN_possessive] victims over and over again. It's said that once [PAWN_pronoun] recoginized humans as prey, [PAWN_pronoun] wouldn't let [PAWN_possessive] victims escape until they where completely drained.</baseDescription>
-	<slot>Adulthood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Construction</defName>
-			<amount>1</amount>
-		</li>
-		<li>
-			<defName>Social</defName>
-			<amount>2</amount>
-		</li>
-		<li>
-			<defName>Medicine</defName>
-			<amount>5</amount>
-		</li>
-		<li>
-			<defName>Crafting</defName>
-			<amount>2</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>5</degree>
-			<chance>100</chance>
-		</li>
-		<li>
-			<defName>Bloodlust</defName>
-			<chance>25</chance>
-		</li>
-	</forcedTraits>
-</AlienRace.BackstoryDef>
-
-<AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
-	<defName>NI_BS6a</defName>
-	<title>wandering nightmare</title>
-	<titleShort>wandering nightmare</titleShort>
-	<baseDescription>[PAWN_nameDef] brings ruin to this world. The enormous magical powers of [PAWN_objective] are still increasing, and it is difficult to control them no matter what the intention of [PAWN_objective] is. No one can account for [PAWN_nameDef]'s atrocities as none have survived.</baseDescription>
-	<slot>Adulthood</slot>
-	<spawnCategories>
-		<li>NI_Backstory</li>
-	</spawnCategories>
-	<skillGains>
-		<li>
-			<defName>Melee</defName>
-			<amount>6</amount>
-		</li>
-		<li>
-			<defName>Shooting</defName>
-			<amount>6</amount>
-		</li>
-	</skillGains>
-	<forcedTraits>
-		<li>
-			<defName>NI_ManaAttribute</defName>
-			<degree>6</degree>
-			<chance>100</chance>
-		</li>
-	</forcedTraits>
-</AlienRace.BackstoryDef>
+  <AlienRace.BackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS6a</defName>
+    <title>wandering nightmare</title>
+    <titleShort>wandering nightmare</titleShort>
+    <baseDescription>[PAWN_nameDef] brings ruin to this world. The enormous magical powers of [PAWN_objective] are still increasing, and it is difficult to control them no matter what the intention of [PAWN_objective] is. No one can account for [PAWN_nameDef]'s atrocities as none have survived.</baseDescription>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <li>
+        <defName>Melee</defName>
+        <amount>6</amount>
+      </li>
+      <li>
+        <defName>Shooting</defName>
+        <amount>6</amount>
+      </li>
+    </skillGains>
+    <forcedTraits>
+      <li>
+        <defName>NI_ManaAttribute</defName>
+        <degree>6</degree>
+        <chance>100</chance>
+      </li>
+    </forcedTraits>
+  </AlienRace.BackstoryDef>
 
 
 </Defs>

@@ -1,32 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-  <ThingDef ParentName="RockBase">
-    <defName>LF_MineableMagicCrystalVein</defName>
-    <label>魔晶鉱脈</label>
-    <description>魔晶鉱石を含んだ鉱床。</description>
-    <graphicData>
-      <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-      <color>(110,104,114)</color>
-      <colorTwo>(68,65,70)</colorTwo>
-    </graphicData>
-    <statBases>
-      <MaxHitPoints>5000</MaxHitPoints>
-    </statBases>
-    <building>
-      <isResourceRock>true</isResourceRock>
-      <mineableThing>LF_MagicCrystal</mineableThing>
-      <mineableYield>5</mineableYield>
-      <mineableScatterCommonality>0.06</mineableScatterCommonality>
-      <mineableScatterLumpSizeRange>
-        <min>2</min>
-        <max>5</max>
-      </mineableScatterLumpSizeRange>
-    </building>
-  </ThingDef>
 
-    <!--ResourceBaseからの継承項目-->
+  <!--ResourceBaseからの継承項目-->
   <ThingDef>
     <defName>LF_MagicCrystal</defName>
     <label>magic ore</label>

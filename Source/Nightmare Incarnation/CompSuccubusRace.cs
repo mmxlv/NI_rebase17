@@ -114,11 +114,6 @@ namespace NightmareIncarnation
             {
                 this.policy.plans.Clear();
                 int degreeOfManaAttribute = this.Pawn.story.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute);
-                WorkPlan useManaItem = new WorkPlan
-                {
-                    workPlanStack = this.policy,
-                    targetType = RelationType.Meal
-                };
                 WorkPlan useColonist = new WorkPlan
                 {
                     workPlanStack = this.policy,
@@ -189,7 +184,6 @@ namespace NightmareIncarnation
                 }
                 this.policy.plans = new List<WorkPlan>
                     {
-                        useManaItem,
                         useEnemy,
                         usePrisoner,
                         useColonist,

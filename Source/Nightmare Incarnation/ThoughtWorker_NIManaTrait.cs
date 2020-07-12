@@ -14,9 +14,9 @@ namespace NightmareIncarnation
                 return false;
             if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Sight))
                 return false;
-            if (other.story == null || !commonUtl.IsSuccubus(other))
+            if (other.story == null || !CommonUtl.IsSuccubus(other))
                 return false;
-            if (commonUtl.IsSuccubus(pawn) && commonUtl.IsSuccubus(other))
+            if (CommonUtl.IsSuccubus(pawn) && CommonUtl.IsSuccubus(other))
                 return ThoughtState.ActiveAtStage(4);
             switch (other.story.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute))
             {

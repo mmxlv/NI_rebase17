@@ -1,27 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-<HairDef>
+  <HairDef>
     <label>NIWavyLong</label>
     <hairGender>Female</hairGender>
     <texPath>Things/Pawn/NI_Succubus/Hairs/WavyLong</texPath>
     <defName>NI_WavyLong</defName>
-		<hairTags>
-			<!--<li>Tribal</li>-->
-			<!--<li>Urban</li>-->
-			<li>NI_Succubus</li>
-		</hairTags>
+    <hairTags>
+      <!--<li>Tribal</li>-->
+      <!--<li>Urban</li>-->
+      <li>NI_Succubus</li>
+    </hairTags>
   </HairDef>
-<HairDef>
+  
+  <HairDef>
     <label>NIBobMedium</label>
     <hairGender>Female</hairGender>
     <texPath>Things/Pawn/NI_Succubus/Hairs/BobMedium</texPath>
     <defName>NI_BobMedium</defName>
-		<hairTags>
-			<!--<li>Tribal</li>-->
-			<!--<li>Urban</li>-->
-			<li>NI_Succubus</li>
-		</hairTags>
+    <hairTags>
+      <!--<li>Tribal</li>-->
+      <!--<li>Urban</li>-->
+      <li>NI_Succubus</li>
+    </hairTags>
   </HairDef>
 
 </Defs>

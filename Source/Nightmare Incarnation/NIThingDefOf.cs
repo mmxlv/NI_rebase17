@@ -10,9 +10,5 @@ namespace NightmareIncarnation
         public static ThingDef Apparel_NIBattleGarb;
 
         public static ThingDef Apparel_NIHalfPersona;
-
-        public static ThingDef NI_ManaherbTea;
-
-        public static ThingDef NI_ManaPotion;
     }
 }

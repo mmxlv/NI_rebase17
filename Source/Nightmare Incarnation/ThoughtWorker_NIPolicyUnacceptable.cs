@@ -8,12 +8,15 @@ namespace NightmareIncarnation
     {
         protected override ThoughtState CurrentStateInternal(Pawn pawn)
         {
-            if (pawn.story == null)
+            if (!CommonUtl.IsSuccubus(pawn))
                 return ThoughtState.Inactive;
 
             CompSuccubusRace succubusComp = pawn.GetComp<CompSuccubusRace>();
             if (succubusComp == null)
+            {
+                Log.Error("Succubus without Comp");
                 return ThoughtState.Inactive;
+            }
 
             int manaAttributeDegree = pawn.story.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute);
 
