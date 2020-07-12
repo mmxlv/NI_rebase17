@@ -63,12 +63,13 @@ namespace NightmareIncarnation
             if (CompRace != null)
             {
                 this.JoyMode = CompRace.tmpJoyMode;
-                this.workPlan = CompRace.policy.plans.FirstOrDefault(x => x.targetType == CompRace.tmpTargetType);
+                this.workPlan = CompRace.policy.plans.First(plan => plan.targetType == CompRace.tmpTargetType);
                 int traitDegree = Actor.story.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute);
-                bool forced = commonUtl.HasEnoughtMana(Victim, workPlan, 0f)
+                bool forced = ManaUtl.CanBeSqueezed(Victim, workPlan, 0f)
                               && (Actor.story.traits.HasTrait(TraitDefOf.Bloodlust)
                                   || Actor.story.traits.HasTrait(TraitDefOf.Psychopath)
-                                  || (traitDegree == 5 || traitDegree == 6));
+                                  || traitDegree == 5
+                                  || traitDegree == 6);
                 this.SqueezeAmount = (JoyMode && !forced) ? 0.2f : workPlan.SqueezeValue;
                 this.manaGainPerTick = (JoyMode ? 0.8f : 1f) * SqueezeAmount / job.def.joyDuration;
                 this.joyGainPerTick = 0.25f * CompRace.JoyTolerancesFactor / job.def.joyDuration;
@@ -81,7 +82,7 @@ namespace NightmareIncarnation
         protected override IEnumerable<Toil> MakeNewToils()
         {
             Need_Mana succubusManaNeed = Actor.needs.TryGetNeed<Need_Mana>();
-            Need_Mana victimManaNeed = Victim.needs.TryGetNeed<Need_Mana>();
+            //Need_Mana victimManaNeed = Victim.needs.TryGetNeed<Need_Mana>();
             this.FailOnDespawnedNullOrForbidden(VictimInd);
             this.FailOnAggroMentalState(VictimInd);
             this.FailOn(() =>
@@ -89,12 +90,14 @@ namespace NightmareIncarnation
                 return !commonUtl.IsPassive(Victim)
                        || workPlan.Suspended
                        || (JoyMode && !workPlan.AllowJoy)
-                       || (!workPlan.AllowOverSqueeze && commonUtl.GetMana(Victim) <= 0f)
+                       || (!workPlan.AllowOverSqueeze
+                           && ManaUtl.GetSeverity(Victim) >= ManaUtl.GetThresholdFromStage(ManaStages.Tired))
                        || (!workPlan.AllowDown
                            && (Victim.Downed
                                || Victim.health.HasHediffsNeedingTendByPlayer(false)
-                               || commonUtl.GetNetMana(Victim) < -0.79f))
-                       || (!workPlan.AllowKill && commonUtl.GetNetMana(Victim) < -0.95f);
+                               || ManaUtl.GetSeverity(Victim) >= ManaUtl.GetThresholdFromStage(ManaStages.Extreme)))
+                       || (!workPlan.AllowKill
+                           && ManaUtl.GetSeverity(Victim) >= ManaUtl.GetThresholdFromStage(ManaStages.Deadly));
             });
             AddFinishAction(() =>
             {
@@ -122,12 +125,8 @@ namespace NightmareIncarnation
                 {
                     totalGainMana += manaGainPerTick;
                     succubusManaNeed.CurLevel += manaGainPerTick;
-                    float drainedMana = victimManaNeed.CurLevel - manaGainPerTick;
-                    victimManaNeed.CurLevel = (drainedMana < 0f) ? 0f : drainedMana;
-                    if (drainedMana < 0f)
-                    {
-                        HealthUtility.AdjustSeverity(Victim, NIHediffDefOf.VigorRavage, -drainedMana);
-                    }
+
+                    HealthUtility.AdjustSeverity(Victim, NIHediffDefOf.VigorRavage, manaGainPerTick);
 
                     int ticksGame = Find.TickManager.TicksGame;
                     if (ticksGame > moteInterval + motethrownTick)
@@ -335,7 +334,7 @@ namespace NightmareIncarnation
             {
                 thought_Memory.moodPowerFactor = ((thought_Memory.MoodOffset() < 0f) ? 0.5f : 1f);
             }
-            if (thought_Memory is Thought_MemorySocial thought_MemorySocial && commonUtl.IsSuccubus(affecter))
+            if (thought_Memory is Thought_MemorySocial thought_MemorySocial && ManaUtl.IsSuccubus(affecter))
             {
                 if (thought_MemorySocial.opinionOffset < 0f)
                 {

@@ -20,6 +20,7 @@ namespace NightmareIncarnation
         /// <param name="workPlan"></param>
         /// <param name="forcedValue"></param>
         /// <returns></returns>
+        [Obsolete]
         public static List<Pawn> GetPawnsByManaPolicy(Pawn pawn, WorkPlan workPlan, float forcedValue = 0f)
         {
             RelationType targetType = workPlan.targetType;
@@ -76,6 +77,7 @@ namespace NightmareIncarnation
         /// </summary>
         /// <param name="pawn">pawn to check</param>
         /// <returns>true if the pawn can have a need for mana, false otherwise</returns>
+        [Obsolete]
         public static bool IsManaConformant(Pawn pawn)
         {
             if (pawn != null && pawn.Spawned)
@@ -103,6 +105,7 @@ namespace NightmareIncarnation
         /// </summary>
         /// <param name="pawn"></param>
         /// <returns></returns>
+        [Obsolete]
         public static float GetMana(Pawn pawn)
         {
             Need_Mana needMana = (pawn.needs.AllNeeds.Find((Need needForMana) => needForMana.def == NINeedDefOf.NI_Need_Mana) as Need_Mana);
@@ -144,6 +147,7 @@ namespace NightmareIncarnation
         /// </summary>
         /// <param name="pawn"></param>
         /// <returns></returns>
+        [Obsolete]
         public static float GetNetMana(Pawn pawn)
         {
             return GetMana(pawn) - ((pawn.GetComp<CompSuccubusRace>() == null) ? GetVigorRavageLv(pawn) : GetDeficiencyLv(pawn));
@@ -157,6 +161,7 @@ namespace NightmareIncarnation
         /// <param name="workPlan"></param>
         /// <param name="forcedValue"></param>
         /// <returns></returns>
+        [Obsolete]
         public static bool HasEnoughtMana(Pawn pawn, WorkPlan workPlan, float forcedValue = 0f)
         {
             float squuezeAmount = (forcedValue > 0f) ? forcedValue : workPlan.SqueezeValue;
@@ -180,6 +185,7 @@ namespace NightmareIncarnation
             }
         }
 
+        [Obsolete]
         public static bool IsSuccubus(Pawn pawn)
         {
             return pawn.GetComp<CompSuccubusRace>() != null;
@@ -333,102 +339,6 @@ namespace NightmareIncarnation
         }
 
         /// <summary>
-        /// the original Method extracted by the decompiler
-        /// This method stays for debugging purposes until I fully understand it
-        /// </summary>
-        /// <param name="getter"></param>
-        /// <param name="eater"></param>
-        /// <param name="manaSource"></param>
-        /// <param name="manaSourceDef"></param>
-        /// <param name="canUseInventory"></param>
-        /// <param name="allowForbidden"></param>
-        /// <param name="forceScanWholeMap"></param>
-        /// <returns></returns>
-        public static bool TryFindBestManaSourceForORIGINALMETHOD(Pawn getter, Pawn eater, out Thing manaSource, out ThingDef manaSourceDef, bool canUseInventory = true, bool allowForbidden = false, bool forceScanWholeMap = false)
-        {
-            bool flag = getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation);
-            bool flag2 = !PawnUtility.IsTeetotaler(eater);
-            Thing thing = null;
-            if (canUseInventory)
-            {
-                bool flag3 = flag;
-                if (flag3)
-                {
-                    thing = commonUtl.BestManaSourceInInventory(getter, eater);
-                }
-                bool flag4 = thing != null;
-                if (flag4)
-                {
-                    bool flag5 = getter.Faction != Faction.OfPlayer;
-                    if (flag5)
-                    {
-                        manaSource = thing;
-                        manaSourceDef = manaSource.def;
-                        return true;
-                    }
-                    CompRottable compRottable = ThingCompUtility.TryGetComp<CompRottable>(thing);
-                    bool flag6 = compRottable != null && compRottable.Stage == null && compRottable.TicksUntilRotAtCurrentTemp < 30000;
-                    if (flag6)
-                    {
-                        manaSource = thing;
-                        manaSourceDef = manaSource.def;
-                        return true;
-                    }
-                }
-            }
-            Thing thing2 = commonUtl.BestManaSourceOnMap(getter, eater, allowForbidden, forceScanWholeMap);
-            bool flag7 = thing == null && thing2 == null;
-            bool result;
-            if (flag7)
-            {
-                manaSource = null;
-                manaSourceDef = null;
-                result = false;
-            }
-            else
-            {
-                bool flag8 = thing == null && thing2 != null;
-                if (flag8)
-                {
-                    manaSource = thing2;
-                    manaSourceDef = manaSource.def;
-                    result = true;
-                }
-                else
-                {
-                    ThingDef finalIngestibleDef = FoodUtility.GetFinalIngestibleDef(thing, false);
-                    bool flag9 = thing2 == null;
-                    if (flag9)
-                    {
-                        manaSource = thing;
-                        manaSourceDef = finalIngestibleDef;
-                        result = true;
-                    }
-                    else
-                    {
-                        float num = FoodUtility.FoodOptimality(eater, thing2, thing2.def, (float)(getter.Position - thing2.Position).LengthManhattan, false);
-                        float num2 = FoodUtility.FoodOptimality(eater, thing, finalIngestibleDef, 0f, false);
-                        num2 -= 32f;
-                        bool flag10 = num > num2;
-                        if (flag10)
-                        {
-                            manaSource = thing2;
-                            manaSourceDef = manaSource.def;
-                            result = true;
-                        }
-                        else
-                        {
-                            manaSource = thing;
-                            manaSourceDef = FoodUtility.GetFinalIngestibleDef(manaSource, false);
-                            result = true;
-                        }
-                    }
-                }
-            }
-            return result;
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="getter">Pawn who will deliver mana.</param>
@@ -473,6 +383,7 @@ namespace NightmareIncarnation
         /// <param name="pawn"></param>
         /// <param name="manaSource"></param>
         /// <returns></returns>
+        [Obsolete]
         public static int EstimateIngestCountOf(Pawn pawn, Thing manaSource)
         {
             if (!IsSuccubus(pawn))

@@ -21,9 +21,10 @@ namespace NightmareIncarnation
                 typeof(DamageInfo),
                 typeof(DamageWorker.DamageResult)
             }, null), new HarmonyMethod(typeof(HarmonyPatches), "Pawn_HealthTrackerAddHediffPrefix", null), null, null);
-            harmony.Patch(AccessTools.Method(typeof(Pawn), "GetGizmos", null, null), null, new HarmonyMethod(typeof(HarmonyPatches), "Pawn_GetGizmos_Postfix", null), null);
+            //harmony.Patch(AccessTools.Method(typeof(Pawn), "GetGizmos", null, null), null, new HarmonyMethod(typeof(HarmonyPatches), "Pawn_GetGizmos_Postfix", null), null);
             harmony.Patch(AccessTools.Method(typeof(Pawn), "PreApplyDamage", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Pawn_PreApplyDamage_Prefix", null), null, null);
             harmony.Patch(AccessTools.Method(typeof(Thing), "Ingested", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Thing_Ingested_Prefix", null), null, null);
+            harmony.Patch(AccessTools.Method(typeof(Pawn_NeedsTracker), "ShouldHaveNeed", null, null), new HarmonyMethod(typeof(HarmonyPatches), "Pawn_NeedsTracker_ShouldHaveNeed_Prefix", null), null, null);
         }
 
         /// <summary>
@@ -34,83 +35,63 @@ namespace NightmareIncarnation
         /// <param name="part"></param>
         /// <param name="dinfo"></param>
         /// <param name="result"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// <see langword="false"/> to skip original method.<br/>
+        /// <see langword="true"/> to call original method.
+        /// </returns>
         private static bool Pawn_HealthTrackerAddHediffPrefix(Pawn ___pawn, Hediff hediff, BodyPartRecord part = null, DamageInfo? dinfo = null, DamageWorker.DamageResult result = null)
         {
-            if (HarmonyPatches.HasResistFor(___pawn, hediff, part, dinfo, result))
+            if (ManaUtl.IsSuccubus(___pawn) && FleshHediffInvalidFor(___pawn, hediff))
             {
-                Log.Message("The pawn " + ___pawn.Label + "is resistant to" + hediff.Label, false);
                 return false;
             }
             return true;
         }
 
-
-        private static bool HasResistFor(Pawn pawn, Hediff hediff, BodyPartRecord part = null, DamageInfo? dinfo = null, DamageWorker.DamageResult result = null)
-        {
-            if (commonUtl.IsSuccubus(pawn))
-            {
-                return HarmonyPatches.FleshHediffInvalidFor(pawn, hediff);
-            }
-            return false;
-        }
-
         private static bool FleshHediffInvalidFor(Pawn pawn, Hediff hediff)
         {
-            if (!pawn.RaceProps.IsFlesh)
+            if (hediff.def == HediffDefOf.Anesthetic)
             {
-                //I think this should be true cause when it steps in here the pawn is not fleshy, right?
-                return false;
+                return pawn.Faction != Faction.OfPlayer
+                       || pawn.CurJob == null
+                       || pawn.CurJobDef != JobDefOf.LayDown
+                       || (pawn.jobs.posture != PawnPosture.LayingInBed && pawn.jobs.posture != PawnPosture.LayingOnGroundNormal);
             }
-            else
+
+            if (hediff.def == HediffDefOf.BloodLoss)
             {
-                if (hediff.def == HediffDefOf.Anesthetic)
-                {
-                    return pawn.Faction == null || !pawn.Faction.IsPlayer || pawn.CurJob == null || pawn.CurJobDef != JobDefOf.LayDown || (pawn.jobs.posture != PawnPosture.LayingInBed && pawn.jobs.posture != PawnPosture.LayingOnGroundNormal);
-                }
-                if (hediff.def == HediffDefOf.BloodLoss)
-                {
-                    HediffSet hediffSet = pawn.health.hediffSet;
-                    return hediffSet != null && hediffSet.BleedRateTotal < 0.1f;
-                }
-                if (hediff.def == HediffDefOf.Malnutrition)
-                {
-                    Pawn_NeedsTracker needs = pawn.needs;
-                    if (needs == null)
-                    {
-                        return false;
-                    }
-                    Need_Food food = needs.food;
-                    return ((food != null) ? new float?(food.CurLevel) : null) > 0f;
-                }
+                return pawn.health.hediffSet.BleedRateTotal < 0.1f;
+            }
+
+            if (hediff.def == HediffDefOf.Malnutrition)
+            {
+                return pawn.needs.food.CurLevel > 0f;
             }
             return false;
         }
 
-        private static void Pawn_GetGizmos_Postfix(ref IEnumerable<Gizmo> __result, Pawn __instance)
-        {
-            if (__result != null)
-            {
-                List<Gizmo> listedGizmos = __result.ToList<Gizmo>();
-                CompSuccubusRace compSuccubusRace = ThingCompUtility.TryGetComp<CompSuccubusRace>(__instance);
-                bool flag2 = compSuccubusRace != null;
-                if (commonUtl.IsSuccubus(__instance))
-                {
-                    foreach (Gizmo item in compSuccubusRace.CompGetGizmosExtra())
-                    {
-                        listedGizmos.Add(item);
-                    }
-                }
-                __result = listedGizmos;
-            }
-        }
+        //private static void Pawn_GetGizmos_Postfix(ref IEnumerable<Gizmo> __result, Pawn __instance)
+        //{
+        //    if (__result != null)
+        //    {
+        //        List<Gizmo> listedGizmos = __result.ToList<Gizmo>();
+        //        CompSuccubusRace compSuccubusRace = ThingCompUtility.TryGetComp<CompSuccubusRace>(__instance);
+        //        if (commonUtl.IsSuccubus(__instance))
+        //        {
+        //            foreach (Gizmo item in compSuccubusRace.CompGetGizmosExtra())
+        //            {
+        //                listedGizmos.Add(item);
+        //            }
+        //        }
+        //        __result = listedGizmos;
+        //    }
+        //}
 
         private static bool Pawn_PreApplyDamage_Prefix(Pawn __instance, ref DamageInfo dinfo, ref bool absorbed)
         {
-            if (commonUtl.IsSuccubus(__instance))
+            if (ManaUtl.IsSuccubus(__instance))
             {
-                bool wearingSuccubusOutfit = GenCollection.Any<Apparel>(__instance.apparel.WornApparel, (Apparel outfit) => outfit.def == NIThingDefOf.Apparel_NIHalfPersona);
-                if (wearingSuccubusOutfit)
+                if (__instance.apparel.WornApparel.Any(outfit => outfit.def == NIThingDefOf.Apparel_NIHalfPersona))
                 {
                     if (Rand.Chance(0.1f))
                     {
@@ -119,8 +100,7 @@ namespace NightmareIncarnation
                         return false;
                     }
                 }
-                bool wearingSuccubusArmor = GenCollection.Any<Apparel>(__instance.apparel.WornApparel, (Apparel armor) => armor.def == NIThingDefOf.Apparel_NIBattleGarb);
-                if (wearingSuccubusArmor)
+                if (__instance.apparel.WornApparel.Any(armor => armor.def == NIThingDefOf.Apparel_NIBattleGarb))
                 {
                     dinfo.SetAmount(dinfo.Amount * 0.7f);
                 }
@@ -146,7 +126,7 @@ namespace NightmareIncarnation
             CompSuccubusRace comp = ingester.GetComp<CompSuccubusRace>();
             if (comp != null)
             {
-                if (CommonData.ManaSourceDefs.Any((ThingDef manaSource) => __instance.def == manaSource))
+                if (CommonData.ManaSourceDefs.Any(manaSource => __instance.def == manaSource))
                 {
                     IngestionOutcomeDoer_OffsetNeed ingestionOutcomeOffset = __instance.def.ingestible.outcomeDoers.FirstOrDefault(delegate (IngestionOutcomeDoer ingestionOutcomer)
                     {
@@ -155,6 +135,23 @@ namespace NightmareIncarnation
                     }) as IngestionOutcomeDoer_OffsetNeed;
                     comp.TotalManaGained = Mathf.Min(comp.TotalManaGained + ingestionOutcomeOffset.offset, 9999f);
                 }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Add Need_Mana only if succubus.
+        /// </summary>
+        /// <returns>
+        /// <see langword="false"/> to skip original method.<br/>
+        /// <see langword="true"/> to call original method.
+        /// </returns>
+        private static bool Pawn_NeedsTracker_ShouldHaveNeed_Prefix(ref bool __result, NeedDef nd, Pawn ___pawn)
+        {
+            if (nd == NINeedDefOf.NI_Need_Mana && !ManaUtl.IsSuccubus(___pawn))
+            {
+                __result = false;
+                return false;
             }
             return true;
         }

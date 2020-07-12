@@ -66,15 +66,26 @@
 
   <HediffDef>
     <defName>VigorRavage</defName>
+    <hediffClass>HediffWithComps</hediffClass>
     <label>energy breakdown</label>
-    <lethalSeverity>1</lethalSeverity>
+    <initialSeverity>0.01</initialSeverity>
+    <lethalSeverity>2</lethalSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
     <description>1</description>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.5</severityPerDay>
+      </li>
+    </comps>
     <stages>
       <li>
+        <minSeverity>0</minSeverity>
+        <label>safe</label>
+        <becomeVisible>false</becomeVisible>
+      </li>
+      <li>
+        <minSeverity>1.0</minSeverity>
         <label>tired</label>
-        <socialFightChanceFactor>1.5</socialFightChanceFactor>
-        <restFallFactorOffset>0.1</restFallFactorOffset>
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
@@ -83,10 +94,8 @@
         </capMods>
       </li>
       <li>
-        <minSeverity>0.2</minSeverity>
+        <minSeverity>1.2</minSeverity>
         <label>fatigue</label>
-        <socialFightChanceFactor>2</socialFightChanceFactor>
-        <restFallFactorOffset>0.25</restFallFactorOffset>
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
@@ -95,10 +104,9 @@
         </capMods>
       </li>
       <li>
-        <minSeverity>0.4</minSeverity>
+        <minSeverity>1.4</minSeverity>
         <label>overworked</label>
         <socialFightChanceFactor>2.5</socialFightChanceFactor>
-        <restFallFactorOffset>0.5</restFallFactorOffset>
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
@@ -107,10 +115,8 @@
         </capMods>
       </li>
       <li>
-        <minSeverity>0.6</minSeverity>
+        <minSeverity>1.6</minSeverity>
         <label>extremly overworked</label>
-        <socialFightChanceFactor>3</socialFightChanceFactor>
-        <restFallFactorOffset>1.0</restFallFactorOffset>
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
@@ -119,10 +125,9 @@
         </capMods>
       </li>
       <li>
-        <minSeverity>0.8</minSeverity>
-        <label>weak</label>
+        <minSeverity>1.8</minSeverity>
+        <label>deadly</label>
         <lifeThreatening>true</lifeThreatening>
-        <restFallFactorOffset>2.0</restFallFactorOffset>
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
