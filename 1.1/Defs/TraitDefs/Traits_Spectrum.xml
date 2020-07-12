@@ -10,37 +10,37 @@
 		<degreeDatas>
 			<li>
 				<label>Nightmare Magic Crest</label>
-				<description>[Nightmare Incarnation]: A volatile magical power\n[PAWN_nameDef]possesses an enormous amount of magical power as a demon.[PAWN_possessive]Evil powers that are comparable to high-ranking demons are extremely difficult to control, and physical maintenance alone will require a great deal of magical power cost. It is a very dangerous and awkward predisposition even for fellows.</description>
+				<description>Nightmare Incarnation: A volatile magical power\n [PAWN_nameDef] possesses an enormous amount of magical power as a demon. [PAWN_possessive] Evil powers that are comparable to high-ranking demons are extremely difficult to control, and physical maintenance alone will require a great deal of magical power cost. It is a very dangerous and awkward predisposition even for fellows.</description>
 				<degree>6</degree>
 				<marketValueFactorOffset>0.80</marketValueFactorOffset>
 			</li>
 			<li>
 				<label>Corrupted Demon</label>
-				<description>[Fallen Dream Magic]: Aphrodisiac magic power\n[PAWN_nameDef]は夢魔として強い力を持っており、さらに強力な呪術といくらかの幻術を使いこなします。[PAWN_pronoun]は人々が困惑したり、苦痛に顔を歪めたりする表情を目にすることに強い快感を覚えます。また魔力収集においても、同じ者への吸精行動を執拗に繰り返して相手の衰弱の様子を楽しんだりすることがある等、なかなかに恐ろしい素質の持ち主です。</description>
+				<description>Fallen Dream Magic: Aphrodisiac magic power\n [PAWN_nameDef] is a powerful demon skilled in the art of illusion spells. [PAWN_pronoun] enjoys seeing the pain in the faces of [PAWN_possessive] victims as [PAWN_pronoun] squeezes the last bit of life from them.</description>
 				<degree>5</degree>
 				<marketValueFactorOffset>0.40</marketValueFactorOffset>
 			</li>
 			<li>
 				<label>Last Memon</label><!-- 【情欲の夢魔】：浪費型魔力特性 -->
-				<description>[Dream of lust]: Wasted magic power characteristics\n[PAWN_nameDef]は夢魔として強い力を持っており、[PAWN_pronoun]が声を発する前から対面するあらゆる相手を自然と惹き付け、虜にしてしまいます。[PAWN_pronoun]はさらに強力な幻術と若干の呪術を使いこなしますが、力が強大な分魔力の消費も激しく、共に過ごす者たちは[PAWN_possessive]貪欲さを思い知ることになるでしょう。ある意味サキュバスとしては最も仕事熱心なタイプなのかもしれません。</description>
+				<description>Dream of lust: Wasted magic power characteristics\n [PAWN_nameDef] is a powerfull succubus who can use [PAWN_possessive] to enthrall her victims without uttering a word. While [PAWN_pronoun] doesn't kill [PAWN_possessive] victims, [PAWN_pronoun] works tirelessly to find new victims and drain mana from them.</description>
 				<degree>4</degree>
 				<marketValueFactorOffset>0.40</marketValueFactorOffset>
 			</li>
 			<li>
 				<label>Mischief Crest</label>
-				<description>[Foursome Dream Magic]: Surprise magic power characteristics\n[PAWN_nameDef]は幻術よりも相手に直接悪影響を与えるような呪術を得意としています。[PAWN_pronoun]は誰かに指示されたり魔力を真面目に扱ったりするのを好まず、常に混沌とした結果を望んで気の赴くままに行動します。それゆえ[PAWN_possessive]周りでは何が起こるかわかりません。</description>
+				<description>Foursome Dream Magic: Surprise magic power characteristics\n [PAWN_nameDef] is not as adept at illusion than other succubi, instead prefering to use mana to harm [PAWN_possessive] victims directly. [PAWN_pronoun] doesn't like to be bossed around or being told how to use [PAWN_possessive] magic. [PAWN_pronoun] revels in chaos and will try to cause as much as possible.</description>
 				<degree>3</degree>
 				<marketValueFactorOffset>0.20</marketValueFactorOffset>
 			</li>
 			<li>
 				<label>Charm crest</label>
-				<description>[Enchanted Dream Magic]: Illusion type magic power\n[PAWN_nameDef]はたくさんの人々を魅了し惑わすことを何よりも好み、またその分野と相性の良い幻術を扱う力にも長けています。いかにもサキュバスらしい魔力特性の持ち主です。魔力収集には大いに役立つ資質といえるでしょう。</description>
+				<description>Enchanted Dream Magic: Illusion type magic power\n [PAWN_nameDef] prefers to charm and deceive [PAWN_possessive] victims instead of attacking directly. [PAWN_possessive] illusion capabilities are excellent and [PAWN_pronoun] is very adapt at collecting mana.</description>
 				<degree>2</degree>
 				<marketValueFactorOffset>0.20</marketValueFactorOffset>
 			</li>
 			<li>
 				<label>Serenity Magic Crest</label>
-				<description>[Silence dreamer]: Consumption reduction type magic power characteristics\n[PAWN_nameDef]は夢魔としての素質を持っていますが、その力は決して強くありません。扱える魔力も他のサキュバス達と比較すると劣ります。そのかわり[PAWN_pronoun]は、出来るだけ他者から奪わなくて済むよう魔力消耗を抑える特性を身につけました。</description>
+				<description>Silence dreamer: Consumption reduction type magic power characteristics\n While [PAWN_nameDef] is a succubus, [PAWN_possessive] powers are very weak compared to other succubi. [PAWN_pronoun] uses [PAWN_possessive] powers to subtly influence [PAWN_possessive] victims to give their mana willingly.</description>
 				<degree>1</degree>
 				<marketValueFactorOffset>0</marketValueFactorOffset>
 			</li>      

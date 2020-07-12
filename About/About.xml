@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>Nightmare Incarnation</name>
-  <author>匿名希望 aka IGNI</author>
+  <author>Various RJW Modders</author>
   <supportedVersions>
     <li>1.1</li>
   </supportedVersions>
-  <packageId>bearlyAlive.NightmareIncarnation.RJWCompatible</packageId>
+  <packageId>NightmareIncarnation.RJWCompatible</packageId>
   <modDependencies>
     <li>
       <packageId>erdelf.HumanoidAlienRaces</packageId>
@@ -19,16 +19,11 @@
     </li>
   </modDependencies>
   <description>ver0.1
-
-    AlienRace練習用。
-    さきゅばす。
-
-    [前提mod]
-    ・Humanoid Alien Race 2.0
-
-
-    当MODの複製・転載・再配布は固く禁じます。
-    !!!Copy, reprinting and distribution are strictly prohibited!!!
-
+    This mod Requires
+    Humanoid Alien Race 2.0
+    Harmony
+    
+    This mod was originaly made by IGNI, 
+    but a lot of his work was reworked so it doesn't resmble the original anymore.
   </description>
 </ModMetaData>
