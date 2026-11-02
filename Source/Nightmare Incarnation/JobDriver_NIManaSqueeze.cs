@@ -99,7 +99,7 @@ namespace NightmareIncarnation
                        || (!workPlan.AllowKill
                            && ManaUtl.GetSeverity(Victim) >= ManaUtl.GetThresholdFromStage(ManaStages.Deadly));
             });
-            AddFinishAction(() =>
+            AddFinishAction(condition =>
             {
                 if (Victim.CurJobDef == JobDefOf.Wait_MaintainPosture)
                 {
@@ -108,6 +108,7 @@ namespace NightmareIncarnation
                 if (totalGainMana > 0f)
                 {
                     ApplyJobThought(pawn, Victim);
+                    CompRace.RecordSqueezedVictim();
                     CompRace.TotalManaGained = Mathf.Min(CompRace.TotalManaGained + Mathf.RoundToInt(totalGainMana / 0.01f) * 0.01f, 9999f);
                 }
             });
@@ -132,7 +133,7 @@ namespace NightmareIncarnation
                     if (ticksGame > moteInterval + motethrownTick)
                     {
                         motethrownTick = ticksGame;
-                        MoteMaker.ThrowMetaIcon(Victim.Position, pawn.Map, ThingDefOf.Mote_Heart);
+                        FleckMaker.ThrowMetaIcon(Victim.Position, pawn.Map, FleckDefOf.Heart);
                     }
 
                     if (this.JoyMode)

@@ -46,7 +46,7 @@ namespace NightmareIncarnation
             CompSuccubusRace comp = pawn.GetComp<CompSuccubusRace>();
             if (comp == null)
             {
-                Log.Error("Job_NIManaSqueeze is unique to the Succubus races.", false);
+                Log.Error("Job_NIManaSqueeze is unique to the Succubus races.");
                 return null;
             }
 
@@ -87,7 +87,8 @@ namespace NightmareIncarnation
                     Pawn foodSourcePawn = currentPlan.MainDishPawn;
                     if (foodSourcePawn != null
                         && foodSourcePawn.Faction == Faction.OfPlayer
-                        && ((currentPlan.targetType == RelationType.Colonist && foodSourcePawn.IsColonist)
+                        && ((currentPlan.targetType == RelationType.Colonist && foodSourcePawn.IsFreeColonist)
+                            || (currentPlan.targetType == RelationType.Slave && foodSourcePawn.IsSlaveOfColony)
                             || (currentPlan.targetType == RelationType.Prisoner && foodSourcePawn.IsPrisonerOfColony))
                         && !CommonUtl.IsSuccubus(foodSourcePawn)
                         && CommonUtl.IsPassive(foodSourcePawn)

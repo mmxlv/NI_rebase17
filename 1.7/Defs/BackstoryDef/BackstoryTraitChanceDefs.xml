@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <NightmareIncarnation.BackstoryTraitChanceDef>
+    <defName>NI_BackstoryTraitChance_NI_BS3c_NaturalMood</defName>
+    <backstory>NI_BS3c</backstory>
+    <trait>NaturalMood</trait>
+    <degree>2</degree>
+    <chance>40</chance>
+  </NightmareIncarnation.BackstoryTraitChanceDef>
+  <NightmareIncarnation.BackstoryTraitChanceDef>
+    <defName>NI_BackstoryTraitChance_NI_BS3c_SpeedOffset</defName>
+    <backstory>NI_BS3c</backstory>
+    <trait>SpeedOffset</trait>
+    <degree>1</degree>
+    <chance>20</chance>
+  </NightmareIncarnation.BackstoryTraitChanceDef>
+  <NightmareIncarnation.BackstoryTraitChanceDef>
+    <defName>NI_BackstoryTraitChance_NI_BS5c_Bloodlust</defName>
+    <backstory>NI_BS5c</backstory>
+    <trait>Bloodlust</trait>
+    <degree>0</degree>
+    <chance>25</chance>
+  </NightmareIncarnation.BackstoryTraitChanceDef>
+  <NightmareIncarnation.BackstoryTraitChanceDef>
+    <defName>NI_BackstoryTraitChance_NI_BS5a_Bloodlust</defName>
+    <backstory>NI_BS5a</backstory>
+    <trait>Bloodlust</trait>
+    <degree>0</degree>
+    <chance>25</chance>
+  </NightmareIncarnation.BackstoryTraitChanceDef>
+</Defs>

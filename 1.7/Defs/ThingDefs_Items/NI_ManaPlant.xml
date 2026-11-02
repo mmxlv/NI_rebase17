@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef>
+    <defName>NI_ManaHerb</defName>
+    <label>mana herb</label>
+    <description>A hardy herb that absorbs traces of mana from the soil.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <selectable>true</selectable>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>75</stackLimit>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <graphicData>
+      <texPath>Things/Item/NI_ManaPlant_Leaves</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>2</MarketValue>
+      <Mass>0.05</Mass>
+    </statBases>
+    <thingCategories>
+      <li>PlantFoodRaw</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+    </comps>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+
+  <ThingDef ParentName="PlantBase">
+    <defName>NI_ManaPlant</defName>
+    <label>mana plant</label>
+    <description>A test crop that yields mana herbs for brewing.</description>
+    <thingClass>NightmareIncarnation.Plant_GrowthStages</thingClass>
+    <selectable>true</selectable>
+    <graphicData>
+      <texPath>Things/Plant/NI_ManaPlant/NI_ManaPlant_A</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.7,0.7)</drawSize>
+      <!--<shaderType>Cutout</shaderType>-->
+    </graphicData>
+    <plant>
+      <fertilityMin>0.05</fertilityMin>
+      <fertilitySensitivity>1</fertilitySensitivity>
+      <growDays>8</growDays>
+      <harvestedThingDef>NI_ManaHerb</harvestedThingDef>
+      <harvestYield>6</harvestYield>
+      <sowTags>
+        <li>Ground</li>
+        <li>Hydroponic</li>
+      </sowTags>
+      <sowMinSkill>0</sowMinSkill>
+    </plant>
+    <ingestible>
+      <preferability>NeverForNutrition</preferability>
+    </ingestible>
+    <modExtensions>
+      <li Class="NightmareIncarnation.PlantGrowthStageExtension">
+        <stages>
+          <li>
+            <minGrowth>0.00</minGrowth>
+            <texPath>Things/Plant/NI_ManaPlant/NI_ManaPlant_A</texPath>
+          </li>
+          <li>
+            <minGrowth>0.25</minGrowth>
+            <texPath>Things/Plant/NI_ManaPlant/NI_ManaPlant_B</texPath>
+          </li>
+          <li>
+            <minGrowth>0.50</minGrowth>
+            <texPath>Things/Plant/NI_ManaPlant/NI_ManaPlant_C</texPath>
+          </li>
+          <li>
+            <minGrowth>0.75</minGrowth>
+            <texPath>Things/Plant/NI_ManaPlant/NI_ManaPlant_D</texPath>
+          </li>
+        </stages>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

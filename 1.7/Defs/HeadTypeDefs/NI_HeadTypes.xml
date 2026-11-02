@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <HeadTypeDef>
+    <defName>NI_Female_NI01face</defName>
+    <label>Succubus 01</label>
+    <graphicPath>Things/Pawn/NI_Succubus/Heads/Female/Female_NI01face</graphicPath>
+    <gender>Female</gender>
+  </HeadTypeDef>
+  <HeadTypeDef>
+    <defName>NI_Female_NI02face</defName>
+    <label>Succubus 02</label>
+    <graphicPath>Things/Pawn/NI_Succubus/Heads/Female/Female_NI02face</graphicPath>
+    <gender>Female</gender>
+  </HeadTypeDef>
+  <HeadTypeDef>
+    <defName>NI_Female_NI03face</defName>
+    <label>Succubus 03</label>
+    <graphicPath>Things/Pawn/NI_Succubus/Heads/Female/Female_NI03face</graphicPath>
+    <gender>Female</gender>
+  </HeadTypeDef>
+  <HeadTypeDef>
+    <defName>NI_Female_NI04face</defName>
+    <label>Succubus 04</label>
+    <graphicPath>Things/Pawn/NI_Succubus/Heads/Female/Female_NI04face</graphicPath>
+    <gender>Female</gender>
+  </HeadTypeDef>
+  <HeadTypeDef>
+    <defName>NI_Female_NI05face</defName>
+    <label>Succubus 05</label>
+    <graphicPath>Things/Pawn/NI_Succubus/Heads/Female/Female_NI05face</graphicPath>
+    <gender>Female</gender>
+  </HeadTypeDef>
+  <HeadTypeDef>
+    <defName>NI_Female_NI06face</defName>
+    <label>Succubus 06</label>
+    <graphicPath>Things/Pawn/NI_Succubus/Heads/Female/Female_NI06face</graphicPath>
+    <gender>Female</gender>
+  </HeadTypeDef>
+  <HeadTypeDef>
+    <defName>NI_Female_NI07face</defName>
+    <label>Succubus 07</label>
+    <graphicPath>Things/Pawn/NI_Succubus/Heads/Female/Female_NI07face</graphicPath>
+    <gender>Female</gender>
+  </HeadTypeDef>
+  <HeadTypeDef>
+    <defName>NI_Female_NI08face</defName>
+    <label>Succubus 08</label>
+    <graphicPath>Things/Pawn/NI_Succubus/Heads/Female/Female_NI08face</graphicPath>
+    <gender>Female</gender>
+  </HeadTypeDef>
+  <HeadTypeDef>
+    <defName>NI_Female_NI09face</defName>
+    <label>Succubus 09</label>
+    <graphicPath>Things/Pawn/NI_Succubus/Heads/Female/Female_NI09face</graphicPath>
+    <gender>Female</gender>
+  </HeadTypeDef>
+  <HeadTypeDef>
+    <defName>NI_Female_NI10face</defName>
+    <label>Succubus 10</label>
+    <graphicPath>Things/Pawn/NI_Succubus/Heads/Female/Female_NI10face</graphicPath>
+    <gender>Female</gender>
+  </HeadTypeDef>
+</Defs>

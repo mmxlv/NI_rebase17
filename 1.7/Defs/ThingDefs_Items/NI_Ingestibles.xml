@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef>
+    <defName>NI_ManaherbTea</defName>
+    <label>mana herb tea</label>
+    <description>A herbal infusion that restores a small amount of mana to a succubus.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <selectable>true</selectable>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>10</stackLimit>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <graphicData>
+      <texPath>Things/Item/ManaherbTea</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>12</MarketValue>
+      <Mass>0.2</Mass>
+      <DeteriorationRate>2</DeteriorationRate>
+    </statBases>
+    <thingCategories>
+      <li>Drugs</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+    </comps>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>NeverForNutrition</preferability>
+      <ingestSound>Meal_Eat</ingestSound>
+      <outcomeDoers>
+        <li Class="NightmareIncarnation.IngestionOutcomeDoer_RestoreMana">
+          <manaFraction>0.15</manaFraction>
+          <moodThought>NI_DrankManaHerbTea</moodThought>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+
+  <ThingDef>
+    <defName>NI_ManaPotion</defName>
+    <label>mana potion</label>
+    <description>A rare potion that restores a substantial amount of mana to a succubus.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <selectable>true</selectable>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>10</stackLimit>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <graphicData>
+      <texPath>Things/Item/ManaPotion</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>40</MarketValue>
+      <Mass>0.2</Mass>
+      <DeteriorationRate>2</DeteriorationRate>
+    </statBases>
+    <thingCategories>
+      <li>Drugs</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+    </comps>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>NeverForNutrition</preferability>
+      <baseIngestTicks>60</baseIngestTicks>
+      <ingestSound>Meal_Eat</ingestSound>
+      <outcomeDoers>
+        <li Class="NightmareIncarnation.IngestionOutcomeDoer_RestoreMana">
+          <manaFraction>0.5</manaFraction>
+          <foodPoisoningSeverity>0.5</foodPoisoningSeverity>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+
+</Defs>

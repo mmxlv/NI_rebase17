@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <AlienRace.AlienBackstoryDef Name="NI_Backstory_Base" Abstract="True">
+    <spawnCategories>
+      <li>NI_Backstory</li>
+    </spawnCategories>
+    <bodyTypeGlobal>Female</bodyTypeGlobal>
+    <bodyTypeMale>Female</bodyTypeMale>
+    <bodyTypeFemale>Female</bodyTypeFemale>
+  </AlienRace.AlienBackstoryDef>
+
+  <!--====================== 幼年期 =====================-->
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS1c</defName>
+    <title>Gentle Devil</title>
+    <titleShort>Gentle Devil</titleShort>
+    <description>[PAWN_nameDef] Was a child of Yumema who was so kind that she couldn't look like a devil. Therefore [PAWN_pronoun] was always teased and bullied by other demons.</description>
+    <slot>Childhood</slot>
+    <skillGains>
+      <Social>2</Social>
+      <Plants>1</Plants>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>1</NI_ManaAttribute>
+        <Kind>0</Kind>
+      </forcedTraits>
+    <linkedBackstory>NI_BS1a</linkedBackstory>
+  </AlienRace.AlienBackstoryDef>
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS2c</defName>
+    <title>young dream apprentice</title>
+    <titleShort>Dream Apprentice</titleShort>
+    <description>[PAWN_nameDef] was training in Makai aiming to be a full-fledged succubus. [PAWN_pronoun] has learned how to handle magical powers, and is able to do his or her job accordingly. The days of [PAWN_possessive] training will continue, with the dream of visiting the human world.</description>
+    <slot>Childhood</slot>
+    <skillGains>
+      <Intellectual>2</Intellectual>
+      <Medicine>3</Medicine>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>2</NI_ManaAttribute>
+      </forcedTraits>
+    <linkedBackstory>NI_BS2a</linkedBackstory>
+  </AlienRace.AlienBackstoryDef>
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS3c</defName>
+    <title>Wandering Demon</title>
+    <titleShort>Wandering Demon</titleShort>
+    <description>[PAWN_nameDef] was walking alone in various parts of the demon world, but [PAWN_pronoun] never felt lonely. If you are hungry, you can enjoy the thrill of stealing food from other demons and chasing you, and when you get tired of walking on the vast land, look up at the sky and look at the clouds fluttering in the Sacred Mountains, and enjoy the serenity of magic flowing into your body. .. Why am I a succubus? [PAWN_pronoun] has no time to think about such trivial matters. Every day, all the good things, the bad things, and the unpredictable experiences are all fresh and enjoyable.</description>
+    <slot>Childhood</slot>
+    <skillGains>
+      <Plants>1</Plants>
+      <Social>1</Social>
+      <Animals>1</Animals>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>3</NI_ManaAttribute>
+      </forcedTraits>
+    <linkedBackstory>NI_BS3a</linkedBackstory>
+  </AlienRace.AlienBackstoryDef>
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS4c</defName>
+    <title>noble born devil</title>
+    <titleShort>Noble Devil</titleShort>
+    <description>[PAWN_nameDef] is a child from a noble demon family from the demon world. [PAWN_pronoun] is a child of noble family from the demon world, who was trained from an early age to utilize advanced magic. It was expected of [PAWN_objective] to become a "dreamer". I was sometimes told [PAWN_pronoun] was very reserved, but [PAWN_possessive] abilities already surpassed those of ordinary dreamers.</description>
+    <slot>Childhood</slot>
+    <skillGains>
+      <Intellectual>4</Intellectual>
+      <Medicine>5</Medicine>
+      <Artistic>5</Artistic>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>4</NI_ManaAttribute>
+      </forcedTraits>
+    <linkedBackstory>NI_BS4a</linkedBackstory>
+  </AlienRace.AlienBackstoryDef>
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS5c</defName>
+    <title>Evil Devil</title>
+    <titleShort>Devil</titleShort>
+    <description>[PAWN_nameDef] has been feared as a shadow ruler since [PAWN_pronoun] was a child, as [PAWN_pronoun] was very good at persuading other demons to obey [PAWN_objective]. The treatmen of [PAWN_possessive] servants was cruel, but none of them complained, for they respcted [PAWN_objective] as an examplar of demonkind. Humans would call someone like [PAWN_objective] a devil.</description>
+    <slot>Childhood</slot>
+    <skillGains>
+      <Intellectual>3</Intellectual>
+      <Social>1</Social>
+      <Crafting>1</Crafting>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>5</NI_ManaAttribute>
+      </forcedTraits>
+    <linkedBackstory>NI_BS5a</linkedBackstory>
+  </AlienRace.AlienBackstoryDef>
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS6c</defName>
+    <title>mysterious lonely demon</title>
+    <titleShort>Mysterious Demon</titleShort>
+    <description>[PAWN_nameDef] found [PAWN_objective]self wandering the wilds of the demon world alone. It is unknown when [PAWN_pronoun] was born, or where [PAWN_pronoun] came from. From where is [PAWN_possessive] magic that no other Dreamer possesses coming from? Everyone who tried to uncover [PAWN_possessive] secrets, has dissapeared. [PAWN_pronoun] is alone to this day.</description>
+    <slot>Childhood</slot>
+    <skillGains>
+      <Melee>4</Melee>
+      <Shooting>4</Shooting>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>6</NI_ManaAttribute>
+      </forcedTraits>
+    <linkedBackstory>NI_BS6a</linkedBackstory>
+  </AlienRace.AlienBackstoryDef>
+
+  <!--====================== 幼年期 ======================-->
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS1a</defName>
+    <title>Gentle Genma</title>
+    <titleShort>Gentle Genma</titleShort>
+    <description>[PAWN_nameDef] is a dreamer who is kind and gentle to everyone. Because of [PAWN_possessive] undemonic behavior, no one knows [PAWN_pronoun] is a succubus until [PAWN_pronoun] reveals [PAWN_objective]self.</description>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <Social>3</Social>
+      <Plants>2</Plants>
+      <Cooking>2</Cooking>
+      <Animals>1</Animals>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>1</NI_ManaAttribute>
+        <Kind>0</Kind>
+      </forcedTraits>
+  </AlienRace.AlienBackstoryDef>
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS2a</defName>
+    <title>Apprentice Muma</title>
+    <titleShort>Apprentice Muma</titleShort>
+    <description>[PAWN_nameDef] is a succubus that has just arrived in this world. [PAWN_pronoun] has worked hard in the demon world is confident that [PAWN_pronoun] can do well in this world. Let's start with the person at hand!</description>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <Intellectual>2</Intellectual>
+      <Medicine>3</Medicine>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>2</NI_ManaAttribute>
+      </forcedTraits>
+  </AlienRace.AlienBackstoryDef>
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS3a</defName>
+    <title>A curious dreamer with a heart full of excitement</title>
+    <titleShort>curius dreamer</titleShort>
+    <description>The eyes of [PAWN_nameDef] where sparkling as [PAWN_pronoun] entered the human world. "I can't believe it, this whole world is going to be mine! I can't contain my excitment! So many new things to see and do!". In [PAWN_possessive] excitement [PAWN_nameDef] even forgets [PAWN_pronoun] is a succubus</description>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <Melee>1</Melee>
+      <Shooting>1</Shooting>
+      <Plants>1</Plants>
+      <Social>1</Social>
+      <Animals>1</Animals>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>3</NI_ManaAttribute>
+      </forcedTraits>
+  </AlienRace.AlienBackstoryDef>
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS4a</defName>
+    <title>noble dreamer</title>
+    <titleShort>noble dreamer</titleShort>
+    <description>[PAWN_nameDef] has only been a short time in this world, but [PAWN_possessive] aura of grace and dignity identifies [PAWN_objective] as a fully fledged dreamer. To protect her families honor and by exttension the demon world [PAWN_pronoun] has entered the human world to collect magic power. In preparation [PAWN_pronoun] made many contacts with demons who share [PAWN_possessive] intentions and now form a wide network in the demon world.</description>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <Cooking>2</Cooking>
+      <Intellectual>4</Intellectual>
+      <Social>5</Social>
+      <Artistic>3</Artistic>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>4</NI_ManaAttribute>
+      </forcedTraits>
+  </AlienRace.AlienBackstoryDef>
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS5a</defName>
+    <title>devilish dreamer</title>
+    <titleShort>devilish dreamer</titleShort>
+    <description>[PAWN_nameDef] is an evil and powerful succubus. [PAWN_pronoun] built [PAWN_possessive] mansion far from civilization and tormented [PAWN_possessive] servants every day. Other demons fear and respect [PAWN_objective] for [PAWN_possessive] cruel way of torturing, injuring and healing [PAWN_possessive] victims over and over again. It's said that once [PAWN_pronoun] recoginized humans as prey, [PAWN_pronoun] wouldn't let [PAWN_possessive] victims escape until they where completely drained.</description>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <Construction>1</Construction>
+      <Social>2</Social>
+      <Medicine>5</Medicine>
+      <Crafting>2</Crafting>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>5</NI_ManaAttribute>
+      </forcedTraits>
+  </AlienRace.AlienBackstoryDef>
+
+  <AlienRace.AlienBackstoryDef ParentName="NI_Backstory_Base">
+    <defName>NI_BS6a</defName>
+    <title>wandering nightmare</title>
+    <titleShort>wandering nightmare</titleShort>
+    <description>[PAWN_nameDef] brings ruin to this world. The enormous magical powers of [PAWN_objective] are still increasing, and it is difficult to control them no matter what the intention of [PAWN_objective] is. No one can account for [PAWN_nameDef]'s atrocities as none have survived.</description>
+    <slot>Adulthood</slot>
+    <skillGains>
+      <Melee>6</Melee>
+      <Shooting>6</Shooting>
+    </skillGains>
+    <forcedTraits>
+        <NI_ManaAttribute>6</NI_ManaAttribute>
+      </forcedTraits>
+  </AlienRace.AlienBackstoryDef>
+
+
+</Defs>

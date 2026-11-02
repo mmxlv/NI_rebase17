@@ -187,7 +187,7 @@ namespace NightmareIncarnation
             }
             TooltipHandler.TipRegion(allowKillButton, Translator.Translate("NItxt_AllowKillTip"));
 
-            if (this.targetType == RelationType.Colonist || this.targetType == RelationType.Prisoner)
+            if (this.targetType == RelationType.Colonist || this.targetType == RelationType.Prisoner || this.targetType == RelationType.Slave)
             {
                 List<FloatMenuOption> pawnOptionFinder()
                 {
@@ -199,7 +199,8 @@ namespace NightmareIncarnation
                     foreach (Pawn ediblePawn in workPlanStack.compRace.parent.Map.mapPawns.AllPawnsSpawned.Where(p => !CommonUtl.IsSuccubus(p)
                                                                                                                       && p != workPlanStack.compRace.parent
                                                                                                                       && ((targetType == RelationType.Colonist && p.IsFreeColonist)
-                                                                                                                          || (targetType == RelationType.Prisoner && p.IsPrisonerOfColony))))
+                                                                                                                          || (targetType == RelationType.Prisoner && p.IsPrisonerOfColony)
+                                                                                                                          || (targetType == RelationType.Slave && p.IsSlaveOfColony))))
                     {
                         ediblePawnOptions.Add(new FloatMenuOption(ediblePawn.LabelCap,
                                                                   () => MainDishPawn = ediblePawn,
@@ -263,6 +264,8 @@ namespace NightmareIncarnation
                         return Translator.Translate("NItxt_Colonist");
                     case RelationType.Prisoner:
                         return Translator.Translate("NItxt_Prisoner");
+                    case RelationType.Slave:
+                        return Translator.Translate("NItxt_Slave");
                     case RelationType.Hostile:
                         return Translator.Translate("NItxt_Enemy");
                         //case RelationType.Meal:

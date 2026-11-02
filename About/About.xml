@@ -3,7 +3,7 @@
   <name>Nightmare Incarnation</name>
   <author>Various RJW Modders</author>
   <supportedVersions>
-    <li>1.1</li>
+    <li>1.7</li>
   </supportedVersions>
   <packageId>NightmareIncarnation.RJWCompatible</packageId>
   <modDependencies>

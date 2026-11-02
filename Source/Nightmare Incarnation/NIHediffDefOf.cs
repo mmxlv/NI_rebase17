@@ -11,5 +11,7 @@ namespace NightmareIncarnation
         public static HediffDef ManaDeficiency;
 
         public static HediffDef VigorRavage;
+
+        public static HediffDef NI_SuccubusGrowth;
     }
 }

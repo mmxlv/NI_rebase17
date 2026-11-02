@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <defName>NI_SuccubusGrowth</defName>
+    <label>succubus growth</label>
+    <description>A succubus's innate strength develops as she drains mana from victims.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <minSeverity>0</minSeverity>
+        <label>Kid</label>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.02</offset></li>
+        </capMods>
+        <statOffsets>
+          <MoveSpeed>0.1</MoveSpeed>
+          <MeleeDodgeChance>1</MeleeDodgeChance>
+          <MeleeHitChance>0.02</MeleeHitChance>
+          <SocialImpact>0.02</SocialImpact>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>Young</label>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.05</offset></li>
+        </capMods>
+        <statOffsets>
+          <MoveSpeed>0.2</MoveSpeed>
+          <MeleeDodgeChance>2</MeleeDodgeChance>
+          <MeleeHitChance>0.04</MeleeHitChance>
+          <SocialImpact>0.05</SocialImpact>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>Young Adult</label>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.1</offset></li>
+        </capMods>
+        <statOffsets>
+          <MoveSpeed>0.3</MoveSpeed>
+          <MeleeDodgeChance>3</MeleeDodgeChance>
+          <MeleeHitChance>0.06</MeleeHitChance>
+          <SocialImpact>0.1</SocialImpact>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>Adult</label>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.25</offset></li>
+        </capMods>
+        <statOffsets>
+          <MoveSpeed>0.8</MoveSpeed>
+          <MeleeDodgeChance>10</MeleeDodgeChance>
+          <MeleeHitChance>0.2</MeleeHitChance>
+          <SocialImpact>0.2</SocialImpact>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

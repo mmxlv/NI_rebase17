@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RecipeDef>
+    <defName>Make_NI_ManaherbTea</defName>
+    <label>make mana herb tea</label>
+    <description>Brew mana herbs and magic crystal into mana herb tea.</description>
+    <jobString>Brewing mana herb tea.</jobString>
+    <workAmount>120</workAmount>
+    <workSkill>Cooking</workSkill>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>NI_ManaHerb</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>LF_MagicCrystal</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>NI_ManaHerb</li>
+        <li>LF_MagicCrystal</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <NI_ManaherbTea>1</NI_ManaherbTea>
+    </products>
+    <recipeUsers>
+      <li>DrugLab</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>Make_NI_ManaPotion</defName>
+    <label>make mana potion</label>
+    <description>Brew mana herbs and magic crystal into a concentrated mana potion.</description>
+    <jobString>Brewing a mana potion.</jobString>
+    <workAmount>240</workAmount>
+    <workSkill>Cooking</workSkill>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>NI_ManaHerb</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>LF_MagicCrystal</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>NI_ManaHerb</li>
+        <li>LF_MagicCrystal</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <NI_ManaPotion>1</NI_ManaPotion>
+    </products>
+    <recipeUsers>
+      <li>DrugLab</li>
+    </recipeUsers>
+  </RecipeDef>
+
+</Defs>

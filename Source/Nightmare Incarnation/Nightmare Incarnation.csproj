@@ -1,76 +1,62 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A2A7FE11-A410-4679-A901-43D6C6ADFBAA}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NightmareIncarnation</RootNamespace>
+    <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>Nightmare Incarnation</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <RootNamespace>NightmareIncarnation</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <OutputPath>..\..\1.7\Assemblies\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <RimWorldDir Condition="'$(RimWorldDir)' == ''">$(MSBuildThisFileDirectory)..\..\..\..\</RimWorldDir>
+    <HarmonyDir Condition="'$(HarmonyDir)' == ''">$(RimWorldDir)..\..\workshop\content\294100\839005762\1.7\Assemblies</HarmonyDir>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\1.1\Assemblies\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\1.1\Assemblies\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\..\workshop\content\294100\2009463077\v1.1\Assemblies\0Harmony.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(HarmonyDir)\0Harmony.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(RimWorldDir)Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityStubs">
+      <HintPath>$(RimWorldDir)UnityStubs.dll</HintPath>
+      <Private>false</Private>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Waylith">
+      <HintPath>$(RimWorldDir)Waylith.dll</HintPath>
+      <Private>false</Private>
     </Reference>
-    <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Waylith.UnityCompat">
+      <HintPath>$(RimWorldDir)Waylith.UnityCompat.dll</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <AppDesigner Include="Properties\" />
-  </ItemGroup>
+
   <ItemGroup>
     <Compile Include="ManaUtl.cs" />
     <Compile Include="CommonUtl.cs" />
+    <Compile Include="PlantGrowthStageGraphics.cs" />
     <Compile Include="CompProperties_SuccubusRace.cs" />
+    <Compile Include="CompAbilityEffect_SuccubusKnockDown.cs" />
+    <Compile Include="CompAbilityEffect_SuccubusEnlarge.cs" />
     <Compile Include="CompSuccubusRace.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="IconTex.cs" />
+    <Compile Include="IngestionOutcomeDoer_RestoreMana.cs" />
     <Compile Include="ITab_ManaPolicy.cs" />
     <Compile Include="JobDriver_NIManaSqueeze.cs" />
     <Compile Include="JobGiver_GetMana.cs" />
@@ -94,23 +80,4 @@
     <Compile Include="WorkPlan.cs" />
     <Compile Include="WorkPlanStack.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Defs\BackstoryDef\NI_BackstoryDef.xml" />
-    <Content Include="Defs\BodyDefs\Bodies_Succubus.xml" />
-    <Content Include="Defs\BodyDefs\NI_BodyParts.xml" />
-    <Content Include="Defs\HairDefs\Hair.xml" />
-    <Content Include="Defs\HediffDefs\Hediffs_Global_Needs.xml" />
-    <Content Include="Defs\JobDefs\NI_Jobs.xml" />
-    <Content Include="Defs\Joy\NI_JoyKinds.xml" />
-    <Content Include="Defs\NeedDefs\Needs.xml" />
-    <Content Include="Defs\PawnKindDefs_Humanlikes\PawnKinds_Succubus.xml" />
-    <Content Include="Defs\ThingDefs_Items\NI_Apparel.xml" />
-    <Content Include="Defs\ThingDefs_Items\NI_Resource.xml" />
-    <Content Include="Defs\ThingDefs_Races\Race_Succubus.xml" />
-    <Content Include="Defs\ThinkTreeDefs\Succubus.xml" />
-    <Content Include="Defs\ThoughtDefs\Thoughts_Situation_Needs.xml" />
-    <Content Include="Defs\ThoughtDefs\Thoughts_Situation_Social.xml" />
-    <Content Include="Defs\TraitDefs\Traits_Spectrum.xml" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

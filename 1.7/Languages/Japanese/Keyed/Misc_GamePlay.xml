@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<NItxt_TabManaPolicy>方針</NItxt_TabManaPolicy>
+	<NItxt_Meal>魔力回復アイテム</NItxt_Meal>
+	<NItxt_Colonist>入植者</NItxt_Colonist>
+	<NItxt_Slave>奴隷</NItxt_Slave>
+	<NItxt_Prisoner>囚人</NItxt_Prisoner>
+	<NItxt_Enemy>敵</NItxt_Enemy>
+	<NItxt_Other>その他</NItxt_Other>
+	<NItxt_SelectMainDish>主食の選択</NItxt_SelectMainDish>
+	<NItxt_SqueezeValue>搾取量：{0}</NItxt_SqueezeValue>
+
+	<NItxt_AllowJoyTip>娯楽吸魔の許可\nこの項目を有効にすると、娯楽としての吸魔行動を行うようになる。</NItxt_AllowJoyTip>
+	<NItxt_AllowOverSqueezeTip>過剰吸魔の許可\nこの項目を有効にすると、対象の魔力がゼロになっても吸魔行動を中断しなくなる。</NItxt_AllowOverSqueezeTip>
+	<NItxt_AllowDownTip>ダウンの許可\nこの項目を有効にすると、対象がダウンしていようと無理やり吸魔行動を続けるようになり、緊急の治療を要する状態でも吸魔の候補と見做されるようになる。</NItxt_AllowDownTip>
+	<NItxt_AllowKillTip>搾殺の許可\nこの項目を有効にすると、対象が魔力欠乏による精力崩壊で死亡する場合でもお構い無しに吸魔行動を続けるようになる。</NItxt_AllowKillTip>
+	<NItxt_SelectMainDishTip>主に魔力を搾り取る対象の指定が出来ます。可能な場合、候補の中から最優先でこの対象が選ばれます。</NItxt_SelectMainDishTip>
+	<NItxt_SqueezeSliderTip>一回の行為で搾り取る魔力の量を決めます。キルが許可されていない場合、あまり大きな値にし過ぎると候補として選ぶことができなくなります。</NItxt_SqueezeSliderTip>
+	<NItxt_SelectMainDishThingTip>魔力回復アイテムの指定が出来ます。指定されたアイテムを見つけられなかった場合、魔力回復アイテムを一切使わなくなります。</NItxt_SelectMainDishThingTip>
+	<NItxt_Teasing>{0}を弄って遊んでいる</NItxt_Teasing>
+	<NItxt_NoManaSource>魔力源がない</NItxt_NoManaSource>
+
+</LanguageData>

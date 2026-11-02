@@ -113,6 +113,7 @@ namespace NightmareIncarnation
         {
             get
             {
+                float traitManaCapacity = 1f;
                 if (pawn.story != null && pawn.GetComp<CompSuccubusRace>() != null)
                 {
                     switch (pawn.story.traits.DegreeOfTrait(NITraitDefOf.NI_ManaAttribute))
@@ -120,16 +121,22 @@ namespace NightmareIncarnation
                         case 1:
                         case 2:
                         case 3:
-                            return 1f;
+                            traitManaCapacity = 1f;
+                            break;
                         case 4:
-                            return 2f;
+                            traitManaCapacity = 2f;
+                            break;
                         case 5:
-                            return 2f;
+                            traitManaCapacity = 2f;
+                            break;
                         case 6:
-                            return 5f;
+                            traitManaCapacity = 5f;
+                            break;
                     }
                 }
-                return 1f;
+                Hediff growth = pawn.health?.hediffSet.GetFirstHediffOfDef(NIHediffDefOf.NI_SuccubusGrowth);
+                int growthStage = growth == null ? 0 : Mathf.FloorToInt(growth.Severity);
+                return traitManaCapacity + growthStage + 1f;
             }
         }
 
@@ -149,7 +156,7 @@ namespace NightmareIncarnation
             });
         }
 
-        public override void DrawOnGUI(Rect rect, int maxThresholdMarkers = 2147483647, float customMargin = -1f, bool drawArrows = true, bool doTooltip = true)
+        public override void DrawOnGUI(Rect rect, int maxThresholdMarkers = 2147483647, float customMargin = -1f, bool drawArrows = true, bool doTooltip = true, Rect? rectForTooltip = null, bool drawLabel = true)
         {
             if (threshPercents == null)
             {
@@ -158,10 +165,10 @@ namespace NightmareIncarnation
             threshPercents.Clear();
             threshPercents.Add(0.3f);
             threshPercents.Add(0.15f);
-            DrawOnGUICustom(rect, maxThresholdMarkers, customMargin, drawArrows, doTooltip);
+            DrawOnGUICustom(rect, maxThresholdMarkers, customMargin, drawArrows, doTooltip, rectForTooltip, drawLabel);
         }
 
-        private void DrawOnGUICustom(Rect guiRect, int maxThresholdMarkers = 2147483647, float customMargin = -1f, bool drawArrows = true, bool doTooltip = true)
+        private void DrawOnGUICustom(Rect guiRect, int maxThresholdMarkers, float customMargin, bool drawArrows, bool doTooltip, Rect? rectForTooltip, bool drawLabel)
         {
             if (guiRect.height > 70f)
             {
@@ -175,7 +182,8 @@ namespace NightmareIncarnation
             }
             if (doTooltip)
             {
-                TooltipHandler.TipRegion(guiRect, new TipSignal(() => this.GetTipString(), guiRect.GetHashCode()));
+                Rect tooltipRect = rectForTooltip ?? guiRect;
+                TooltipHandler.TipRegion(tooltipRect, new TipSignal(() => this.GetTipString(), tooltipRect.GetHashCode()));
             }
             float someHeight = 14f;
             float margin = (customMargin < 0f) ? (someHeight + 15f) : customMargin;
@@ -186,8 +194,15 @@ namespace NightmareIncarnation
             Text.Font = ((guiRect.height <= 55f) ? GameFont.Tiny : GameFont.Small);
             Text.Anchor = TextAnchor.LowerLeft;
 
-            Rect labelBox = new Rect(guiRect.x + margin + guiRect.width * 0.1f, guiRect.y, guiRect.width - margin - guiRect.width * 0.1f, guiRect.height / 2f);
-            Widgets.Label(labelBox, base.LabelCap);
+            if (drawLabel)
+            {
+                Rect labelBox = new Rect(guiRect.x + margin + guiRect.width * 0.1f, guiRect.y, guiRect.width - margin - guiRect.width * 0.1f, guiRect.height / 2f);
+                Widgets.Label(labelBox, base.LabelCap);
+            }
+            if (DebugSettings.godMode)
+            {
+                DrawGodModeLevelButtons(guiRect);
+            }
             Text.Anchor = 0;
             Rect instantMarkerBar = new Rect(guiRect.x, guiRect.y + guiRect.height / 2f, guiRect.width, guiRect.height / 2f);
             Rect manaBarRect = new Rect(instantMarkerBar.x + margin, instantMarkerBar.y, instantMarkerBar.width - margin * 2f, instantMarkerBar.height - someHeight);
@@ -228,6 +243,34 @@ namespace NightmareIncarnation
                 UIHighlighter.HighlightOpportunity(guiRect, this.def.tutorHighlightTag);
             }
             Text.Font = GameFont.Small;
+        }
+
+        private void DrawGodModeLevelButtons(Rect guiRect)
+        {
+            const float buttonSize = 18f;
+            const float buttonGap = 4f;
+            float y = guiRect.y + 1f;
+            Rect decreaseRect = new Rect(guiRect.xMax - buttonSize * 2f - buttonGap, y, buttonSize, buttonSize);
+            Rect increaseRect = new Rect(guiRect.xMax - buttonSize, y, buttonSize, buttonSize);
+
+            Text.Anchor = TextAnchor.MiddleCenter;
+            GUI.color = Color.yellow;
+            Widgets.Label(decreaseRect, "−");
+            Widgets.Label(increaseRect, "+");
+
+            if (Widgets.ButtonInvisible(decreaseRect))
+            {
+                CurLevel = Mathf.Max(0f, CurLevel - MaxLevel * 0.1f);
+                Event.current.Use();
+            }
+            if (Widgets.ButtonInvisible(increaseRect))
+            {
+                CurLevel = Mathf.Min(MaxLevel, CurLevel + MaxLevel * 0.1f);
+                Event.current.Use();
+            }
+
+            GUI.color = Color.white;
+            Text.Anchor = TextAnchor.LowerLeft;
         }
 
         private void DrawBarThreshold(Rect barRect, float threshPct)

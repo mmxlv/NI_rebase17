@@ -24,7 +24,7 @@ namespace NightmareIncarnation
             {
                 if (this.plans.RemoveAll((WorkPlan x) => x == null) != 0)
                 {
-                    Log.Error("Some manaSqueezePolicy were null after loading", false);
+                    Log.Error("Some manaSqueezePolicy were null after loading");
                 }
                 for (int i = 0; i < this.plans.Count; i++)
                 {

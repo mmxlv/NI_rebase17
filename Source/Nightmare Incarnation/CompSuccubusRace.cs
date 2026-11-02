@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace NightmareIncarnation
@@ -10,7 +11,7 @@ namespace NightmareIncarnation
     /// </summary>
     public class CompSuccubusRace : ThingComp
     {
-        public float ManaFallPerTick = 1E-05f;
+        public float ManaFallPerTick = 5E-06f;
 
         public float ManaFallFactor = 1f;
 
@@ -21,6 +22,8 @@ namespace NightmareIncarnation
         public WorkPlanStack policy;
 
         public float TotalManaGained;
+
+        public int TotalVictimsSqueezed;
 
         public RelationType tmpTargetType;
 
@@ -51,6 +54,7 @@ namespace NightmareIncarnation
         {
             base.PostExposeData();
             Scribe_Values.Look<float>(ref this.TotalManaGained, "TotalManaGained", 0f, false);
+            Scribe_Values.Look<int>(ref this.TotalVictimsSqueezed, "TotalVictimsSqueezed", 0, false);
             Scribe_Deep.Look<WorkPlanStack>(ref this.policy, "ManaSqueezePolicy", new object[]
             {
                 this
@@ -102,6 +106,67 @@ namespace NightmareIncarnation
                 this.JoyThreshold = 0f;
             }
             this.InitManaSqueezePolicy(false);
+            EnsureSlaveManaPolicy();
+            UpdateGrowthHediff();
+            EnsureKnockDownAbility();
+            EnsureEnlargeAbility();
+        }
+
+        private void EnsureKnockDownAbility()
+        {
+            if (this.Pawn?.abilities == null)
+                return;
+
+            AbilityDef knockDown = DefDatabase<AbilityDef>.GetNamedSilentFail("NI_KnockDown");
+            if (knockDown != null && this.Pawn.abilities.GetAbility(knockDown) == null)
+                this.Pawn.abilities.GainAbility(knockDown);
+        }
+
+        private void EnsureEnlargeAbility()
+        {
+            if (this.Pawn?.abilities == null)
+                return;
+
+            AbilityDef enlarge = DefDatabase<AbilityDef>.GetNamedSilentFail("NI_Enlarge");
+            if (enlarge != null && this.Pawn.abilities.GetAbility(enlarge) == null)
+                this.Pawn.abilities.GainAbility(enlarge);
+        }
+
+        public void RecordSqueezedVictim()
+        {
+            this.TotalVictimsSqueezed++;
+            UpdateGrowthHediff();
+        }
+
+        private void UpdateGrowthHediff()
+        {
+            if (this.Pawn == null || this.Pawn.health == null)
+                return;
+
+            Need_Mana manaNeed = this.Pawn.needs?.TryGetNeed<Need_Mana>();
+            float previousManaPercentage = manaNeed?.CurLevelPercentage ?? 0f;
+            float previousMaxMana = manaNeed?.MaxLevel ?? 0f;
+
+            int victimsSqueezed = Mathf.Max(0, this.TotalVictimsSqueezed);
+            float stage = 0.01f;
+            if (victimsSqueezed < 10)
+                stage += victimsSqueezed / 10f;
+            else if (victimsSqueezed < 25)
+                stage += 1f + (victimsSqueezed - 10) / 15f;
+            else if (victimsSqueezed < 50)
+                stage += 2f + (victimsSqueezed - 25) / 25f;
+            else
+                stage = 3f;
+            Hediff growth = this.Pawn.health.hediffSet.GetFirstHediffOfDef(NIHediffDefOf.NI_SuccubusGrowth);
+            if (growth == null)
+            {
+                growth = HediffMaker.MakeHediff(NIHediffDefOf.NI_SuccubusGrowth, this.Pawn);
+                this.Pawn.health.AddHediff(growth);
+            }
+            growth.Severity = stage;
+
+            if (manaNeed != null && manaNeed.MaxLevel > previousMaxMana)
+                manaNeed.CurLevelPercentage = previousManaPercentage;
         }
 
         /// <summary>
@@ -143,11 +208,19 @@ namespace NightmareIncarnation
                     targetType = RelationType.Other,
                     AllowJoy = true
                 };
+                WorkPlan useSlave = new WorkPlan
+                {
+                    workPlanStack = this.policy,
+                    targetType = RelationType.Slave,
+                    AllowJoy = true
+                };
                 switch (degreeOfManaAttribute)
                 {
                     case 1:
                         useColonist.AllowJoy = false;
                         useColonist.SqueezeValue = 0.7f;
+                        useSlave.AllowJoy = false;
+                        useSlave.SqueezeValue = 0.7f;
                         usePrisoner.AllowJoy = false;
                         usePrisoner.SqueezeValue = 0.7f;
                         useEnemy.AllowJoy = false;
@@ -165,6 +238,7 @@ namespace NightmareIncarnation
                         break;
                     case 5:
                         useColonist.AllowOverSqueeze = true;
+                        useSlave.AllowOverSqueeze = true;
                         usePrisoner.AllowDown = true;
                         usePrisoner.AllowKill = true;
                         usePrisoner.SqueezeValue = 2.1f;
@@ -173,6 +247,7 @@ namespace NightmareIncarnation
                         break;
                     case 6:
                         useColonist.AllowOverSqueeze = true;
+                        useSlave.AllowOverSqueeze = true;
                         usePrisoner.AllowDown = true;
                         usePrisoner.AllowKill = true;
                         usePrisoner.SqueezeValue = 2.1f;
@@ -187,8 +262,24 @@ namespace NightmareIncarnation
                         useEnemy,
                         usePrisoner,
                         useColonist,
+                        useSlave,
                         useOther
                     };
+            }
+        }
+
+        private void EnsureSlaveManaPolicy()
+        {
+            if (!this.policy.plans.Exists(plan => plan.targetType == RelationType.Slave))
+            {
+                int colonistPlanIndex = this.policy.plans.FindIndex(plan => plan.targetType == RelationType.Colonist);
+                int insertIndex = colonistPlanIndex >= 0 ? colonistPlanIndex + 1 : this.policy.plans.Count;
+                this.policy.plans.Insert(insertIndex, new WorkPlan
+                {
+                    workPlanStack = this.policy,
+                    targetType = RelationType.Slave,
+                    AllowJoy = true
+                });
             }
         }
     }

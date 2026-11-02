@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using RimWorld;
+using LudeonTK;
 using UnityEngine;
 using Verse;
 
@@ -32,7 +33,7 @@ namespace NightmareIncarnation
         public ITab_ManaPolicy()
         {
             this.size = ITab_ManaPolicy.WinSize;
-            this.labelKey = "Mana Policy";
+            this.labelKey = "NItxt_TabManaPolicy";
             this.tutorTag = "Sucking Policy";
         }
 

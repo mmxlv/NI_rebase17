@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<NItxt_TabManaPolicy>方针</NItxt_TabManaPolicy>
+	<NItxt_Meal>魔力恢复物品</NItxt_Meal>
+	<NItxt_Colonist>殖民者</NItxt_Colonist>
+	<NItxt_Slave>奴隶</NItxt_Slave>
+	<NItxt_Prisoner>囚犯</NItxt_Prisoner>
+	<NItxt_Enemy>敌人</NItxt_Enemy>
+	<NItxt_Other>其他</NItxt_Other>
+	<NItxt_SelectMainDish>主食的选择</NItxt_SelectMainDish>
+	<NItxt_SqueezeValue>榨取量：{0}</NItxt_SqueezeValue>
+
+	<NItxt_AllowJoyTip>娱乐性补魔开启\n启用这个选项的话，就会进行作为娱乐活动的补魔行为。</NItxt_AllowJoyTip>
+	<NItxt_AllowOverSqueezeTip>过量补魔开启\n启用这个选项的话，即使对象的魔力值变成零也不会中断吸取魔力的行为。</NItxt_AllowOverSqueezeTip>
+	<NItxt_AllowDownTip>瘫痪时的许可\n如果启用此项目，则即使吸取对象跌倒也将继续强行吸取魔力，即使在需要紧急治疗的情况下，也将被视为吸取的候选对象。</NItxt_AllowDownTip>
+	<NItxt_AllowKillTip>榨取致死开启\n如果启用此项目，即使对象由于缺乏魔法能量而危及生死时，仍将继续吸取魔力。</NItxt_AllowKillTip>
+	<NItxt_SelectMainDishTip>您可以主要指定榨取魔力的目标。在允许的情况下，从候选者中选择最高优先级的目标。</NItxt_SelectMainDishTip>
+	<NItxt_SqueezeSliderTip>设定一次性榨取的魔力值。在不允许杀死对象的前提下，如果设定的量过高可能会缺少合适的人选。</NItxt_SqueezeSliderTip>
+	<NItxt_SelectMainDishThingTip>可以指定魔力回复物品。如果找不到指定的物品的话，就完全不使用魔力恢复物品了。</NItxt_SelectMainDishThingTip>
+	<NItxt_Teasing>正在玩弄着 {0}</NItxt_Teasing>
+	<NItxt_NoManaSource>缺少魔力来源</NItxt_NoManaSource>
+
+</LanguageData>

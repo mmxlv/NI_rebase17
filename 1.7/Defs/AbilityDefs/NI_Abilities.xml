@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <AbilityDef>
+    <defName>NI_KnockDown</defName>
+    <label>knock down</label>
+    <description>Spend 1 mana to down a pawn within 10 cells.</description>
+    <iconPath>UI/Commands/Attack</iconPath>
+    <cooldownTicksRange>0</cooldownTicksRange>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>1</warmupTime>
+      <range>10</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetHumans>true</canTargetHumans>
+        <canTargetMechs>true</canTargetMechs>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetLocations>false</canTargetLocations>
+        <neverTargetIncapacitated>true</neverTargetIncapacitated>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="NightmareIncarnation.CompProperties_AbilitySuccubusKnockDown">
+        <manaCost>1</manaCost>
+      </li>
+    </comps>
+  </AbilityDef>
+  <AbilityDef>
+    <defName>NI_Enlarge</defName>
+    <label>enlarge</label>
+    <description>Increase every RJW penis part on a target by 0.05 size severity. Costs 2 mana per part.</description>
+    <iconPath>UI/Commands/Attack</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>5</warmupTime>
+      <range>10</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetHumans>true</canTargetHumans>
+        <canTargetMechs>true</canTargetMechs>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetLocations>false</canTargetLocations>
+        <neverTargetIncapacitated>true</neverTargetIncapacitated>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="NightmareIncarnation.CompProperties_AbilitySuccubusEnlarge">
+        <manaCostPerPart>2</manaCostPerPart>
+        <severityIncrease>0.05</severityIncrease>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

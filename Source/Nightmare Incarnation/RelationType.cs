@@ -10,5 +10,6 @@ namespace NightmareIncarnation
         Ally,
         Neutral,
         Hostile,
+        Slave,
     }
 }

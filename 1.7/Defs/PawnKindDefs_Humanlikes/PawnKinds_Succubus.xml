@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnKindDef Name="NI_KindBase" Abstract="True">
+    <defaultFactionDef>PlayerColony</defaultFactionDef>
+    <race>NI_Race</race>
+    <abilities>
+      <li>NI_KnockDown</li>
+    </abilities>
+    <chemicalAddictionChance>0.001</chemicalAddictionChance>
+    <apparelTags>
+      <li>NI_SuccubusCommon</li>
+      <!--<li>IndustrialBasic</li>-->
+    </apparelTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="NI_KindBase">
+    <defName>NI_ScColonist</defName>
+    <label>Succubus</label>
+    <combatPower>50</combatPower>
+    <isFighter>false</isFighter>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>NI_Backstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <backstoryCryptosleepCommonality>0.0</backstoryCryptosleepCommonality>
+    <initialWillRange>0~1</initialWillRange>
+    <initialResistanceRange>8~14</initialResistanceRange>
+    <gearHealthRange>
+      <min>0.2</min>
+      <max>2.0</max>
+    </gearHealthRange>
+    <apparelMoney>
+      <min>1</min>
+      <max>2400</max>
+    </apparelMoney>
+
+    <weaponTags>
+      <!--<li>Gun</li>-->
+    </weaponTags>
+    <invNutrition>0.9</invNutrition>
+    <inventoryOptions>
+      <skipChance>0.75</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <choiceChance>90</choiceChance>
+          <thingDef>Gold</thingDef>
+          <countRange>
+            <min>7</min>
+            <max>10</max>
+          </countRange>
+        </li>
+        <li>
+          <choiceChance>10</choiceChance>
+          <thingDef>Gold</thingDef>
+          <countRange>
+            <min>30</min>
+            <max>50</max>
+          </countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+  </PawnKindDef>
+
+</Defs>
