@@ -103,7 +103,8 @@ namespace NightmareIncarnation
                     tmpCandidates = ManaUtl.GetPawnsByManaPolicy(pawn, currentPlan, comp.tmpJoyMode ? 0.2f : 0f);
                     if (tmpCandidates.Count > 0)
                     {
-                        foodSourcePawn = tmpCandidates.RandomElementByWeight(candidate => CommonUtl.GetPreferWeight(candidate, pawn));
+                        if (!tmpCandidates.TryRandomElementByWeight(candidate => CommonUtl.GetPreferWeight(candidate, pawn), out foodSourcePawn))
+                            foodSourcePawn = tmpCandidates.RandomElement();
                         comp.tmpTargetType = currentPlan.targetType;
                         return new Job(NIJobDefOf.Job_NIManaSqueeze, foodSourcePawn);
                     }

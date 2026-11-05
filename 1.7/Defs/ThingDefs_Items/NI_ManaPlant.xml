@@ -17,9 +17,13 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>6</DeteriorationRate>
       <MarketValue>2</MarketValue>
       <Mass>0.05</Mass>
     </statBases>
+    <useHitPoints>true</useHitPoints>
     <thingCategories>
       <li>PlantFoodRaw</li>
     </thingCategories>

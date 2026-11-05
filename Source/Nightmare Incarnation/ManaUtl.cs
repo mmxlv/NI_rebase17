@@ -92,7 +92,7 @@ namespace NightmareIncarnation
                                                                                   && hostile != pawn
                                                                                   && !CommonUtl.IsSuccubus(hostile)
                                                                                   && CommonUtl.IsPassive(hostile)
-                                                                                  && CanBeSqueezed(pawn, workPlan, forcedValue)
+                                                                                  && CanBeSqueezed(hostile, workPlan, forcedValue)
                                                                                   && ReservationUtility.CanReserveAndReach(pawn, hostile, PathEndMode.OnCell, Danger.Deadly)).ToList();
                     break;
                 default:
@@ -103,7 +103,7 @@ namespace NightmareIncarnation
                                                                                 && other != pawn
                                                                                 && !CommonUtl.IsSuccubus(other)
                                                                                 && CommonUtl.IsPassive(other)
-                                                                                && CanBeSqueezed(pawn, workPlan, forcedValue)
+                                                                                && CanBeSqueezed(other, workPlan, forcedValue)
                                                                                 && ReservationUtility.CanReserveAndReach(pawn, other, PathEndMode.OnCell, Danger.Deadly)).ToList();
                     break;
             }

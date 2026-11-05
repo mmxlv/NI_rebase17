@@ -47,12 +47,18 @@
     <thingCategories>
       <li>ResourcesRaw</li>
     </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
     <deepCommonality>0.5</deepCommonality>
     <deepCountPerPortion>2</deepCountPerPortion>
     <deepLumpSizeRange>
       <min>2</min>
       <max>4</max>
     </deepLumpSizeRange>
+    <thingSetMakerTags>
+      <li>RewardStandardMidFreq</li>
+    </thingSetMakerTags>
     <!--
     <stuffProps>
       <categories>
