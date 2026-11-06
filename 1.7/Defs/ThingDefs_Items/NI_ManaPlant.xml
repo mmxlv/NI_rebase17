@@ -25,7 +25,7 @@
     </statBases>
     <useHitPoints>true</useHitPoints>
     <thingCategories>
-      <li>PlantFoodRaw</li>
+      <li>ResourcesRaw</li>
     </thingCategories>
     <comps>
       <li Class="CompProperties_Forbiddable" />
